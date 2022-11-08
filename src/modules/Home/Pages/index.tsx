@@ -217,7 +217,7 @@ function Home(): JSX.Element {
 					</nav> */}
 
 					<div className="h-full w-full flex flex-col justify-center items-center gap-10 relative">
-						<div className="bg-black h-full w-full fixed left-0 z-20 gsap-initial-div"></div>
+						<div className="bg-black h-fit-available w-full fixed left-0 z-20 gsap-initial-div"></div>
 						{/* <div className="bg-pink-300 h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div> */}
 						<div className="black-gradient h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div>
 						{/* <div className="text-center p-10 relative z-20">

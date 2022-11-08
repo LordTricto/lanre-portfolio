@@ -5,7 +5,7 @@ import {ReactComponent as ArrowDownIcon} from "../../assets/svg/arrowDownIcon.sv
 function Nav(): JSX.Element {
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 	return (
-		<div className="max-w-7xl mx-auto relative w-full">
+		<div className="flex justify-start items-start max-w-7xl mx-auto relative w-full h-14">
 			<div
 				className={
 					`fixed h-screen w-full uppercase bg-black z-20 transition-all ` +
