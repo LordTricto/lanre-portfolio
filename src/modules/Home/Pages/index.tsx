@@ -186,7 +186,7 @@ function Home(): JSX.Element {
 		<main className="flex flex-col min-h-screen w-full bg-white-dark pb-8 relative" ref={landingDivRef}>
 			{/* <main className="flex flex-col min-h-screen w-full bg-white-dark pb-8 max-w-7xl mx-auto relative"> */}
 			<Nav />
-			<section className="relative z-10 w-full overflow-hidden 2xs:overflow-visible">
+			<section className="relative z-10 w-full overflow-hidden 2xs:overflow-auto">
 				{/* <div className="fixed h-screen w-full uppercase bg-black z-20">
 					<ul className="flex flex-col justify-center items-center gap-14 h-full w-full p-8 text-6xl text-white">
 						<li className="transition-all hover:scale-110">LENCO</li>
@@ -196,7 +196,7 @@ function Home(): JSX.Element {
 						<li className="transition-all hover:scale-110">BERGER</li>
 					</ul>
 				</div> */}
-				<div className="h-screen px-8 lg:px-16 max-w-7xl mx-auto relative">
+				<div className="h-screen px-8 lg:px-16 max-w-7xl mx-auto relative w-full">
 					{/* <nav className="w-full flex flex-row justify-between items-start absolute top-0 left-0 px-8 lg:px-16 pt-8 z-30">
 						<div className="uppercase 2xs:text-lg lg:text-xl text-black text-white">Olanrewaju Olukanni</div>
 						<div className="hidden lg:block uppercase">
@@ -216,7 +216,7 @@ function Home(): JSX.Element {
 						</div>
 					</nav> */}
 
-					<div className="h-full w-full flex flex-col justify-center items-center gap-10 relative overflow-hidden">
+					<div className="h-full w-full flex flex-col justify-center items-center gap-10 relative">
 						<div className="bg-black h-full w-full fixed left-0 z-20 gsap-initial-div"></div>
 						{/* <div className="bg-pink-300 h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div> */}
 						<div className="black-gradient h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div>
@@ -418,7 +418,7 @@ function Home(): JSX.Element {
 					</div>
 				</div>
 			</section>
-			<section className="px-8 py-16 lg:p-16 max-w-7xl mx-auto">
+			<section className="px-8 py-16 lg:p-16 max-w-7xl mx-auto w-full">
 				<div className="flex flex-col xl:flex-row justify-start xl:justify-between items-center px-7 py-14 md:px-14 bg-white rounded-3xl">
 					<div className="w-full xl:max-w-lg">
 						<div className="flex flex-col justify-start items-start gap-2">
