@@ -20,7 +20,7 @@ function Nav(): JSX.Element {
 					<li className="transition-all text-white hover:scale-110">BERGER</li>
 				</ul>
 			</div>
-			<nav className="w-full flex flex-row justify-between items-start absolute top-0 left-0 px-8 lg:px-16 pt-8 z-10 max-w-7xl mx-auto">
+			<nav className="w-full flex flex-row justify-between items-start absolute top-0 left-0 pt-8 z-10 max-w-7xl mx-auto">
 				<div className={`uppercase 2xs:text-lg lg:text-xl  ` + `${isNavOpen ? "text-white" : "text-black"}`}>Olanrewaju Olukanni</div>
 				<div className="hidden lg:block uppercase">
 					<ul className="flex flex-row gap-14 text-base text-black-tertiary">
