@@ -185,7 +185,6 @@ function Home(): JSX.Element {
 	return (
 		<main className="flex flex-col min-h-screen w-full bg-white-dark pb-8 relative" ref={landingDivRef}>
 			{/* <main className="flex flex-col min-h-screen w-full bg-white-dark pb-8 max-w-7xl mx-auto relative"> */}
-			<Nav />
 			<section className="relative z-10 w-full overflow-hidden 2xs:overflow-auto">
 				{/* <div className="fixed h-screen w-full uppercase bg-black z-20">
 					<ul className="flex flex-col justify-center items-center gap-14 h-full w-full p-8 text-6xl text-white">
@@ -196,7 +195,8 @@ function Home(): JSX.Element {
 						<li className="transition-all hover:scale-110">BERGER</li>
 					</ul>
 				</div> */}
-				<div className="h-screen px-8 lg:px-16 max-w-7xl mx-auto relative w-full">
+				<div className="h-screen px-8 lg:px-16 max-w-7xl mx-auto w-full">
+					<Nav />
 					{/* <nav className="w-full flex flex-row justify-between items-start absolute top-0 left-0 px-8 lg:px-16 pt-8 z-30">
 						<div className="uppercase 2xs:text-lg lg:text-xl text-black text-white">Olanrewaju Olukanni</div>
 						<div className="hidden lg:block uppercase">
@@ -216,10 +216,10 @@ function Home(): JSX.Element {
 						</div>
 					</nav> */}
 
-					<div className="h-full w-full flex flex-col justify-center items-center gap-10 relative">
-						<div className="bg-black h-fit-available w-full fixed left-0 z-20 gsap-initial-div"></div>
-						{/* <div className="bg-pink-300 h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div> */}
-						<div className="black-gradient h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div>
+					<div className="h-full w-full flex flex-col justify-center items-center gap-10">
+						<div className="bg-black h-fit-available w-full absolute top-0 left-0 z-20 gsap-initial-div"></div>
+						{/* <div className="bg-pink-300 h-full w-[110vw] absolute top-0 -right-0.5 z-30 gsap-overlay-div"></div> */}
+						<div className="black-gradient h-full w-[110vw] absolute top-0 -right-0.5 z-30 gsap-overlay-div"></div>
 						{/* <div className="text-center p-10 relative z-20">
 							<span
 							ref={heroText}
