@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useRef} from "react";
+import React, {useLayoutEffect, useRef} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
 // import {ReactComponent as ArrowDownIcon} from "../../../assets/svg/arrowDownIcon.svg";
@@ -16,15 +16,19 @@ import PhoneImageFour from "../../../assets/images/phone-img-4.png";
 import PhoneImageOne from "../../../assets/images/phone-img-1.png";
 import PhoneImageThree from "../../../assets/images/phone-img-3.png";
 import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
+import useDimension from "../../../hooks/useDimension";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Home(): JSX.Element {
-	const timelineRanRef = useRef(false);
-	const initialDiv = useRef<HTMLDivElement | null>(null);
-	const overlayDiv = useRef<HTMLDivElement | null>(null);
-	const heroText = useRef<HTMLSpanElement | null>(null);
+	// const timelineRanRef = useRef(false);
+	// const initialDiv = useRef<HTMLDivElement | null>(null);
+	// const overlayDiv = useRef<HTMLDivElement | null>(null);
+	// const heroText = useRef<HTMLSpanElement | null>(null);
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
-
-	const timeline = gsap.timeline();
+	const {width} = useDimension();
+	// const timeline = gsap.timeline();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	// useLayoutEffect(() => {
 	// // console.log(timelineRanRef.current);
@@ -81,6 +85,7 @@ function Home(): JSX.Element {
 			tl.current.to(".gsap-hero-text", {
 				// scale: 1,
 				color: "white",
+				duration: 0.5,
 			});
 			tl.current.from(".gsap-hero-text", {
 				duration: 1.5,
@@ -93,7 +98,7 @@ function Home(): JSX.Element {
 			// // color: "white",
 			// });
 			tl.current.from(".gsap-overlay-div", {
-				duration: 5,
+				duration: width < 547 ? 5 : 4.6,
 				width: 0,
 				ease: Power1.easeOut,
 			});
@@ -104,27 +109,62 @@ function Home(): JSX.Element {
 					pointerEvents: "none",
 					opacity: 0,
 				},
-				"=-1"
+				width < 547 ? "=-1" : "=-1.4"
 			);
 			tl.current.to(
 				".gsap-initial-div",
 				{
-					duration: 4,
+					duration: 2,
 					opacity: 0,
 					pointerEvents: "none",
-					ease: Power4.easeOut,
 				},
-				"=-1"
+				width < 547 ? "=-1" : "=-1.4"
 			);
 			tl.current.to(
 				".gsap-hero-text",
 				{
-					duration: 4,
+					duration: 0,
 					color: "#1F2130",
 					ease: Power4.easeOut,
 				},
-				"=-5"
+				width < 547 ? "=-2.2" : "=-2"
 			);
+			gsap.to(".gsap-imgs-1", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "-150px 400px",
+					// end: "top 100px",
+					// scrub: 1,
+					// markers: true,
+					toggleActions: "play none none reverse",
+				},
+				opacity: 1,
+				duration: 2,
+				ease: "none",
+				// reversed: false,
+			});
+			gsap.from(".gsap-img-1", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top center",
+					end: "top 100px",
+					scrub: 1,
+					// markers: true,
+				},
+				y: -75,
+				ease: Circ.easeOut,
+			});
+			gsap.from(".gsap-img-3", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top center",
+					end: "top 100px",
+					scrub: 1,
+					// markers: true,
+				},
+				y: +50,
+				ease: Circ.easeOut,
+			});
 		}, landingDivRef);
 		// <- scopes all selector text inside the context to this ref
 		// (optional, default is document)
@@ -146,7 +186,7 @@ function Home(): JSX.Element {
 		<main className="flex flex-col min-h-screen w-full bg-white-dark pb-8 relative" ref={landingDivRef}>
 			{/* <main className="flex flex-col min-h-screen w-full bg-white-dark pb-8 max-w-7xl mx-auto relative"> */}
 			<Nav />
-			<section className="relative z-10">
+			<section className="relative z-10 w-full overflow-hidden 2xs:overflow-visible">
 				{/* <div className="fixed h-screen w-full uppercase bg-black z-20">
 					<ul className="flex flex-col justify-center items-center gap-14 h-full w-full p-8 text-6xl text-white">
 						<li className="transition-all hover:scale-110">LENCO</li>
@@ -176,8 +216,9 @@ function Home(): JSX.Element {
 						</div>
 					</nav> */}
 
-					<div className="h-full w-full flex flex-col justify-center items-center gap-10 relative">
+					<div className="h-full w-full flex flex-col justify-center items-center gap-10 relative overflow-hidden">
 						<div className="bg-black h-full w-full fixed left-0 z-20 gsap-initial-div"></div>
+						{/* <div className="bg-pink-300 h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div> */}
 						<div className="black-gradient h-full w-[110vw] fixed -right-0.5 z-30 gsap-overlay-div"></div>
 						{/* <div className="text-center p-10 relative z-20">
 							<span
@@ -205,17 +246,21 @@ function Home(): JSX.Element {
 					</div>
 				</div>
 				<div>
-					<div className="relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px]">
+					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px]">
 						<img
-							className="absolute top-28 xs:top-36 md:!top-64 lg:!top-80 -left-[122px] xs:-left-[205px] md:!-left-[270px] lg:!-left-[338px] xl:!-left-30% h-36 xs:h-60 md:!h-80 lg:!h-100 xl:!h-120 w-max object-contain grayscale transition-all duration-300 hover:grayscale-0"
+							className="gsap-img-1 absolute top-28 xs:top-36 md:!top-64 lg:!top-80 -left-[122px] xs:-left-[205px] md:!-left-[270px] lg:!-left-[338px] xl:!-left-30% h-36 xs:h-60 md:!h-80 lg:!h-100 xl:!h-120 w-max object-contain grayscale transistion !ease-linear duration-300 hover:grayscale-0"
 							src={ImageOne}
 							alt="chair"
 						/>
-						<div className="absolute top-0 left-[13%] min-[345px]:!left-[17%]  min-[370px]:!left-20% min-[420px]:!left-25% xs:!left-25% sm:!left-25% md:!left-20% h-[280px] xs:h-[420px] md:!h-[640px] lg:!h-[820px] xl:!h-[1020px] ">
-							<img className="object-contain h-full grayscale transition-all duration-300 hover:grayscale-0" src={ImageTwo} alt="map" />
+						<div className="gsap-img-2 absolute top-0 left-[13%] min-[345px]:!left-[17%]  min-[370px]:!left-20% min-[420px]:!left-25% xs:!left-25% sm:!left-25% md:!left-20% h-[280px] xs:h-[420px] md:!h-[640px] lg:!h-[820px] xl:!h-[1020px] ">
+							<img
+								className="object-contain h-full grayscale transistion !ease-linear duration-300 hover:grayscale-0"
+								src={ImageTwo}
+								alt="map"
+							/>
 						</div>
 						<img
-							className="absolute top-4 md:top-10 -right-[140px] xs:-right-[222px] md:!-right-80 lg:!-right-96 xl:!-right-[34%] h-80 xs:h-[500px] md:!h-[700px] lg:!h-[920px] xl:!h-[1120px] w-max object-contain grayscale transition-all duration-300 hover:grayscale-0"
+							className="gsap-img-3 absolute top-4 md:top-10 -right-[140px] xs:-right-[222px] md:!-right-80 lg:!-right-96 xl:!-right-[34%] h-80 xs:h-[500px] md:!h-[700px] lg:!h-[920px] xl:!h-[1120px] w-max object-contain grayscale transistion !ease-linear duration-300 hover:grayscale-0"
 							src={ImageThree}
 							alt="people"
 						/>
@@ -223,7 +268,7 @@ function Home(): JSX.Element {
 					<div className="relative [@media(min-width:1400px)]:!h-[720px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] [@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36">
 						<img
 							className={
-								`absolute -top-24 [@media(min-width:1400px)]:!-left-[168px] [@media(min-width:1240px)]:!-left-[148px] [@media(min-width:1100px)]:!-left-[134px] grayscale transition-all duration-300 hover:grayscale-0 ` +
+								`absolute -top-24 [@media(min-width:1400px)]:!-left-[168px] [@media(min-width:1240px)]:!-left-[148px] [@media(min-width:1100px)]:!-left-[134px] grayscale transistion !ease-linear duration-300 hover:grayscale-0 ` +
 								`[@media(min-width:1024px)]:!-left-[125px] [@media(min-width:880px)]:-left-[103px] [@media(min-width:775px)]:-left-[92px] sm:-left-[76px] xs:-left-[56px] 4xs:-left-[42px] -left-[34px] ` +
 								`[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] ` +
 								`[@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36 w-max object-contain`
@@ -238,7 +283,7 @@ function Home(): JSX.Element {
 							//  [@media(min-width:1024px)]:h-[520px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1240px)]:!h-[620px]
 							//  [@media(min-width:1400px)]:!h-[700px] w-max object-contain"
 							className={
-								`absolute lg:-top-6 [@media(min-width:880px)]:-top-8 [@media(min-width:775px)]:-top-10 sm:-top-12 xs:-top-16 -top-20 grayscale transition-all duration-300 hover:grayscale-0  ` +
+								`absolute lg:-top-6 [@media(min-width:880px)]:-top-8 [@media(min-width:775px)]:-top-10 sm:-top-12 xs:-top-16 -top-20 grayscale transistion !ease-linear duration-300 hover:grayscale-0  ` +
 								`[@media(min-width:1400px)]:!-right-[168px] [@media(min-width:1240px)]:!-right-[148px] [@media(min-width:1100px)]:!-right-[134px] [@media(min-width:1024px)]:!-right-[125px] ` +
 								`[@media(min-width:880px)]:-right-[103px] [@media(min-width:775px)]:-right-[92px] sm:-right-[76px] xs:-right-[56px] 4xs:-right-[42px] -right-[34px] ` +
 								`[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] ` +
