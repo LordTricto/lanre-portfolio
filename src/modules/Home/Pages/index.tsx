@@ -263,7 +263,7 @@ function Home(): JSX.Element {
 
 						<div
 							className={
-								`gsap-img-1 absolute top-8 3xs:top-16 bg-blue-200 w-max ` +
+								`gsap-img-1 absolute top-8 3xs:top-16 ` +
 								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
 								`-left-[83px] 3xs:-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
 							}
@@ -288,9 +288,9 @@ function Home(): JSX.Element {
 								/>
 							</div>
 						</div>
-						<div
+						{/* <div
 							className={
-								`gsap-img-3 absolute top-4 3xs:top-8 bg-yellow-200 w-max ` +
+								`gsap-img-3 absolute top-4 3xs:top-8 ` +
 								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
 								`-right-[63px] 3xs:-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
 							}
@@ -300,7 +300,17 @@ function Home(): JSX.Element {
 								src={ImageThree}
 								alt="people"
 							/>
-						</div>
+						</div> */}
+
+						<img
+							className={
+								`gsap-img-3 absolute top-4 3xs:top-8 ` +
+								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
+								`-right-[63px] 3xs:-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
+							}
+							src={ImageThree}
+							alt="people"
+						/>
 					</div>
 					<div className="relative [@media(min-width:1400px)]:!h-[720px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] [@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36">
 						<img
