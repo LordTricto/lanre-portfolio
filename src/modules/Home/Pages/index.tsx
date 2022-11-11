@@ -261,7 +261,7 @@ function Home(): JSX.Element {
 							/>
 						</div> */}
 
-						<div
+						{/* <div
 							className={
 								`gsap-img-1 absolute top-8 3xs:top-16 ` +
 								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
@@ -273,7 +273,18 @@ function Home(): JSX.Element {
 								src={ImageOne}
 								alt="chair"
 							/>
-						</div>
+						</div> */}
+
+						<img
+							className={
+								`gsap-img-1 absolute top-8 3xs:top-16 ` +
+								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
+								`object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`-left-[83px] 3xs:-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
+							}
+							src={ImageOne}
+							alt="chair"
+						/>
 						<div
 							className={
 								`absolute top-0 left-0 h-full w-full ` +
@@ -306,6 +317,7 @@ function Home(): JSX.Element {
 							className={
 								`gsap-img-3 absolute top-4 3xs:top-8 ` +
 								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
+								`object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
 								`-right-[63px] 3xs:-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
 							}
 							src={ImageThree}
