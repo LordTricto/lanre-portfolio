@@ -245,7 +245,7 @@ function Home(): JSX.Element {
 					</div>
 				</div>
 				<div className="w-full">
-					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] ">
+					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] bg-purple-100 ">
 						<img
 							className={
 								`gsap-img-1 absolute top-8 3xs:top-16 w-max object-contain ` +
