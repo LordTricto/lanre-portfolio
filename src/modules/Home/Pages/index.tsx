@@ -16,8 +16,8 @@ import PhoneImageFour from "../../../assets/images/phone-img-4.png";
 import PhoneImageOne from "../../../assets/images/phone-img-1.png";
 import PhoneImageThree from "../../../assets/images/phone-img-3.png";
 import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
-import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import useDimension from "../../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -244,39 +244,41 @@ function Home(): JSX.Element {
 						</div>
 					</div>
 				</div>
-				<div>
-					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px]">
+				<div className="w-full">
+					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] ">
 						<img
 							className={
-								`gsap-img-1 absolute ` +
-								`top-28 xs:top-36 md:!top-64 lg:!top-80 ` +
-								`-left-[122px] xs:-left-[205px] md:!-left-[270px] lg:!-left-[338px] xl:!-left-[432.5px] 2xl:!-left-[432.5px] ` +
-								`h-36 xs:h-60 md:!h-80 lg:!h-100 xl:!h-120 ` +
-								`w-max object-contain grayscale transistion !ease-linear duration-300 hover:grayscale-0`
+								`gsap-img-1 absolute top-8 3xs:top-16 w-max object-contain ` +
+								`grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
+								`-left-[83px] 3xs:-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
 							}
 							src={ImageOne}
 							alt="chair"
 						/>
 						<div
 							className={
-								`gsap-img-2 absolute top-0 ` +
-								`left-[13%] min-[345px]:!left-[17%] min-[370px]:!left-20% min-[420px]:!left-25% xs:!left-25% sm:!left-25% md:!left-20% ` +
-								`h-[280px] xs:h-[420px] md:!h-[640px] lg:!h-[820px] xl:!h-[1020px]`
+								`absolute top-0 left-0 h-full w-full ` +
+								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px]`
 							}
 						>
-							<img
-								className="object-contain h-full grayscale transistion !ease-linear duration-300 hover:grayscale-0"
-								src={ImageTwo}
-								alt="map"
-							/>
+							<div className="relative w-full h-full">
+								<img
+									className={
+										"object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 mx-auto pl- " +
+										`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px]`
+									}
+									src={ImageTwo}
+									alt="map"
+								/>
+							</div>
 						</div>
 						<img
 							className={
-								`gsap-img-3 absolute ` +
-								`top-4 md:top-10 ` +
-								`-right-[140px] xs:-right-[222px] md:!-right-80 lg:!-right-[405px] xl:!-right-[495px] 2xl:!-right-[495px] ` +
-								`h-80 xs:h-[500px] md:!h-[700px] lg:!h-[920px] xl:!h-[1120px] ` +
-								`w-max object-contain grayscale transistion !ease-linear duration-300 hover:grayscale-0 `
+								`gsap-img-3 absolute top-4 3xs:top-8 w-max object-contain ` +
+								`grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
+								`-right-[63px] 3xs:-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
 							}
 							src={ImageThree}
 							alt="people"
@@ -285,7 +287,7 @@ function Home(): JSX.Element {
 					<div className="relative [@media(min-width:1400px)]:!h-[720px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] [@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36">
 						<img
 							className={
-								`absolute -top-24 [@media(min-width:1400px)]:!-left-[168px] [@media(min-width:1240px)]:!-left-[148px] [@media(min-width:1100px)]:!-left-[134px] grayscale transistion !ease-linear duration-300 hover:grayscale-0 ` +
+								`absolute -top-24 [@media(min-width:1400px)]:!-left-[168px] [@media(min-width:1240px)]:!-left-[148px] [@media(min-width:1100px)]:!-left-[134px] grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
 								`[@media(min-width:1024px)]:!-left-[125px] [@media(min-width:880px)]:-left-[103px] [@media(min-width:775px)]:-left-[92px] sm:-left-[76px] xs:-left-[56px] 4xs:-left-[42px] -left-[34px] ` +
 								`[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] ` +
 								`[@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36 w-max object-contain`
@@ -300,7 +302,7 @@ function Home(): JSX.Element {
 							//  [@media(min-width:1024px)]:h-[520px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1240px)]:!h-[620px]
 							//  [@media(min-width:1400px)]:!h-[700px] w-max object-contain"
 							className={
-								`absolute lg:-top-6 [@media(min-width:880px)]:-top-8 [@media(min-width:775px)]:-top-10 sm:-top-12 xs:-top-16 -top-20 grayscale transistion !ease-linear duration-300 hover:grayscale-0  ` +
+								`absolute lg:-top-6 [@media(min-width:880px)]:-top-8 [@media(min-width:775px)]:-top-10 sm:-top-12 xs:-top-16 -top-20 grayscale transition !ease-linear duration-300 hover:grayscale-0  ` +
 								`[@media(min-width:1400px)]:!-right-[168px] [@media(min-width:1240px)]:!-right-[148px] [@media(min-width:1100px)]:!-right-[134px] [@media(min-width:1024px)]:!-right-[125px] ` +
 								`[@media(min-width:880px)]:-right-[103px] [@media(min-width:775px)]:-right-[92px] sm:-right-[76px] xs:-right-[56px] 4xs:-right-[42px] -right-[34px] ` +
 								// `[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px]
