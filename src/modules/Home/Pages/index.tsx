@@ -249,8 +249,10 @@ function Home(): JSX.Element {
 						<div
 							className={
 								`gsap-img-1 absolute top-8 3xs:top-16 left-0 transform ` +
-								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
-								`-translate-x-[83px] 3xs:-translate-x-[125px] xs:-translate-x-[185px] md:!-translate-x-[270px] lg:!-translate-x-[440px] xl:!-translate-x-[610px] `
+								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] `
+								// +
+								// `-translate-x-[83px] 3xs:-translate-x-[125px] xs:-translate-x-[185px] md:!-translate-x-[270px]
+								// lg:!-translate-x-[440px] xl:!-translate-x-[610px] `
 							}
 						>
 							<img
