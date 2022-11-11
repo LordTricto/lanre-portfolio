@@ -248,9 +248,9 @@ function Home(): JSX.Element {
 					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] bg-purple-100 ">
 						<div
 							className={
-								`gsap-img-1 absolute top-8 3xs:top-16 ` +
+								`gsap-img-1 absolute top-8 3xs:top-16 left-0 transform ` +
 								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
-								`-left-[83px] 3xs:-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
+								`-translate-x-[83px] 3xs:-translate-x-[125px] xs:-translate-x-[185px] md:!-translate-x-[270px] lg:!-translate-x-[440px] xl:!-translate-x-[610px] `
 							}
 						>
 							<img
