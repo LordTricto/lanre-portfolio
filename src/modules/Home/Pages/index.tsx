@@ -218,6 +218,7 @@ function Home(): JSX.Element {
 
 					<div className="h-full w-full flex flex-col justify-center items-center gap-10">
 						{/* <div className="bg-black h-fit-available w-full absolute top-0 left-0 z-20 gsap-initial-div"></div> */}
+						<div className="bg-pink-100 h-8 w-24 absolute top-10 -left-4 z-20"></div>
 						{/* <div className="black-gradient h-full w-[110vw] absolute top-0 -right-0.5 z-30 gsap-overlay-div"></div> */}
 						{/* <div className="text-center p-10 relative z-20">
 							<span
@@ -245,7 +246,9 @@ function Home(): JSX.Element {
 					</div>
 				</div>
 				<div className="w-full">
-					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] bg-purple-100 ">
+					<div className="gsap-imgs-1 opacity-0 relative flex h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] bg-purple-100 ">
+						<div className=""></div>
+
 						<div
 							className={
 								`gsap-img-1 absolute top-8 3xs:top-16 left-0 transform ` +
