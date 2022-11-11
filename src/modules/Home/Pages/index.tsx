@@ -305,7 +305,7 @@ function Home(): JSX.Element {
 								`[@media(min-width:880px)]:-right-[103px] [@media(min-width:775px)]:-right-[92px] sm:-right-[76px] xs:-right-[56px] 4xs:-right-[42px] -right-[34px] ` +
 								// `[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px]
 								//  [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] ` +
-								`h-[280px] xs:h-[420px] md:!h-[640px] lg:!h-[820px] xl:!h-[1020px] ` +
+								`h-[280px] xs:h-[420px] md:!h-[640px] lg:!h-[820px] xl:!h-[700px] ` +
 								`[@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36 w-max object-contain `
 							}
 							src={ImageFive}
