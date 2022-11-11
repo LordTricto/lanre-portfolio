@@ -222,14 +222,23 @@ function Home(): JSX.Element {
 						<div
 							className={
 								`absolute top-8 3xs:top-16 left-0 transform ` +
-								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] `
+								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] w-24 bg-blue`
+								// +
+								// `-translate-x-[83px] 3xs:-translate-x-[125px] xs:-translate-x-[185px] md:!-translate-x-[270px]
+								// lg:!-translate-x-[440px] xl:!-translate-x-[610px] `
+							}
+						></div>
+						<div
+							className={
+								`absolute top-[500px] left-0 transform ` +
+								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] bg-blue`
 								// +
 								// `-translate-x-[83px] 3xs:-translate-x-[125px] xs:-translate-x-[185px] md:!-translate-x-[270px]
 								// lg:!-translate-x-[440px] xl:!-translate-x-[610px] `
 							}
 						>
 							<img
-								className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 mx-auto "
+								className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 "
 								src={ImageOne}
 								alt="chair"
 							/>
