@@ -19,6 +19,8 @@ import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
 
+// import { Link, animateScroll as scroll } from "react-scroll";
+
 gsap.registerPlugin(ScrollTrigger);
 
 function Home(): JSX.Element {
@@ -129,40 +131,204 @@ function Home(): JSX.Element {
 				},
 				width < 547 ? "=-2.2" : "=-2"
 			);
-			gsap.to(".gsap-imgs-1", {
-				scrollTrigger: {
-					trigger: ".gsap-imgs-1",
-					start: "-150px 400px",
-					// end: "top 100px",
-					// scrub: 1,
-					// markers: true,
-					toggleActions: "play none none reverse",
-				},
-				opacity: 1,
-				duration: 2,
-				ease: "none",
-				// reversed: false,
-			});
+			// gsap.to(".gsap-imgs-1", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-1",
+			// start: "-150px 400px",
+			// // end: "top 100px",
+			// // scrub: 1,
+			// // markers: true,
+			// // toggleActions: "play none none reverse",
+			// },
+			// opacity: 1,
+			// duration: 2,
+			// ease: "none",
+			// // reversed: false,
+			// });
 			gsap.from(".gsap-img-1", {
 				scrollTrigger: {
 					trigger: ".gsap-imgs-1",
 					start: "top center",
-					end: "top 100px",
+					// end: "+=500",
 					scrub: 1,
 					// markers: true,
 				},
-				y: -75,
+				y: -40,
 				ease: Circ.easeOut,
 			});
 			gsap.from(".gsap-img-3", {
 				scrollTrigger: {
 					trigger: ".gsap-imgs-1",
 					start: "top center",
-					end: "top 100px",
+					// end: "+=500",
 					scrub: 1,
 					// markers: true,
 				},
-				y: +50,
+				y: +40,
+				ease: Circ.easeOut,
+			});
+
+			// gsap.to(".gsap-imgs-2", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-2",
+			// start: "-150px 400px",
+			// // end: "top 100px",
+			// // scrub: 1,
+			// // markers: true,
+			// // toggleActions: "play none none reverse",
+			// },
+			// opacity: 1,
+			// duration: 2,
+			// ease: "none",
+			// // reversed: false,
+			// });
+			gsap.from(".gsap-img-4", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-2",
+					start: "top center",
+					end: "bottom 100px",
+					scrub: 1,
+					// markers: true,
+				},
+				y: -40,
+				ease: Circ.easeOut,
+			});
+
+			gsap.from(".gsap-img-5", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-2",
+					start: "top center",
+					end: "bottom 100px",
+					scrub: 1,
+					// markers: true,
+					// endTrigger: ".gsap-memo",
+				},
+				y: +40,
+				// opacity: 0,
+				ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-memo-span", {
+				scrollTrigger: {
+					trigger: ".gsap-memo",
+					start: "top +=500px",
+					// end: "+=500",
+					// scrub: 1,
+					// markers: true,
+					// toggleActions: "play none none reverse",
+				},
+				duration: 0.5,
+				color: "#1F2130",
+				ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-lenco-img", {
+				scrollTrigger: {
+					trigger: ".gsap-lenco-primary",
+					start: "top +=400px",
+					// end: "+=500",
+					// scrub: 1,
+					// markers: true,
+					// toggleActions: "play none none reverse",
+				},
+				duration: 1,
+				scale: 1,
+				// ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-lenco-img", {
+				scrollTrigger: {
+					trigger: ".gsap-lenco-primary",
+					start: "center center",
+					end: "bottom top",
+					scrub: 0.3,
+					markers: true,
+					// endTrigger: ".gsap-memo",
+				},
+				y: 40,
+				// opacity: 0,
+				ease: Circ.easeOut,
+			});
+			gsap.to(".gsap-ridr-img", {
+				scrollTrigger: {
+					trigger: ".gsap-ridr-primary",
+					start: "top +=400px",
+					// end: "+=500",
+					// scrub: 1,
+					// markers: true,
+					// toggleActions: "play none none reverse",
+				},
+				duration: 1,
+				scale: 1,
+				// ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-ridr-img", {
+				scrollTrigger: {
+					trigger: ".gsap-ridr-primary",
+					start: "center center",
+					end: "bottom top",
+					scrub: 0.3,
+					// markers: true,
+					// endTrigger: ".gsap-memo",
+				},
+				y: 40,
+				// opacity: 0,
+				ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-accrue-img", {
+				scrollTrigger: {
+					trigger: ".gsap-accrue-primary",
+					start: "center center",
+					// end: "+=500",
+					// scrub: 1,
+					// markers: true,
+					// toggleActions: "play none none reverse",
+				},
+				duration: 1,
+				scale: 1,
+				// ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-accrue-img", {
+				scrollTrigger: {
+					trigger: ".gsap-accrue-primary",
+					start: "center center",
+					end: "bottom top",
+					scrub: 0.3,
+					// markers: true,
+					// endTrigger: ".gsap-memo",
+				},
+				y: 30,
+				// opacity: 0,
+				ease: Circ.easeOut,
+			});
+
+			gsap.to(".gsap-fora-img", {
+				scrollTrigger: {
+					trigger: ".gsap-fora-primary",
+					start: "center center",
+					// end: "+=500",
+					// scrub: 1,
+					// markers: true,
+					// toggleActions: "play none none reverse",
+				},
+				duration: 1,
+				scale: 1,
+				// ease: Circ.easeOut,
+			});
+			gsap.to(".gsap-fora-img", {
+				scrollTrigger: {
+					trigger: ".gsap-fora-primary",
+					start: "center center",
+					end: "bottom top",
+					scrub: 0.3,
+					// markers: true,
+					// endTrigger: ".gsap-memo",
+				},
+				y: 30,
+				// opacity: 0,
 				ease: Circ.easeOut,
 			});
 		}, landingDivRef);
@@ -217,8 +383,8 @@ function Home(): JSX.Element {
 					</nav> */}
 
 					<div className="h-full w-full flex flex-col justify-center items-center gap-10">
-						{/* <div className="bg-black h-fit-available w-full absolute top-0 left-0 z-20 gsap-initial-div"></div> */}
-						{/* <div className="black-gradient h-full w-[110vw] absolute top-0 -right-0.5 z-30 gsap-overlay-div"></div> */}
+						<div className="bg-black h-fit-available w-full absolute top-0 left-0 z-20 gsap-initial-div"></div>
+						<div className="black-gradient h-full w-[110vw] absolute top-0 -right-0.5 z-30 gsap-overlay-div"></div>
 						{/* <div className="text-center p-10 relative z-20">
 							<span
 							ref={heroText}
@@ -245,52 +411,21 @@ function Home(): JSX.Element {
 					</div>
 				</div>
 				<div className="w-full">
-					<div className="gsap-imgs-1 opacity-0 relative h-108 xs:!h-[560px] sm:!h-[600px] md:!h-[820px] lg:!h-[1000px] xl:!h-[1220px] w-full max-w-[1720px] bg-purple-100 ">
-						{/* <div
-							className={
-								`gsap-img-1 absolute top-8 3xs:top-16 left-0 transform ` +
-								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
-								`-translate-x-[83px] 3xs:-translate-x-[125px] xs:-translate-x-[185px] md:!-translate-x-[270px]
-								 lg:!-translate-x-[440px] xl:!-translate-x-[610px] `
-							}
-						>
-							<img
-								className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 mx-auto "
-								src={ImageOne}
-								alt="chair"
-							/>
-						</div> */}
-
-						{/* <div
-							className={
-								`gsap-img-1 absolute top-8 3xs:top-16 ` +
-								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
-								`-left-[83px] 3xs:-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
-							}
-						>
-							<img
-								className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0"
-								src={ImageOne}
-								alt="chair"
-							/>
-						</div> */}
-
+					<div className="gsap-imgs-1  relative mb-4 min-[360]:mb-10 3xs:mb-16 lg:mb-36 h-[232px] xs:h-[332px] md:!h-[432px] lg:!h-[652px] xl:!h-[852px] w-full max-w-[1720px] mx-auto ">
+						{/* <div className="gsap-imgs-1 opacity-0 relative mb-4 min-[360]:mb-10 3xs:mb-16 lg:mb-36 h-[232px]
+					xs:h-[332px]
+					md:!h-[432px] lg:!h-[652px] xl:!h-[852px] w-full max-w-[1720px] mx-auto "> */}
 						<img
 							className={
 								`gsap-img-1 absolute top-8 3xs:top-16 ` +
-								`h-[100px] 3xs:h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
-								`object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
-								`-left-[83px] 3xs:-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
+								`h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] ` +
+								`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `
 							}
 							src={ImageOne}
 							alt="chair"
 						/>
-						<div
-							className={
-								`absolute top-0 left-0 h-full w-full ` +
-								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px]`
-							}
-						>
+						<div className={`absolute top-0 left-0 h-full w-full ` + `h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px]`}>
 							<div className="relative w-full h-full">
 								<img
 									className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 mx-auto "
@@ -299,75 +434,56 @@ function Home(): JSX.Element {
 								/>
 							</div>
 						</div>
-						{/* <div
-							className={
-								`gsap-img-3 absolute top-4 3xs:top-8 ` +
-								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
-								`-right-[63px] 3xs:-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
-							}
-						>
-							<img
-								className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 "
-								src={ImageThree}
-								alt="people"
-							/>
-						</div> */}
-
 						<img
 							className={
 								`gsap-img-3 absolute top-4 3xs:top-8 ` +
-								`h-[150px] 3xs:h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
-								`object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
-								`-right-[63px] 3xs:-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
+								`h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px] ` +
+								`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`-right-[82px] xs:-right-[125px] md:!-right-[168px] lg:!-right-[260px] xl:!-right-[345px] `
 							}
 							src={ImageThree}
 							alt="people"
 						/>
 					</div>
-					<div className="relative [@media(min-width:1400px)]:!h-[720px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] [@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36">
+					<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[120px] [@media(min-width:360px)]:h-[145px] min-[540px]:!h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
+						{/* <div className="gsap-imgs-2 opacity-0 relative mb-8 xs:mb-16 lg:mb-32 h-[120px]
+					[@media(min-width:360px)]:h-[145px] min-[540px]:!h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]"> */}
 						<img
 							className={
-								`absolute -top-24 [@media(min-width:1400px)]:!-left-[168px] [@media(min-width:1240px)]:!-left-[148px] [@media(min-width:1100px)]:!-left-[134px] grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
-								`[@media(min-width:1024px)]:!-left-[125px] [@media(min-width:880px)]:-left-[103px] [@media(min-width:775px)]:-left-[92px] sm:-left-[76px] xs:-left-[56px] 4xs:-left-[42px] -left-[34px] ` +
-								`[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] ` +
-								`[@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36 w-max object-contain`
+								`gsap-img-4 absolute top-0 ` +
+								`h-[120px] [@media(min-width:360px)]:h-[145px] min-[540px]:!h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px] ` +
+								`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`-left-[31px] [@media(min-width:360px)]:-left-[38px] min-[540px]:!-left-[53px] md:!-left-[95px] lg:!-left-[120px] xl:!-left-[150px] `
 							}
 							src={ImageFour}
 							alt="people dancing"
 						/>
+
 						<img
-							// className="absolute -top-6 -right-[56px] sm:-right-[76px] [@media(min-width:775px)]:-right-[90px]
-							// [@media(min-width:880px)]:-right-[93px] lg:-right-[12%] xs:h-60 h-36 sm:h-80 [@media(min-width:775px)]:h-96
-							// [@media(min-width:880px)]:h-108
-							//  [@media(min-width:1024px)]:h-[520px] [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1240px)]:!h-[620px]
-							//  [@media(min-width:1400px)]:!h-[700px] w-max object-contain"
 							className={
-								`absolute lg:-top-6 [@media(min-width:880px)]:-top-8 [@media(min-width:775px)]:-top-10 sm:-top-12 xs:-top-16 -top-20 grayscale transition !ease-linear duration-300 hover:grayscale-0  ` +
-								`[@media(min-width:1400px)]:!-right-[168px] [@media(min-width:1240px)]:!-right-[148px] [@media(min-width:1100px)]:!-right-[134px] [@media(min-width:1024px)]:!-right-[125px] ` +
-								`[@media(min-width:880px)]:-right-[103px] [@media(min-width:775px)]:-right-[92px] sm:-right-[76px] xs:-right-[56px] 4xs:-right-[42px] -right-[34px] ` +
-								// `[@media(min-width:1400px)]:!h-[700px] [@media(min-width:1240px)]:!h-[620px]
-								//  [@media(min-width:1100px)]:!h-[560px] [@media(min-width:1024px)]:!h-[520px] ` +
-								`h-[280px] xs:h-[420px] md:!h-[640px] lg:!h-[820px] xl:!h-[700px] ` +
-								`[@media(min-width:880px)]:h-108 [@media(min-width:775px)]:h-96 sm:h-80 xs:h-60 4xs:h-44 h-36 w-max object-contain `
+								`gsap-img-5 absolute top-2 lg:top-4 ` +
+								`h-[120px] [@media(min-width:360px)]:h-[145px] min-[540px]:!h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px] ` +
+								`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
+								`-right-[31px] [@media(min-width:360px)]:-right-[38px] min-[540px]:!-right-[53px] md:!-right-[95px] lg:!-right-[120px] xl:!-right-[150px] `
 							}
 							src={ImageFive}
 							alt="hero page"
 						/>
 					</div>
 				</div>
-				<div className="px-8 py-16 lg:p-16 max-w-7xl mx-auto">
+				<div className="gsap-memo px-8 py-16 lg:p-16 max-w-7xl mx-auto">
 					<div className="flex flex-col md:flex-row justify-between items-center gap-6 p-7 2xs:p-14 bg-white rounded-3xl">
 						<div className="max-w-lg">
-							<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-tertiary">
+							<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 								With a background in design,
-								<span className="text-black"> I work closely with design-focused teams </span>
+								<span className="gsap-memo-span"> I work closely with design-focused teams </span>
 								to build websites for companies and Individuals.
 							</p>
 						</div>
 						<div className="max-w-lg">
-							<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-tertiary">
+							<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 								I have
-								<span className="text-black"> years of experience working, collaborating with product teams and building </span>
+								<span className="gsap-memo-span"> years of experience working, collaborating with product teams and building </span>
 								user-centered products.
 							</p>
 						</div>
@@ -376,7 +492,7 @@ function Home(): JSX.Element {
 			</section>
 			<section className="px-8 lg:px-16 min-h-screen flex flex-col gap-16 lg:gap-32 max-w-7xl mx-auto">
 				<p className="text-4xl 2xs:text-5xl lg:!text-6xl text-black font-medium lg:pt-16">Projects</p>
-				<div className="flex flex-col lg:flex-row justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14">
+				<div className="gsap-lenco-primary flex flex-col lg:flex-row justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14">
 					<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full">
 						<span className="text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-[4rem]">
 							Lenco Bank Mobile
@@ -388,13 +504,13 @@ function Home(): JSX.Element {
 					</div>
 					<div className="mt-1 pt-20 w-full flex justify-center">
 						<img
-							className="-mt-10 h-[420px] lg:h-[720px] scale-[1.2] origin-top w-max object-contain"
+							className="-mt-10 h-[420px] lg:h-[650px] scale-[1.2] origin-top w-max object-contain gsap-lenco-img !ease-linear"
 							src={PhoneImageOne}
 							alt="phone showing app dashboard(lenco)"
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col lg:flex-row justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14">
+				<div className="gsap-ridr-primary flex flex-col lg:flex-row justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14">
 					<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full lg:order-2">
 						<span className="text-success font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-[4rem]">Ridr Fitness</span>
 						<p className="lg:max-w-sm 2xs:text-lg lg:text-xl">
@@ -404,14 +520,14 @@ function Home(): JSX.Element {
 					</div>
 					<div className="mt-0.5 pt-20 w-full flex justify-center lg:order-1">
 						<img
-							className="-mt-10 h-[420px] lg:h-[720px] scale-[1.2] origin-top w-max object-contain"
+							className="-mt-10 h-[420px] lg:h-[650px] scale-[1.2] origin-top w-max object-contain gsap-ridr-img !ease-linear"
 							src={PhoneImageTwo}
 							alt="phone showing app(ridr)"
 						/>
 					</div>
 				</div>
 				<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-					<div className="flex flex-col justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14 w-full lg:w-60%">
+					<div className="gsap-accrue-primary flex flex-col justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14 w-full lg:w-60%">
 						<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full">
 							<span className="text-accrue-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-sm lg:leading-[4rem]">
 								Accrue Savings
@@ -421,31 +537,31 @@ function Home(): JSX.Element {
 								customizable savings plans and cash rewards.
 							</p>
 						</div>
-						<div className="pt-20 w-full flex justify-center xl:justify-between gap-4">
+						<div className="gsap-accrue-secondary pt-[30px] w-full flex justify-center xl:justify-between gap-4 pb-10">
 							<img
-								className="-mt-10 h-[420px] xl:h-120 scale-[1.2] origin-top w-max object-contain"
+								className="h-[420px] xl:h-[350px] scale-[1.2] origin-top w-max object-contain gsap-accrue-img !ease-linear"
 								src={PhoneImageThree}
 								alt="phone showing app(accrue)"
 							/>
 							<img
-								className="-mt-10 h-120 scale-[1.2] origin-top w-max object-contain hidden xl:block"
+								className="h-[350px] scale-[1.2] origin-top w-max object-contain hidden xl:block gsap-accrue-img !ease-linear"
 								src={PhoneImageFour}
 								alt="second phone showing app(accrue)"
 							/>
 						</div>
 					</div>
-					<div className="flex flex-col justify-between items-start bg-fora-blue rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14 w-full lg:w-40%">
+					<div className="gsap-fora-primary flex flex-col justify-between items-start bg-fora-blue rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14 w-full lg:w-40%">
 						<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full">
 							<span className="text-white font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-sm lg:leading-[4rem]">Fora</span>
 							<p className="lg:max-w-sm 2xs:text-lg lg:text-xl text-white">
 								Fora is a mobile online community that allows Nigerians creatives build a portfolio, connect with other creatives.
 							</p>
 						</div>
-						<div className="pt-20 w-full flex justify-center">
+						<div className="gsap-fora-secondary pt-10 w-full flex justify-center pb-10">
 							<img
-								className="-mt-10 h-[420px] xl:h-120 scale-[1.2] origin-top w-max object-contain"
+								className="h-[420px] xl:h-[350px] scale-[1.2] origin-top w-max object-contain gsap-fora-img !ease-linear"
 								src={PhoneImageFive}
-								alt="phone showing app(ridr)"
+								alt="phone showing app(fora)"
 							/>
 						</div>
 					</div>
