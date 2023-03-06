@@ -115,6 +115,13 @@ module.exports = {
 					quin: "#D3F0D6",
 					backdrop: "#F7FCF8",
 				},
+				lenco: {
+					"bg-dark": "#05051E",
+					"bg-light": "#ccd1fd",
+					"bg-xdark": "#02020D",
+					// "bg-2x-dark": "#2a337d",
+					"bg-2x-dark": "#191f4b",
+				},
 				accrue: {
 					blue: "#1B0AED",
 				},

@@ -1,23 +1,21 @@
-export const Routes = {
-	ACCOUNT_OPENING: Object.freeze({
-		STATUS: "/application",
-		SET_REGISTRATION_STATUS: "/application/registration-status",
+import Home from "../modules/Home/Pages";
+import Lenco from "../modules/Lenco/Pages";
 
-		REGISTERED: Object.freeze({
-			COMPANY: "/application/company",
-			SIGNATORY: "/application/signatory",
-			DOCUMENT: "/application/documents",
-			REFEREE: "/application/referees",
-			AGREEMENT: "/application/agreements",
-		}),
-
-		UNREGISTERED: Object.freeze({
-			BUSINESS: "/application/business",
-			PERSONAL: "/application/personal",
-			IDENTITY: "/application/identity",
-		}),
-	}),
-
-	// todo -> remove /dashboard from these
-	DASHBOARD: "/",
+type RouterRoutes = {
+	path: string;
+	name: string;
+	Component: () => JSX.Element;
 };
+export const Routes = Object.freeze({
+	HOME: "/",
+	LENCO: "/lenco",
+	ACCRUE: "/accrue",
+	FORA: "/fora",
+	RIDR: "/ridr",
+	BERGER: "/berger",
+});
+
+export const routerRoutes: RouterRoutes[] = [
+	{path: Routes.HOME, name: "Home", Component: Home},
+	{path: "/about", name: "About", Component: Lenco},
+];

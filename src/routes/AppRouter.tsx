@@ -1,7 +1,7 @@
 import {Navigate, Route, Routes} from "react-router-dom";
 
 import Home from "../modules/Home/Pages";
-import Lenco from "../modules/Home/Pages/Lenco";
+import Lenco from "../modules/Lenco/Pages";
 import React from "react";
 
 function AppRouter(): JSX.Element {
@@ -22,7 +22,7 @@ function AppRouter(): JSX.Element {
 				<Route path="/director/:a/:b" component={DirectorForm} />
 				<Route path="/reset-password/:a/:b/:c" component={ResetForgotPassword} /> */}
 				<Route path="/" element={<Home />} />
-				<Route path="/" element={<Lenco />} />
+				<Route path="/lenco" element={<Lenco />} />
 				{/* This will never be triggered. But leave it */}
 				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
