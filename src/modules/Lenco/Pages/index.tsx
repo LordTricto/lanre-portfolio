@@ -1,6 +1,4 @@
 import React, {useLayoutEffect, useRef} from "react";
-// import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
-import gsap, {Circ, Power1, Power4} from "gsap";
 
 import ArchitectureImg from "../../../assets/images/lenco/lenco-architecture-1.png";
 import AssessingImgFour from "../../../assets/images/lenco/lenco-assessing-4.png";
@@ -34,6 +32,8 @@ import TransactionListImgOne from "../../../assets/images/lenco/lenco-transactio
 import TransactionListImgThree from "../../../assets/images/lenco/lenco-transaction-3.png";
 import TransactionListImgTwo from "../../../assets/images/lenco/lenco-transaction-2.png";
 import VirtualImgOne from "../../../assets/images/lenco/lenco-virtual-1.png";
+// import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
+import gsap from "gsap";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);

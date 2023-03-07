@@ -1,10 +1,10 @@
 import "./index.css";
 
 import React, {createRef} from "react";
-import {BrowserRouter as Router, RouterProvider, createBrowserRouter} from "react-router-dom";
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import {enableES5, enableMapSet} from "immer";
 
-import Accrue from "./modules/Accrue/Pages";
+// import Accrue from "./modules/Accrue/Pages";
 import App from "./App";
 import Home from "./modules/Home/Pages";
 import Lenco from "./modules/Lenco/Pages";

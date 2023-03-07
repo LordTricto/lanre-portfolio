@@ -1,15 +1,15 @@
 import "./App.css";
 
 import {CSSTransition, SwitchTransition} from "react-transition-group";
-import {RouterRoute, routes} from ".";
-import gsap, {Circ, Power1, Power2, Power4} from "gsap";
+import gsap, {Power1} from "gsap";
 import {useLocation, useOutlet} from "react-router-dom";
 
-import Nav from "./components/nav/nav";
+// import Nav from "./components/nav/nav";
 // import AppRouter from "./routes/AppRouter";
 // import Nav from "./components/nav/nav";
 import React from "react";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import {routes} from ".";
+// import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "./hooks/useDimension";
 
 function App(): JSX.Element {

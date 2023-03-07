@@ -1,15 +1,16 @@
 import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
-import gsap, {Circ, Power0, Power2, Power4} from "gsap";
+import gsap, {Circ} from "gsap";
 import {useLocation, useNavigate} from "react-router-dom";
 
 import {ReactComponent as ArrowDownIcon} from "../../assets/svg/arrowDownIcon.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import useDimension from "../../hooks/useDimension";
+
+// import useDimension from "../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Nav(): JSX.Element {
-	const {width} = useDimension();
+	// const {width} = useDimension();
 	const navigate = useNavigate();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const navDivRef = useRef<HTMLDivElement | null>(null);
