@@ -414,7 +414,7 @@ function Home(): JSX.Element {
 							/>
 						</div>
 						<div className="h-full w-full pb-24 md:pb-96 relative">
-							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[730px] 2xs:h-[780px] md:!h-[640px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden md:overflow-visible">
+							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[640px] 2xs:h-[780px] md:!h-[640px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden md:overflow-visible">
 								<img className="h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
 								<div className="flex flex-col justify-start items-left md:items-center gap-8 pt-12 sm:pt-20 w-full z-10">
 									<span className="font-semibold text-3xl 2xs:text-4xl md:!text-5xl max-w-sm md:leading-[4rem] text-left md:text-center">
@@ -426,9 +426,11 @@ function Home(): JSX.Element {
 									</p>
 								</div>
 								<div className="h-full w-full relative">
-									<div className="bg-pink-100 pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full block [@media(min-width:890px)]:flex justify-center absolute [@media(min-width:890px)]:!-bottom-44 top-0 [@media(min-width:890px)]:left-0">
+									<div className=" pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full block [@media(min-width:890px)]:flex justify-center absolute bottom-20 2xs:top-0 [@media(min-width:890px)]:!-bottom-44  [@media(min-width:890px)]:left-0">
 										<img
-											className="gsap-berger-img h-[240px] 4xs:h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px] xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-full [@media(min-width:890px)]:w-max object-contain"
+											className="gsap-berger-img h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px] xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-max object-contain"
+											// className="gsap-berger-img h-[240px] 4xs:h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px]
+											//  xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-max object-contain"
 											src={MacImageOne}
 											alt="Mac showing app landing page(Berger Paints)"
 										/>
