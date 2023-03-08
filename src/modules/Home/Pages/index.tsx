@@ -137,87 +137,45 @@ function Home(): JSX.Element {
 					ease: Circ.easeOut,
 				});
 
-				gsap.to(".gsap-lenco-img", {
+				gsap.from(".gsap-lenco-img", {
 					scrollTrigger: {
 						trigger: ".gsap-lenco-primary",
 						start: "top +=400px",
 					},
 					duration: 1,
-					scale: 1,
+					scale: 1.4,
 				});
-				// gsap.to(".gsap-lenco-img", {
-				// scrollTrigger: {
-				// trigger: ".gsap-lenco-primary",
-				// start: "center center",
-				// end: "bottom top",
-				// scrub: 0.3,
-				// markers: true,
-				// once: true,
-				// toggleActions: "play complete complete complete",
-				// },
-				// y: 40,
-				// ease: Circ.easeOut,
-				// });
 
-				gsap.to(".gsap-ridr-img", {
+				gsap.from(".gsap-ridr-img", {
 					scrollTrigger: {
 						trigger: ".gsap-ridr-primary",
 						start: "top +=400px",
 					},
 					duration: 1,
-					scale: 1,
+					scale: 1.4,
 				});
-				// gsap.to(".gsap-ridr-img", {
-				// scrollTrigger: {
-				// trigger: ".gsap-ridr-primary",
-				// start: "center center",
-				// end: "bottom top",
-				// scrub: 0.3,
-				// toggleActions: "play pause pause pause",
-				// },
-				// y: 40,
-				// ease: Circ.easeOut,
-				// });
 
-				gsap.to(".gsap-accrue-img", {
+				gsap.from(".gsap-accrue-img", {
 					scrollTrigger: {
 						trigger: ".gsap-accrue-primary",
 						start: "center center",
 					},
 					duration: 1,
-					scale: 1,
+					scale: 1.3,
+					bottom: "1rem",
+					clearProps: "bottom,scale",
 				});
-				// gsap.to(".gsap-accrue-img", {
-				// scrollTrigger: {
-				// trigger: ".gsap-accrue-primary",
-				// start: "center center",
-				// end: "bottom top",
-				// scrub: 0.3,
-				// toggleActions: "play pause pause pause",
-				// },
-				// y: 30,
-				// ease: Circ.easeOut,
-				// });
 
-				gsap.to(".gsap-fora-img", {
+				gsap.from(".gsap-fora-img", {
 					scrollTrigger: {
 						trigger: ".gsap-fora-primary",
 						start: "center center",
 					},
 					duration: 1,
-					scale: 1,
+					scale: 1.3,
+					bottom: "1rem",
+					clearProps: "bottom,scale",
 				});
-				// gsap.to(".gsap-fora-img", {
-				// scrollTrigger: {
-				// trigger: ".gsap-fora-primary",
-				// start: "center center",
-				// end: "bottom top",
-				// scrub: 0.3,
-				// toggleActions: "play pause pause pause",
-				// },
-				// y: 30,
-				// ease: Circ.easeOut,
-				// });
 
 				gsap.to(".gsap-berger-img", {
 					scrollTrigger: {
@@ -227,17 +185,6 @@ function Home(): JSX.Element {
 					duration: 1,
 					scale: 1,
 				});
-				// gsap.to(".gsap-berger-img", {
-				// scrollTrigger: {
-				// trigger: ".gsap-berger-primary",
-				// start: "center center",
-				// end: "bottom top",
-				// scrub: 0.3,
-				// toggleActions: "play pause pause pause",
-				// },
-				// y: 30,
-				// ease: Circ.easeOut,
-				// });
 
 				gsap.to(".gsap-cta-span", {
 					scrollTrigger: {
@@ -265,222 +212,6 @@ function Home(): JSX.Element {
 		}
 	}, []);
 
-	// useLayoutEffect(() => {
-	// console.log(window.onload);
-	// if (!window.onload) return;
-	// const ctx = gsap.context(() => {
-	// tl.current = gsap.timeline();
-	// tl.current.to(".gsap-hero-text", {
-	// color: "white",
-	// // duration: 0.5,
-	// });
-	// tl.current.from(".gsap-hero-text", {
-	// duration: 1.5,
-	// scale: 5,
-	// });
-	// tl.current.from(".gsap-overlay-div", {
-	// duration: width < 547 ? 5 : 4.6,
-	// width: 0,
-	// ease: Power1.easeOut,
-	// });
-	// tl.current.to(
-	// ".gsap-overlay-div",
-	// {
-	// duration: 0,
-	// pointerEvents: "none",
-	// opacity: 0,
-	// },
-	// width < 547 ? "=-1" : "=-1.4"
-	// );
-	// tl.current.to(
-	// ".gsap-initial-div",
-	// {
-	// duration: 2,
-	// opacity: 0,
-	// pointerEvents: "none",
-	// },
-	// width < 547 ? "=-1" : "=-1.4"
-	// );
-	// tl.current.to(
-	// ".gsap-hero-text",
-	// {
-	// duration: 0,
-	// color: "#1F2130",
-	// ease: Power4.easeOut,
-	// },
-	// width < 547 ? "=-2.2" : "=-2"
-	// );
-
-	// gsap.from(".gsap-img-1", {
-	// scrollTrigger: {
-	// trigger: ".gsap-imgs-1",
-	// start: "top center",
-	// scrub: 1,
-	// },
-	// y: -40,
-	// ease: Circ.easeOut,
-	// });
-
-	// gsap.from(".gsap-img-3", {
-	// scrollTrigger: {
-	// trigger: ".gsap-imgs-1",
-	// start: "top center",
-	// scrub: 1,
-	// },
-	// y: +40,
-	// ease: Circ.easeOut,
-	// });
-
-	// gsap.from(".gsap-img-4", {
-	// scrollTrigger: {
-	// trigger: ".gsap-imgs-2",
-	// start: "top center",
-	// end: "bottom 100px",
-	// scrub: 1,
-	// },
-	// y: -40,
-	// ease: Circ.easeOut,
-	// });
-
-	// gsap.from(".gsap-img-5", {
-	// scrollTrigger: {
-	// trigger: ".gsap-imgs-2",
-	// start: "top center",
-	// end: "bottom 100px",
-	// scrub: 1,
-	// },
-	// y: +40,
-	// ease: Circ.easeOut,
-	// });
-
-	// gsap.to(".gsap-memo-span", {
-	// scrollTrigger: {
-	// trigger: ".gsap-memo",
-	// start: "top +=500px",
-	// },
-	// duration: 2.5,
-	// color: "#1F2130",
-	// ease: Circ.easeOut,
-	// });
-
-	// gsap.to(".gsap-lenco-img", {
-	// scrollTrigger: {
-	// trigger: ".gsap-lenco-primary",
-	// start: "top +=400px",
-	// },
-	// duration: 1,
-	// scale: 1,
-	// });
-	// // gsap.to(".gsap-lenco-img", {
-	// // scrollTrigger: {
-	// // trigger: ".gsap-lenco-primary",
-	// // start: "center center",
-	// // end: "bottom top",
-	// // scrub: 0.3,
-	// // markers: true,
-	// // once: true,
-	// // toggleActions: "play complete complete complete",
-	// // },
-	// // y: 40,
-	// // ease: Circ.easeOut,
-	// // });
-
-	// gsap.to(".gsap-ridr-img", {
-	// scrollTrigger: {
-	// trigger: ".gsap-ridr-primary",
-	// start: "top +=400px",
-	// },
-	// duration: 1,
-	// scale: 1,
-	// });
-	// // gsap.to(".gsap-ridr-img", {
-	// // scrollTrigger: {
-	// // trigger: ".gsap-ridr-primary",
-	// // start: "center center",
-	// // end: "bottom top",
-	// // scrub: 0.3,
-	// // toggleActions: "play pause pause pause",
-	// // },
-	// // y: 40,
-	// // ease: Circ.easeOut,
-	// // });
-
-	// gsap.to(".gsap-accrue-img", {
-	// scrollTrigger: {
-	// trigger: ".gsap-accrue-primary",
-	// start: "center center",
-	// },
-	// duration: 1,
-	// scale: 1,
-	// });
-	// // gsap.to(".gsap-accrue-img", {
-	// // scrollTrigger: {
-	// // trigger: ".gsap-accrue-primary",
-	// // start: "center center",
-	// // end: "bottom top",
-	// // scrub: 0.3,
-	// // toggleActions: "play pause pause pause",
-	// // },
-	// // y: 30,
-	// // ease: Circ.easeOut,
-	// // });
-
-	// gsap.to(".gsap-fora-img", {
-	// scrollTrigger: {
-	// trigger: ".gsap-fora-primary",
-	// start: "center center",
-	// },
-	// duration: 1,
-	// scale: 1,
-	// });
-	// // gsap.to(".gsap-fora-img", {
-	// // scrollTrigger: {
-	// // trigger: ".gsap-fora-primary",
-	// // start: "center center",
-	// // end: "bottom top",
-	// // scrub: 0.3,
-	// // toggleActions: "play pause pause pause",
-	// // },
-	// // y: 30,
-	// // ease: Circ.easeOut,
-	// // });
-
-	// gsap.to(".gsap-berger-img", {
-	// scrollTrigger: {
-	// trigger: ".gsap-berger-primary",
-	// start: "center center",
-	// },
-	// duration: 1,
-	// scale: 1,
-	// });
-	// // gsap.to(".gsap-berger-img", {
-	// // scrollTrigger: {
-	// // trigger: ".gsap-berger-primary",
-	// // start: "center center",
-	// // end: "bottom top",
-	// // scrub: 0.3,
-	// // toggleActions: "play pause pause pause",
-	// // },
-	// // y: 30,
-	// // ease: Circ.easeOut,
-	// // });
-
-	// gsap.to(".gsap-cta-span", {
-	// scrollTrigger: {
-	// trigger: ".gsap-cta",
-	// start: "top +=500px",
-	// },
-	// duration: 2.5,
-	// color: "#1F2130",
-	// ease: Circ.easeOut,
-	// });
-	// }, landingDivRef);
-
-	// return () => {
-	// ctx.revert(); // cleanup!!
-	// };
-	// }, []);
-	console.log(location?.from);
 	return (
 		<>
 			<Nav />
@@ -598,9 +329,9 @@ function Home(): JSX.Element {
 				<section className="w-full h-fit">
 					<div className="flex flex-col min-h-screen gap-16 lg:gap-32 max-w-7xl mx-auto w-full px-4 2xs:px-8 lg:px-16">
 						<h2 className="pt-36 text-4xl 2xs:text-5xl lg:!text-6xl text-black font-medium">Projects</h2>
-						<div className="gsap-lenco-primary flex flex-col lg:flex-row justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14">
-							<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full">
-								<span className="text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-[4rem]">
+						<div className="gsap-lenco-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
+							<div className="flex flex-col gap-8 w-full">
+								<span className="text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
 									Lenco Bank Mobile
 								</span>
 								<p className="lg:max-w-sm 2xs:text-lg lg:text-xl">
@@ -608,17 +339,18 @@ function Home(): JSX.Element {
 									without any hassle.
 								</p>
 							</div>
-							<div className="mt-1 pt-20 w-full flex justify-center">
+							<div className="flex justify-center items-center w-full h-full">
 								<img
-									className="-mt-10 h-[420px] lg:h-[590px] scale-[1.2] origin-top w-max object-contain gsap-lenco-img !ease-linear"
+									className="mt-5 h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear"
+									// className="mt-6 h-[420px] lg:h-[740px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear"
 									src={PhoneImageOne}
 									alt="phone showing app dashboard(lenco)"
 								/>
 							</div>
 						</div>
-						<div className="gsap-ridr-primary flex flex-col lg:flex-row justify-between items-start bg-white rounded-3xl h-[640px] lg:h-[720px] overflow-hidden relative px-7 md:px-14">
-							<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full lg:order-2">
-								<span className="text-success font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-[4rem]">
+						<div className="gsap-ridr-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
+							<div className="flex flex-col gap-8 w-full lg:order-2">
+								<span className="text-success font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
 									Ridr Fitness
 								</span>
 								<p className="lg:max-w-sm 2xs:text-lg lg:text-xl">
@@ -626,9 +358,9 @@ function Home(): JSX.Element {
 									Skateboards et.c – ride and earn tokens.
 								</p>
 							</div>
-							<div className="mt-0.5 pt-20 w-full flex justify-center lg:order-1">
+							<div className=" flex justify-center lg:order-1 w-full">
 								<img
-									className="-mt-10 h-[420px] lg:h-[590px] scale-[1.2] origin-top w-max object-contain gsap-ridr-img !ease-linear"
+									className=" h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-ridr-img !ease-linear"
 									src={PhoneImageTwo}
 									alt="phone showing app(ridr)"
 								/>

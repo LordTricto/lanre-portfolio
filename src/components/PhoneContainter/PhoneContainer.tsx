@@ -23,17 +23,14 @@ function PhoneContainer(props: Props): JSX.Element {
 			{isSingle && (
 				<div
 					className={
-						`flex flex-col justify-between items-start rounded-3xl h-[660px] lg:h-[740px] overflow-hidden relative px-6 md:px-12 w-full ` +
+						`flex flex-col justify-between items-start rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
 						`${props.gsapPrimaryContainerTag} ` +
 						`${props.customContainerStyle} `
+						// h-[700px] lg:h-[780px]
 					}
 				>
-					<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full">
-						<span
-							className={
-								`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] lg:leading-[4rem] max-w-sm ` + `${props.customTitleStyle}`
-							}
-						>
+					<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
+						<span className={`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] lg:leading- max-w-sm ` + `${props.customTitleStyle}`}>
 							{props.title}
 						</span>
 						<p className={`lg:max-w-sm 2xs:text-lg lg:text-xl ` + `${props.customSubtitleStyle || ""}`}>{props.subTitle}</p>
@@ -41,8 +38,8 @@ function PhoneContainer(props: Props): JSX.Element {
 					<div className={`flex justify-center w-full relative ` + `${props.gsapSecondaryContainerTag}`}>
 						<img
 							className={
-								`h-[420px] scale-[1.2] !ease-linear origin-top w-max object-contain ` +
-								`absolute -bottom-4 ` +
+								`h-[420px] scale-[1] !ease-linear origin-top w-max object-contain ` +
+								`absolute bottom-10 sm:bottom-16 ` +
 								`${props.gsapImageTag}`
 							}
 							src={props.imgOne}
@@ -54,17 +51,13 @@ function PhoneContainer(props: Props): JSX.Element {
 			{!isSingle && (
 				<div
 					className={
-						`flex flex-col justify-between items-start rounded-3xl h-[660px] lg:h-[740px] overflow-hidden relative px-6 md:px-12 w-full ` +
+						`flex flex-col justify-between items-start rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
 						`${props.gsapPrimaryContainerTag} ` +
 						`${props.customContainerStyle} `
 					}
 				>
-					<div className="flex flex-col gap-8 pt-12 sm:pt-20 w-full">
-						<span
-							className={
-								`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] lg:leading-[4rem] max-w-sm ` + `${props.customTitleStyle}`
-							}
-						>
+					<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
+						<span className={`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] lg:leading- max-w-sm ` + `${props.customTitleStyle}`}>
 							{props.title}
 						</span>
 						<p className={`2xs:text-lg lg:text-xl ` + `${props.customSubtitleStyle || ""}`}>{props.subTitle}</p>
@@ -72,8 +65,8 @@ function PhoneContainer(props: Props): JSX.Element {
 					<div className={`flex justify-center w-full relative ` + `${props.gsapSecondaryContainerTag}`}>
 						<img
 							className={
-								`h-[420px] scale-[1.2] !ease-linear origin-top w-max xl:ml-5 object-contain ` +
-								`absolute -bottom-4 xl:left-0 ` +
+								`h-[420px] scale-[1] !ease-linear origin-top w-max xl:ml-5 object-contain ` +
+								`absolute bottom-10 sm:bottom-16 xl:left-0 ` +
 								`${props.gsapImageTag}`
 							}
 							src={props.imgOne}
@@ -81,8 +74,8 @@ function PhoneContainer(props: Props): JSX.Element {
 						/>
 						<img
 							className={
-								`h-[420px] scale-[1.2] !ease-linear origin-top w-max xl:mr-5 object-contain hidden xl:block ` +
-								`absolute -bottom-4 right-0 ` +
+								`h-[420px] scale-[1] !ease-linear origin-top w-max xl:mr-5 object-contain hidden xl:block ` +
+								`absolute bottom-10 sm:bottom-16 right-0 ` +
 								`${props.gsapImageTag}`
 							}
 							src={props.imgTwo}

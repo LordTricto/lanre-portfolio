@@ -26,9 +26,6 @@ function App(): JSX.Element {
 		// });
 	};
 	const onExiting = () => {
-		console.log(specificRoute?.nodeRef.current?.children);
-
-		console.log(specificRoute?.nodeRef.current?.lastChild?.lastChild);
 		gsap.to(specificRoute?.nodeRef.current?.lastChild?.lastChild || "", {
 			duration: width < 547 ? 2 : 1.6,
 			left: 0,

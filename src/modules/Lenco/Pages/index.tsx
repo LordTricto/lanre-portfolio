@@ -113,7 +113,6 @@ function Lenco(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, []);
-	console.log(location?.from);
 
 	return (
 		<>
