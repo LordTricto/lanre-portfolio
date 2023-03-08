@@ -140,19 +140,23 @@ function Home(): JSX.Element {
 				gsap.from(".gsap-lenco-img", {
 					scrollTrigger: {
 						trigger: ".gsap-lenco-primary",
-						start: "top +=400px",
+						start: width > 1023 ? "top +=400px" : "center center",
 					},
 					duration: 1,
-					scale: 1.4,
+					scale: width > 1023 ? 1.4 : 1.3,
+					bottom: width > 1023 ? "unset" : "1rem",
+					clearProps: "scale",
 				});
 
 				gsap.from(".gsap-ridr-img", {
 					scrollTrigger: {
 						trigger: ".gsap-ridr-primary",
-						start: "top +=400px",
+						start: width > 1023 ? "top +=400px" : "center center",
 					},
 					duration: 1,
-					scale: 1.4,
+					scale: width > 1023 ? 1.4 : 1.3,
+					bottom: width > 1023 ? "unset" : "1rem",
+					clearProps: "scale",
 				});
 
 				gsap.from(".gsap-accrue-img", {
@@ -280,7 +284,9 @@ function Home(): JSX.Element {
 								alt="people"
 							/>
 						</div>
-						<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[120px] [@media(min-width:360px)]:h-[145px] [@media(min-width:540px)]:h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
+						<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
+							{/* <div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[120px] [@media(min-width:360px)]:h-[145px]
+							[@media(min-width:540px)]:h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]"> */}
 							<img
 								className={
 									`gsap-img-4 absolute top-0 ` +
@@ -305,15 +311,15 @@ function Home(): JSX.Element {
 						</div>
 					</div>
 					<div className="gsap-memo px-8 !pb-0 py-16 lg:p-16 max-w-7xl mx-auto">
-						<div className="flex flex-col md:flex-row justify-between items-center gap-6 p-7 2xs:p-14 bg-white rounded-3xl">
-							<div className="max-w-lg">
+						<div className="flex flex-col md:flex-row justify-between items-start gap-4 p-7 2xs:p-14 bg-white rounded-3xl">
+							<div className="flex justify-start items-start max-w-lg">
 								<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 									With a background in design,
-									<span className="gsap-memo-span"> I work closely with design-focused teams </span>
+									<span className="gsap-memo-span w-full"> I work closely with design-focused teams </span>
 									to build websites for companies and Individuals.
 								</p>
 							</div>
-							<div className="max-w-lg">
+							<div className="flex justify-start items-start max-w-lg">
 								<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 									I have
 									<span className="gsap-memo-span">
@@ -330,7 +336,7 @@ function Home(): JSX.Element {
 					<div className="flex flex-col min-h-screen gap-16 lg:gap-32 max-w-7xl mx-auto w-full px-4 2xs:px-8 lg:px-16">
 						<h2 className="pt-36 text-4xl 2xs:text-5xl lg:!text-6xl text-black font-medium">Projects</h2>
 						<div className="gsap-lenco-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
-							<div className="flex flex-col gap-8 w-full">
+							<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0">
 								<span className="text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
 									Lenco Bank Mobile
 								</span>
@@ -339,9 +345,14 @@ function Home(): JSX.Element {
 									without any hassle.
 								</p>
 							</div>
-							<div className="flex justify-center items-center w-full h-full">
+							<div className="flex justify-center items-center w-full h-full relative">
 								<img
-									className="mt-5 h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear"
+									className={
+										`gsap-lenco-img ` +
+										`lg:mt-5 h-[420px] lg:h-[550px] scale-[1] !ease-linear origin-top w-max object-contain ` +
+										`absolute lg:relative bottom-10 sm:bottom-16 lg:bottom-unset `
+										// "mt-5 h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear " +
+									}
 									// className="mt-6 h-[420px] lg:h-[740px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear"
 									src={PhoneImageOne}
 									alt="phone showing app dashboard(lenco)"
@@ -349,7 +360,7 @@ function Home(): JSX.Element {
 							</div>
 						</div>
 						<div className="gsap-ridr-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
-							<div className="flex flex-col gap-8 w-full lg:order-2">
+							<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0 lg:order-2">
 								<span className="text-success font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
 									Ridr Fitness
 								</span>
@@ -360,7 +371,12 @@ function Home(): JSX.Element {
 							</div>
 							<div className=" flex justify-center lg:order-1 w-full">
 								<img
-									className=" h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-ridr-img !ease-linear"
+									className={
+										`gsap-ridr-img ` +
+										`lg:mt-5 h-[420px] lg:h-[550px] scale-[1] !ease-linear origin-top w-max object-contain ` +
+										`absolute lg:relative bottom-10 sm:bottom-16 lg:bottom-unset `
+										// "mt-5 h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear " +
+									}
 									src={PhoneImageTwo}
 									alt="phone showing app(ridr)"
 								/>
@@ -398,7 +414,7 @@ function Home(): JSX.Element {
 							/>
 						</div>
 						<div className="h-full w-full pb-24 md:pb-96 relative">
-							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[520px] 4xs:h-[580px] 2xs:h-[780px] md:!h-[640px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden md:overflow-visible">
+							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[730px] 2xs:h-[780px] md:!h-[640px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden md:overflow-visible">
 								<img className="h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
 								<div className="flex flex-col justify-start items-left md:items-center gap-8 pt-12 sm:pt-20 w-full z-10">
 									<span className="font-semibold text-3xl 2xs:text-4xl md:!text-5xl max-w-sm md:leading-[4rem] text-left md:text-center">
@@ -410,7 +426,7 @@ function Home(): JSX.Element {
 									</p>
 								</div>
 								<div className="h-full w-full relative">
-									<div className=" pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full block [@media(min-width:890px)]:flex justify-center absolute [@media(min-width:890px)]:!-bottom-44 top-0 [@media(min-width:890px)]:left-0">
+									<div className="bg-pink-100 pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full block [@media(min-width:890px)]:flex justify-center absolute [@media(min-width:890px)]:!-bottom-44 top-0 [@media(min-width:890px)]:left-0">
 										<img
 											className="gsap-berger-img h-[240px] 4xs:h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px] xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-full [@media(min-width:890px)]:w-max object-contain"
 											src={MacImageOne}
