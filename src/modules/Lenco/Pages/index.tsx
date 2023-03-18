@@ -143,49 +143,6 @@ function Lenco(): JSX.Element {
 							headerImgThreeAlt="lenco-phone-app-three"
 							// isSingle
 						/>
-
-						{/* <div className="gsap-header-section flex flex-col lg:flex-row justify-center items-center gap-5 bg-white-dark rounded-3xl
-					 min-h-[500px] lg:h-[60vh] w-full overflow-hidden relative mt-36 px-7 md:px-14 max-w-7xl mx-auto">
-						<div className="gsap-header-imgs-div h-full w-full relative flex flex-col lg:flex-row justify-center">
-							<img
-								className={
-									`gsap-header-img-1 absolute -bottom-[45%] transform-none ` +
-									`h-[720px] ` +
-									`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
-									`left-8 `
-								}
-								src={HeaderImgOne}
-								alt="lenco-phone-app"
-							/>
-							<div
-								className={
-									`gsap-header-img-2-div absolute -top-8 3xs:-top-[35%] ` +
-									`flex justify-center items-center  ` +
-									`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
-									`left-0 top-0 h-full w-full `
-								}
-							>
-								<img
-									// className={`h-[150px] xs:h-[220px] md:!h-[320px] lg:!h-[520px] xl:!h-[720px] `}
-									className={`gsap-header-img-2 h-[720px] ml-6.5 `}
-									src={HeaderImgTwo}
-									alt="lenco-phone-app"
-								/>
-							</div>
-
-							<img
-								className={
-									`gsap-header-img-3 absolute -bottom-[45%] translate-y-0  ` +
-									`h-[720px] ` +
-									`object-contain h-full grayscale transition !ease-linear duration-300 hover:grayscale-0 ` +
-									`right-0`
-									// `-left-[125px] xs:-left-[185px] md:!-left-[270px] lg:!-left-[440px] xl:!-left-[610px] `left-16
-								}
-								src={HeaderImgThree}
-								alt="lenco-phone-app"
-							/>
-						</div>
-					</div> */}
 						<div className="flex flex-col justify-start items-start w-full gap-12 border-white divide-y-2 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<div className="flex flex-row justify-between items-start w-full gap-2">
 								<span className="text-7xl text-white max-w-sm leading-[75px]">Lenco Bank Mobile</span>

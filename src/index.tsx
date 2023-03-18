@@ -1,7 +1,7 @@
 import "./index.css";
 
+import {Navigate, RouterProvider, createBrowserRouter} from "react-router-dom";
 import React, {createRef} from "react";
-import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import {enableES5, enableMapSet} from "immer";
 
 // import Accrue from "./modules/Accrue/Pages";
@@ -26,7 +26,7 @@ export const routes: RouterRoute[] = [
 	{path: "/lenco", name: "Lenco", element: <Lenco />, nodeRef: createRef()},
 	{path: "/accrue", name: "Accrue", element: <Lenco />, nodeRef: createRef()},
 	{path: "/404", name: "error", element: <h1>hii</h1>, nodeRef: createRef()},
-	{path: "*", name: "Error", element: <h1>hii</h1>, nodeRef: createRef()},
+	// {path: "*", name: "Error", element: <Home />, nodeRef: createRef()},
 ];
 
 // const router = createBrowserRouter([
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
 			path: route.path === "/" ? undefined : route.path,
 			element: route.element,
 		})),
+	},
+	{
+		path: "*",
+		element: <h1>hii</h1>,
 	},
 ]);
 

@@ -34,11 +34,13 @@ function Home(): JSX.Element {
 	const {width} = useDimension();
 	const location = useLocation().state as LocationState;
 	const tl = useRef<gsap.core.Timeline | undefined>();
+	const tl2 = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
 				tl.current = gsap.timeline();
+
 				tl.current.to(".gsap-hero-text", {
 					color: "white",
 					duration: 0,
@@ -127,15 +129,66 @@ function Home(): JSX.Element {
 					ease: Circ.easeOut,
 				});
 
-				gsap.to(".gsap-memo-span", {
+				tl2.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-memo",
-						start: "top +=500px",
+						start: "top center",
+						// end: "+=400",
+						// scrub: true,
+						markers: true,
+						toggleActions: "restart none none reverse",
 					},
-					duration: 2.5,
-					color: "#1F2130",
-					ease: Circ.easeOut,
 				});
+
+				tl2.current.from(".gsap-memo", {
+					width: "100%",
+					height: "30rem",
+					duration: 1.5,
+					ease: Circ.easeOut,
+					clearProps: "height,width",
+				});
+
+				tl2.current.from(
+					[".gsap-memo-one", ".gsap-memo-two"],
+					{
+						translateY: "100%",
+						opacity: 0,
+						duration: 2.5,
+						stagger: 0.5,
+						ease: Power4.easeInOut,
+						clearProps: "transform,translateY",
+					},
+					// width < 1240 ? "-=1.75" : "-=1.25"
+					"-=1.75"
+				);
+				tl2.current.to(
+					".gsap-memo-span",
+					{
+						color: "#1F2130",
+						duration: 1,
+						stagger: 0.5,
+						ease: Circ.easeInOut,
+
+						// clearProps: "height,width",
+					},
+					">-0.75"
+				);
+
+				// tl2.current.to(".gsap-memo-overlay", {
+				// top: "-100%",
+				// duration: 2.5,
+				// ease: Circ.easeOut,
+				// });
+
+				// gsap.to(".gsap-memo-span", {
+				// scrollTrigger: {
+				// trigger: ".gsap-memo",
+				// start: "top +=500px",
+				// },
+				// duration: 2.5,
+				// color: "#1F2130",
+				// ease: Circ.easeOut,
+				// });
 
 				gsap.from(".gsap-lenco-img", {
 					scrollTrigger: {
@@ -181,13 +234,14 @@ function Home(): JSX.Element {
 					clearProps: "bottom,scale",
 				});
 
-				gsap.to(".gsap-berger-img", {
+				gsap.from(".gsap-berger-img", {
 					scrollTrigger: {
 						trigger: ".gsap-berger-primary",
 						start: "center center",
 					},
 					duration: 1,
-					scale: 1,
+					scale: 1.2,
+					clearProps: "bottom,scale",
 				});
 
 				gsap.to(".gsap-cta-span", {
@@ -284,7 +338,7 @@ function Home(): JSX.Element {
 								alt="people"
 							/>
 						</div>
-						<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
+						<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 mt-16 2xs:mt-0 h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
 							{/* <div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[120px] [@media(min-width:360px)]:h-[145px]
 							[@media(min-width:540px)]:h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]"> */}
 							<img
@@ -310,31 +364,34 @@ function Home(): JSX.Element {
 							/>
 						</div>
 					</div>
-					<div className="gsap-memo px-8 !pb-0 py-16 lg:p-16 max-w-7xl mx-auto">
-						<div className="flex flex-col md:flex-row justify-between items-start gap-4 p-7 2xs:p-14 bg-white rounded-3xl">
-							<div className="flex justify-start items-start max-w-lg">
-								<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
-									With a background in design,
-									<span className="gsap-memo-span w-full"> I work closely with design-focused teams </span>
-									to build websites for companies and Individuals.
-								</p>
-							</div>
-							<div className="flex justify-start items-start max-w-lg">
-								<p className="text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
-									I have
-									<span className="gsap-memo-span">
-										{" "}
-										years of experience working, collaborating with product teams and building{" "}
-									</span>
-									user-centered products.
-								</p>
+					<div className="gsap-memo px-8 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto rounded-3xl relative overflow-hidden">
+						{/* <div className="gsap-memo-overlay absolute top-0 left-0 w-full h-full bg-white max-w-7xl "></div> */}
+						<div className="w-full h-full bg-white rounded-3xl">
+							<div className="flex flex-col md:flex-row justify-between items-start h-full gap-4 p-7 2xs:p-14 xl:w-[1152px] max-w-7xl mx-auto">
+								<div className="gsap-memo-overlay-one flex justify-start items-start max-w-lg overflow-hidden">
+									<p className="gsap-memo-one text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
+										With a background in design,
+										<span className="gsap-memo-span w-full"> I work closely with design-focused teams </span>
+										to build websites for companies and Individuals.
+									</p>
+								</div>
+								<div className="gsap-memo-overlay-two flex justify-start items-start max-w-lg overflow-hidden">
+									<p className="gsap-memo-two text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
+										I have
+										<span className="gsap-memo-span">
+											{" "}
+											years of experience working, collaborating with product teams and building{" "}
+										</span>
+										user-centered products.
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</section>
 				<section className="w-full h-fit">
 					<div className="flex flex-col min-h-screen gap-16 lg:gap-32 max-w-7xl mx-auto w-full px-4 2xs:px-8 lg:px-16">
-						<h2 className="pt-36 text-4xl 2xs:text-5xl lg:!text-6xl text-black font-medium">Projects</h2>
+						<h2 className="pt-16 2xs:pt-36 text-4xl 2xs:text-5xl lg:!text-6xl text-black font-medium">Projects</h2>
 						<div className="gsap-lenco-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
 							<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0">
 								<span className="text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
@@ -414,21 +471,39 @@ function Home(): JSX.Element {
 							/>
 						</div>
 						<div className="h-full w-full pb-24 md:pb-96 relative">
-							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[640px] 2xs:h-[780px] md:!h-[640px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden md:overflow-visible">
+							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden lg:overflow-visible">
 								<img className="h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
-								<div className="flex flex-col justify-start items-left md:items-center gap-8 pt-12 sm:pt-20 w-full z-10">
-									<span className="font-semibold text-3xl 2xs:text-4xl md:!text-5xl max-w-sm md:leading-[4rem] text-left md:text-center">
+								<div className="flex flex-col justify-start items-start lg:items-center gap-8 pt-12 sm:pt-20 w-full z-10 text-left lg:text-center">
+									<span className="font-semibold text-3xl 2xs:text-4xl md:!text-5xl max-w-sm md:leading-[4rem] text-left lg:text-center">
 										Berger Paints
 									</span>
-									<p className="md:max-w-sm 2xs:text-lg md:text-xl text-white">
+									<p className="max-w-2xl 2xs:text-lg md:text-xl text-white">
 										Nigeria&apos;s leading paint brand, offering varieties of paints and coating products to provide your desired
 										colors.
 									</p>
 								</div>
 								<div className="h-full w-full relative">
-									<div className=" pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full block [@media(min-width:890px)]:flex justify-center absolute bottom-20 2xs:top-0 [@media(min-width:890px)]:!-bottom-44  [@media(min-width:890px)]:left-0">
+									<div
+										className={
+											"" +
+											"md:pt-20 w-full" +
+											` ` +
+											`flex justify-center items-end lg:block ` +
+											`absolute -bottom-16 lg:top-0 left-0`
+											// "pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full " +
+										}
+									>
 										<img
-											className="gsap-berger-img h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px] xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-max object-contain"
+											className={
+												"gsap-berger-img scale-[1] origin-top object-contain " +
+												"w-full [@media(min-width:900px)]:w-[700px] lg:!w-full  " +
+												//for the mobile view
+												"absolute left-0 [@media(min-width:815px)]:relative " +
+												"min-w-[400px] 3xs:min-w-[500px] xs:min-w-[650px] sm:min-w-[675px] md:min-w-[700px]  " +
+												"bottom-10 xs:bottom-[unset] " +
+												"lg:h-[600px] xl:h-[700px] " +
+												``
+											}
 											// className="gsap-berger-img h-[240px] 4xs:h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px]
 											//  xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-max object-contain"
 											src={MacImageOne}
