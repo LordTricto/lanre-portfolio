@@ -362,7 +362,7 @@ function Accrue(): JSX.Element {
 								</p>
 							</div>
 							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-								<PhoneContainer
+								{/* <PhoneContainer
 									title="Homescreen"
 									subTitle='Cards with a "tap to expand" features were used to keep screens as brief as possible.'
 									customTitleStyle="text-accrue-blue"
@@ -388,7 +388,7 @@ function Accrue(): JSX.Element {
 									imgOne={SwitchBusinessImgOne}
 									imgOneAlt="phone showing app switching business(lenco)"
 									isSingle
-								/>
+								/> */}
 							</div>
 							<MultiPhoneContainer
 								title="Transaction List Filter"
@@ -409,7 +409,7 @@ function Accrue(): JSX.Element {
 								imgFourAlt="phone showing app switching business(lenco)"
 							/>
 							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-								<PhoneContainer
+								{/* <PhoneContainer
 									title="Virtual Cards"
 									subTitle="By removing unnecessary elements, I was able create an interface that draws the user’s attention to what
 											matters most."
@@ -437,7 +437,7 @@ function Accrue(): JSX.Element {
 									imgOneAlt="phone showing app(lenco-virtual)"
 									imgTwoAlt="second phone showing app(lenco-virtual)"
 									isSingle={false}
-								/>
+								/> */}
 							</div>
 							<MultiPhoneContainer
 								title="Reimbursements"

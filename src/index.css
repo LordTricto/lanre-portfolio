@@ -55,3 +55,31 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+/* .gsap-accure-fora-secondary {
+	transform: rotateX(22.5deg);
+	opacity: 0;
+}
+
+.gsap-accure-secondary-active {
+	will-change: opacity perspective;
+	animation: reveal 1s linear forwards;
+	animation-delay: 2s;
+	transition: 1.5s ease-in-out;
+}
+.gsap-fora-secondary-active {
+	will-change: opacity perspective;
+	animation: reveal 1s linear forwards;
+	animation-delay: 2s;
+	transition: 1.5s ease-in-out;
+} */
+/* 
+@keyframes reveal {
+	0% {
+		transform: rotateX(15deg);
+	}
+	100% {
+		transform: rotateX(0deg);
+		opacity: 1;
+	}
+} */

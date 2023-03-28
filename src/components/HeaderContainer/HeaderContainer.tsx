@@ -24,7 +24,7 @@ function HeaderContainer(props: Props): JSX.Element {
 					`flex flex-col lg:flex-row justify-center items-center gap-5 relative transition-all duration-[0ms] ` +
 					// `h-[25vh] xs:h-[30vh] md:h-[40vh] lg:h-[50vh] xl:h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto ` +
 					// `!h-[25vh] xs:!h-[30vh] md:!h-[40vh] lg:!h-[50vh] xl:!h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto ` +
-					`h-[200px] 2xs:h-[25vh] xs:h-[30vh] md:h-[40vh] lg:h-[50vh] xl:h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 xl:w-[80rem]  mx-auto ` +
+					`h-[200px] 2xs:h-[25vh] xs:h-[30vh] md:h-[40vh] lg:h-[50vh] xl:h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 xl:w-[80rem] mx-auto ` +
 					// `h-screen w-full overflow-hidden mx-auto ` +
 					`${props.gsapHeaderContainerTag}`
 				}

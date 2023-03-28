@@ -35,6 +35,11 @@ function Home(): JSX.Element {
 	const location = useLocation().state as LocationState;
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
+	const tl3 = useRef<gsap.core.Timeline | undefined>();
+	const tl4 = useRef<gsap.core.Timeline | undefined>();
+	// const tl5 = useRef<gsap.core.Timeline | undefined>();
+	const foraDivRef = useRef<HTMLDivElement | null>(null);
+	const accureDivRef = useRef<HTMLDivElement | null>(null);
 
 	useLayoutEffect(() => {
 		const onPageLoad = () => {
@@ -129,24 +134,95 @@ function Home(): JSX.Element {
 					ease: Circ.easeOut,
 				});
 
+				gsap.from(".gsap-img-1", {
+					scrollTrigger: {
+						trigger: ".gsap-imgs-1",
+						start: "top bottom-=300px",
+						toggleActions: "restart none none reverse",
+						// markers: true,
+					},
+					translateX: "-20%",
+					opacity: 0,
+					duration: 0.5,
+					ease: Circ.easeOut,
+					clearProps: "translateX,opacity",
+				});
+				gsap.from(".gsap-img-2", {
+					scrollTrigger: {
+						trigger: ".gsap-imgs-1",
+						start: "top bottom-=300px",
+						toggleActions: "restart none none reverse",
+					},
+					translateY: "20%",
+					opacity: 0,
+					duration: 0.5,
+					ease: Circ.easeOut,
+					clearProps: "translateY,opacity",
+				});
+				gsap.from(".gsap-img-3", {
+					scrollTrigger: {
+						trigger: ".gsap-imgs-1",
+						start: "top bottom-=300px",
+						toggleActions: "restart none none reverse",
+					},
+					translateX: "20%",
+					opacity: 0,
+					duration: 0.5,
+					ease: Circ.easeOut,
+					clearProps: "translateX,opacity",
+				});
+
+				gsap.from(".gsap-img-4", {
+					scrollTrigger: {
+						trigger: ".gsap-imgs-2",
+						start: "top bottom-=300px",
+						toggleActions: "restart none none reverse",
+					},
+					translateX: "-20%",
+					opacity: 0,
+					duration: 0.5,
+					ease: Circ.easeOut,
+					clearProps: "translateX,opacity",
+				});
+				gsap.from(".gsap-img-5", {
+					scrollTrigger: {
+						trigger: ".gsap-imgs-2",
+						start: "top bottom-=300px",
+						toggleActions: "restart none none reverse",
+					},
+					translateX: "20%",
+					opacity: 0,
+					duration: 0.5,
+					ease: Circ.easeOut,
+					clearProps: "translateX,opacity",
+				});
+
 				tl2.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-memo",
 						start: "top center",
-						// end: "+=400",
-						// scrub: true,
-						markers: true,
 						toggleActions: "restart none none reverse",
 					},
 				});
 
 				tl2.current.from(".gsap-memo", {
 					width: "100%",
+					borderRadius: 0,
+					padding: 0,
 					height: "30rem",
 					duration: 1.5,
 					ease: Circ.easeOut,
-					clearProps: "height,width",
+					clearProps: "height,width,padding,borderRadius",
 				});
+				tl2.current.from(
+					".gsap-memo-primary",
+					{
+						borderRadius: 0,
+						duration: 1.5,
+						clearProps: "borderRadius",
+					},
+					"<"
+				);
 
 				tl2.current.from(
 					[".gsap-memo-one", ".gsap-memo-two"],
@@ -158,70 +234,275 @@ function Home(): JSX.Element {
 						ease: Power4.easeInOut,
 						clearProps: "transform,translateY",
 					},
-					// width < 1240 ? "-=1.75" : "-=1.25"
 					"-=1.75"
 				);
 				tl2.current.to(
-					".gsap-memo-span",
+					".gsap-memo-one-span",
 					{
 						color: "#1F2130",
-						duration: 1,
-						stagger: 0.5,
-						ease: Circ.easeInOut,
-
-						// clearProps: "height,width",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
 					},
 					">-0.75"
 				);
+				tl2.current.to(
+					".gsap-memo-two-span",
+					{
+						color: "#1F2130",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
+					},
+					">+0.5"
+				);
 
-				// tl2.current.to(".gsap-memo-overlay", {
-				// top: "-100%",
-				// duration: 2.5,
-				// ease: Circ.easeOut,
-				// });
+				gsap.from(".gsap-section-project-header", {
+					scrollTrigger: {
+						trigger: ".gsap-section-project",
+						start: "top center-=150px",
+						// toggleActions: "restart none none reverse",
+						// markers: true,
+					},
+					translateY: "20%",
+					opacity: 0,
+					duration: 1,
+					ease: Circ.easeOut,
+					clearProps: "translateY,opacity",
+				});
 
-				// gsap.to(".gsap-memo-span", {
-				// scrollTrigger: {
-				// trigger: ".gsap-memo",
-				// start: "top +=500px",
-				// },
-				// duration: 2.5,
-				// color: "#1F2130",
-				// ease: Circ.easeOut,
-				// });
+				// <====== Lenco Section ======>
+				tl3.current = gsap.timeline({
+					scrollTrigger: {
+						trigger: ".gsap-lenco",
+						start: "top center",
+						// toggleActions: "restart none none reverse",
+					},
+				});
+
+				tl3.current.from(".gsap-lenco", {
+					width: "100%",
+					borderRadius: 0,
+					padding: 0,
+					duration: 1.5,
+					ease: Circ.easeOut,
+					clearProps: "width,padding,borderRadius",
+				});
+				tl3.current.from(
+					".gsap-lenco-primary",
+					{
+						borderRadius: 0,
+						duration: 1.5,
+						clearProps: "borderRadius",
+					},
+					"<"
+				);
+				tl3.current.to(
+					".gsap-lenco-text-overlay",
+					{
+						height: "0",
+						// opacity: 0,
+						stagger: 0.75,
+						duration: 2,
+						clearProps: "opacity",
+						ease: Circ.easeInOut,
+					},
+					">-0.5"
+				);
+				tl3.current.from(
+					".gsap-lenco-content",
+					{
+						// translateY: "20%",
+						opacity: 0,
+						stagger: 0.75,
+						duration: 1.25,
+						clearProps: "translateY,opacity",
+						ease: Circ.easeOut,
+					},
+					">-2"
+				);
+				tl3.current.from(
+					".gsap-lenco-img",
+					{
+						duration: 1,
+						scale: width > 1023 ? 1.4 : 1.3,
+						bottom: width > 1023 ? "unset" : "1rem",
+						clearProps: "scale,bottom",
+					}
+					// width > 1023 ? ">-2" : ">-0.5"
+				);
 
 				gsap.from(".gsap-lenco-img", {
 					scrollTrigger: {
-						trigger: ".gsap-lenco-primary",
-						start: width > 1023 ? "top +=400px" : "center center",
+						trigger: ".gsap-lenco",
+						start: width > 1023 ? "top center" : "top center",
+						// toggleActions: "restart none none reverse",
+						// markers: true,
 					},
+					opacity: width > 1023 ? 0 : 1,
 					duration: 1,
-					scale: width > 1023 ? 1.4 : 1.3,
-					bottom: width > 1023 ? "unset" : "1rem",
-					clearProps: "scale",
+					clearProps: "opacity",
 				});
+
+				// <====== Ridr Section ======>
+				tl4.current = gsap.timeline({
+					scrollTrigger: {
+						trigger: ".gsap-ridr",
+						start: "top center",
+						// toggleActions: "restart none none reverse",
+					},
+				});
+
+				tl4.current.from(".gsap-ridr", {
+					width: "100%",
+					borderRadius: 0,
+					padding: 0,
+					duration: 1.5,
+					ease: Circ.easeOut,
+					clearProps: "width,padding,borderRadius",
+				});
+				tl4.current.from(
+					".gsap-ridr-primary",
+					{
+						borderRadius: 0,
+						duration: 1.5,
+						clearProps: "borderRadius",
+					},
+					"<"
+				);
+				tl4.current.to(
+					".gsap-ridr-text-overlay",
+					{
+						height: "0",
+						// opacity: 0,
+						stagger: 0.75,
+						duration: 2,
+						clearProps: "opacity",
+						ease: Circ.easeInOut,
+					},
+					">-0.5"
+				);
+				tl4.current.from(
+					".gsap-ridr-content",
+					{
+						// translateY: "20%",
+						opacity: 0,
+						stagger: 0.75,
+						duration: 1.25,
+						clearProps: "translateY,opacity",
+						ease: Circ.easeOut,
+					},
+					">-2"
+				);
+				tl4.current.from(
+					".gsap-ridr-img",
+					{
+						duration: 1,
+						scale: width > 1023 ? 1.4 : 1.3,
+						bottom: width > 1023 ? "unset" : "1rem",
+						clearProps: "scale,bottom",
+					}
+					// width > 1023 ? ">-1.5" : ">-0.5"
+				);
 
 				gsap.from(".gsap-ridr-img", {
 					scrollTrigger: {
-						trigger: ".gsap-ridr-primary",
-						start: width > 1023 ? "top +=400px" : "center center",
+						trigger: ".gsap-ridr",
+						start: width > 1023 ? "top center" : "top center",
+						// toggleActions: "restart none none reverse",
+						// markers: true,
 					},
+					opacity: width > 1023 ? 0 : 1,
 					duration: 1,
-					scale: width > 1023 ? 1.4 : 1.3,
-					bottom: width > 1023 ? "unset" : "1rem",
-					clearProps: "scale",
+					clearProps: "opacity",
 				});
 
-				gsap.from(".gsap-accrue-img", {
+				// gsap.from(".gsap-ridr-img", {
+				// scrollTrigger: {
+				// trigger: ".gsap-ridr-primary",
+				// start: width > 1023 ? "top +=400px" : "center center",
+				// },
+				// duration: 1,
+				// scale: width > 1023 ? 1.4 : 1.3,
+				// bottom: width > 1023 ? "unset" : "1rem",
+				// clearProps: "scale",
+				// });
+
+				// <====== Accrue/Ridr Section ======>
+				gsap.from(".gsap-accure-fora-primary", {
 					scrollTrigger: {
-						trigger: ".gsap-accrue-primary",
-						start: "center center",
+						trigger: ".gsap-ridr",
+						start: "bottom center+=150px",
+						// toggleActions: "restart none none reverse",
+						markers: true,
 					},
+					translateY: "10%",
+					opacity: 0,
 					duration: 1,
-					scale: 1.3,
-					bottom: "1rem",
-					clearProps: "bottom,scale",
+					clearProps: "opacity,translateY",
 				});
+
+				// tl5.current = gsap.timeline({
+				// scrollTrigger: {
+				// trigger: ".gsap-accure-fora-primary",
+				// start: "start center",
+				// // toggleActions: "restart none none reverse",
+
+				// },
+				// });
+				// tl5.current.from(".gsap-accure-fora-primary", {
+				// translateY: "20%",
+				// opacity: 0,
+				// duration: 1,
+				// clearProps: "opacity,translateY",
+				// });
+				// tl5.current.to(".gsap-accure-fora-overlay", {
+				// translateX: "100%",
+				// duration: 2,
+				// // bottom: "1rem",
+				// ease: Circ.easeOut,
+				// clearProps: "translateX",
+				// });
+				// gsap.from(".gsap-accure-fora-secondary", {
+				// scrollTrigger: {
+				// trigger: ".gsap-accure-fora-primary",
+				// start: "top center",
+				// toggleActions: "restart none none reverse",
+				// // markers: true,
+				// onEnter: () => {
+				// // divRef.current?.classList.add("gsap-accure-fora-secondary-active");
+				// foraDivRef.current?.classList.add("gsap-fora-secondary-active");
+				// accureDivRef.current?.classList.add("gsap-accure-secondary-active");
+				// },
+				// },
+				// delay: 3,
+				// opacity: 0,
+				// transform: "translate3d(80deg, 0px, 0px)",
+				// clearProps: "opacity",
+				// ease: Circ.easeOut,
+				// });
+				// tl5.current.from(".gsap-accure-fora-secondary", {
+				// // width: 0,
+				// transform: "rotateX(80deg)",
+				// // scaleX: 0,
+				// scrub: 1,
+				// padding: 0,
+				// duration: 2,
+				// // bottom: "1rem",
+				// ease: Circ.easeOut,
+				// clearProps: "padding",
+				// });
+
+				// gsap.from(".gsap-accrue-img", {
+				// scrollTrigger: {
+				// trigger: ".gsap-accrue-primary",
+				// start: "center center",
+				// },
+				// duration: 1,
+				// scale: 1.3,
+				// bottom: "1rem",
+				// clearProps: "bottom,scale",
+				// });
 
 				gsap.from(".gsap-fora-img", {
 					scrollTrigger: {
@@ -316,7 +597,8 @@ function Home(): JSX.Element {
 							/>
 							<div
 								className={
-									`absolute top-0 left-0 h-full w-full ` + `h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px]`
+									`gsap-img-2 absolute top-0 left-0 h-full w-full ` +
+									`h-[200px] xs:h-[300px] md:!h-[400px] lg:!h-[620px] xl:!h-[820px]`
 								}
 							>
 								<div className="relative w-full h-full">
@@ -364,24 +646,35 @@ function Home(): JSX.Element {
 							/>
 						</div>
 					</div>
-					<div className="gsap-memo px-8 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto rounded-3xl relative overflow-hidden">
+					<div className="gsap-memo px-8 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
 						{/* <div className="gsap-memo-overlay absolute top-0 left-0 w-full h-full bg-white max-w-7xl "></div> */}
-						<div className="w-full h-full bg-white rounded-3xl">
+						<div className="gsap-memo-primary w-full h-full bg-white rounded-3xl">
 							<div className="flex flex-col md:flex-row justify-between items-start h-full gap-4 p-7 2xs:p-14 xl:w-[1152px] max-w-7xl mx-auto">
 								<div className="gsap-memo-overlay-one flex justify-start items-start max-w-lg overflow-hidden">
 									<p className="gsap-memo-one text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 										With a background in design,
-										<span className="gsap-memo-span w-full"> I work closely with design-focused teams </span>
+										<span className="gsap-memo-one-span w-full"> I </span>
+										<span className="gsap-memo-one-span w-full"> work </span>
+										<span className="gsap-memo-one-span w-full"> closely </span>
+										<span className="gsap-memo-one-span w-full"> with </span>
+										<span className="gsap-memo-one-span w-full"> design-focused </span>
+										<span className="gsap-memo-one-span w-full"> teams </span>
 										to build websites for companies and Individuals.
 									</p>
 								</div>
 								<div className="gsap-memo-overlay-two flex justify-start items-start max-w-lg overflow-hidden">
 									<p className="gsap-memo-two text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 										I have
-										<span className="gsap-memo-span">
-											{" "}
-											years of experience working, collaborating with product teams and building{" "}
-										</span>
+										<span className="gsap-memo-two-span"> years </span>
+										<span className="gsap-memo-two-span"> of </span>
+										<span className="gsap-memo-two-span"> experience </span>
+										<span className="gsap-memo-two-span"> working, </span>
+										<span className="gsap-memo-two-span"> collaborating </span>
+										<span className="gsap-memo-two-span"> with </span>
+										<span className="gsap-memo-two-span"> product </span>
+										<span className="gsap-memo-two-span"> teams </span>
+										<span className="gsap-memo-two-span"> and </span>
+										<span className="gsap-memo-two-span"> building </span>
 										user-centered products.
 									</p>
 								</div>
@@ -389,86 +682,130 @@ function Home(): JSX.Element {
 						</div>
 					</div>
 				</section>
-				<section className="w-full h-fit">
-					<div className="flex flex-col min-h-screen gap-16 lg:gap-32 max-w-7xl mx-auto w-full px-4 2xs:px-8 lg:px-16">
-						<h2 className="pt-16 2xs:pt-36 text-4xl 2xs:text-5xl lg:!text-6xl text-black font-medium">Projects</h2>
-						<div className="gsap-lenco-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
-							<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0">
-								<span className="text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
-									Lenco Bank Mobile
-								</span>
-								<p className="lg:max-w-sm 2xs:text-lg lg:text-xl">
-									Lenco is a neo-bank that issues easy to open and free to operate current bank accounts for Startups and SMEs
-									without any hassle.
-								</p>
-							</div>
-							<div className="flex justify-center items-center w-full h-full relative">
-								<img
-									className={
-										`gsap-lenco-img ` +
-										`lg:mt-5 h-[420px] lg:h-[550px] scale-[1] !ease-linear origin-top w-max object-contain ` +
-										`absolute lg:relative bottom-10 sm:bottom-16 lg:bottom-unset `
-										// "mt-5 h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear " +
-									}
-									// className="mt-6 h-[420px] lg:h-[740px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear"
-									src={PhoneImageOne}
-									alt="phone showing app dashboard(lenco)"
-								/>
-							</div>
-						</div>
-						<div className="gsap-ridr-primary flex flex-col lg:flex-row justify-between items-center bg-white rounded-3xl h-[730px] lg:h-[640px] overflow-hidden relative px-7 md:px-14">
-							<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0 lg:order-2">
-								<span className="text-success font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs lg:leading-">
-									Ridr Fitness
-								</span>
-								<p className="lg:max-w-sm 2xs:text-lg lg:text-xl">
-									Ridr is a Web3 fitness app with Social-Fi and Game-Fi elements. Users equipped with NFT e-Bikes, e-Scotters,
-									Skateboards et.c – ride and earn tokens.
-								</p>
-							</div>
-							<div className=" flex justify-center lg:order-1 w-full">
-								<img
-									className={
-										`gsap-ridr-img ` +
-										`lg:mt-5 h-[420px] lg:h-[550px] scale-[1] !ease-linear origin-top w-max object-contain ` +
-										`absolute lg:relative bottom-10 sm:bottom-16 lg:bottom-unset `
-										// "mt-5 h-[420px] lg:h-[550px] scale-[1] origin-top w-max object-contain gsap-lenco-img !ease-linear " +
-									}
-									src={PhoneImageTwo}
-									alt="phone showing app(ridr)"
-								/>
+				<section className={`gsap-section-project ` + "w-full h-fit"}>
+					{/* <div className="flex flex-col min-h-screen gap-16 lg:gap-32 max-w-7xl mx-auto w-full px-4 2xs:px-8 lg:px-16"> */}
+					<div className="flex flex-col min-h-screen gap-16 lg:gap-32 w-full">
+						<h2
+							className={
+								`gsap-section-project-header ` +
+								`pb-2 px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto ` +
+								`pt-16 2xs:pt-36 text-4xl 2xs:text-5xl lg:!text-6xl text-black text-left font-medium overflow-hidden `
+							}
+						>
+							<span>Projects</span>
+						</h2>
+						<div className="gsap-lenco px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto overflow-hidden relative">
+							<div className="gsap-lenco-primary bg-white rounded-3xl h-[730px] lg:h-[640px] w-full">
+								<div className="flex flex-col lg:flex-row justify-between items-center h-full w-full xl:w-[1152px] max-w-7xl mx-auto px-7 md:px-14">
+									<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0 relative">
+										<div className="flex flex-row flex-wrap gap-2 text-blue font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs relative">
+											<div className="gsap-lenco-text-overlay bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"></div>
+											<span className="gsap-lenco-content">Lenco Bank Mobile</span>
+										</div>
+										<div className="relative lg:max-w-sm 2xs:text-lg lg:text-xl">
+											<div className="gsap-lenco-text-overlay bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"></div>
+											<p className="gsap-lenco-content">
+												Lenco is a neo-bank that issues easy to open and free to operate current bank accounts for Startups
+												and SMEs without any hassle.
+											</p>
+										</div>
+									</div>
+									<div className="flex justify-center items-center w-full h-full relative">
+										<img
+											className={
+												`gsap-lenco-img ` +
+												`h-[420px] lg:h-[550px] scale-[1] !ease-linear origin-top w-max object-contain ` +
+												`absolute lg:relative bottom-10 sm:bottom-16 lg:bottom-unset `
+											}
+											src={PhoneImageOne}
+											alt="phone showing app dashboard(lenco)"
+										/>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-							<PhoneContainer
-								title="Accrue Savings"
-								subTitle="Accrue Savings is a New York-based fintech startup that helps users save money towards purchases by offering
+						<div className="gsap-ridr px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto overflow-hidden relative">
+							<div className="gsap-ridr-primary bg-white rounded-3xl h-[730px] lg:h-[640px] w-full">
+								<div className="flex flex-col lg:flex-row justify-between items-center h-full w-full xl:w-[1152px] max-w-7xl mx-auto px-7 md:px-14">
+									<div className="flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0 relative lg:order-2">
+										<div className="flex flex-row flex-wrap gap-2 text-success font-semibold text-3xl 2xs:text-4xl lg:!text-5xl max-w-xs relative">
+											<div className="gsap-ridr-text-overlay bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"></div>
+											<span className="gsap-ridr-content">Ridr Fitness</span>
+										</div>
+										<div className="relative lg:max-w-sm 2xs:text-lg lg:text-xl">
+											<div className="gsap-ridr-text-overlay bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"></div>
+											<p className="gsap-ridr-content">
+												Ridr is a Web3 fitness app with Social-Fi and Game-Fi elements. Users equipped with NFT e-Bikes,
+												e-Scotters, Skateboards et.c – ride and earn tokens.
+											</p>
+										</div>
+									</div>
+									<div className="flex justify-center items-center w-full h-full relative lg:order-1">
+										<img
+											className={
+												`gsap-ridr-img ` +
+												`h-[420px] lg:h-[550px] scale-[1] !ease-linear origin-top w-max object-contain ` +
+												`absolute lg:relative bottom-10 sm:bottom-16 lg:bottom-unset `
+											}
+											src={PhoneImageTwo}
+											alt="phone showing app(ridr)"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="gsap-accure-fora-primary w-full relative">
+							{/* <div className="gsap-accure-fora-overlay absolute top-0 left-0 w-full h-full bg-fora-blue z-10"></div> */}
+							{/* <div className="gsap-accure-fora-overlay absolute top-0 left-0 w-full h-full bg-fora-blue z-10"></div> */}
+							<div
+								// ref={divRef}
+								className="flex justify-start lg:justify-end items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 relative transition-transform px-4 2xs:px-8 lg:px-16 xl:w-[80rem] mx-auto "
+								// style={{
+								// perspective: "500px",
+								// transformStyle: "preserve-3d",
+								// }}
+							>
+								<div className="gsap-accure-fora-secondary lg:w-50% xl:w-60%" ref={accureDivRef}>
+									<PhoneContainer
+										title="Accrue Savings"
+										subTitle="Accrue Savings is a New York-based fintech startup that helps users save money towards purchases by offering
 										customizable savings plans and cash rewards."
-								customTitleStyle="text-accrue-blue"
-								customContainerStyle="bg-white lg:w-50% xl:w-60%"
-								gsapImageTag="gsap-accrue-img"
-								gsapPrimaryContainerTag="gsap-accrue-primary"
-								gsapSecondaryContainerTag="gsap-accrue-secondary"
-								imgOne={PhoneImageThree}
-								imgTwo={PhoneImageFour}
-								imgOneAlt="phone showing app(accrue)"
-								imgTwoAlt="second phone showing app(accrue)"
-								isSingle={false}
-							/>
-							<PhoneContainer
-								title="Fora"
-								subTitle="Fora is a mobile online community that allows Nigerians creatives build a portfolio, connect with other
+										customTitleStyle="text-accrue-blue"
+										customContainerStyle="bg-white"
+										gsapImageTag="gsap-accrue-img"
+										gsapPrimaryContainerTag="gsap-accrue-primary"
+										gsapSecondaryContainerTag="gsap-accrue-secondary"
+										gsapImgsContainerTag="gsap-accrue-imgs"
+										gsapTextOverlayTag="gsap-accrue-text-overlay"
+										imgOne={PhoneImageThree}
+										imgTwo={PhoneImageFour}
+										imgOneAlt="phone showing app(accrue)"
+										imgTwoAlt="second phone showing app(accrue)"
+										isSingle={false}
+										delay={1}
+									/>
+								</div>
+								<div className="gsap-accure-fora-secondary w-full lg:w-50% xl:w-40%" ref={foraDivRef}>
+									<PhoneContainer
+										title="Fora"
+										subTitle="Fora is a mobile online community that allows Nigerians creatives build a portfolio, connect with other
 										creatives."
-								customTitleStyle="text-white"
-								customSubtitleStyle="text-white"
-								customContainerStyle="bg-fora-blue lg:w-50% xl:w-40%"
-								gsapImageTag="gsap-fora-img"
-								gsapPrimaryContainerTag="gsap-fora-primary"
-								gsapSecondaryContainerTag="gsap-fora-secondary"
-								imgOne={PhoneImageFive}
-								imgOneAlt="phone showing app(fora)"
-								isSingle
-							/>
+										customTitleStyle="text-white"
+										customSubtitleStyle="text-white"
+										customContainerStyle="bg-fora-blue"
+										gsapImageTag="gsap-fora-img"
+										gsapPrimaryContainerTag="gsap-fora-primary"
+										gsapSecondaryContainerTag="gsap-fora-secondary"
+										gsapImgsContainerTag="gsap-fora-imgs"
+										gsapTextOverlayTag="gsap-fora-text-overlay"
+										imgOne={PhoneImageFive}
+										imgOneAlt="phone showing app(fora)"
+										delay={1}
+										isSingle
+									/>
+								</div>
+							</div>
 						</div>
 						<div className="h-full w-full pb-24 md:pb-96 relative">
 							<div className="gsap-berger-primary flex flex-col justify-center items-center w-full text-white rounded-3xl z-10 h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] relative px-7 md:px-14 overflow-hidden lg:overflow-visible">

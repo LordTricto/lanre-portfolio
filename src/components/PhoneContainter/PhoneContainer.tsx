@@ -1,4 +1,11 @@
-import React from "react";
+import React, {useLayoutEffect, useRef} from "react";
+import gsap, {Circ} from "gsap";
+
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+// import useDimension from "../../hooks/useDimension";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
 	isSingle: boolean;
@@ -11,79 +18,227 @@ interface Props {
 	gsapImageTag: string;
 	gsapPrimaryContainerTag: string;
 	gsapSecondaryContainerTag: string;
+	gsapTextOverlayTag: string;
+	gsapImgsContainerTag: string;
 	customContainerStyle: string;
 	customTitleStyle: string;
 	customSubtitleStyle?: string;
+	delay?: number;
 }
 
 function PhoneContainer(props: Props): JSX.Element {
 	const {isSingle = true} = props;
+
+	const phoneRef = useRef<HTMLDivElement | null>(null);
+	// const {width} = useDimension();
+	const tl = useRef<gsap.core.Timeline | undefined>();
+	// const tl2 = useRef<gsap.core.Timeline | undefined>();
+
+	useLayoutEffect(() => {
+		const onPageLoad = () => {
+			const ctx = gsap.context(() => {
+				tl.current = gsap.timeline();
+
+				// gsap.from(".gsap-fora-img", {
+				// scrollTrigger: {
+				// trigger: ".gsap-primary-container-tag",
+				// start: "center center",
+				// },
+				// duration: 1,
+				// scale: 1.3,
+				// bottom: "1rem",
+				// clearProps: "bottom,scale",
+				// });
+
+				tl.current = gsap.timeline({
+					scrollTrigger: {
+						trigger: ".gsap-primary-container-tag",
+						start: "top center",
+						// toggleActions: "restart none none reverse",
+						// markers: true,
+					},
+				});
+
+				// tl.current.from(".gsap-lenco", {
+				// width: "100%",
+				// borderRadius: 0,
+				// padding: 0,
+				// duration: 1.5,
+				// ease: Circ.easeOut,
+				// clearProps: "width,padding,borderRadius",
+				// });
+				// tl.current.from(
+				// ".gsap-lenco-primary",
+				// {
+				// borderRadius: 0,
+				// duration: 1.5,
+				// clearProps: "borderRadius",
+				// },
+				// "<"
+				// );
+				tl.current.to(
+					".gsap-text-overlay-tag",
+					{
+						delay: props.delay,
+						height: "0",
+						// opacity: 0,
+						stagger: 0.75,
+						duration: 2,
+						clearProps: "opacity",
+						ease: Circ.easeInOut,
+					},
+					">-0.5"
+				);
+				tl.current.from(
+					".gsap-content",
+					{
+						// translateY: "20%",
+						opacity: 0,
+						stagger: 0.75,
+						duration: 1.25,
+						clearProps: "translateY,opacity",
+						ease: Circ.easeOut,
+					},
+					">-2"
+				);
+				tl.current.from(
+					".gsap-image-tag",
+					{
+						duration: 1,
+						// scale: width > 1023 ? 1.4 : 1.3,
+						// bottom: width > 1023 ? "unset" : "1rem",
+						scale: 1.3,
+						bottom: "1rem",
+						clearProps: "bottom,scale",
+						// clearProps: "scale,bottom",
+					}
+					// width > 1023 ? ">-2" : ">-0.5"
+					// "2.5"
+				);
+
+				// gsap.from(".gsap-image-tag", {
+				// scrollTrigger: {
+				// trigger: ".gsap-primary-container-tag",
+				// start: width > 1023 ? "top center" : "top center",
+				// // toggleActions: "restart none none reverse",
+				// // markers: true,
+				// },
+				// opacity: width > 1023 ? 0 : 1,
+				// duration: 1,
+				// clearProps: "opacity",
+				// });
+			}, phoneRef);
+
+			return () => {
+				ctx.revert(); // cleanup!!
+			};
+		};
+
+		// Check if the page has already loaded
+		if (document.readyState === "complete") {
+			onPageLoad();
+		} else {
+			window.addEventListener("load", onPageLoad, false);
+			// Remove the event listener when component unmounts
+			return () => window.removeEventListener("load", onPageLoad);
+		}
+	}, []);
+
 	return (
 		<>
-			{isSingle && (
-				<div
-					className={
-						`flex flex-col justify-between items-start rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
-						`${props.gsapPrimaryContainerTag} ` +
-						`${props.customContainerStyle} `
-						// h-[700px] lg:h-[780px]
-					}
-				>
-					<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
-						<span className={`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] lg:leading- max-w-sm ` + `${props.customTitleStyle}`}>
-							{props.title}
-						</span>
-						<p className={`lg:max-w-sm 2xs:text-lg lg:text-xl ` + `${props.customSubtitleStyle || ""}`}>{props.subTitle}</p>
+			<div className="w-full" ref={phoneRef}>
+				{isSingle && (
+					<div
+						className={
+							`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
+							`gsap-primary-container-tag ` +
+							`${props.customContainerStyle} `
+						}
+					>
+						<div className={`gsap-secondary-container-tag ` + `flex flex-col justify-between items-start h-full w-full `}>
+							<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
+								<div
+									className={
+										`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] max-w-sm relative pb-1.5 ` + `${props.customTitleStyle}`
+									}
+								>
+									<div
+										className={`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"}
+									></div>
+									<span className="gsap-content">{props.title}</span>
+								</div>
+								<div className="relative lg:max-w-sm 2xs:text-lg lg:text-xl">
+									<div
+										className={`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"}
+									></div>
+									<p className={`2xs:text-lg lg:text-xl gsap-content ` + `${props.customSubtitleStyle || ""}`}>{props.subTitle}</p>
+								</div>
+							</div>
+							<div className={`flex justify-center w-full relative ` + `gsap-imgs-container-tag`}>
+								<img
+									className={
+										`h-[420px] scale-[1] !ease-linear origin-top w-max object-contain ` +
+										`absolute bottom-10 sm:bottom-16 ` +
+										`gsap-image-tag`
+									}
+									src={props.imgOne}
+									alt={props.imgOneAlt}
+								/>
+							</div>
+						</div>
 					</div>
-					<div className={`flex justify-center w-full relative ` + `${props.gsapSecondaryContainerTag}`}>
-						<img
-							className={
-								`h-[420px] scale-[1] !ease-linear origin-top w-max object-contain ` +
-								`absolute bottom-10 sm:bottom-16 ` +
-								`${props.gsapImageTag}`
-							}
-							src={props.imgOne}
-							alt={props.imgOneAlt}
-						/>
+				)}
+				{!isSingle && (
+					<div
+						className={
+							`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
+							`gsap-primary-container-tag ` +
+							`${props.customContainerStyle} `
+						}
+					>
+						<div className={`gsap-secondary-container-tag ` + `flex flex-col justify-between items-start h-full w-full `}>
+							<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
+								<div
+									className={
+										`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] max-w-sm relative pb-1.5 ` + `${props.customTitleStyle}`
+									}
+								>
+									<div
+										className={`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"}
+									></div>
+									<span className="gsap-content">{props.title}</span>
+								</div>
+								<div className="relative lg:max-w-sm 2xs:text-lg lg:text-xl">
+									<div
+										className={`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"}
+									></div>
+									<p className={`2xs:text-lg lg:text-xl gsap-content ` + `${props.customSubtitleStyle || ""}`}>{props.subTitle}</p>
+								</div>
+							</div>
+							<div className={`flex justify-center h-full w-full relative ` + `gsap-imgs-container-tag`}>
+								<img
+									className={
+										`h-[420px] scale-[1] !ease-linear origin-top w-max xl:ml-5 object-contain ` +
+										`absolute bottom-10 sm:bottom-16 xl:left-0 ` +
+										`gsap-image-tag`
+									}
+									src={props.imgOne}
+									alt={props.imgOneAlt}
+								/>
+								<img
+									className={
+										`h-[420px] scale-[1] !ease-linear origin-top w-max xl:mr-5 object-contain hidden xl:block ` +
+										`absolute bottom-10 sm:bottom-16 right-0 ` +
+										`gsap-image-tag`
+									}
+									src={props.imgTwo}
+									alt={props.imgTwoAlt}
+								/>
+							</div>
+						</div>
 					</div>
-				</div>
-			)}
-			{!isSingle && (
-				<div
-					className={
-						`flex flex-col justify-between items-start rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
-						`${props.gsapPrimaryContainerTag} ` +
-						`${props.customContainerStyle} `
-					}
-				>
-					<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
-						<span className={`font-semibold text-3xl 2xs:text-4xl lg:!text-[44px] lg:leading- max-w-sm ` + `${props.customTitleStyle}`}>
-							{props.title}
-						</span>
-						<p className={`2xs:text-lg lg:text-xl ` + `${props.customSubtitleStyle || ""}`}>{props.subTitle}</p>
-					</div>
-					<div className={`flex justify-center w-full relative ` + `${props.gsapSecondaryContainerTag}`}>
-						<img
-							className={
-								`h-[420px] scale-[1] !ease-linear origin-top w-max xl:ml-5 object-contain ` +
-								`absolute bottom-10 sm:bottom-16 xl:left-0 ` +
-								`${props.gsapImageTag}`
-							}
-							src={props.imgOne}
-							alt={props.imgOneAlt}
-						/>
-						<img
-							className={
-								`h-[420px] scale-[1] !ease-linear origin-top w-max xl:mr-5 object-contain hidden xl:block ` +
-								`absolute bottom-10 sm:bottom-16 right-0 ` +
-								`${props.gsapImageTag}`
-							}
-							src={props.imgTwo}
-							alt={props.imgTwoAlt}
-						/>
-					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</>
 	);
 }
