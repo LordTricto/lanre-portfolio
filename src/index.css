@@ -59,9 +59,9 @@ code {
 /* .gsap-accure-fora-secondary {
 	transform: rotateX(22.5deg);
 	opacity: 0;
-}
+} */
 
-.gsap-accure-secondary-active {
+/* .gsap-accure-secondary-active {
 	will-change: opacity perspective;
 	animation: reveal 1s linear forwards;
 	animation-delay: 2s;
@@ -73,13 +73,21 @@ code {
 	animation-delay: 2s;
 	transition: 1.5s ease-in-out;
 } */
-/* 
+.gsap-primary-container-tag {
+	transform: rotateX(5deg);
+	opacity: 0;
+}
+.-active {
+	animation: reveal 1s linear forwards;
+	transition: 1.5s ease-in-out;
+}
+
 @keyframes reveal {
 	0% {
-		transform: rotateX(15deg);
+		transform: rotateX(5deg);
 	}
 	100% {
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
-} */
+}
