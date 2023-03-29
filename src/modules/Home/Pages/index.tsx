@@ -554,7 +554,7 @@ function Home(): JSX.Element {
 						trigger: ".gsap-berger-primary",
 						start: "top center",
 						// markers: true,
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 					},
 				});
 				if (width > 1023) {
@@ -634,8 +634,8 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-cta",
 						start: "top center",
-						markers: true,
-						toggleActions: "restart none none reverse",
+						// markers: true,
+						// toggleActions: "restart none none reverse",
 					},
 				});
 				tl6.current.to(

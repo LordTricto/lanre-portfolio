@@ -67,7 +67,7 @@ function PhoneContainer(props: Props): JSX.Element {
 							trigger: ".gsap-container-tag",
 							start: "top center",
 							// end:
-							toggleActions: "restart none none reverse",
+							// toggleActions: "restart none none reverse",
 							// markers: true,
 							onEnter: () => {
 								primaryDivRef.current?.classList.add("-active");
