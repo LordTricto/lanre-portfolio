@@ -24,6 +24,8 @@ interface Props {
 	customContainerStyle: string;
 	customTitleStyle: string;
 	customSubtitleStyle?: string;
+	customTextOverlayStyle: string;
+
 	delay?: number;
 }
 
@@ -170,7 +172,9 @@ function PhoneContainer(props: Props): JSX.Element {
 									>
 										<div
 											className={
-												`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"
+												`gsap-text-overlay-tag ` +
+												"w-full h-full absolute bottom-0 left-0 z-10 origin-bottom " +
+												`${props.customTextOverlayStyle}`
 											}
 										></div>
 										<span className="gsap-content">{props.title}</span>
@@ -178,7 +182,9 @@ function PhoneContainer(props: Props): JSX.Element {
 									<div className="relative lg:max-w-sm 2xs:text-lg lg:text-xl">
 										<div
 											className={
-												`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"
+												`gsap-text-overlay-tag ` +
+												"w-full h-full absolute bottom-0 left-0 z-10 origin-bottom " +
+												`${props.customTextOverlayStyle}`
 											}
 										></div>
 										<p className={`2xs:text-lg lg:text-xl gsap-content ` + `${props.customSubtitleStyle || ""}`}>
@@ -219,7 +225,9 @@ function PhoneContainer(props: Props): JSX.Element {
 									>
 										<div
 											className={
-												`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"
+												`gsap-text-overlay-tag ` +
+												"w-full h-full absolute bottom-0 left-0 z-10 origin-bottom  " +
+												`${props.customTextOverlayStyle}`
 											}
 										></div>
 										<span className="gsap-content">{props.title}</span>
@@ -227,7 +235,9 @@ function PhoneContainer(props: Props): JSX.Element {
 									<div className="relative lg:max-w-sm 2xs:text-lg lg:text-xl">
 										<div
 											className={
-												`gsap-text-overlay-tag ` + "bg-pink-50 w-full h-full absolute bottom-0 left-0 z-10 origin-bottom"
+												`gsap-text-overlay-tag ` +
+												"w-full h-full absolute bottom-0 left-0 z-10 origin-bottom " +
+												`${props.customTextOverlayStyle}`
 											}
 										></div>
 										<p className={`2xs:text-lg lg:text-xl gsap-content ` + `${props.customSubtitleStyle || ""}`}>
