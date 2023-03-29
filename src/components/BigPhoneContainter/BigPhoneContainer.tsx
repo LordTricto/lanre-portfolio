@@ -52,12 +52,12 @@ function BigPhoneContainer(props: Props): JSX.Element {
 					},
 				});
 
-				if (width > 1279) {
+				if (width > 1023) {
 					// console.log("first")
 					tl.current.from(".gsap-big-phone", {
 						width: "100%",
 						borderRadius: 0,
-						padding: width > 1279 ? 0 : undefined,
+						padding: width > 1023 ? 0 : undefined,
 						duration: 1.5,
 						ease: Circ.easeOut,
 						clearProps: "width,padding,borderRadius",
@@ -96,29 +96,44 @@ function BigPhoneContainer(props: Props): JSX.Element {
 					},
 					">-2"
 				);
-				tl.current.from(
-					".gsap-big-phone-img",
-					{
-						duration: 1,
-						scale: width > 1023 ? 1.4 : 1.3,
-						bottom: width > 1023 ? "unset" : "1rem",
-						clearProps: "scale,bottom",
-					},
-					">-1.25"
-					// width > 1023 ? ">-2" : ">-0.5"
-				);
+				if (width > 1023) {
+					tl.current.from(
+						".gsap-big-phone-img",
+						{
+							duration: 1,
+							scale: width > 1023 ? 1.4 : 1.3,
+							bottom: width > 1023 ? "unset" : "1rem",
+							clearProps: "scale,bottom",
+						},
+						">-1.25"
+						// width > 1023 ? ">-2" : ">-0.5"
+					);
+				} else {
+					tl.current.from(
+						".gsap-big-phone-img",
+						{
+							opacity: 0,
+							duration: 1,
+							translateY: "10%",
+							clearProps: "opacity,translateY",
+						},
+						">-1.25"
+						// width > 1023 ? ">-2" : ">-0.5"
+					);
+				}
 
-				gsap.from(".gsap-big-phone-img", {
-					scrollTrigger: {
-						trigger: ".gsap-big-phone",
-						start: width > 1023 ? "top center" : "top center",
-						// toggleActions: "restart none none reverse",
-						// markers: true,
-					},
-					opacity: width > 1023 ? 0 : 1,
-					duration: 1,
-					clearProps: "opacity",
-				});
+				//old gsap
+				// gsap.from(".gsap-big-phone-img", {
+				// scrollTrigger: {
+				// trigger: ".gsap-big-phone",
+				// start: width > 1023 ? "top center" : "top center",
+				// // toggleActions: "restart none none reverse",
+				// // markers: true,
+				// },
+				// opacity: width > 1023 ? 0 : 1,
+				// duration: 1,
+				// clearProps: "opacity",
+				// });
 			}, phoneRef);
 
 			return () => {

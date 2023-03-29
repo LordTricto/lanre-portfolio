@@ -73,9 +73,11 @@ code {
 	animation-delay: 2s;
 	transition: 1.5s ease-in-out;
 } */
-.gsap-primary-container-tag {
-	transform: rotateX(5deg);
-	opacity: 0;
+
+@media screen and (min-width: 1024px) {
+	.gsap-primary-container-tag {
+		transform: rotateX(5deg);
+	}
 }
 .-active {
 	animation: reveal 1s linear forwards;

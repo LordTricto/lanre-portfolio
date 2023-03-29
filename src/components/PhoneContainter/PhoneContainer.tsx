@@ -100,12 +100,30 @@ function PhoneContainer(props: Props): JSX.Element {
 					},
 					">-2"
 				);
-				tl.current.from(".gsap-image-tag", {
-					duration: 1,
-					scale: 1.3,
-					bottom: "1rem",
-					clearProps: "bottom,scale",
-				});
+
+				if (width > 1023) {
+					tl.current.from(
+						".gsap-image-tag",
+						{
+							scale: 1.3,
+							bottom: "1rem",
+							duration: 1,
+							clearProps: "bottom,scale",
+						},
+						">-1.25"
+					);
+				} else {
+					tl.current.from(
+						".gsap-image-tag",
+						{
+							opacity: 0,
+							duration: 1,
+							translateY: "10%",
+							clearProps: "opacity,translateY",
+						},
+						">-1.25"
+					);
+				}
 			}, phoneRef);
 
 			return () => {

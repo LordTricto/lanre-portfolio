@@ -39,6 +39,7 @@ function Home(): JSX.Element {
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
 	const tl4 = useRef<gsap.core.Timeline | undefined>();
 	const tl5 = useRef<gsap.core.Timeline | undefined>();
+	const tl6 = useRef<gsap.core.Timeline | undefined>();
 	const foraDivRef = useRef<HTMLDivElement | null>(null);
 	const accureDivRef = useRef<HTMLDivElement | null>(null);
 
@@ -206,36 +207,50 @@ function Home(): JSX.Element {
 					},
 				});
 
-				tl2.current.from(".gsap-memo", {
-					width: "100%",
-					borderRadius: 0,
-					padding: 0,
-					height: "30rem",
-					duration: 1.5,
-					ease: Circ.easeOut,
-					clearProps: "height,width,padding,borderRadius",
-				});
-				tl2.current.from(
-					".gsap-memo-primary",
-					{
+				if (width > 767) {
+					tl2.current.from(".gsap-memo", {
+						width: "100%",
 						borderRadius: 0,
+						padding: 0,
+						height: "30rem",
 						duration: 1.5,
-						clearProps: "borderRadius",
-					},
-					"<"
-				);
+						ease: "M0,0 C0,0 0.024,0.595 0.2,0.8 0.406,1.04 1,1 1,1 ",
+						clearProps: "height,width,padding,borderRadius",
+					});
+
+					tl2.current.from(
+						".gsap-memo-primary",
+						{
+							borderRadius: 0,
+							duration: 1.5,
+							clearProps: "borderRadius",
+						},
+						"<"
+					);
+				} else {
+					tl.current.from(
+						".gsap-memo",
+						{
+							opacity: 0,
+							duration: 1,
+							translateY: "10%",
+							clearProps: "opacity,translateY",
+						},
+						">-1.25"
+					);
+				}
 
 				tl2.current.from(
 					[".gsap-memo-one", ".gsap-memo-two"],
 					{
 						translateY: "100%",
 						opacity: 0,
-						duration: 2.5,
+						duration: 1,
 						stagger: 0.5,
-						ease: Power4.easeInOut,
+						ease: Circ.easeOut,
 						clearProps: "transform,translateY",
-					},
-					"-=1.75"
+					}
+					// "-=1.75"
 				);
 				tl2.current.to(
 					".gsap-memo-one-span",
@@ -244,8 +259,8 @@ function Home(): JSX.Element {
 						duration: 0.5,
 						stagger: 0.25,
 						ease: Power4.easeInOut,
-					},
-					">-0.75"
+					}
+					// ">-0.75"
 				);
 				tl2.current.to(
 					".gsap-memo-two-span",
@@ -518,32 +533,50 @@ function Home(): JSX.Element {
 				// bottom: "1rem",
 				// clearProps: "bottom,scale",
 				// });
+
+				if (width < 1024) {
+					gsap.from(".gsap-berger-primary", {
+						scrollTrigger: {
+							trigger: ".gsap-berger-primary",
+							start: "top center+=150px",
+							// toggleActions: "restart none none reverse",
+							// markers: true,
+						},
+						translateY: "10%",
+						opacity: 0,
+						duration: 1,
+						clearProps: "opacity,translateY",
+					});
+				}
+
 				tl5.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-berger-primary",
 						start: "top center",
-						markers: true,
+						// markers: true,
 						toggleActions: "restart none none reverse",
 					},
 				});
-				tl5.current.from(".gsap-berger-primary", {
-					width: "100%",
-					borderRadius: 0,
-					padding: 0,
-					duration: 1.5,
-					ease: Circ.easeOut,
-					clearProps: "width,padding,borderRadius",
-				});
-				tl5.current.from(
-					".gsap-berger-primary-bg",
-					{
+				if (width > 1023) {
+					tl5.current.from(".gsap-berger-primary", {
+						width: "100%",
 						borderRadius: 0,
+						padding: 0,
 						duration: 1.5,
 						ease: Circ.easeOut,
-						clearProps: "borderRadius",
-					},
-					"<"
-				);
+						clearProps: "width,padding,borderRadius",
+					});
+					tl5.current.from(
+						".gsap-berger-primary-bg",
+						{
+							borderRadius: 0,
+							duration: 1.5,
+							ease: Circ.easeOut,
+							clearProps: "borderRadius",
+						},
+						"<"
+					);
+				}
 				tl5.current.from(".gsap-berger-content", {
 					opacity: 0,
 					stagger: 0.75,
@@ -552,15 +585,29 @@ function Home(): JSX.Element {
 					ease: Circ.easeOut,
 					clearProps: "translateY,opacity",
 				});
-				tl5.current.from(
-					".gsap-berger-img",
-					{
-						duration: 1,
-						scale: 1.2,
-						clearProps: "bottom,scale",
-					},
-					">-=1"
-				);
+				if (width > 1023) {
+					tl5.current.from(
+						".gsap-berger-img",
+						{
+							duration: 1,
+							scale: 1.2,
+							clearProps: "bottom,scale",
+						},
+						">-=1"
+					);
+				} else {
+					tl5.current.from(
+						".gsap-berger-img",
+						{
+							opacity: 0,
+							duration: 1,
+							translateX: "10%",
+							clearProps: "opacity,translateX",
+						},
+						">-=1"
+					);
+				}
+
 				// tl5.current.from(
 				// ".gsap-berger-img",
 				// {
@@ -583,16 +630,64 @@ function Home(): JSX.Element {
 				// scale: 1.2,
 				// clearProps: "bottom,scale",
 				// });
-
-				gsap.to(".gsap-cta-span", {
+				tl6.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-cta",
-						start: "top +=500px",
+						start: "top center",
+						markers: true,
+						toggleActions: "restart none none reverse",
 					},
-					duration: 2.5,
-					color: "#1F2130",
-					ease: Circ.easeOut,
 				});
+				tl6.current.to(
+					".gsap-cta-one-span",
+					{
+						color: "#1F2130",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
+					},
+					">+0.5"
+				);
+				tl6.current.to(
+					".gsap-cta-two-span",
+					{
+						color: "#1F2130",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
+					},
+					">+0.5"
+				);
+				tl6.current.to(
+					".gsap-cta-three-span",
+					{
+						color: "#1F2130",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
+					},
+					">+0.5"
+				);
+				tl6.current.to(
+					".gsap-cta-four-span",
+					{
+						color: "#1F2130",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
+					},
+					">+0.5"
+				);
+				tl6.current.to(
+					".gsap-cta-five-span",
+					{
+						color: "#1F2130",
+						duration: 0.5,
+						stagger: 0.25,
+						ease: Power4.easeInOut,
+					},
+					">+0.5"
+				);
 			}, landingDivRef);
 
 			return () => {
@@ -709,7 +804,7 @@ function Home(): JSX.Element {
 						{/* <div className="gsap-memo-overlay absolute top-0 left-0 w-full h-full bg-white max-w-7xl "></div> */}
 						<div className="gsap-memo-primary w-full h-full bg-white rounded-3xl">
 							<div className="flex flex-col md:flex-row justify-between items-start h-full gap-4 px-7 md:px-14 py-12 md:py-16 xl:w-[1152px] max-w-7xl mx-auto">
-								<div className="gsap-memo-overlay-one flex justify-start items-start max-w-lg overflow-hidden">
+								<div className="gsap-memo-overlay-one flex justify-start items-start lg:max-w-lg overflow-hidden">
 									<p className="gsap-memo-one text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 										With a background in design,
 										<span className="gsap-memo-one-span w-full"> I </span>
@@ -721,7 +816,7 @@ function Home(): JSX.Element {
 										to build websites for companies and Individuals.
 									</p>
 								</div>
-								<div className="gsap-memo-overlay-two flex justify-start items-start max-w-lg overflow-hidden">
+								<div className="gsap-memo-overlay-two flex justify-start items-start lg:max-w-lg overflow-hidden">
 									<p className="gsap-memo-two text-2xl xs:text-3xl lg:!text-4xl text-black-quat">
 										I have
 										<span className="gsap-memo-two-span"> years </span>
@@ -937,10 +1032,13 @@ function Home(): JSX.Element {
 					</div>
 				</section>
 				<section className="px-8 !pt-0 py-16 lg:p-16 max-w-7xl mx-auto w-full">
-					<div className="gsap-cta flex flex-col xl:flex-row justify-start xl:justify-between items-center px-7 md:px-14 py-12 md:py-16 bg-white rounded-3xl">
+					<div className="flex flex-col xl:flex-row justify-start xl:justify-between items-center px-7 md:px-14 py-12 md:py-16 bg-white rounded-3xl">
 						<div className="w-full xl:max-w-lg">
-							<div className="flex flex-col justify-start items-start gap-2">
-								<p className="gsap-cta-span text-5xl 2xs:text-7xl lg:!text-8xl font-medium text-black-tertiary">Say Hello!</p>
+							<div className="gsap-cta flex flex-col justify-start items-start gap-2">
+								<p className="text-5xl 2xs:text-7xl lg:!text-8xl font-medium text-black-tertiary">
+									<span className="gsap-cta-one-span"> Say </span>
+									<span className="gsap-cta-one-span"> Hello! </span>
+								</p>
 								<p className="w-full break-words">
 									<a
 										className="text-xl xs:text-2xl lg:!text-3xl text-black-tertiary w-full"
@@ -952,31 +1050,59 @@ function Home(): JSX.Element {
 							</div>
 							<p className="text-xl xs:text-2xl lg:!text-3xl text-black-tertiary pt-14">
 								I was born and raised in Lagos,
-								<span className="gsap-cta-span"> I have spent almost a decades in the digital industry </span>
+								<span className="gsap-cta-two-span"> I </span>
+								<span className="gsap-cta-two-span"> have </span>
+								<span className="gsap-cta-two-span"> spent </span>
+								<span className="gsap-cta-two-span"> almost </span>
+								<span className="gsap-cta-two-span"> a </span>
+								<span className="gsap-cta-two-span"> decades </span>
+								<span className="gsap-cta-two-span"> in </span>
+								<span className="gsap-cta-two-span"> the </span>
+								<span className="gsap-cta-two-span"> digital </span>
+								<span className="gsap-cta-two-span"> industry </span>
 								working for design studios, companies and startups. I am currently
-								<span className="gsap-cta-span"> Product Designer at Lenco in Nigeria.</span>
+								<span className="gsap-cta-two-span"> Product </span>
+								<span className="gsap-cta-two-span"> Designer </span>
+								<span className="gsap-cta-two-span"> at </span>
+								<span className="gsap-cta-two-span"> Lenco </span>
+								<span className="gsap-cta-two-span"> in </span>
+								<span className="gsap-cta-two-span"> Nigeria.</span>
 							</p>
 						</div>
 						<div className="w-full xl:max-w-lg">
 							<div className="flex flex-col gap-5.5 text-xl xs:text-2xl lg:!text-3xl text-black-tertiary mt-5.5 xl:mt-2">
 								<p>
 									I have
-									<span className="gsap-cta-span"> expertise in </span>
+									<span className="gsap-cta-three-span"> expertise </span>
+									<span className="gsap-cta-three-span"> in </span>
 									leading large scale projects, from
-									<span className="gsap-cta-span"> Product Strategy, User Experience & Interaction Design. </span>
+									<span className="gsap-cta-three-span"> Product </span>
+									<span className="gsap-cta-three-span"> Strategy, </span>
+									<span className="gsap-cta-three-span"> User </span>
+									<span className="gsap-cta-three-span"> Experience </span>
+									<span className="gsap-cta-three-span"> & </span>
+									<span className="gsap-cta-three-span"> Interaction </span>
+									<span className="gsap-cta-three-span"> Design. </span>
 								</p>
 								<p>
 									I&apos;m very
-									<span className="gsap-cta-span"> passionate about digital products, technology, </span>
+									<span className="gsap-cta-four-span"> passionate </span>
+									<span className="gsap-cta-four-span"> about </span>
+									<span className="gsap-cta-four-span"> digital </span>
+									<span className="gsap-cta-four-span"> products, </span>
+									<span className="gsap-cta-four-span"> technology, </span>
 									and
-									<span className="gsap-cta-span"> designs </span>
+									<span className="gsap-cta-four-span"> designs </span>
 									that create a significant impact on humanity.
 								</p>
 
 								<p>
-									I<span className="gsap-cta-span"> contribute </span>
+									I<span className="gsap-cta-five-span"> contribute </span>
 									by bringing technology
-									<span className="gsap-cta-span"> into people&apos;s lives through simple </span>
+									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
+									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
+									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
+									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
 									and elegant digital products.
 								</p>
 							</div>
