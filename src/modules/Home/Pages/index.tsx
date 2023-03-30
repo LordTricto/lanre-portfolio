@@ -199,7 +199,7 @@ function Home(): JSX.Element {
 						trigger: ".gsap-memo",
 						start: "top center",
 						toggleActions: "restart none none reverse",
-						markers: true,
+						// markers: true,
 					},
 				});
 
@@ -591,43 +591,47 @@ function Home(): JSX.Element {
 
 						<div className="w-full relative">
 							<div className="flex justify-start lg:justify-end items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 relative transition-transform px-4 2xs:px-8 lg:px-16 xl:w-[80rem] mx-auto ">
-								<PhoneContainer
-									title="Accrue Savings"
-									subTitle="Accrue Savings is a New York-based fintech startup that helps users save money towards purchases by offering
+								<div className="w-full lg:w-50% xl:w-60%">
+									<PhoneContainer
+										title="Accrue Savings"
+										subTitle="Accrue Savings is a New York-based fintech startup that helps users save money towards purchases by offering
 										customizable savings plans and cash rewards."
-									customTitleStyle="text-accrue-blue"
-									customContainerStyle="bg-white lg:w-50% xl:w-60%"
-									customTextOverlayStyle="bg-white"
-									gsapImageTag="gsap-accrue-img"
-									gsapPrimaryContainerTag="gsap-accrue-primary"
-									gsapSecondaryContainerTag="gsap-accrue-secondary"
-									gsapImgsContainerTag="gsap-accrue-imgs"
-									gsapTextOverlayTag="gsap-accrue-text-overlay"
-									imgOne={PhoneImageThree}
-									imgTwo={PhoneImageFour}
-									imgOneAlt="phone showing app(accrue)"
-									imgTwoAlt="second phone showing app(accrue)"
-									isSingle={false}
-									delay={width > 1279 ? 1 : undefined}
-								/>
-								<PhoneContainer
-									title="Fora"
-									subTitle="Fora is a mobile online community that allows Nigerians creatives build a portfolio, connect with other
+										customTitleStyle="text-accrue-blue"
+										customContainerStyle="bg-white"
+										customTextOverlayStyle="bg-white"
+										gsapImageTag="gsap-accrue-img"
+										gsapPrimaryContainerTag="gsap-accrue-primary"
+										gsapSecondaryContainerTag="gsap-accrue-secondary"
+										gsapImgsContainerTag="gsap-accrue-imgs"
+										gsapTextOverlayTag="gsap-accrue-text-overlay"
+										imgOne={PhoneImageThree}
+										imgTwo={PhoneImageFour}
+										imgOneAlt="phone showing app(accrue)"
+										imgTwoAlt="second phone showing app(accrue)"
+										isSingle={false}
+										delay={width > 1279 ? 1 : undefined}
+									/>
+								</div>
+								<div className="w-full lg:w-50% xl:w-40%">
+									<PhoneContainer
+										title="Fora"
+										subTitle="Fora is a mobile online community that allows Nigerians creatives build a portfolio, connect with other
 										creatives."
-									customTitleStyle="text-white"
-									customSubtitleStyle="text-white"
-									customContainerStyle="bg-fora-blue w-full lg:w-50% xl:w-40%"
-									customTextOverlayStyle="bg-fora-blue"
-									gsapImageTag="gsap-fora-img"
-									gsapPrimaryContainerTag="gsap-fora-primary"
-									gsapSecondaryContainerTag="gsap-fora-secondary"
-									gsapImgsContainerTag="gsap-fora-imgs"
-									gsapTextOverlayTag="gsap-fora-text-overlay"
-									imgOne={PhoneImageFive}
-									imgOneAlt="phone showing app(fora)"
-									delay={width > 1279 ? 1 : undefined}
-									isSingle
-								/>
+										customTitleStyle="text-white"
+										customSubtitleStyle="text-white"
+										customContainerStyle="bg-fora-blue"
+										customTextOverlayStyle="bg-fora-blue"
+										gsapImageTag="gsap-fora-img"
+										gsapPrimaryContainerTag="gsap-fora-primary"
+										gsapSecondaryContainerTag="gsap-fora-secondary"
+										gsapImgsContainerTag="gsap-fora-imgs"
+										gsapTextOverlayTag="gsap-fora-text-overlay"
+										imgOne={PhoneImageFive}
+										imgOneAlt="phone showing app(fora)"
+										delay={width > 1279 ? 1 : undefined}
+										isSingle
+									/>
+								</div>
 							</div>
 						</div>
 						<div className="gsap-berger-primary h-full px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto pb-24 md:pb-96 relative rounded-3xl">
