@@ -302,7 +302,7 @@ function Nav(): JSX.Element {
 					className={
 						`gsap-nav-links ` +
 						`absolute top-0 left-0 ` +
-						`flex flex-col justify-center items-center gap-14 h-full w-screen p-8 text-6xl uppercase z-30 ` +
+						`flex flex-col justify-center items-center gap-14 h-full w-screen p-8 text-4xl md:text-6xl uppercase z-30 ` +
 						`${isNavOpen ? "text-white" : ""}`
 					}
 				>
