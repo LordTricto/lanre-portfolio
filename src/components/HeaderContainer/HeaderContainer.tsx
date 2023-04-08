@@ -21,7 +21,7 @@ function HeaderContainer(props: Props): JSX.Element {
 		<>
 			<div
 				className={
-					`flex flex-col lg:flex-row justify-center items-center gap-5 relative transition-all duration-[0ms] ` +
+					`flex flex-row justify-center items-center gap-5 relative transition-all duration-[0ms] ` +
 					// `h-[25vh] xs:h-[30vh] md:h-[40vh] lg:h-[50vh] xl:h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto ` +
 					// `!h-[25vh] xs:!h-[30vh] md:!h-[40vh] lg:!h-[50vh] xl:!h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto ` +
 					`h-[200px] 2xs:h-[25vh] xs:h-[30vh] md:h-[40vh] lg:h-[50vh] xl:h-[60vh] w-full overflow-hidden mt-36 px-4 2xs:px-8 lg:px-16 xl:w-[80rem] mx-auto ` +
@@ -57,7 +57,7 @@ function HeaderContainer(props: Props): JSX.Element {
 									className={
 										`${props.gsapImgOneTag} ` +
 										// `left-8 ` +
-										`left-0 md:ml-[-800px] transition-transform duration-[0ms] ` +
+										`ml-[-220px] 3xs:ml-[-250px] 2xs:ml-[-270px] xs:ml-[-330px] sm:ml-[-390px] md:ml-[-490px] lg:ml-[-650px] xl:ml-[-800px] transition-transform duration-[0ms] ` +
 										`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[420px] lg:!h-[520px] xl:!h-[660px] ` +
 										`translate-y-16 xs:translate-y-[5.75rem] sm:translate-y-24 md:translate-y-32 lg:translate-y-40 xl:translate-y-48`
 
@@ -101,9 +101,9 @@ function HeaderContainer(props: Props): JSX.Element {
 							<div className={`flex justify-center items-center h-full w-[360px] absolute mx-auto `}>
 								<img
 									className={
-										`${props.gsapImgThreeTag} transition-transform duration-[0ms] ` +
+										`${props.gsapImgThreeTag} ` +
 										// `left-8 ` +
-										`left-0 md:mr-[-800px] ` +
+										`mr-[-220px] 3xs:mr-[-250px] 2xs:mr-[-270px] xs:mr-[-330px] sm:mr-[-390px] md:mr-[-490px] lg:mr-[-650px] xl:mr-[-800px] transition-transform duration-[0ms] ` +
 										`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[420px] lg:!h-[520px] xl:!h-[660px] ` +
 										`translate-y-16 xs:translate-y-[5.75rem] sm:translate-y-24 md:translate-y-32 lg:translate-y-40 xl:translate-y-48`
 

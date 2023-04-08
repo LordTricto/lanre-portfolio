@@ -391,6 +391,7 @@ function Accrue(): JSX.Element {
 								/> */}
 							</div>
 							<MultiPhoneContainer
+								type=""
 								title="Transaction List Filter"
 								subTitle="Filters were designed with consideration of the user’s priorities, allowing quick and multiple selection as well
 									as display the applied filters."
@@ -440,6 +441,7 @@ function Accrue(): JSX.Element {
 								/> */}
 							</div>
 							<MultiPhoneContainer
+								type=""
 								title="Reimbursements"
 								subTitle="The goal was to create a flow that is easy to use, and an easy way to improve usability of the product is to
 										simplify it, and removing any extraneous actions or buttons."

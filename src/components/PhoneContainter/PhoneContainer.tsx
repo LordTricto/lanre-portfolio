@@ -45,11 +45,11 @@ function PhoneContainer(props: Props): JSX.Element {
 				gsap.from(".gsap-primary-container-tag", {
 					scrollTrigger: {
 						trigger: ".gsap-primary-container-tag",
-						start: "top center+=150px",
+						start: "top center",
 						// toggleActions: "restart none none reverse",
 						// markers: true,
 					},
-					translateY: "10%",
+					translateY: width > 1023 ? undefined : "10%",
 					opacity: 0,
 					duration: 1,
 					clearProps: "opacity,translateY",
@@ -70,8 +70,10 @@ function PhoneContainer(props: Props): JSX.Element {
 							start: "top center",
 							// end:
 							// toggleActions: "restart none none reverse",
+							// markers: props.title === "Homescreen" ? true : false,
 							// markers: true,
 							onEnter: () => {
+								// primaryDivRef.current?.classList.toggle("-active");
 								primaryDivRef.current?.classList.add("-active");
 							},
 						},

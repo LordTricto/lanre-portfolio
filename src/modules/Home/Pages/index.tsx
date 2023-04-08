@@ -3,18 +3,15 @@ import gsap, {Circ, Power1, Power4} from "gsap";
 
 import BergerBG from "../../../assets/images/berger-bg.png";
 import BigPhoneContainer from "../../../components/BigPhoneContainter/BigPhoneContainer";
-// import {ReactComponent as ArrowDownIcon} from "../../../assets/svg/arrowDownIcon.svg";
 import {ReactComponent as DownloadIcon} from "../../../assets/svg/download-icon.svg";
 import ImageFive from "../../../assets/images/img-5.png";
 import ImageFour from "../../../assets/images/img-4.png";
 import ImageOne from "../../../assets/images/img-1.png";
 import ImageThree from "../../../assets/images/img-3.png";
 import ImageTwo from "../../../assets/images/img-2.png";
-// import {Link} from "react-router-dom";
 import MacImageOne from "../../../assets/images/mac-img-1.png";
 import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainter/PhoneContainer";
-// import Nav from "../../../components/nav/nav";
 import PhoneImageFive from "../../../assets/images/phone-img-5.png";
 import PhoneImageFour from "../../../assets/images/phone-img-4.png";
 import PhoneImageOne from "../../../assets/images/phone-img-1.png";
@@ -490,8 +487,6 @@ function Home(): JSX.Element {
 							/>
 						</div>
 						<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 mt-16 2xs:mt-0 h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
-							{/* <div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 h-[120px] [@media(min-width:360px)]:h-[145px]
-							[@media(min-width:540px)]:h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]"> */}
 							<img
 								className={
 									`gsap-img-4 absolute top-0 ` +
@@ -516,7 +511,6 @@ function Home(): JSX.Element {
 						</div>
 					</div>
 					<div className="gsap-memo px-4 2xs:px-8 lg:px-16 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
-						{/* <div className="gsap-memo-overlay absolute top-0 left-0 w-full h-full bg-white max-w-7xl "></div> */}
 						<div className="gsap-memo-primary w-full h-full bg-white rounded-3xl">
 							<div className="flex flex-col md:flex-row justify-between items-start h-full gap-4 px-7 md:px-14 py-12 md:py-16 xl:w-[1152px] max-w-7xl mx-auto">
 								<div className="gsap-memo-overlay-one flex justify-start items-start lg:max-w-lg overflow-hidden">
@@ -552,7 +546,6 @@ function Home(): JSX.Element {
 					</div>
 				</section>
 				<section className={`gsap-section-project ` + "w-full h-fit"}>
-					{/* <div className="flex flex-col min-h-screen gap-16 lg:gap-32 max-w-7xl mx-auto w-full px-4 2xs:px-8 lg:px-16"> */}
 					<div className="flex flex-col min-h-screen gap-16 lg:gap-32 w-full">
 						<h2
 							className={
@@ -649,12 +642,7 @@ function Home(): JSX.Element {
 								<div className="h-full w-full relative">
 									<div
 										className={
-											"" +
-											"md:pt-20 w-full" +
-											` ` +
-											`flex justify-center items-end lg:block ` +
-											`absolute -bottom-16 lg:top-0 left-0`
-											// "pt-5 4xs:pt-9 2xs:pt-[68px] md:pt-0 [@media(min-width:930px)]:pt-20 w-max md:w-full " +
+											"md:pt-20 w-full" + `flex justify-center items-end lg:block ` + `absolute -bottom-16 lg:top-0 left-0`
 										}
 									>
 										<img
@@ -668,8 +656,6 @@ function Home(): JSX.Element {
 												"lg:h-[600px] xl:h-[700px] " +
 												``
 											}
-											// className="gsap-berger-img h-[240px] 4xs:h-[280px] 2xs:h-[390px] [@media(min-width:500px)]:h-[410px]
-											//  xs:!h-[460px] sm:!h-[520px] md:!h-[600px] xl:!h-[640px] scale-[1.2] md:scale-[1.2] origin-top w-max object-contain"
 											src={MacImageOne}
 											alt="Mac showing app landing page(Berger Paints)"
 										/>
