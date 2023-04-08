@@ -34,7 +34,6 @@ function ProjectDescription(props: Props): JSX.Element {
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
 				setTimeout(() => {
-					console.log("first");
 					tl.current?.scrollTrigger?.refresh();
 				}, 6500);
 				tl.current = gsap.timeline({

@@ -52,7 +52,6 @@ function Lenco(): JSX.Element {
 		window.onload;
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
-				console.log("first");
 				tl.current?.scrollTrigger?.refresh();
 			}, 7000);
 

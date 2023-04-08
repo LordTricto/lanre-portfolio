@@ -642,7 +642,7 @@ function Home(): JSX.Element {
 								<div className="h-full w-full relative">
 									<div
 										className={
-											"md:pt-20 w-full" + `flex justify-center items-end lg:block ` + `absolute -bottom-16 lg:top-0 left-0`
+											"md:pt-20 w-full " + `flex justify-center items-end lg:block ` + `absolute -bottom-16 lg:top-0 left-0`
 										}
 									>
 										<img

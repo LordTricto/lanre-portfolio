@@ -39,7 +39,6 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
 				setTimeout(() => {
-					console.log("first");
 					tl.current?.scrollTrigger?.refresh();
 					ScrollTrigger.refresh();
 				}, 7000);
