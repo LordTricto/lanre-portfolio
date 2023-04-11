@@ -167,27 +167,31 @@ function ProjectDescription(props: Props): JSX.Element {
 				ref={divRef}
 			>
 				<div className="flex flex-col md:flex-row justify-between items-start w-full gap-12 md:gap-2">
-					<span className={`${props.customTitleStyle} gsap-project-title ` + "text-7xl text-white md:max-w-sm leading-[75px]"}>
+					<span
+						className={`${props.customTitleStyle} gsap-project-title ` + "text-5xl md:text-7xl text-white md:max-w-sm md:leading-[75px]"}
+					>
 						{props.title}
 					</span>
-					<p className={`${props.customSubTitleStyle} gsap-project-subTitle ` + "text-3xl text-blue-quat md:max-w-sm"}>{props.subTitle}</p>
+					<p className={`${props.customSubTitleStyle} gsap-project-subTitle ` + "text-2xl md:text-3xl text-blue-quat md:max-w-sm"}>
+						{props.subTitle}
+					</p>
 				</div>
 				<div className="gsap-project-border w-full h-0.5 bg-white"></div>
 				<div className="flex flex-col justify-between items-start w-full gap-24">
 					<div className="flex flex-row justify-start items-start gap-16 w-full">
 						<div className="gsap-project-timeline flex flex-col justify-start items-start">
-							<span className={`${props.isHeaderBlack ? "text-black" : "text-white"} ` + "text-2xl "}>Timeline</span>
-							<span className={`${props.textColorStyle} ` + "text-xl"}>{props.timeline} Month</span>
+							<span className={`${props.isHeaderBlack ? "text-black" : "text-white"} ` + "text-xl md:text-2xl "}>Timeline</span>
+							<span className={`${props.textColorStyle} ` + "text-lg md:text-xl"}>{props.timeline} Month</span>
 						</div>
 						<div className="gsap-project-role flex flex-col justify-start items-start">
-							<span className={`${props.isHeaderBlack ? "text-black" : "text-white"} ` + "text-2xl "}>Role</span>
-							<span className={`${props.textColorStyle} ` + "text-xl"}>{props.role}</span>
+							<span className={`${props.isHeaderBlack ? "text-black" : "text-white"} ` + "text-xl md:text-2xl "}>Role</span>
+							<span className={`${props.textColorStyle} ` + "text-lg md:text-xl"}>{props.role}</span>
 						</div>
 					</div>
 					<div className="flex flex-col justify-end items-end w-full">
 						<div className="gsap-project-quote flex flex-col justify-end items-end gap-8 w-full max-w-2xl">
-							<p className={`${props.textColorStyle} ` + "text-3xl text-right"}>{props.quote}</p>
-							<span className={`${props.textColorStyle} ` + "text-2xl"}>— {props.author}</span>
+							<p className={`${props.textColorStyle} ` + "text-2xl md:text-3xl text-right"}>{props.quote}</p>
+							<span className={`${props.textColorStyle} ` + "text-xl md:text-2xl"}>— {props.author}</span>
 						</div>
 					</div>
 				</div>

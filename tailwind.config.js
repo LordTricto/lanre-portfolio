@@ -330,6 +330,10 @@ module.exports = {
 				6.5: "1.65rem",
 				6.75: "1.7rem",
 			},
+			transformOrigin: {
+				"top-left-0-75": "0 75px",
+				"top-left-0-60": "0 60px",
+			},
 			translate: {
 				105: "45rem",
 			},

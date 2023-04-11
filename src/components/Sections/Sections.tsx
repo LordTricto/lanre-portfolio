@@ -4,6 +4,7 @@ import gsap, {Circ} from "gsap";
 // import useDimension from "../../hooks/useDimension";
 import {LencoSection} from "../../modules/Lenco/Services/lenco.constant";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import useDimension from "../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +23,7 @@ function Sections(props: Props): JSX.Element {
 	const divRef = useRef<HTMLDivElement | null>(null);
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	// const tl2 = useRef<gsap.core.Timeline | undefined>();
-	// const {width} = useDimension();
+	const {width} = useDimension();
 	// const tl2 = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
@@ -34,7 +35,7 @@ function Sections(props: Props): JSX.Element {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-title`,
-						start: "top center",
+						start: width < 476 ? "top center+=100px" : "top center",
 						// toggleActions: "restart none none reverse",
 					},
 				});
@@ -85,13 +86,17 @@ function Sections(props: Props): JSX.Element {
 					{props.title}
 				</h2>
 				{props.lists && (
-					<ul className={`gsap-${props.type}-lists ${props.listsStyle || ""} ` + "list-disc text-xl ml-5"}>
+					<ul className={`gsap-${props.type}-lists ${props.listsStyle || ""} ` + "list-disc text-base 2xs:text-lg lg:text-xl ml-5"}>
 						{props.lists.map((_list, index) => (
 							<li key={index}>{_list}</li>
 						))}
 					</ul>
 				)}
-				{props.paragraph && <p className={`gsap-${props.type}-paragraph ${props.paragraphStyle || ""} ` + "text-xl"}>{props.paragraph}</p>}
+				{props.paragraph && (
+					<p className={`gsap-${props.type}-paragraph ${props.paragraphStyle || ""} ` + "text-base 2xs:text-lg lg:text-xl"}>
+						{props.paragraph}
+					</p>
+				)}
 			</div>
 		</>
 	);

@@ -566,6 +566,8 @@ function Home(): JSX.Element {
 							customOverlayStyle="bg-white"
 							imgOne={PhoneImageOne}
 							imgOneAlt="phone showing app dashboard(lenco)"
+							withLink
+							link="/lenco"
 							// delay={1}
 						/>
 

@@ -242,7 +242,9 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 							</div>
 							<div
 								className={
-									`grid grid-cols-4 gap-16 pb-6 ` + `gsap-${props.type}-phone-img ` + `${props.customSecondaryContainerStyle || ""}`
+									`grid grid-cols-2 2xs:grid-cols-4 mt-4 gap-8 lg:gap-16 pb-6 ` +
+									`gsap-${props.type}-phone-img ` +
+									`${props.customSecondaryContainerStyle || ""}`
 								}
 							>
 								<img className="w-fit object-contain" src={props.imgOne} alt={props.imgOneAlt} />

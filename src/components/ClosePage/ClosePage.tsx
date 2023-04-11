@@ -21,8 +21,8 @@ function ClosePage(props: Props): JSX.Element {
 
 	return (
 		<div className={`gsap-close flex flex-row justify-center items-center cursor-pointer ${props.customCloseStyle}`} onClick={handleLeavePage}>
-			<CloseIcon className="stroke-current h-20 w-20" />
-			<span className="text-7xl">Close</span>
+			<CloseIcon className="stroke-current h-16 w-16 lg:h-20 lg:w-20" />
+			<span className="text-5xl 2xs:text-6xl lg:!text-7xl">Close</span>
 		</div>
 	);
 }

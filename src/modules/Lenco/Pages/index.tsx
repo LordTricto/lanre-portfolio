@@ -189,8 +189,10 @@ function Lenco(): JSX.Element {
 	return (
 		<>
 			<Nav />
-			<div ref={landingDivRef}>
-				{/* <div className="gsap-lenco-overlay-div fixed top-0 left-0 h-screen w-screen bg-white-dark z-10 duration-[5000ms]"></div> */}
+			<main
+				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-lenco-bg-dark min-h-screen pb-8 relative overflow-hidden "
+				ref={landingDivRef}
+			>
 				<div
 					className={
 						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 bg-white-dark ` +
@@ -198,249 +200,247 @@ function Lenco(): JSX.Element {
 						`${location?.from === "/accrue" ? "!bg-accrue-blue" : ""}`
 					}
 				></div>
-				<main className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-lenco-bg-dark">
-					<div className="flex flex-col justify-start items-start w-full mb-36 gap-28">
-						<HeaderContainer
-							gsapHeaderContainerTag="gsap-header-section"
-							gsapPrimaryContainerTag="gsap-header-imgs-div"
-							gsapImgOneTag="gsap-header-img-1"
-							gsapImgTwoContainerTag="gsap-header-img-2-div"
-							gsapImgTwoTag="gsap-header-img-2"
-							gsapImgThreeTag="gsap-header-img-3"
-							headerImgOne={HeaderImgOne}
-							headerImgOneAlt="lenco-phone-app-one"
-							headerImgTwo={HeaderImgTwo}
-							headerImgTwoAlt="lenco-phone-app-two"
-							headerImgThree={HeaderImgThree}
-							headerImgThreeAlt="lenco-phone-app-three"
-							// isSingle
-						/>
-						<ProjectDescription
-							title="Lenco Bank Mobile"
-							subTitle="Lenco is a neo-bank that issues easy to open and free to operate current bank accounts for Startups and SMEs
+				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-16 gap-28">
+					<HeaderContainer
+						gsapHeaderContainerTag="gsap-header-section"
+						gsapPrimaryContainerTag="gsap-header-imgs-div"
+						gsapImgOneTag="gsap-header-img-1"
+						gsapImgTwoContainerTag="gsap-header-img-2-div"
+						gsapImgTwoTag="gsap-header-img-2"
+						gsapImgThreeTag="gsap-header-img-3"
+						headerImgOne={HeaderImgOne}
+						headerImgOneAlt="lenco-phone-app-one"
+						headerImgTwo={HeaderImgTwo}
+						headerImgTwoAlt="lenco-phone-app-two"
+						headerImgThree={HeaderImgThree}
+						headerImgThreeAlt="lenco-phone-app-three"
+						// isSingle
+					/>
+					<ProjectDescription
+						title="Lenco Bank Mobile"
+						subTitle="Lenco is a neo-bank that issues easy to open and free to operate current bank accounts for Startups and SMEs
 									without any hassle."
-							textColorStyle="text-blue-quat"
-							customTitleStyle="text-white"
-							customBorderStyle="border-white"
-							customSubTitleStyle="text-blue-quat"
-							author="Jef Raskin"
-							quote={
-								<>
-									Creating an interface is much like building a house: <br /> If you don’t get the foundations right, no amount of
-									decorating can fix the resulting structure.”
-								</>
-							}
-							role="Conception, UX/UI, Design System"
-							timeline="1"
+						textColorStyle="text-blue-quat"
+						customTitleStyle="text-white"
+						customBorderStyle="border-white"
+						customSubTitleStyle="text-blue-quat"
+						author="Jef Raskin"
+						quote={
+							<>
+								Creating an interface is much like building a house: <br /> If you don’t get the foundations right, no amount of
+								decorating can fix the resulting structure.”
+							</>
+						}
+						role="Conception, UX/UI, Design System"
+						timeline="1"
+					/>
+
+					<div className="flex flex-col justify-start items-start w-full gap-28 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<Sections
+							type={LencoSections[LencoSection.THE_GOAL].value}
+							lists={LencoSections[LencoSection.THE_GOAL].lists}
+							paragraph={LencoSections[LencoSection.THE_GOAL].paragraph}
+							title={LencoSections[LencoSection.THE_GOAL].title}
+							listsStyle="text-blue-quat"
+							titleStyle="text-white"
+							paragraphStyle="text-blue-quat"
 						/>
 
-						<div className="flex flex-col justify-start items-start w-full gap-28 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="gsap-assessing-phone-section flex flex-col justify-start items-start w-full gap-8">
 							<Sections
-								type={LencoSections[LencoSection.THE_GOAL].value}
-								lists={LencoSections[LencoSection.THE_GOAL].lists}
-								paragraph={LencoSections[LencoSection.THE_GOAL].paragraph}
-								title={LencoSections[LencoSection.THE_GOAL].title}
-								listsStyle="text-blue-quat"
-								titleStyle="text-white"
-								paragraphStyle="text-blue-quat"
-							/>
-
-							<div className="gsap-assessing-phone-section flex flex-col justify-start items-start w-full gap-8">
-								<Sections
-									type={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].value}
-									lists={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].lists}
-									paragraph={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].paragraph}
-									title={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].title}
-									titleStyle="text-white"
-									listsStyle="text-blue-quat"
-									paragraphStyle="text-blue-quat"
-								/>
-								<div className="gsap-assessing-phone-imgs grid grid-cols-4 mt-4 gap-16">
-									<img className="w-fit object-fill" src={AssessingImgOne} alt="lenco-old-app" />
-									<img className="w-fit object-contain" src={AssessingImgTwo} alt="lenco-old-app" />
-									<img className="w-fit object-contain" src={AssessingImgThree} alt="lenco-old-app" />
-									<img className="w-fit object-contain" src={AssessingImgFour} alt="lenco-old-app" />
-								</div>
-							</div>
-							<Sections
-								type={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].value}
-								lists={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].lists}
-								paragraph={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].paragraph}
-								title={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].title}
+								type={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].value}
+								lists={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].lists}
+								paragraph={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].paragraph}
+								title={LencoSections[LencoSection.ASSESSING_THE_PREVIOUS_APP].title}
 								titleStyle="text-white"
 								listsStyle="text-blue-quat"
 								paragraphStyle="text-blue-quat"
 							/>
-							<div className="gsap-revised-phone-section flex flex-col justify-start items-start w-full gap-12">
-								<Sections
-									type={LencoSections[LencoSection.REVISED_ARCHITECTURE].value}
-									lists={LencoSections[LencoSection.REVISED_ARCHITECTURE].lists}
-									paragraph={LencoSections[LencoSection.REVISED_ARCHITECTURE].paragraph}
-									title={LencoSections[LencoSection.REVISED_ARCHITECTURE].title}
-									titleStyle="text-white"
-									listsStyle="text-blue-quat"
-									paragraphStyle="text-blue-quat"
-								/>
-								<div className="gsap-revised-phone-imgs">
-									<img className={`h-full ` + `object-contain`} src={ArchitectureImg} alt="lenco-phone-app" />
-								</div>
-							</div>
-							<div className="flex flex-col justify-start items-start w-full gap-28">
-								<Sections
-									type={LencoSections[LencoSection.THE_REDESIGN].value}
-									lists={LencoSections[LencoSection.THE_REDESIGN].lists}
-									paragraph={LencoSections[LencoSection.THE_REDESIGN].paragraph}
-									title={LencoSections[LencoSection.THE_REDESIGN].title}
-									titleStyle="text-white"
-									listsStyle="text-blue-quat"
-									paragraphStyle="text-blue-quat"
-								/>
-
-								<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-									<div className="lg:w-50% xl:w-60%">
-										<PhoneContainer
-											title="Homescreen"
-											subTitle='Cards with a "tap to expand" features were used to keep screens as brief as possible.'
-											customTitleStyle="text-accrue-blue"
-											customContainerStyle="bg-white-dark "
-											gsapImageTag="gsap-accrue-img"
-											gsapPrimaryContainerTag="gsap-accrue-primary"
-											gsapSecondaryContainerTag="gsap-accrue-secondary"
-											imgOne={HomeScreenImgOne}
-											imgTwo={HomeScreenImgTwo}
-											imgOneAlt="phone showing app home screen(lenco)"
-											imgTwoAlt="second phone showing home screen(lenco)"
-											isSingle={false}
-											customTextOverlayStyle="bg-white-dark "
-											gsapImgsContainerTag="gsap-accrue-imgs"
-											gsapTextOverlayTag="gsap-accrue-text-overlay"
-											// delay={width > 1279 ? 1 : undefined}
-										/>
-									</div>
-									<div className="lg:w-50% xl:w-40%">
-										<PhoneContainer
-											title="Switch Business"
-											subTitle="Key actions were kept accessible as this was designed with accessibility in mind. Finger-friendly buttons and cards."
-											customTitleStyle="text-white"
-											customSubtitleStyle="text-white"
-											customContainerStyle="bg-fora-blue"
-											gsapImageTag="gsap-fora-img"
-											gsapPrimaryContainerTag="gsap-fora-primary"
-											gsapSecondaryContainerTag="gsap-fora-secondary"
-											imgOne={SwitchBusinessImgOne}
-											imgOneAlt="phone showing app switching business(lenco)"
-											isSingle
-											customTextOverlayStyle="bg-fora-blue"
-											gsapImgsContainerTag="gsap-accrue-imgs"
-											gsapTextOverlayTag="gsap-accrue-text-overlay"
-										/>
-									</div>
-								</div>
+							<div className="gsap-assessing-phone-imgs grid grid-cols-2 2xs:grid-cols-4 mt-4 gap-8 lg:gap-16">
+								<img className="w-fit object-fill" src={AssessingImgOne} alt="lenco-old-app" />
+								<img className="w-fit object-contain" src={AssessingImgTwo} alt="lenco-old-app" />
+								<img className="w-fit object-contain" src={AssessingImgThree} alt="lenco-old-app" />
+								<img className="w-fit object-contain" src={AssessingImgFour} alt="lenco-old-app" />
 							</div>
 						</div>
-						<MultiPhoneContainer
-							type="filter"
-							title="Transaction List Filter"
-							subTitle="Filters were designed with consideration of the user’s priorities, allowing quick and multiple selection as well
-									as display the applied filters."
-							customTitleStyle="text-white"
-							customSubtitleStyle="text-blue-quat"
-							customContainerStyle="bg-lenco-bg-xdark w-full"
-							customOverlayStyle="bg-lenco-bg-xdark"
-							// customContainerStyle="bg-white w-full"
-							gsapPrimaryContainerTag="gsap-lenco-primary"
-							gsapSecondaryContainerTag="gsap-lenco-secondary"
-							imgOne={TransactionListImgOne}
-							imgOneAlt="phone showing app switching business(lenco)"
-							imgTwo={TransactionListImgTwo}
-							imgTwoAlt="phone showing app switching business(lenco)"
-							imgThree={TransactionListImgThree}
-							imgThreeAlt="phone showing app switching business(lenco)"
-							imgFour={TransactionListImgFour}
-							imgFourAlt="phone showing app switching business(lenco)"
+						<Sections
+							type={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].value}
+							lists={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].lists}
+							paragraph={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].paragraph}
+							title={LencoSections[LencoSection.COMPETITIVE_ANALYSIS].title}
+							titleStyle="text-white"
+							listsStyle="text-blue-quat"
+							paragraphStyle="text-blue-quat"
 						/>
-						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-							<div className="lg:w-50% xl:w-40%">
-								<PhoneContainer
-									title="Virtual Cards"
-									subTitle="By removing unnecessary elements, I was able create an interface that draws the user’s attention to what
-											matters most."
-									customTitleStyle="text-accrue-blue"
-									customContainerStyle="bg-white-dark "
-									gsapImageTag="gsap-virtual-img"
-									gsapPrimaryContainerTag="gsap-virtual-primary"
-									gsapSecondaryContainerTag="gsap-virtual-secondary"
-									imgOne={VirtualImgOne}
-									imgOneAlt="phone showing app(lenco-virtual)"
-									isSingle
-									customTextOverlayStyle="bg-white-dark "
-									gsapImgsContainerTag="gsap-accrue-imgs"
-									gsapTextOverlayTag="gsap-accrue-text-overlay"
-								/>
-							</div>
-							<div className="lg:w-50% xl:w-60%">
-								<PhoneContainer
-									title="Physical Cards"
-									subTitle="Minimalistic and accessible design with a basic call to action and navigation bar."
-									customTitleStyle="text-white"
-									customSubtitleStyle="text-white"
-									customContainerStyle="bg-fora-blue"
-									gsapImageTag="gsap-accrue-img"
-									gsapPrimaryContainerTag="gsap-accrue-primary"
-									gsapSecondaryContainerTag="gsap-accrue-secondary"
-									imgOne={PhysicalImgOne}
-									imgTwo={PhysicalImgTwo}
-									imgOneAlt="phone showing app(lenco-virtual)"
-									imgTwoAlt="second phone showing app(lenco-virtual)"
-									isSingle={false}
-									customTextOverlayStyle="bg-fora-blue "
-									gsapImgsContainerTag="gsap-accrue-imgs"
-									gsapTextOverlayTag="gsap-accrue-text-overlay"
-								/>
-							</div>
-						</div>
-						<MultiPhoneContainer
-							type="reimbursement"
-							title="Reimbursements"
-							subTitle="The goal was to create a flow that is easy to use, and an easy way to improve usability of the product is to
-										simplify it, and removing any extraneous actions or buttons."
-							customTitleStyle="text-white"
-							customSubtitleStyle="text-blue-quat"
-							customContainerStyle="bg-lenco-bg-xdark w-full"
-							customOverlayStyle="bg-lenco-bg-xdark"
-							gsapPrimaryContainerTag="gsap-lenco-primary"
-							gsapSecondaryContainerTag="gsap-lenco-secondary"
-							imgOne={ReimbursementsListImgOne}
-							imgOneAlt="phone showing app switching business(lenco)"
-							imgTwo={ReimbursementsListImgTwo}
-							imgTwoAlt="phone showing app switching business(lenco)"
-							imgThree={ReimbursementsListImgThree}
-							imgThreeAlt="phone showing app switching business(lenco)"
-							imgFour={ReimbursementsListImgFour}
-							imgFourAlt="phone showing app switching business(lenco)"
-						/>
-						<div className="gsap-takeout-section flex flex-col justify-start items-start w-full gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="gsap-revised-phone-section flex flex-col justify-start items-start w-full gap-12">
 							<Sections
-								type={LencoSections[LencoSection.TAKEOUT].value}
-								lists={LencoSections[LencoSection.TAKEOUT].lists}
-								paragraph={LencoSections[LencoSection.TAKEOUT].paragraph}
-								title={LencoSections[LencoSection.TAKEOUT].title}
-								listsStyle="text-blue-quat"
+								type={LencoSections[LencoSection.REVISED_ARCHITECTURE].value}
+								lists={LencoSections[LencoSection.REVISED_ARCHITECTURE].lists}
+								paragraph={LencoSections[LencoSection.REVISED_ARCHITECTURE].paragraph}
+								title={LencoSections[LencoSection.REVISED_ARCHITECTURE].title}
 								titleStyle="text-white"
+								listsStyle="text-blue-quat"
 								paragraphStyle="text-blue-quat"
 							/>
+							<div className="gsap-revised-phone-imgs">
+								<img className={`w-full ` + `object-contain`} src={ArchitectureImg} alt="lenco-phone-app" />
+							</div>
 						</div>
-						<div className=" w-full flex justify-end items-end py-10 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto overflow-hidden">
-							<div className="gsap-close-section w-full flex justify-end items-end">
-								<ClosePage link="/" customCloseStyle="text-white" />
+						<div className="flex flex-col justify-start items-start w-full gap-28">
+							<Sections
+								type={LencoSections[LencoSection.THE_REDESIGN].value}
+								lists={LencoSections[LencoSection.THE_REDESIGN].lists}
+								paragraph={LencoSections[LencoSection.THE_REDESIGN].paragraph}
+								title={LencoSections[LencoSection.THE_REDESIGN].title}
+								titleStyle="text-white"
+								listsStyle="text-blue-quat"
+								paragraphStyle="text-blue-quat"
+							/>
+
+							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
+								<div className="lg:w-50% xl:w-60%">
+									<PhoneContainer
+										title="Homescreen"
+										subTitle='Cards with a "tap to expand" features were used to keep screens as brief as possible.'
+										customTitleStyle="text-accrue-blue"
+										customContainerStyle="bg-white-dark "
+										gsapImageTag="gsap-accrue-img"
+										gsapPrimaryContainerTag="gsap-accrue-primary"
+										gsapSecondaryContainerTag="gsap-accrue-secondary"
+										imgOne={HomeScreenImgOne}
+										imgTwo={HomeScreenImgTwo}
+										imgOneAlt="phone showing app home screen(lenco)"
+										imgTwoAlt="second phone showing home screen(lenco)"
+										isSingle={false}
+										customTextOverlayStyle="bg-white-dark "
+										gsapImgsContainerTag="gsap-accrue-imgs"
+										gsapTextOverlayTag="gsap-accrue-text-overlay"
+										// delay={width > 1279 ? 1 : undefined}
+									/>
+								</div>
+								<div className="lg:w-50% xl:w-40%">
+									<PhoneContainer
+										title="Switch Business"
+										subTitle="Key actions were kept accessible as this was designed with accessibility in mind. Finger-friendly buttons and cards."
+										customTitleStyle="text-white"
+										customSubtitleStyle="text-white"
+										customContainerStyle="bg-fora-blue"
+										gsapImageTag="gsap-fora-img"
+										gsapPrimaryContainerTag="gsap-fora-primary"
+										gsapSecondaryContainerTag="gsap-fora-secondary"
+										imgOne={SwitchBusinessImgOne}
+										imgOneAlt="phone showing app switching business(lenco)"
+										isSingle
+										customTextOverlayStyle="bg-fora-blue"
+										gsapImgsContainerTag="gsap-accrue-imgs"
+										gsapTextOverlayTag="gsap-accrue-text-overlay"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
-				</main>
+					<MultiPhoneContainer
+						type="filter"
+						title="Transaction List Filter"
+						subTitle="Filters were designed with consideration of the user’s priorities, allowing quick and multiple selection as well
+									as display the applied filters."
+						customTitleStyle="text-white"
+						customSubtitleStyle="text-blue-quat"
+						customContainerStyle="bg-lenco-bg-xdark w-full"
+						customOverlayStyle="bg-lenco-bg-xdark"
+						// customContainerStyle="bg-white w-full"
+						gsapPrimaryContainerTag="gsap-lenco-primary"
+						gsapSecondaryContainerTag="gsap-lenco-secondary"
+						imgOne={TransactionListImgOne}
+						imgOneAlt="phone showing app switching business(lenco)"
+						imgTwo={TransactionListImgTwo}
+						imgTwoAlt="phone showing app switching business(lenco)"
+						imgThree={TransactionListImgThree}
+						imgThreeAlt="phone showing app switching business(lenco)"
+						imgFour={TransactionListImgFour}
+						imgFourAlt="phone showing app switching business(lenco)"
+					/>
+					<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="lg:w-50% xl:w-40%">
+							<PhoneContainer
+								title="Virtual Cards"
+								subTitle="By removing unnecessary elements, I was able create an interface that draws the user’s attention to what
+											matters most."
+								customTitleStyle="text-accrue-blue"
+								customContainerStyle="bg-white-dark "
+								gsapImageTag="gsap-virtual-img"
+								gsapPrimaryContainerTag="gsap-virtual-primary"
+								gsapSecondaryContainerTag="gsap-virtual-secondary"
+								imgOne={VirtualImgOne}
+								imgOneAlt="phone showing app(lenco-virtual)"
+								isSingle
+								customTextOverlayStyle="bg-white-dark "
+								gsapImgsContainerTag="gsap-accrue-imgs"
+								gsapTextOverlayTag="gsap-accrue-text-overlay"
+							/>
+						</div>
+						<div className="lg:w-50% xl:w-60%">
+							<PhoneContainer
+								title="Physical Cards"
+								subTitle="Minimalistic and accessible design with a basic call to action and navigation bar."
+								customTitleStyle="text-white"
+								customSubtitleStyle="text-white"
+								customContainerStyle="bg-fora-blue"
+								gsapImageTag="gsap-accrue-img"
+								gsapPrimaryContainerTag="gsap-accrue-primary"
+								gsapSecondaryContainerTag="gsap-accrue-secondary"
+								imgOne={PhysicalImgOne}
+								imgTwo={PhysicalImgTwo}
+								imgOneAlt="phone showing app(lenco-virtual)"
+								imgTwoAlt="second phone showing app(lenco-virtual)"
+								isSingle={false}
+								customTextOverlayStyle="bg-fora-blue "
+								gsapImgsContainerTag="gsap-accrue-imgs"
+								gsapTextOverlayTag="gsap-accrue-text-overlay"
+							/>
+						</div>
+					</div>
+					<MultiPhoneContainer
+						type="reimbursement"
+						title="Reimbursements"
+						subTitle="The goal was to create a flow that is easy to use, and an easy way to improve usability of the product is to
+										simplify it, and removing any extraneous actions or buttons."
+						customTitleStyle="text-white"
+						customSubtitleStyle="text-blue-quat"
+						customContainerStyle="bg-lenco-bg-xdark w-full"
+						customOverlayStyle="bg-lenco-bg-xdark"
+						gsapPrimaryContainerTag="gsap-lenco-primary"
+						gsapSecondaryContainerTag="gsap-lenco-secondary"
+						imgOne={ReimbursementsListImgOne}
+						imgOneAlt="phone showing app switching business(lenco)"
+						imgTwo={ReimbursementsListImgTwo}
+						imgTwoAlt="phone showing app switching business(lenco)"
+						imgThree={ReimbursementsListImgThree}
+						imgThreeAlt="phone showing app switching business(lenco)"
+						imgFour={ReimbursementsListImgFour}
+						imgFourAlt="phone showing app switching business(lenco)"
+					/>
+					<div className="gsap-takeout-section flex flex-col justify-start items-start w-full gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<Sections
+							type={LencoSections[LencoSection.TAKEOUT].value}
+							lists={LencoSections[LencoSection.TAKEOUT].lists}
+							paragraph={LencoSections[LencoSection.TAKEOUT].paragraph}
+							title={LencoSections[LencoSection.TAKEOUT].title}
+							listsStyle="text-blue-quat"
+							titleStyle="text-white"
+							paragraphStyle="text-blue-quat"
+						/>
+					</div>
+					<div className=" w-full flex justify-end items-end px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto overflow-hidden">
+						<div className="gsap-close-section w-full flex justify-end items-end">
+							<ClosePage link="/" customCloseStyle="text-white" />
+						</div>
+					</div>
+				</div>
 				<div
 					className={`gsap-page-departure-transition-div left-right-lenco-gradient h-full w-[110vw] absolute top-0 left-[100%] z-30 `}
 				></div>
-			</div>
+			</main>
 		</>
 	);
 }
