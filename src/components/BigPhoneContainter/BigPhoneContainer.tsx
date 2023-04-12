@@ -2,8 +2,9 @@ import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "
 import gsap, {Circ} from "gsap";
 
 import ScrollTrigger from "gsap/ScrollTrigger";
-import ViewProject from "../ViewProject/ViewProject";
+import ViewProject from "../CircularWords/CircularWords";
 import useDimension from "../../hooks/useDimension";
+import {useNavigate} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,14 +25,16 @@ interface Props {
 	delay?: number;
 
 	link?: string;
-	withLink?: boolean;
-	viewProjectCustomStyle?: string;
+	withViewProject?: boolean;
+	circularWordsCustomStyle?: string;
 }
 
 function BigPhoneContainer(props: Props): JSX.Element {
 	const phoneRef = useRef<HTMLDivElement | null>(null);
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const {width} = useDimension();
+	const navigate = useNavigate();
+
 	const [hideCursor, setHideCursor] = useState(false);
 	const [coords, setCoords] = useState<CoordsInterface>({
 		x: 0,
@@ -168,19 +171,25 @@ function BigPhoneContainer(props: Props): JSX.Element {
 		}
 	}, []);
 
+	const handleOnClick = useCallback(() => {
+		if (props.link) {
+			navigate(props.link || "");
+		}
+	}, [props.link]);
+
 	return (
 		<>
-			<div className="w-full relative" style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} ref={phoneRef}>
-				{props.withLink && hideCursor && width > 1023 && (
-					<div className="hidden lg:block">
-						<ViewProject link={props.link || ""} coords={coords} viewProjectCustomStyle={props.viewProjectCustomStyle} />
+			<div className="w-full relative" style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} onClick={handleOnClick} ref={phoneRef}>
+				{props.withViewProject && hideCursor && width > 1023 && (
+					<div className="hidden z-30 lg:block">
+						<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
 					</div>
 				)}
 				<div className="gsap-big-phone px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto overflow-hidden relative">
 					<div
 						className={"gsap-big-phone-primary bg-white rounded-3xl h-[730px] lg:h-[640px] w-full" + ` ${props.customContainerStyle}`}
-						onMouseOver={handleMouseOver}
-						onMouseOut={handleMouseLeave}
+						onMouseOver={props.withViewProject ? handleMouseOver : undefined}
+						onMouseOut={props.withViewProject ? handleMouseLeave : undefined}
 					>
 						<div className="flex flex-col lg:flex-row justify-between items-center h-full w-full xl:w-[1152px] max-w-7xl mx-auto px-7 md:px-14">
 							<div className={"flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0 relative" + ` ${props.imgFirst ? "lg:order-2" : ""}`}>
@@ -218,9 +227,11 @@ function BigPhoneContainer(props: Props): JSX.Element {
 									src={props.imgOne}
 									alt={props.imgOneAlt}
 								/>
-								<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden">
-									<ViewProject link={props.link || ""} coords={coords} viewProjectCustomStyle={props.viewProjectCustomStyle} />
-								</div>
+								{props.withViewProject && (
+									<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
+										<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

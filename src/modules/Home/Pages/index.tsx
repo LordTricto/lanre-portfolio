@@ -1,15 +1,17 @@
-import React, {useLayoutEffect, useRef} from "react";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, {useCallback, useLayoutEffect, useRef} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
-import BergerBG from "../../../assets/images/berger-bg.png";
 import BigPhoneContainer from "../../../components/BigPhoneContainter/BigPhoneContainer";
+import CircularWords from "../../../components/CircularWords/CircularWords";
+import ContactMe from "../../../components/Lenco/ContactMe/ContactMe";
 import {ReactComponent as DownloadIcon} from "../../../assets/svg/download-icon.svg";
 import ImageFive from "../../../assets/images/img-5.png";
 import ImageFour from "../../../assets/images/img-4.png";
 import ImageOne from "../../../assets/images/img-1.png";
 import ImageThree from "../../../assets/images/img-3.png";
 import ImageTwo from "../../../assets/images/img-2.png";
-import MacImageOne from "../../../assets/images/mac-img-1.png";
+import MacContainer from "../../../components/Lenco/MacContainer/MacContainer";
 import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainter/PhoneContainer";
 import PhoneImageFive from "../../../assets/images/phone-img-5.png";
@@ -19,7 +21,6 @@ import PhoneImageThree from "../../../assets/images/phone-img-3.png";
 import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
-import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,11 +31,11 @@ type LocationState = {
 function Home(): JSX.Element {
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const {width} = useDimension();
+	const navigate = useNavigate();
 	const location = useLocation().state as LocationState;
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
-	const tl4 = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
 		const onPageLoad = () => {
@@ -86,6 +87,11 @@ function Home(): JSX.Element {
 					},
 					width < 547 ? "=-2.2" : "=-2"
 				);
+				tl.current.from(".gsap-contact-me-now", {
+					duration: 1,
+					opacity: 0,
+					ease: Power4.easeOut,
+				});
 
 				gsap.from(".gsap-img-1", {
 					scrollTrigger: {
@@ -274,83 +280,13 @@ function Home(): JSX.Element {
 					clearProps: "translateY,opacity",
 				});
 
-				if (width < 1024) {
-					gsap.from(".gsap-berger-primary", {
-						scrollTrigger: {
-							trigger: ".gsap-berger-primary",
-							start: "top center+=150px",
-						},
-						translateY: "10%",
-						opacity: 0,
-						duration: 1,
-						clearProps: "opacity,translateY",
-					});
-				}
-
 				tl3.current = gsap.timeline({
-					scrollTrigger: {
-						trigger: ".gsap-berger-primary",
-						start: "top center",
-					},
-				});
-				if (width > 1023) {
-					tl3.current.from(".gsap-berger-primary", {
-						width: "100%",
-						borderRadius: 0,
-						padding: 0,
-						duration: 1.5,
-						ease: Circ.easeOut,
-						clearProps: "width,padding,borderRadius",
-					});
-					tl3.current.from(
-						".gsap-berger-primary-bg",
-						{
-							borderRadius: 0,
-							duration: 1.5,
-							ease: Circ.easeOut,
-							clearProps: "borderRadius",
-						},
-						"<"
-					);
-				}
-				tl3.current.from(".gsap-berger-content", {
-					opacity: 0,
-					stagger: 0.75,
-					duration: 1,
-					translateY: "40%",
-					ease: Circ.easeOut,
-					clearProps: "translateY,opacity,transform",
-				});
-				if (width > 1023) {
-					tl3.current.from(
-						".gsap-berger-img",
-						{
-							duration: 1,
-							scale: 1.2,
-							clearProps: "bottom,scale",
-						},
-						">-=1"
-					);
-				} else {
-					tl3.current.from(
-						".gsap-berger-img",
-						{
-							opacity: 0,
-							duration: 1,
-							translateX: "10%",
-							clearProps: "opacity,translateX",
-						},
-						">-=1"
-					);
-				}
-
-				tl4.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-cta",
 						start: "top center",
 					},
 				});
-				tl4.current.to(
+				tl3.current.to(
 					".gsap-cta-one-span",
 					{
 						color: "#1F2130",
@@ -360,7 +296,7 @@ function Home(): JSX.Element {
 					},
 					">+0.5"
 				);
-				tl4.current.to(
+				tl3.current.to(
 					".gsap-cta-two-span",
 					{
 						color: "#1F2130",
@@ -370,7 +306,7 @@ function Home(): JSX.Element {
 					},
 					">+0.5"
 				);
-				tl4.current.to(
+				tl3.current.to(
 					".gsap-cta-three-span",
 					{
 						color: "#1F2130",
@@ -380,7 +316,7 @@ function Home(): JSX.Element {
 					},
 					">+0.5"
 				);
-				tl4.current.to(
+				tl3.current.to(
 					".gsap-cta-four-span",
 					{
 						color: "#1F2130",
@@ -390,7 +326,7 @@ function Home(): JSX.Element {
 					},
 					">+0.5"
 				);
-				tl4.current.to(
+				tl3.current.to(
 					".gsap-cta-five-span",
 					{
 						color: "#1F2130",
@@ -415,6 +351,11 @@ function Home(): JSX.Element {
 			// Remove the event listener when component unmounts
 			return () => window.removeEventListener("load", onPageLoad);
 		}
+	}, []);
+
+	const handleContactMe = useCallback(() => {
+		console.log("first");
+		navigate("mailto:example@example.com");
 	}, []);
 
 	return (
@@ -447,6 +388,21 @@ function Home(): JSX.Element {
 									technology.
 								</p>
 							</div>
+						</div>
+						<div className="relative">
+							<Link
+								to="#"
+								onClick={() => {
+									// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+									window.location.href = "mailto:yourmail@domain.com";
+								}}
+							>
+								<div className="gsap-contact-me-now flex justify-center items-center absolute bottom-8 right-0 h-36 w-36 rounded-full">
+									<div className="relative">
+										<CircularWords name="- Contact - M e - Now " />
+									</div>
+								</div>
+							</Link>
 						</div>
 					</div>
 					<div className="w-full">
@@ -566,8 +522,8 @@ function Home(): JSX.Element {
 							customOverlayStyle="bg-white"
 							imgOne={PhoneImageOne}
 							imgOneAlt="phone showing app dashboard(lenco)"
-							withLink
 							link="/lenco"
+							withViewProject
 							// delay={1}
 						/>
 
@@ -581,6 +537,8 @@ function Home(): JSX.Element {
 							imgOne={PhoneImageTwo}
 							imgOneAlt="phone showing app(ridr)"
 							imgFirst
+							link="/ridr"
+							withViewProject
 							// delay={1}
 						/>
 
@@ -605,6 +563,8 @@ function Home(): JSX.Element {
 										imgTwoAlt="second phone showing app(accrue)"
 										isSingle={false}
 										delay={width > 1279 ? 1 : undefined}
+										link="/accrue"
+										withViewProject
 									/>
 								</div>
 								<div className="w-full lg:w-50% xl:w-40%">
@@ -625,46 +585,14 @@ function Home(): JSX.Element {
 										imgOneAlt="phone showing app(fora)"
 										delay={width > 1279 ? 1 : undefined}
 										isSingle
+										link="/fora"
+										withViewProject
+										circularWordsCustomStyle="text-white lg:text-black"
 									/>
 								</div>
 							</div>
 						</div>
-						<div className="gsap-berger-primary h-full px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto pb-24 md:pb-96 relative rounded-3xl">
-							<div className="flex flex-col justify-center items-center w-full text-white  z-10 h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] mx-auto relative px-7 md:px-14 overflow-hidden lg:overflow-visible">
-								<img className="gsap-berger-primary-bg h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
-								<div className="flex flex-col justify-start items-start lg:items-center gap-8 pt-12 sm:pt-20 w-full z-10 text-left lg:text-center">
-									<span className="gsap-berger-content font-semibold text-3xl 2xs:text-4xl md:!text-5xl max-w-sm md:leading-[4rem] text-left lg:text-center">
-										Berger Paints
-									</span>
-									<p className="gsap-berger-content max-w-2xl 2xs:text-lg md:text-xl text-white">
-										Nigeria&apos;s leading paint brand, offering varieties of paints and coating products to provide your desired
-										colors.
-									</p>
-								</div>
-								<div className="h-full w-full relative">
-									<div
-										className={
-											"md:pt-20 w-full " + `flex justify-center items-end lg:block ` + `absolute -bottom-16 lg:top-0 left-0`
-										}
-									>
-										<img
-											className={
-												"gsap-berger-img scale-[1] origin-top object-contain " +
-												"w-full [@media(min-width:900px)]:w-[700px] lg:!w-full  " +
-												//for the mobile view
-												"absolute left-0 [@media(min-width:815px)]:relative " +
-												"min-w-[400px] 3xs:min-w-[500px] xs:min-w-[650px] sm:min-w-[675px] md:min-w-[700px]  " +
-												"bottom-10 xs:bottom-[unset] " +
-												"lg:h-[600px] xl:h-[700px] " +
-												``
-											}
-											src={MacImageOne}
-											alt="Mac showing app landing page(Berger Paints)"
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
+						<MacContainer link="/lenco" withViewProject circularWordsCustomStyle="text-black" />
 					</div>
 				</section>
 				<section className="px-8 !pt-0 py-16 lg:p-16 max-w-7xl mx-auto w-full">
@@ -745,6 +673,7 @@ function Home(): JSX.Element {
 						</div>
 					</div>
 				</section>
+				<ContactMe />
 				<footer>
 					<div className="flex justify-center items-center w-full gap-3 2xs:gap-10 text-lg uppercase max-w-7xl mx-auto">
 						<a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">

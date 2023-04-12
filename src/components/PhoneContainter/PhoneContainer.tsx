@@ -1,13 +1,19 @@
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ} from "gsap";
 
 import ScrollTrigger from "gsap/ScrollTrigger";
+import ViewProject from "../CircularWords/CircularWords";
 import useDimension from "../../hooks/useDimension";
+import {useNavigate} from "react-router-dom";
 
 // import useDimension from "../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface CoordsInterface {
+	x: number;
+	y: number;
+}
 interface Props {
 	isSingle: boolean;
 	title: string;
@@ -27,16 +33,27 @@ interface Props {
 	customTextOverlayStyle: string;
 
 	delay?: number;
+
+	link?: string;
+	withViewProject?: boolean;
+	circularWordsCustomStyle?: string;
 }
 
 function PhoneContainer(props: Props): JSX.Element {
 	const {isSingle = true} = props;
 
+	const {width} = useDimension();
+	const navigate = useNavigate();
+
+	const tl = useRef<gsap.core.Timeline | undefined>();
 	const phoneRef = useRef<HTMLDivElement | null>(null);
 	const primaryDivRef = useRef<HTMLDivElement | null>(null);
 
-	const {width} = useDimension();
-	const tl = useRef<gsap.core.Timeline | undefined>();
+	const [hideCursor, setHideCursor] = useState(false);
+	const [coords, setCoords] = useState<CoordsInterface>({
+		x: 0,
+		y: 0,
+	});
 	// const tl2 = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
@@ -145,15 +162,53 @@ function PhoneContainer(props: Props): JSX.Element {
 		}
 	}, []);
 
+	useEffect(() => {
+		document.addEventListener("mousemove", handleMouseMove);
+
+		return () => {
+			document.removeEventListener("mousemove", handleMouseMove);
+		};
+	}, []);
+
+	const handleMouseOver = useCallback(() => {
+		setHideCursor(true);
+	}, []);
+
+	const handleMouseLeave = useCallback(() => {
+		setHideCursor(false);
+	}, []);
+
+	const handleMouseMove = useCallback((e: MouseEvent) => {
+		if (phoneRef.current) {
+			setCoords({
+				x: e.clientX - phoneRef.current?.getBoundingClientRect().left || 0,
+				y: e.clientY - phoneRef.current?.getBoundingClientRect().top || 0,
+			});
+		}
+	}, []);
+
+	const handleOnClick = useCallback(() => {
+		if (props.link) {
+			navigate(props.link || "");
+		}
+	}, [props.link]);
+
 	return (
 		<>
-			<div className="w-full" ref={phoneRef}>
+			<div className="w-full relative" style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} onClick={handleOnClick} ref={phoneRef}>
+				{props.withViewProject && hideCursor && width > 1023 && (
+					<div className="hidden z-30 lg:block">
+						<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
+					</div>
+				)}
 				<div
 					className="gsap-container-tag w-full"
 					style={{
 						perspective: "500px",
 						transformStyle: "preserve-3d",
 					}}
+					onMouseOver={props.withViewProject ? handleMouseOver : undefined}
+					onMouseOut={props.withViewProject ? handleMouseLeave : undefined}
 				>
 					{isSingle && (
 						<div
@@ -204,6 +259,11 @@ function PhoneContainer(props: Props): JSX.Element {
 										src={props.imgOne}
 										alt={props.imgOneAlt}
 									/>
+									{props.withViewProject && (
+										<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
+											<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
@@ -266,6 +326,11 @@ function PhoneContainer(props: Props): JSX.Element {
 										src={props.imgTwo}
 										alt={props.imgTwoAlt}
 									/>
+									{props.withViewProject && (
+										<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
+											<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
