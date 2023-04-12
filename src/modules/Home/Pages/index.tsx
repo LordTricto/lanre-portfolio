@@ -1,5 +1,5 @@
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import React, {useCallback, useLayoutEffect, useRef} from "react";
+import {Link, useLocation} from "react-router-dom";
+import React, {useLayoutEffect, useRef} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
 import BigPhoneContainer from "../../../components/BigPhoneContainter/BigPhoneContainer";
@@ -31,7 +31,6 @@ type LocationState = {
 function Home(): JSX.Element {
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const {width} = useDimension();
-	const navigate = useNavigate();
 	const location = useLocation().state as LocationState;
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
@@ -351,11 +350,6 @@ function Home(): JSX.Element {
 			// Remove the event listener when component unmounts
 			return () => window.removeEventListener("load", onPageLoad);
 		}
-	}, []);
-
-	const handleContactMe = useCallback(() => {
-		console.log("first");
-		navigate("mailto:example@example.com");
 	}, []);
 
 	return (
