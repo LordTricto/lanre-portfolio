@@ -36,6 +36,12 @@ function Home(): JSX.Element {
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
+		window.onload;
+		document.body.style.scrollBehavior = "unset";
+		window.scrollTo(0, 0);
+		window.onbeforeunload = function () {
+			window.scrollTo(0, 0);
+		};
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
 				tl.current = gsap.timeline();
@@ -46,6 +52,7 @@ function Home(): JSX.Element {
 					duration: 0,
 					onComplete: () => {
 						document.body.style.overflow = "hidden";
+						document.body.style.scrollBehavior = "unset";
 					},
 				});
 				tl.current.to(".gsap-page-entry-transition-div", {
@@ -95,6 +102,7 @@ function Home(): JSX.Element {
 					ease: Power4.easeOut,
 					onComplete: () => {
 						document.body.style.overflow = "unset";
+						document.body.style.scrollBehavior = "smooth";
 					},
 				});
 
@@ -556,7 +564,7 @@ function Home(): JSX.Element {
 					</div>
 				</footer>
 				<div
-					className={`gsap-page-departure-transition-div black-gradient-left-right-home h-full w-[110vw] absolute top-0 left-[100%] z-30 `}
+					className={`gsap-page-departure-transition-div black-gradient-left-right-home h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
 				></div>
 			</main>
 		</>

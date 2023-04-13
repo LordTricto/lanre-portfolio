@@ -51,6 +51,11 @@ function Lenco(): JSX.Element {
 
 	useLayoutEffect(() => {
 		window.onload;
+		document.body.style.scrollBehavior = "unset";
+		window.scrollTo(0, 0);
+		window.onbeforeunload = function () {
+			window.scrollTo(0, 0);
+		};
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
@@ -68,6 +73,7 @@ function Lenco(): JSX.Element {
 				duration: 0,
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
+					document.body.style.scrollBehavior = "unset";
 				},
 			});
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
@@ -116,6 +122,7 @@ function Lenco(): JSX.Element {
 					duration: 2,
 					onComplete: () => {
 						document.body.style.overflow = "unset";
+						document.body.style.scrollBehavior = "smooth";
 					},
 				},
 				"<"
@@ -446,7 +453,7 @@ function Lenco(): JSX.Element {
 					</div>
 				</div>
 				<div
-					className={`gsap-page-departure-transition-div left-right-lenco-gradient h-full w-[110vw] absolute top-0 left-[100%] z-30 `}
+					className={`gsap-page-departure-transition-div left-right-lenco-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
 				></div>
 			</main>
 		</>

@@ -192,11 +192,11 @@ function ContactMe(): JSX.Element {
 		<>
 			<div className="w-full" ref={contactDivRef}>
 				<div className="gsap-contact-me px-4 2xs:px-8 lg:px-16 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
-					<div className="gsap-contact-me-circular-words absolute -right-2 top-24 3xs:right-0 lg:relative z-30 lg:hidden ">
+					<div className="gsap-contact-me-circular-words absolute -right-2 top-24 3xs:right-0 lg:relative z-30 lg:hidden pointer-events-none ">
 						<CircularWords coords={coords} name="- C o n t a c t - M e - N o w " />
 					</div>
 					{hideCursor && width > 1023 && (
-						<div className="hidden z-30 lg:block">
+						<div className="hidden z-30 lg:block pointer-events-none">
 							<CircularWords coords={coords} name="- C o n t a c t - M e - N o w " />
 						</div>
 					)}
