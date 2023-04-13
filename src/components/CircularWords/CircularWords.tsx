@@ -16,7 +16,7 @@ interface Props {
 function CircularWords(props: Props): JSX.Element {
 	const {width} = useDimension();
 	const [letterAngles, setLetterAngles] = useState<number[]>([]);
-	const word = props.name || "- View - Project ";
+	const word = props.name || "- V i e w - P r o j e c t ";
 	useEffect(() => {
 		const angleIncrement = 360 / word.length;
 		setLetterAngles(Array.from({length: word.length}, (_, i) => i * angleIncrement));

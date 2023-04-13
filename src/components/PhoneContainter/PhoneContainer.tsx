@@ -145,6 +145,13 @@ function PhoneContainer(props: Props): JSX.Element {
 						">-1.25"
 					);
 				}
+				if (props.withViewProject) {
+					tl.current.from(".gsap-view-project", {
+						opacity: 0,
+						duration: 1,
+						clearProps: "opacity",
+					});
+				}
 			}, phoneRef);
 
 			return () => {
@@ -195,7 +202,7 @@ function PhoneContainer(props: Props): JSX.Element {
 
 	return (
 		<>
-			<div className="w-full relative" style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} onClick={handleOnClick} ref={phoneRef}>
+			<div className="w-full relative " style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} ref={phoneRef}>
 				{props.withViewProject && hideCursor && width > 1023 && (
 					<div className="hidden z-30 lg:block">
 						<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
@@ -209,6 +216,7 @@ function PhoneContainer(props: Props): JSX.Element {
 					}}
 					onMouseOver={props.withViewProject ? handleMouseOver : undefined}
 					onMouseOut={props.withViewProject ? handleMouseLeave : undefined}
+					onClick={handleOnClick}
 				>
 					{isSingle && (
 						<div
@@ -260,7 +268,7 @@ function PhoneContainer(props: Props): JSX.Element {
 										alt={props.imgOneAlt}
 									/>
 									{props.withViewProject && (
-										<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
+										<div className="gsap-view-project absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
 											<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
 										</div>
 									)}
@@ -327,7 +335,7 @@ function PhoneContainer(props: Props): JSX.Element {
 										alt={props.imgTwoAlt}
 									/>
 									{props.withViewProject && (
-										<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
+										<div className="gsap-view-project absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
 											<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
 										</div>
 									)}

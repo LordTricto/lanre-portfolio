@@ -45,6 +45,7 @@ function Lenco(): JSX.Element {
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
+	const tl4 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
 
@@ -53,6 +54,7 @@ function Lenco(): JSX.Element {
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
+				tl4.current?.scrollTrigger?.refresh();
 			}, 7000);
 
 			tl.current = gsap.timeline();
@@ -64,6 +66,9 @@ function Lenco(): JSX.Element {
 				marginTop: 0,
 				padding: 0,
 				duration: 0,
+				onComplete: () => {
+					document.body.style.overflow = "hidden";
+				},
 			});
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
 				translateY: "unset",
@@ -109,6 +114,9 @@ function Lenco(): JSX.Element {
 				{
 					borderRadius: 0,
 					duration: 2,
+					onComplete: () => {
+						document.body.style.overflow = "unset";
+					},
 				},
 				"<"
 			);
@@ -118,7 +126,7 @@ function Lenco(): JSX.Element {
 					trigger: `.gsap-assessing-phone-imgs`,
 					start: "top center",
 					// markers: true,
-					toggleActions: "restart none none reverse",
+					// toggleActions: "restart none none reverse",
 				},
 			});
 
@@ -140,7 +148,7 @@ function Lenco(): JSX.Element {
 					trigger: `.gsap-revised-phone-imgs`,
 					start: "top top+=300px",
 					// markers: true,
-					toggleActions: "restart none none reverse",
+					// toggleActions: "restart none none reverse",
 				},
 			});
 
@@ -158,16 +166,16 @@ function Lenco(): JSX.Element {
 			);
 
 			//close section
-			tl.current = gsap.timeline({
+			tl4.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.gsap-takeout-section`,
 					start: "top center",
-					// markers: true,
-					toggleActions: "restart none none reverse",
+					markers: true,
+					// toggleActions: "restart none none reverse",
 				},
 			});
 
-			tl.current.from(
+			tl4.current.from(
 				`.gsap-close-section`,
 				{
 					opacity: 0,
@@ -200,7 +208,7 @@ function Lenco(): JSX.Element {
 						`${location?.from === "/accrue" ? "!bg-accrue-blue" : ""}`
 					}
 				></div>
-				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-16 gap-28">
+				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
 					<HeaderContainer
 						gsapHeaderContainerTag="gsap-header-section"
 						gsapPrimaryContainerTag="gsap-header-imgs-div"
@@ -420,7 +428,7 @@ function Lenco(): JSX.Element {
 						imgFour={ReimbursementsListImgFour}
 						imgFourAlt="phone showing app switching business(lenco)"
 					/>
-					<div className="gsap-takeout-section flex flex-col justify-start items-start w-full gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+					<div className="gsap-takeout-section flex flex-col justify-start items-start w-full gap-8 pb-0 lg:pb-8 xl:pb-0 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 						<Sections
 							type={LencoSections[LencoSection.TAKEOUT].value}
 							lists={LencoSections[LencoSection.TAKEOUT].lists}

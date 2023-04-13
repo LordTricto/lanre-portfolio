@@ -4,13 +4,14 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 import {ReactComponent as ArrowDownIcon} from "../../assets/svg/arrowDownIcon.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import useDimension from "../../hooks/useDimension";
 
 // import useDimension from "../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Nav(): JSX.Element {
-	// const {width} = useDimension();
+	const {width} = useDimension();
 	const navigate = useNavigate();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const navDivRef = useRef<HTMLDivElement | null>(null);
@@ -30,7 +31,7 @@ function Nav(): JSX.Element {
 				setIsAnimationDone(true);
 				setActiveRoute(location.pathname);
 			},
-			location.pathname === "/" ? 7000 : 6000
+			location.pathname === "/" ? (width > 1023 ? 8000 : 9000) : 6000
 		);
 		return () => {
 			// clearTimeout(timeout);
@@ -322,7 +323,11 @@ function Nav(): JSX.Element {
 						>
 							<span
 								className={`${
-									!location.pathname.includes("lenco") ? "cursor-pointer" : "cursor-default pointer-events-none line-through"
+									isAnimationDone
+										? !activeRoute.includes("lenco")
+											? "cursor-pointer"
+											: "cursor-default pointer-events-none line-through"
+										: "cursor-default"
 								}`}
 								onClick={handleGoLenco}
 							>
@@ -346,7 +351,11 @@ function Nav(): JSX.Element {
 						>
 							<span
 								className={`${
-									!location.pathname.includes("accure") ? "cursor-pointer" : "cursor-default pointer-events-none line-through"
+									isAnimationDone
+										? !activeRoute.includes("accrue")
+											? "cursor-pointer"
+											: "cursor-default pointer-events-none line-through"
+										: "cursor-default"
 								}`}
 								onClick={handleGoAccure}
 							>
@@ -370,7 +379,11 @@ function Nav(): JSX.Element {
 						>
 							<span
 								className={`${
-									!location.pathname.includes("fora") ? "cursor-pointer" : "cursor-default pointer-events-none line-through"
+									isAnimationDone
+										? !activeRoute.includes("fora")
+											? "cursor-pointer"
+											: "cursor-default pointer-events-none line-through"
+										: "cursor-default"
 								}`}
 								onClick={handleGoFora}
 							>
@@ -394,7 +407,11 @@ function Nav(): JSX.Element {
 						>
 							<span
 								className={`${
-									!location.pathname.includes("ridr") ? "cursor-pointer" : "cursor-default pointer-events-none line-through"
+									isAnimationDone
+										? !activeRoute.includes("ridr")
+											? "cursor-pointer"
+											: "cursor-default pointer-events-none line-through"
+										: "cursor-default"
 								}`}
 								onClick={handleGoRidr}
 							>
@@ -418,7 +435,11 @@ function Nav(): JSX.Element {
 						>
 							<span
 								className={`${
-									!location.pathname.includes("berger") ? "cursor-pointer" : "cursor-default pointer-events-none line-through"
+									isAnimationDone
+										? !activeRoute.includes("berger")
+											? "cursor-pointer"
+											: "cursor-default pointer-events-none line-through"
+										: "cursor-default"
 								}`}
 								onClick={handleGoBerger}
 							>

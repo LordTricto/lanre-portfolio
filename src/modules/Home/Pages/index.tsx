@@ -34,16 +34,19 @@ function Home(): JSX.Element {
 	const location = useLocation().state as LocationState;
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
-	const tl3 = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
 				tl.current = gsap.timeline();
+				document.body;
 
 				tl.current.to(".gsap-hero-text", {
 					color: "white",
 					duration: 0,
+					onComplete: () => {
+						document.body.style.overflow = "hidden";
+					},
 				});
 				tl.current.to(".gsap-page-entry-transition-div", {
 					opacity: 0,
@@ -90,6 +93,9 @@ function Home(): JSX.Element {
 					duration: 1,
 					opacity: 0,
 					ease: Power4.easeOut,
+					onComplete: () => {
+						document.body.style.overflow = "unset";
+					},
 				});
 
 				gsap.from(".gsap-img-1", {
@@ -138,7 +144,7 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-imgs-1",
 						start: "top bottom-=300px",
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 					},
 					translateX: "-20%",
 					opacity: 0,
@@ -150,7 +156,7 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-imgs-1",
 						start: "top bottom-=300px",
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 					},
 					translateY: "20%",
 					opacity: 0,
@@ -162,7 +168,7 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-imgs-1",
 						start: "top bottom-=300px",
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 					},
 					translateX: "20%",
 					opacity: 0,
@@ -175,7 +181,7 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-imgs-2",
 						start: "top bottom-=300px",
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 					},
 					translateX: "-20%",
 					opacity: 0,
@@ -187,7 +193,7 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-imgs-2",
 						start: "top bottom-=300px",
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 					},
 					translateX: "20%",
 					opacity: 0,
@@ -200,7 +206,7 @@ function Home(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-memo",
 						start: "top center",
-						toggleActions: "restart none none reverse",
+						// toggleActions: "restart none none reverse",
 						// markers: true,
 					},
 				});
@@ -278,63 +284,6 @@ function Home(): JSX.Element {
 					ease: Circ.easeOut,
 					clearProps: "translateY,opacity",
 				});
-
-				tl3.current = gsap.timeline({
-					scrollTrigger: {
-						trigger: ".gsap-cta",
-						start: "top center",
-					},
-				});
-				tl3.current.to(
-					".gsap-cta-one-span",
-					{
-						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
-						ease: Power4.easeInOut,
-					},
-					">+0.5"
-				);
-				tl3.current.to(
-					".gsap-cta-two-span",
-					{
-						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
-						ease: Power4.easeInOut,
-					},
-					">+0.5"
-				);
-				tl3.current.to(
-					".gsap-cta-three-span",
-					{
-						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
-						ease: Power4.easeInOut,
-					},
-					">+0.5"
-				);
-				tl3.current.to(
-					".gsap-cta-four-span",
-					{
-						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
-						ease: Power4.easeInOut,
-					},
-					">+0.5"
-				);
-				tl3.current.to(
-					".gsap-cta-five-span",
-					{
-						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
-						ease: Power4.easeInOut,
-					},
-					">+0.5"
-				);
 			}, landingDivRef);
 
 			return () => {
@@ -393,7 +342,7 @@ function Home(): JSX.Element {
 							>
 								<div className="gsap-contact-me-now flex justify-center items-center absolute bottom-8 right-0 h-36 w-36 rounded-full">
 									<div className="relative">
-										<CircularWords name="- Contact - M e - Now " />
+										<CircularWords name="- C o n t a c t - M e - N o w " />
 									</div>
 								</div>
 							</Link>
@@ -589,98 +538,20 @@ function Home(): JSX.Element {
 						<MacContainer link="/lenco" withViewProject circularWordsCustomStyle="text-black" />
 					</div>
 				</section>
-				<section className="px-8 !pt-0 py-16 lg:p-16 max-w-7xl mx-auto w-full">
-					<div className="flex flex-col xl:flex-row justify-start xl:justify-between items-center px-7 md:px-14 py-12 md:py-16 bg-white rounded-3xl">
-						<div className="w-full xl:max-w-lg">
-							<div className="gsap-cta flex flex-col justify-start items-start gap-2">
-								<p className="text-5xl 2xs:text-7xl lg:!text-8xl font-medium text-black-tertiary">
-									<span className="gsap-cta-one-span"> Say </span>
-									<span className="gsap-cta-one-span"> Hello! </span>
-								</p>
-								<p className="w-full break-words">
-									<a
-										className="text-xl xs:text-2xl lg:!text-3xl text-black-tertiary w-full"
-										href="mailto:olanrewaju.olukanni@gmail.com"
-									>
-										olanrewaju.olukanni@gmail.com
-									</a>
-								</p>
-							</div>
-							<p className="text-xl xs:text-2xl lg:!text-3xl text-black-tertiary pt-14">
-								I was born and raised in Lagos,
-								<span className="gsap-cta-two-span"> I </span>
-								<span className="gsap-cta-two-span"> have </span>
-								<span className="gsap-cta-two-span"> spent </span>
-								<span className="gsap-cta-two-span"> almost </span>
-								<span className="gsap-cta-two-span"> a </span>
-								<span className="gsap-cta-two-span"> decades </span>
-								<span className="gsap-cta-two-span"> in </span>
-								<span className="gsap-cta-two-span"> the </span>
-								<span className="gsap-cta-two-span"> digital </span>
-								<span className="gsap-cta-two-span"> industry </span>
-								working for design studios, companies and startups. I am currently
-								<span className="gsap-cta-two-span"> Product </span>
-								<span className="gsap-cta-two-span"> Designer </span>
-								<span className="gsap-cta-two-span"> at </span>
-								<span className="gsap-cta-two-span"> Lenco </span>
-								<span className="gsap-cta-two-span"> in </span>
-								<span className="gsap-cta-two-span"> Nigeria.</span>
-							</p>
-						</div>
-						<div className="w-full xl:max-w-lg">
-							<div className="flex flex-col gap-5.5 text-xl xs:text-2xl lg:!text-3xl text-black-tertiary mt-5.5 xl:mt-2">
-								<p>
-									I have
-									<span className="gsap-cta-three-span"> expertise </span>
-									<span className="gsap-cta-three-span"> in </span>
-									leading large scale projects, from
-									<span className="gsap-cta-three-span"> Product </span>
-									<span className="gsap-cta-three-span"> Strategy, </span>
-									<span className="gsap-cta-three-span"> User </span>
-									<span className="gsap-cta-three-span"> Experience </span>
-									<span className="gsap-cta-three-span"> & </span>
-									<span className="gsap-cta-three-span"> Interaction </span>
-									<span className="gsap-cta-three-span"> Design. </span>
-								</p>
-								<p>
-									I&apos;m very
-									<span className="gsap-cta-four-span"> passionate </span>
-									<span className="gsap-cta-four-span"> about </span>
-									<span className="gsap-cta-four-span"> digital </span>
-									<span className="gsap-cta-four-span"> products, </span>
-									<span className="gsap-cta-four-span"> technology, </span>
-									and
-									<span className="gsap-cta-four-span"> designs </span>
-									that create a significant impact on humanity.
-								</p>
-
-								<p>
-									I<span className="gsap-cta-five-span"> contribute </span>
-									by bringing technology
-									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-									<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-									and elegant digital products.
-								</p>
-							</div>
-						</div>
-					</div>
-				</section>
 				<ContactMe />
 				<footer>
 					<div className="flex justify-center items-center w-full gap-3 2xs:gap-10 text-lg uppercase max-w-7xl mx-auto">
-						<a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+						<a href="https://www.linkedin.com/in/olanrewaju-olukanni-628a11149/" target="_blank" rel="noreferrer">
 							<span className="flex flex-row justify-center items-center text-xs xs:text-base">LinkedIn</span>
 						</a>
-						<a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+						<a href="https://drive.google.com/file/d/1tu0lPxDybsIBOZfnoc5jDy6GWBHVNuD9/view" target="_blank" rel="noreferrer">
 							<span className="flex flex-row justify-center items-center text-xs xs:text-base">
 								<DownloadIcon className="pr-1" />
 								RESUME
 							</span>
 						</a>
-						<a href="https://www.twitter.com/" target="_blank" rel="noreferrer">
-							<span className="flex flex-row justify-center items-center text-xs xs:text-base">Twitter</span>
+						<a href="mailto:olanrewaju.olukanni@gmail.com">
+							<span className="flex flex-row justify-center items-center text-xs xs:text-base">Contact</span>
 						</a>
 					</div>
 				</footer>

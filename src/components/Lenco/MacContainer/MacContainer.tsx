@@ -105,6 +105,11 @@ function MacContainer(props: Props): JSX.Element {
 						">-=1"
 					);
 				}
+				tl.current.from(".gsap-view-project", {
+					opacity: 0,
+					duration: 1,
+					clearProps: "opacity",
+				});
 			}, phoneRef);
 
 			return () => {
@@ -197,7 +202,7 @@ function MacContainer(props: Props): JSX.Element {
 									alt="Mac showing app landing page(Berger Paints)"
 								/>
 								{props.withViewProject && (
-									<div className="absolute -right-2 bottom-24 3xs:right-0 lg:hidden z-30">
+									<div className="gsap-view-project absolute -right-2 bottom-24 3xs:right-0 lg:hidden z-30">
 										<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
 									</div>
 								)}

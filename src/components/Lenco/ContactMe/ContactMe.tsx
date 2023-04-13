@@ -26,11 +26,16 @@ function ContactMe(): JSX.Element {
 	useLayoutEffect(() => {
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
+				// setTimeout(() => {
+				// tl.current?.scrollTrigger?.refresh();
+				// ScrollTrigger.refresh();
+				// }, 4000);
+
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-contact-me",
-						start: "top center",
-						toggleActions: "restart none none reverse",
+						start: width > 1024 ? "center center-=200px" : "top center",
+						// toggleActions: "restart none none reverse",
 						// markers: true,
 					},
 				});
@@ -40,10 +45,10 @@ function ContactMe(): JSX.Element {
 						width: "100%",
 						borderRadius: 0,
 						padding: 0,
-						height: "30rem",
+						// height: "30rem",
 						duration: 1.5,
 						ease: "M0,0 C0,0 0.024,0.595 0.2,0.8 0.406,1.04 1,1 1,1 ",
-						clearProps: "height,width,padding,borderRadius",
+						clearProps: "width,padding,borderRadius",
 					});
 
 					tl.current.from(
@@ -75,6 +80,16 @@ function ContactMe(): JSX.Element {
 						clearProps: "transform,translateY",
 					}
 					// "-=1.75"
+				);
+
+				tl.current.from(
+					".gsap-contact-me-circular-words",
+					{
+						opacity: 0,
+						duration: 1,
+						clearProps: "opacity",
+					},
+					">"
 				);
 
 				tl.current.to(
@@ -176,19 +191,19 @@ function ContactMe(): JSX.Element {
 	return (
 		<>
 			<div className="w-full" ref={contactDivRef}>
-				<div className="gsap-contact-me px-4 2xs:px-8 lg:px-16 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto relative overflow-hidden cursor-none">
-					<div className="absolute -right-2 top-24 3xs:right-0 lg:relative z-30 lg:hidden ">
-						<CircularWords coords={coords} name="- Contact - Me - Now " />
+				<div className="gsap-contact-me px-4 2xs:px-8 lg:px-16 !pb-0 py-16 lg:p-16 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
+					<div className="gsap-contact-me-circular-words absolute -right-2 top-24 3xs:right-0 lg:relative z-30 lg:hidden ">
+						<CircularWords coords={coords} name="- C o n t a c t - M e - N o w " />
 					</div>
 					{hideCursor && width > 1023 && (
 						<div className="hidden z-30 lg:block">
-							<CircularWords coords={coords} name="- Contact - Me - Now " />
+							<CircularWords coords={coords} name="- C o n t a c t - M e - N o w " />
 						</div>
 					)}
 
 					<div className="gsap-contact-me-primary w-full h-full bg-white rounded-3xl">
 						<div
-							className="flex flex-col xl:flex-row justify-start xl:justify-between items-start h-full gap-4 px-7 md:px-14 py-12 md:py-16 xl:w-[1152px] max-w-7xl mx-auto"
+							className="flex flex-col xl:flex-row justify-start xl:justify-between items-start h-full gap-4 px-7 md:px-14 py-12 md:py-16 xl:w-[1152px] max-w-7xl mx-auto cursor-none"
 							onMouseOver={handleMouseOver}
 							onMouseOut={handleMouseLeave}
 							onClick={handleOnClick}
@@ -259,10 +274,11 @@ function ContactMe(): JSX.Element {
 									<p>
 										I<span className="gsap-cta-five-span"> contribute </span>
 										by bringing technology
-										<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-										<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-										<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
-										<span className="gsap-cta-five-span"> into people&apos;s lives through simple </span>
+										<span className="gsap-cta-five-span"> into </span>
+										<span className="gsap-cta-five-span"> people&apos;s </span>
+										<span className="gsap-cta-five-span"> lives </span>
+										<span className="gsap-cta-five-span"> through </span>
+										<span className="gsap-cta-five-span"> simple </span>
 										and elegant digital products.
 									</p>
 								</div>

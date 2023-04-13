@@ -125,6 +125,11 @@ function BigPhoneContainer(props: Props): JSX.Element {
 						">-1.25"
 					);
 				}
+				tl.current.from(".gsap-view-project", {
+					opacity: 0,
+					duration: 1,
+					clearProps: "opacity",
+				});
 			}, phoneRef);
 
 			return () => {
@@ -179,7 +184,7 @@ function BigPhoneContainer(props: Props): JSX.Element {
 
 	return (
 		<>
-			<div className="w-full relative" style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} onClick={handleOnClick} ref={phoneRef}>
+			<div className="w-full relative" style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}} ref={phoneRef}>
 				{props.withViewProject && hideCursor && width > 1023 && (
 					<div className="hidden z-30 lg:block">
 						<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
@@ -187,9 +192,10 @@ function BigPhoneContainer(props: Props): JSX.Element {
 				)}
 				<div className="gsap-big-phone px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto overflow-hidden relative">
 					<div
-						className={"gsap-big-phone-primary bg-white rounded-3xl h-[730px] lg:h-[640px] w-full" + ` ${props.customContainerStyle}`}
+						className={"gsap-big-phone-primary bg-white rounded-3xl h-[730px] lg:h-[640px] w-full " + ` ${props.customContainerStyle}`}
 						onMouseOver={props.withViewProject ? handleMouseOver : undefined}
 						onMouseOut={props.withViewProject ? handleMouseLeave : undefined}
+						onClick={handleOnClick}
 					>
 						<div className="flex flex-col lg:flex-row justify-between items-center h-full w-full xl:w-[1152px] max-w-7xl mx-auto px-7 md:px-14">
 							<div className={"flex flex-col gap-8 w-full pt-12 sm:pt-16 lg:pt-0 relative" + ` ${props.imgFirst ? "lg:order-2" : ""}`}>
@@ -228,7 +234,7 @@ function BigPhoneContainer(props: Props): JSX.Element {
 									alt={props.imgOneAlt}
 								/>
 								{props.withViewProject && (
-									<div className="absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
+									<div className="gsap-view-project absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">
 										<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
 									</div>
 								)}
