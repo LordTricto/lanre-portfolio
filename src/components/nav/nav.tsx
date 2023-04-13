@@ -31,7 +31,7 @@ function Nav(): JSX.Element {
 				setIsAnimationDone(true);
 				setActiveRoute(location.pathname);
 			},
-			location.pathname === "/" ? (width > 1023 ? 8000 : 9000) : 6000
+			location.pathname === "/" ? (width > 1023 ? 8000 : 8500) : 6000
 		);
 		return () => {
 			// clearTimeout(timeout);

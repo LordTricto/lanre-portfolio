@@ -21,7 +21,7 @@ function App(): JSX.Element {
 			ease: Power1.easeOut,
 		});
 		gsap.to(specificRoute?.nodeRef.current?.firstChild?.firstChild || "", {
-			delay: width < 547 ? 0.5 : 1.5,
+			delay: 1.5,
 			opacity: 0,
 			duration: 0,
 			ease: Power1.easeOut,
