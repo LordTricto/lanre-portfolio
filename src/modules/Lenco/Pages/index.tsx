@@ -170,7 +170,7 @@ function Lenco(): JSX.Element {
 				scrollTrigger: {
 					trigger: `.gsap-takeout-section`,
 					start: "top center",
-					markers: true,
+					// markers: true,
 					// toggleActions: "restart none none reverse",
 				},
 			});
