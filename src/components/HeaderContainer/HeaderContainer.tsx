@@ -9,6 +9,7 @@ interface Props {
 	headerImgThreeAlt?: string;
 	gsapHeaderContainerTag: string;
 	gsapPrimaryContainerTag: string;
+	primaryContainerCustomStyle: string;
 	gsapImgOneTag: string;
 	gsapImgTwoTag: string;
 	gsapImgTwoContainerTag: string;
@@ -31,18 +32,19 @@ function HeaderContainer(props: Props): JSX.Element {
 			>
 				<div
 					className={
-						`h-full w-full relative flex flex-row justify-center gap-2 2xs:gap-4 md:gap-8 overflow-hidden ` +
-						`bg-white-dark rounded-3xl ` +
+						`h-full w-full flex flex-row justify-center gap-2 2xs:gap-4 md:gap-8 rounded-3xl overflow-hidden ` +
+						`${props.primaryContainerCustomStyle} ` +
 						`${props.gsapPrimaryContainerTag}`
 					}
 				>
 					{props.isSingle && (
 						<>
-							<div className={` h-full w-full ` + `flex justify-center items-center `}>
+							<div className="absolute left-0 top-0 right-0 bottom-0 m-auto flex justify-center items-center">
 								<img
 									// className={`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[320px] lg:!h-[520px] xl:!h-[660px] `}
 									className={
-										`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[420px] lg:!h-[520px] xl:!h-[660px] ` + `${props.gsapImgOneTag}`
+										`h-[180px] xs:h-[220px] sm:h-[270px] md:!h-[370px] lg:!h-[480px] xl:!h-[600px] mt-24 md:mt-36  ` +
+										`${props.gsapImgOneTag}`
 									}
 									src={props.headerImgOne}
 									alt={props.headerImgOneAlt}
@@ -52,7 +54,7 @@ function HeaderContainer(props: Props): JSX.Element {
 					)}
 					{!props.isSingle && (
 						<>
-							<div className="flex justify-center items-center h-full w-[360px] absolute mx-auto ">
+							<div className="flex justify-center items-center h-full w-[360px] absolute mx-auto">
 								<img
 									className={
 										`${props.gsapImgOneTag} ` +

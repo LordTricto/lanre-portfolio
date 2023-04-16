@@ -10,7 +10,7 @@ export type SectionsType = {
 	value: LencoSection;
 	title: string;
 	lists: string[] | null;
-	paragraph: string | null;
+	paragraph: string[] | null;
 };
 
 export const LencoSections: {
@@ -38,42 +38,48 @@ export const LencoSections: {
 			"There was little or no interaction that would engage the user",
 			"Data and analytics were too technical and didn't make sense to most users",
 		],
-		paragraph:
+		paragraph: [
 			"A thoughtful review of the previous app highlighted many issues and pain points that indicated poor user-experience which led to user abandonment and the overall degrade in the experience interacting with the app.",
+		],
 	},
 	[LencoSection.COMPETITIVE_ANALYSIS]: {
 		value: LencoSection.COMPETITIVE_ANALYSIS,
 		title: "Competitive Analysis",
 		lists: null,
-		paragraph:
+		paragraph: [
 			"To understand where our product stood in the market, determine whether there were any gaps in the industry, and identify attributes that these competitors' products lacked, research was conducted on a few direct and indirect competitors' products. Focused and thoughtful UX competitor analysis provided insightful information that allowed us to change important product design features",
+		],
 	},
 	[LencoSection.REVISED_ARCHITECTURE]: {
 		value: LencoSection.REVISED_ARCHITECTURE,
 		title: "The Revised Architecture",
 		lists: null,
-		paragraph:
+		paragraph: [
 			"After conducting extensive competitors' analysis, establishing the business goals by working closely with all key stakeholders, and determining how prospective users categorize information through card sorting session, I went on to revise and redesign the product's information architecture (IA).",
+		],
 	},
 	[LencoSection.THE_REDESIGN]: {
 		value: LencoSection.THE_REDESIGN,
 		title: "The Redesign",
 		lists: null,
-		paragraph:
+		paragraph: [
 			"After all the flows and content struct have been established, I went on create visual interfaces users will find easy to navigate, simple to use, and enjoyable.",
+		],
 	},
 	[LencoSection.THE_REDESIGN]: {
 		value: LencoSection.THE_REDESIGN,
 		title: "The Redesign",
 		lists: null,
-		paragraph:
+		paragraph: [
 			"After all the flows and content struct have been established, I went on create visual interfaces users will find easy to navigate, simple to use, and enjoyable.",
+		],
 	},
 	[LencoSection.TAKEOUT]: {
 		value: LencoSection.TAKEOUT,
 		title: "Takeout",
 		lists: null,
-		paragraph:
+		paragraph: [
 			"A great experience from start to finish with valuable insights from designing a product with improved UX, UI and navigation. Following multiple Guerilla Usability Testing sessions with potential consumers and important stakeholders, necessary iterations were made.",
+		],
 	},
 };

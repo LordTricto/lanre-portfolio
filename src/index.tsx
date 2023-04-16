@@ -4,12 +4,16 @@ import React, {createRef} from "react";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import {enableES5, enableMapSet} from "immer";
 
+import Accrue from "./modules/Accrue/Pages";
 // import Accrue from "./modules/Accrue/Pages";
 import App from "./App";
+import Berger from "./modules/Berger/Pages";
+import Fora from "./modules/Fora/Pages";
 import Home from "./modules/Home/Pages";
 import Lenco from "./modules/Lenco/Pages";
 // import Lenco from "./modules/Lenco/Pages";
 import ReactDOM from "react-dom/client";
+import Ridr from "./modules/Ridr/Pages";
 import reportWebVitals from "./reportWebVitals";
 
 enableMapSet();
@@ -25,6 +29,10 @@ export type RouterRoute = {
 export const routes: RouterRoute[] = [
 	{path: "/", name: "Home", element: <Home />, nodeRef: createRef()},
 	{path: "/lenco", name: "Lenco", element: <Lenco />, nodeRef: createRef()},
+	{path: "/fora", name: "Fora", element: <Fora />, nodeRef: createRef()},
+	{path: "/ridr", name: "Ridr", element: <Ridr />, nodeRef: createRef()},
+	{path: "/accrue", name: "Accrue", element: <Accrue />, nodeRef: createRef()},
+	{path: "/berger", name: "Berger", element: <Berger />, nodeRef: createRef()},
 	{path: "/404", name: "error", element: <h1>hii</h1>, nodeRef: createRef()},
 	// {path: "/accrue", name: "Accrue", element: <Lenco />, nodeRef: createRef()},
 	// {path: "*", name: "Error", element: <Home />, nodeRef: createRef()},

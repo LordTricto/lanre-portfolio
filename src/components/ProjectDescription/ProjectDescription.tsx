@@ -160,23 +160,14 @@ function ProjectDescription(props: Props): JSX.Element {
 
 	return (
 		<>
-			<div
-				className={
-					`${props.customBorderStyle} ` + "flex flex-col justify-start items-start w-full gap-12 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto"
-				}
-				ref={divRef}
-			>
+			<div className="flex flex-col justify-start items-start w-full gap-12 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto" ref={divRef}>
 				<div className="flex flex-col md:flex-row justify-between items-start w-full gap-12 md:gap-2">
-					<span
-						className={`${props.customTitleStyle} gsap-project-title ` + "text-5xl md:text-7xl text-white md:max-w-sm md:leading-[75px]"}
-					>
+					<span className={`${props.customTitleStyle} gsap-project-title ` + "text-5xl md:text-7xl md:max-w-md md:leading-[75px]"}>
 						{props.title}
 					</span>
-					<p className={`${props.customSubTitleStyle} gsap-project-subTitle ` + "text-2xl md:text-3xl text-blue-quat md:max-w-sm"}>
-						{props.subTitle}
-					</p>
+					<p className={`${props.customSubTitleStyle} gsap-project-subTitle ` + "text-2xl md:text-3xl md:max-w-sm"}>{props.subTitle}</p>
 				</div>
-				<div className="gsap-project-border w-full h-0.5 bg-white"></div>
+				<div className={`${props.customBorderStyle} ` + "gsap-project-border w-full h-0.5"}></div>
 				<div className="flex flex-col justify-between items-start w-full gap-24">
 					<div className="flex flex-row justify-start items-start gap-16 w-full">
 						<div className="gsap-project-timeline flex flex-col justify-start items-start">

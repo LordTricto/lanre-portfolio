@@ -14,9 +14,9 @@ import HeaderImgThree from "../../../assets/images/lenco/lenco-header-3.png";
 import HeaderImgTwo from "../../../assets/images/lenco/lenco-header-2.png";
 import HomeScreenImgOne from "../../../assets/images/lenco/lenco-homescreen-1.png";
 import HomeScreenImgTwo from "../../../assets/images/lenco/lenco-homescreen-2.png";
-import MultiPhoneContainer from "../../../components/MultiPhoneContainter/MultiPhoneContainer";
+import MultiPhoneContainer from "../../../components/MultiPhoneContainer/MultiPhoneContainer";
 import Nav from "../../../components/nav/nav";
-import PhoneContainer from "../../../components/PhoneContainter/PhoneContainer";
+import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import PhysicalImgOne from "../../../assets/images/lenco/lenco-physical-1.png";
 import PhysicalImgTwo from "../../../assets/images/lenco/lenco-physical-2.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
@@ -205,14 +205,18 @@ function Lenco(): JSX.Element {
 		<>
 			<Nav />
 			<main
-				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-lenco-bg-dark min-h-screen pb-8 relative overflow-hidden "
+				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-lenco-bg-dark min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
 				ref={landingDivRef}
 			>
 				<div
 					className={
-						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 bg-white-dark ` +
-						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
-						`${location?.from === "/accrue" ? "!bg-accrue-blue" : ""}`
+						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
+						`${location?.from === "/" ? "bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
+						`${location?.from === "/accrue" ? "" : ""}`
 					}
 				></div>
 				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
@@ -221,6 +225,7 @@ function Lenco(): JSX.Element {
 						gsapPrimaryContainerTag="gsap-header-imgs-div"
 						gsapImgOneTag="gsap-header-img-1"
 						gsapImgTwoContainerTag="gsap-header-img-2-div"
+						primaryContainerCustomStyle="bg-white-dark"
 						gsapImgTwoTag="gsap-header-img-2"
 						gsapImgThreeTag="gsap-header-img-3"
 						headerImgOne={HeaderImgOne}
@@ -237,7 +242,7 @@ function Lenco(): JSX.Element {
 									without any hassle."
 						textColorStyle="text-blue-quat"
 						customTitleStyle="text-white"
-						customBorderStyle="border-white"
+						customBorderStyle="bg-white"
 						customSubTitleStyle="text-blue-quat"
 						author="Jef Raskin"
 						quote={
@@ -313,42 +318,32 @@ function Lenco(): JSX.Element {
 							/>
 
 							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-								<div className="lg:w-50% xl:w-60%">
+								<div className="w-full lg:w-50% xl:w-60%">
 									<PhoneContainer
 										title="Homescreen"
 										subTitle='Cards with a "tap to expand" features were used to keep screens as brief as possible.'
 										customTitleStyle="text-accrue-blue"
 										customContainerStyle="bg-white-dark "
-										gsapImageTag="gsap-accrue-img"
-										gsapPrimaryContainerTag="gsap-accrue-primary"
-										gsapSecondaryContainerTag="gsap-accrue-secondary"
 										imgOne={HomeScreenImgOne}
 										imgTwo={HomeScreenImgTwo}
 										imgOneAlt="phone showing app home screen(lenco)"
 										imgTwoAlt="second phone showing home screen(lenco)"
 										isSingle={false}
 										customTextOverlayStyle="bg-white-dark "
-										gsapImgsContainerTag="gsap-accrue-imgs"
-										gsapTextOverlayTag="gsap-accrue-text-overlay"
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>
-								<div className="lg:w-50% xl:w-40%">
+								<div className="w-full lg:w-50% xl:w-40%">
 									<PhoneContainer
 										title="Switch Business"
 										subTitle="Key actions were kept accessible as this was designed with accessibility in mind. Finger-friendly buttons and cards."
 										customTitleStyle="text-white"
 										customSubtitleStyle="text-white"
 										customContainerStyle="bg-fora-blue"
-										gsapImageTag="gsap-fora-img"
-										gsapPrimaryContainerTag="gsap-fora-primary"
-										gsapSecondaryContainerTag="gsap-fora-secondary"
 										imgOne={SwitchBusinessImgOne}
 										imgOneAlt="phone showing app switching business(lenco)"
 										isSingle
 										customTextOverlayStyle="bg-fora-blue"
-										gsapImgsContainerTag="gsap-accrue-imgs"
-										gsapTextOverlayTag="gsap-accrue-text-overlay"
 									/>
 								</div>
 							</div>
@@ -364,8 +359,6 @@ function Lenco(): JSX.Element {
 						customContainerStyle="bg-lenco-bg-xdark w-full"
 						customOverlayStyle="bg-lenco-bg-xdark"
 						// customContainerStyle="bg-white w-full"
-						gsapPrimaryContainerTag="gsap-lenco-primary"
-						gsapSecondaryContainerTag="gsap-lenco-secondary"
 						imgOne={TransactionListImgOne}
 						imgOneAlt="phone showing app switching business(lenco)"
 						imgTwo={TransactionListImgTwo}
@@ -376,42 +369,32 @@ function Lenco(): JSX.Element {
 						imgFourAlt="phone showing app switching business(lenco)"
 					/>
 					<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-						<div className="lg:w-50% xl:w-40%">
+						<div className="w-full lg:w-50% xl:w-40%">
 							<PhoneContainer
 								title="Virtual Cards"
 								subTitle="By removing unnecessary elements, I was able create an interface that draws the user’s attention to what
 											matters most."
 								customTitleStyle="text-accrue-blue"
 								customContainerStyle="bg-white-dark "
-								gsapImageTag="gsap-virtual-img"
-								gsapPrimaryContainerTag="gsap-virtual-primary"
-								gsapSecondaryContainerTag="gsap-virtual-secondary"
 								imgOne={VirtualImgOne}
 								imgOneAlt="phone showing app(lenco-virtual)"
 								isSingle
 								customTextOverlayStyle="bg-white-dark "
-								gsapImgsContainerTag="gsap-accrue-imgs"
-								gsapTextOverlayTag="gsap-accrue-text-overlay"
 							/>
 						</div>
-						<div className="lg:w-50% xl:w-60%">
+						<div className="w-full lg:w-50% xl:w-60%">
 							<PhoneContainer
 								title="Physical Cards"
 								subTitle="Minimalistic and accessible design with a basic call to action and navigation bar."
 								customTitleStyle="text-white"
 								customSubtitleStyle="text-white"
 								customContainerStyle="bg-fora-blue"
-								gsapImageTag="gsap-accrue-img"
-								gsapPrimaryContainerTag="gsap-accrue-primary"
-								gsapSecondaryContainerTag="gsap-accrue-secondary"
 								imgOne={PhysicalImgOne}
 								imgTwo={PhysicalImgTwo}
 								imgOneAlt="phone showing app(lenco-virtual)"
 								imgTwoAlt="second phone showing app(lenco-virtual)"
 								isSingle={false}
 								customTextOverlayStyle="bg-fora-blue "
-								gsapImgsContainerTag="gsap-accrue-imgs"
-								gsapTextOverlayTag="gsap-accrue-text-overlay"
 							/>
 						</div>
 					</div>
@@ -424,8 +407,6 @@ function Lenco(): JSX.Element {
 						customSubtitleStyle="text-blue-quat"
 						customContainerStyle="bg-lenco-bg-xdark w-full"
 						customOverlayStyle="bg-lenco-bg-xdark"
-						gsapPrimaryContainerTag="gsap-lenco-primary"
-						gsapSecondaryContainerTag="gsap-lenco-secondary"
 						imgOne={ReimbursementsListImgOne}
 						imgOneAlt="phone showing app switching business(lenco)"
 						imgTwo={ReimbursementsListImgTwo}

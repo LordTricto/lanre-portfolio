@@ -2,7 +2,7 @@ import {Link, useLocation} from "react-router-dom";
 import React, {useLayoutEffect, useRef} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
-import BigPhoneContainer from "../../../components/BigPhoneContainter/BigPhoneContainer";
+import BigPhoneContainer from "../../../components/BigPhoneContainer/BigPhoneContainer";
 import CircularWords from "../../../components/CircularWords/CircularWords";
 import ContactMe from "../../../components/Lenco/ContactMe/ContactMe";
 import {ReactComponent as DownloadIcon} from "../../../assets/svg/download-icon.svg";
@@ -13,7 +13,7 @@ import ImageThree from "../../../assets/images/img-3.png";
 import ImageTwo from "../../../assets/images/img-2.png";
 import MacContainer from "../../../components/Lenco/MacContainer/MacContainer";
 import Nav from "../../../components/nav/nav";
-import PhoneContainer from "../../../components/PhoneContainter/PhoneContainer";
+import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import PhoneImageFive from "../../../assets/images/phone-img-5.png";
 import PhoneImageFour from "../../../assets/images/phone-img-4.png";
 import PhoneImageOne from "../../../assets/images/phone-img-1.png";
@@ -317,7 +317,10 @@ function Home(): JSX.Element {
 					className={
 						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
 						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/accrue" ? "bg-accrue-blue" : ""}`
+						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
+						`${location?.from === "/accrue" ? "" : ""}`
 					}
 				></div>
 				<section className="relative z-10 w-full overflow-hidden">
@@ -503,11 +506,6 @@ function Home(): JSX.Element {
 										customTitleStyle="text-accrue-blue"
 										customContainerStyle="bg-white"
 										customTextOverlayStyle="bg-white"
-										gsapImageTag="gsap-accrue-img"
-										gsapPrimaryContainerTag="gsap-accrue-primary"
-										gsapSecondaryContainerTag="gsap-accrue-secondary"
-										gsapImgsContainerTag="gsap-accrue-imgs"
-										gsapTextOverlayTag="gsap-accrue-text-overlay"
 										imgOne={PhoneImageThree}
 										imgTwo={PhoneImageFour}
 										imgOneAlt="phone showing app(accrue)"
@@ -527,11 +525,6 @@ function Home(): JSX.Element {
 										customSubtitleStyle="text-white"
 										customContainerStyle="bg-fora-blue"
 										customTextOverlayStyle="bg-fora-blue"
-										gsapImageTag="gsap-fora-img"
-										gsapPrimaryContainerTag="gsap-fora-primary"
-										gsapSecondaryContainerTag="gsap-fora-secondary"
-										gsapImgsContainerTag="gsap-fora-imgs"
-										gsapTextOverlayTag="gsap-fora-text-overlay"
 										imgOne={PhoneImageFive}
 										imgOneAlt="phone showing app(fora)"
 										delay={width > 1279 ? 1 : undefined}
