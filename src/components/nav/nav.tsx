@@ -6,8 +6,6 @@ import {ReactComponent as ArrowDownIcon} from "../../assets/svg/arrowDownIcon.sv
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../hooks/useDimension";
 
-// import useDimension from "../../hooks/useDimension";
-
 gsap.registerPlugin(ScrollTrigger);
 
 function Nav(): JSX.Element {
@@ -25,7 +23,6 @@ function Nav(): JSX.Element {
 	useLayoutEffect(() => {
 		setIsAnimationDone(false);
 		setActiveRoute("");
-		// const timeout = setTimeout(() => setIsAnimationDone(false), width < 547 ? 2000 : 1600);
 		const timeout2 = setTimeout(
 			() => {
 				setIsAnimationDone(true);
@@ -34,7 +31,6 @@ function Nav(): JSX.Element {
 			location.pathname === "/" ? (width > 1023 ? 8000 : 8500) : 6000
 		);
 		return () => {
-			// clearTimeout(timeout);
 			clearTimeout(timeout2);
 		};
 	}, []);
@@ -50,16 +46,11 @@ function Nav(): JSX.Element {
 
 	const timeline1 = useCallback(() => {
 		tl.current = gsap.timeline();
-		tl.current.to(
-			".gsap-nav-overlay-div",
-			{
-				translateY: 0,
-				ease: Circ.easeOut,
-				duration: 1.5,
-				// delay: "2",
-			}
-			// tl.current.reversed() ? "=+10" : "=+10"
-		);
+		tl.current.to(".gsap-nav-overlay-div", {
+			translateY: 0,
+			ease: Circ.easeOut,
+			duration: 1.5,
+		});
 		tl.current.to(
 			".gsap-nav-link-one",
 			{
@@ -139,7 +130,6 @@ function Nav(): JSX.Element {
 				from: location.pathname || "",
 			},
 		});
-		// console.log(location.pathname);
 	}, []);
 
 	const handleGoLenco = useCallback(() => {
@@ -148,7 +138,6 @@ function Nav(): JSX.Element {
 				from: location.pathname || "",
 			},
 		});
-		// console.log(location.pathname);
 	}, []);
 	const handleGoAccure = useCallback(() => {
 		navigate("/accrue", {
@@ -182,24 +171,13 @@ function Nav(): JSX.Element {
 
 	return (
 		<div ref={navDivRef}>
-			{/* className=
-			{
-				`h-screen w-full `
-				+
-				`transition-all duration-1000  `
-				+
-				`${isNavOpen ? "bg-black" : ""}` +
-				`${!isNavOpen && location.pathname === "/" ? "bg-white-dark" : ""} ` +
-				`${!isNavOpen && location.pathname.includes("/lenco") ? "bg-lenco-bg-dark" : ""} ` +
-				`${!isNavOpen && location.pathname.includes("/lenco") ? "bg-lenco-bg-dark" : ""} `
-			} */}
 			<nav className="fixed flex flex-row justify-center items-center h-[60px] w-full z-30">
 				<div
 					className={
 						`flex flex-row justify-between items-center w-full max-w-7xl mx-auto px-4 2xs:px-8 lg:px-16 transition-opacity duration-300 ` +
 						`${!isAnimationDone ? "opacity-0 pointer-events-none" : ""} ` +
 						`${isAnimationDone && activeRoute === "/" ? "text-black " : ""} ` +
-						`${isAnimationDone && activeRoute.includes("/lenco") ? "text-white" : ""} `
+						`${isAnimationDone && (activeRoute.includes("/lenco") || activeRoute.includes("/ridr")) ? "text-white" : ""} `
 					}
 				>
 					<span className="uppercase 2xs:text-lg lg:text-xl cursor-pointer" onClick={handleGoHome}>
@@ -275,28 +253,18 @@ function Nav(): JSX.Element {
 				</div>
 			</nav>
 
-			<div
-				className={
-					// `gsap-nav-overlay-div ` +
-					`fixed top-0 left-0` +
-					`lg:hidden h-screen w-full z-20 ` +
-					//  +
-					// `lg:hidden h-[110vh] w-full z-20 transition-opacity duration-1000 -translate-y-100% ` +
-					// `${activeRoute === "/" ? "black-gradient-top-down-home" : ""} ` +
-					// `${activeRoute.includes("/lenco") ? "black-gradient-top-down-lenco" : ""} `
-					// +
-					// `${activeRoute.includes("/lenco") ? "bg-lenco-bg-dark" : ""} `
-					// `lg:hidden h-full w-full z-20 bg-black transition-opacity duration-1000  ` +
-					`${isNavOpen ? "" : "pointer-events-none"}`
-				}
-			>
+			<div className={`fixed top-0 left-0` + `lg:hidden h-screen w-full z-20 ` + `${isNavOpen ? "" : "pointer-events-none"}`}>
 				<div
 					className={
 						`gsap-nav-overlay-div ` +
 						`absolute left-0 ` +
 						`lg:hidden h-[110vh] w-full z-10 transition-opacity duration-1000 -translate-y-100% ` +
 						`${activeRoute === "/" ? "black-gradient-top-down-home" : ""} ` +
-						`${activeRoute.includes("/lenco") ? "black-gradient-top-down-lenco" : ""} `
+						`${activeRoute.includes("/lenco") ? "black-gradient-top-down-lenco" : ""} ` +
+						`${activeRoute.includes("/accrue") ? "black-gradient-top-down-accrue" : ""} ` +
+						`${activeRoute.includes("/fora") ? "black-gradient-top-down-fora" : ""} ` +
+						`${activeRoute.includes("/ridr") ? "black-gradient-top-down-ridr" : ""} ` +
+						`${activeRoute.includes("/berger") ? "black-gradient-top-down-berger" : ""} `
 					}
 				></div>
 				<ul
@@ -315,11 +283,7 @@ function Nav(): JSX.Element {
 						}
 					>
 						<div
-							className={
-								`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-one `
-								// +
-								// `${isNavOpen ? "top-0" : "top-14 "}`
-							}
+							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-one `}
 						>
 							<span
 								className={`${
@@ -343,11 +307,7 @@ function Nav(): JSX.Element {
 						}
 					>
 						<div
-							className={
-								`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-two `
-								// +
-								// `${isNavOpen ? "top-0" : "top-14 "}`
-							}
+							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-two `}
 						>
 							<span
 								className={`${
@@ -371,11 +331,7 @@ function Nav(): JSX.Element {
 						}
 					>
 						<div
-							className={
-								`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-three `
-								// +
-								// `${isNavOpen ? "top-0" : "top-14 "}`
-							}
+							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-three `}
 						>
 							<span
 								className={`${
@@ -399,11 +355,7 @@ function Nav(): JSX.Element {
 						}
 					>
 						<div
-							className={
-								`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-four `
-								// +
-								// `${isNavOpen ? "top-0" : "top-14 "}`
-							}
+							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-four `}
 						>
 							<span
 								className={`${
@@ -427,11 +379,7 @@ function Nav(): JSX.Element {
 						}
 					>
 						<div
-							className={
-								`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-five `
-								// +
-								// `${isNavOpen ? "top-0" : "top-14 "}`
-							}
+							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-five `}
 						>
 							<span
 								className={`${

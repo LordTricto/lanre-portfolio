@@ -2,7 +2,6 @@ import {ForaSection, ForaSections} from "../Services/fora.constant";
 import React, {useLayoutEffect, useRef} from "react";
 import gsap, {Circ, Power4} from "gsap";
 
-import ClosePage from "../../../components/ClosePage/ClosePage";
 import ExploreImgOne from "../../../assets/images/fora/fora-explore-1.png";
 import ExploreImgTwo from "../../../assets/images/fora/fora-explore-2.png";
 import HeaderContainer from "../../../components/HeaderContainer/HeaderContainer";
@@ -32,11 +31,9 @@ type LocationState = {
 };
 
 function Fora(): JSX.Element {
-	// const {width} = useDimension();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
-	const tl4 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
 
@@ -50,7 +47,8 @@ function Fora(): JSX.Element {
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
-				tl4.current?.scrollTrigger?.refresh();
+				tl2.current?.scrollTrigger?.refresh();
+				tl3.current?.scrollTrigger?.refresh();
 			}, 7000);
 
 			tl.current = gsap.timeline();
@@ -80,7 +78,6 @@ function Fora(): JSX.Element {
 				margin: 0,
 				duration: 1,
 			});
-			// tl.current.pause(4);
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
 				transitionDuration: 1,
 				duration: 0,
@@ -123,68 +120,32 @@ function Fora(): JSX.Element {
 				scrollTrigger: {
 					trigger: `.gsap-assessing-phone-imgs`,
 					start: "top center",
-					// markers: true,
-					// toggleActions: "restart none none reverse",
 				},
 			});
 
-			tl2.current.from(
-				`.gsap-assessing-phone-imgs img`,
-				{
-					opacity: "0",
-					translateY: "5%",
-					duration: 0.5,
-					stagger: 0.5,
-					ease: Power4.easeOut,
-					clearProps: "opacity,translateY",
-				}
-				// "<+=0.5"
-			);
+			tl2.current.from(`.gsap-assessing-phone-imgs img`, {
+				opacity: "0",
+				translateY: "5%",
+				duration: 0.5,
+				stagger: 0.5,
+				ease: Power4.easeOut,
+				clearProps: "opacity,translateY",
+			});
 
 			tl3.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.gsap-revised-phone-imgs`,
 					start: "top top+=300px",
-					// markers: true,
-					// toggleActions: "restart none none reverse",
 				},
 			});
 
-			tl3.current.from(
-				`.gsap-revised-phone-imgs img`,
-				{
-					opacity: "0",
-					translateY: "10%",
-					duration: 1,
-					// stagger: 0.25,
-					ease: Circ.easeOut,
-					clearProps: "opacity,translateY",
-				}
-				// "<+=0.5"
-			);
-
-			//close section
-			tl4.current = gsap.timeline({
-				scrollTrigger: {
-					trigger: `.gsap-takeout-section`,
-					start: "top center",
-					// markers: true,
-					// toggleActions: "restart none none reverse",
-				},
+			tl3.current.from(`.gsap-revised-phone-imgs img`, {
+				opacity: "0",
+				translateY: "10%",
+				duration: 1,
+				ease: Circ.easeOut,
+				clearProps: "opacity,translateY",
 			});
-
-			tl4.current.from(
-				`.gsap-close-section`,
-				{
-					opacity: 0,
-					duration: 0.5,
-					translateX: "5%",
-					clearProps: "opacity,translateX",
-				},
-				"1.75"
-			);
-
-			// gsap-assessing-phone-section
 		}, landingDivRef);
 
 		return () => {
@@ -387,7 +348,7 @@ function Fora(): JSX.Element {
 							</div>
 						</div>
 					</div>
-					<div className="gsap-takeout-section flex flex-col justify-start items-start w-full gap-8 pb-0 lg:pb-8 xl:pb-0 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+					<div className="flex flex-col justify-start items-start w-full pb-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 						<Sections
 							type={ForaSections[ForaSection.TAKEOUT].value}
 							lists={ForaSections[ForaSection.TAKEOUT].lists}
@@ -395,16 +356,12 @@ function Fora(): JSX.Element {
 							title={ForaSections[ForaSection.TAKEOUT].title}
 							titleStyle="text-black"
 							paragraphStyle="text-fora-black-secondary"
+							withCloseSection
 						/>
-					</div>
-					<div className=" w-full flex justify-end items-end px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto overflow-hidden">
-						<div className="gsap-close-section w-full flex justify-end items-end">
-							<ClosePage link="/" customCloseStyle="text-fora" />
-						</div>
 					</div>
 				</div>
 				<div
-					className={`gsap-page-departure-transition-div left-right-lenco-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
+					className={`gsap-page-departure-transition-div left-right-fora-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
 				></div>
 			</main>
 		</>

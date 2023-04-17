@@ -115,7 +115,8 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 				<div
 					className={
 						`gsap-${props.type}-side-image-no-section ` +
-						`px-4 2xs:px-8 lg:px-16 w-full h-[730px] lg:h-[800px] xl:w-[80rem] mx-auto overflow-hidden relative `
+						`px-4 2xs:px-8 lg:px-16 w-full h-max xl:w-[80rem] mx-auto overflow-hidden relative `
+						// `px-4 2xs:px-8 lg:px-16 w-full h-[730px] lg:h-[800px] xl:w-[80rem] mx-auto overflow-hidden relative `
 					}
 				>
 					<div

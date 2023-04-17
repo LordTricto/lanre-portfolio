@@ -16,7 +16,7 @@ function App(): JSX.Element {
 	const specificRoute = routes.find((route) => route.path === location.pathname || route.path === "404");
 	const onExiting = () => {
 		gsap.to(specificRoute?.nodeRef.current?.lastChild?.lastChild || "", {
-			left: width < 547 ? "-5rem" : 0,
+			left: "-5rem",
 			duration: width < 547 ? 2 : 1.6,
 			ease: Power1.easeOut,
 		});

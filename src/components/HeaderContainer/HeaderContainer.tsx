@@ -10,6 +10,7 @@ interface Props {
 	gsapHeaderContainerTag: string;
 	gsapPrimaryContainerTag: string;
 	primaryContainerCustomStyle: string;
+	gsapImgOneContainerTag?: string;
 	gsapImgOneTag: string;
 	gsapImgTwoTag: string;
 	gsapImgTwoContainerTag: string;
@@ -39,11 +40,17 @@ function HeaderContainer(props: Props): JSX.Element {
 				>
 					{props.isSingle && (
 						<>
-							<div className="absolute left-0 top-0 right-0 bottom-0 m-auto flex justify-center items-center">
+							<div
+								className={
+									"absolute left-0 top-0 right-0 bottom-0 m-auto flex justify-center items-center " +
+									`${props.gsapImgOneContainerTag || ""}`
+								}
+							>
 								<img
 									// className={`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[320px] lg:!h-[520px] xl:!h-[660px] `}
 									className={
-										`h-[180px] xs:h-[220px] sm:h-[270px] md:!h-[370px] lg:!h-[480px] xl:!h-[600px] mt-24 md:mt-36  ` +
+										`h-[180px] xs:h-[220px] sm:h-[270px] md:!h-[370px] lg:!h-[480px] xl:!h-[600px] .gsap-header-img-1 ` +
+										// `absolute top-0 left-0 right-0 bottom-0 m-auto ` +
 										`${props.gsapImgOneTag}`
 									}
 									src={props.headerImgOne}

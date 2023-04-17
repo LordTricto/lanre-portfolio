@@ -52,8 +52,8 @@ export const BergerSections: {
 		value: BergerSection.COMPETITIVE_ANALYSIS,
 		title: "Competitive Analysis",
 		lists: null,
-		paragraph: null,
-		paragraphWithSideIcon: [
+		// paragraph: null,
+		paragraph: [
 			"Research on some of the direct and indirect competitors were carried out. During this research, insights on some of their weaknesses were gathered. Some of these competitors are Dulux (CAP Plc), Portland Paint Nigeria, Meyer Paint, PPG, Eagles Paint. Below are key insights from the competitive analysis.",
 		],
 	},

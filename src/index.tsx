@@ -1,7 +1,7 @@
 import "./index.css";
 
+import {Navigate, RouterProvider, createBrowserRouter} from "react-router-dom";
 import React, {createRef} from "react";
-import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import {enableES5, enableMapSet} from "immer";
 
 import Accrue from "./modules/Accrue/Pages";
@@ -33,7 +33,21 @@ export const routes: RouterRoute[] = [
 	{path: "/ridr", name: "Ridr", element: <Ridr />, nodeRef: createRef()},
 	{path: "/accrue", name: "Accrue", element: <Accrue />, nodeRef: createRef()},
 	{path: "/berger", name: "Berger", element: <Berger />, nodeRef: createRef()},
-	{path: "/404", name: "error", element: <h1>hii</h1>, nodeRef: createRef()},
+	{
+		path: "/404",
+		name: "error",
+		element: (
+			<div className="flex justify-center items-center h-screen w-full">
+				<div className="flex justify-start items-stretch gap-2 w-full">
+					<div className="flex-grow flex- w-2 bg-pink-200"></div>
+					<div className="text-base">
+						lfjasdfasdfasd fjasdjf;aksdfksdjfklasdjflkasd;flakljf;lkasdjf;kldsjf;kasjdf;kljasd;fkljas;dklfja;skdlfja;lksdjf;kasdjf
+					</div>
+				</div>
+			</div>
+		),
+		nodeRef: createRef(),
+	},
 	// {path: "/accrue", name: "Accrue", element: <Lenco />, nodeRef: createRef()},
 	// {path: "*", name: "Error", element: <Home />, nodeRef: createRef()},
 ];
@@ -50,7 +64,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "*",
-		element: <h1>hii</h1>,
+		element: <Navigate to="/" />,
 	},
 ]);
 

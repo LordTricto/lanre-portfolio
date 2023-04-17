@@ -3,6 +3,7 @@ import gsap, {Circ} from "gsap";
 
 import {AccrueSection} from "../../modules/Accrue/Services/accrue.constant";
 import {BergerSection} from "../../modules/Berger/Services/berger.constant";
+import ClosePage from "../ClosePage/ClosePage";
 import {ForaSection} from "../../modules/Fora/Services/fora.constant";
 // import useDimension from "../../hooks/useDimension";
 import {LencoSection} from "../../modules/Lenco/Services/lenco.constant";
@@ -26,6 +27,7 @@ interface Props {
 	paragraphWithSideIconStyle?: string | undefined;
 
 	smallText?: boolean;
+	withCloseSection?: boolean;
 }
 
 function Sections(props: Props): JSX.Element {
@@ -70,7 +72,7 @@ function Sections(props: Props): JSX.Element {
 						">"
 					);
 				}
-				if (props.paragraph) {
+				if (props.paragraph || props.paragraphWithSideIcon) {
 					tl.current.from(
 						`.gsap-${props.type}-paragraph p`,
 						{
@@ -92,6 +94,18 @@ function Sections(props: Props): JSX.Element {
 							stagger: 0.25,
 							ease: Circ.easeOut,
 							clearProps: "opacity",
+						},
+						">"
+					);
+				}
+				if (props.withCloseSection) {
+					tl.current.from(
+						`.gsap-close-section`,
+						{
+							opacity: 0,
+							duration: 0.5,
+							translateX: "5%",
+							clearProps: "opacity,translateX",
 						},
 						">"
 					);
@@ -128,18 +142,20 @@ function Sections(props: Props): JSX.Element {
 				</h2>
 
 				{(props.paragraph || props.lists || props.paragraphWithSideIcon) && (
-					<div className={`flex flex-col justify-start items-start w-full` + `${props.paragraph && props.lists ? "" : "gap-8"}`}>
+					<div className={`flex flex-col justify-start items-start w-full ` + `${props.paragraph && props.lists ? "" : "gap-8"}`}>
 						{props.paragraph && (
 							<div
 								className={
 									`gsap-${props.type}-paragraph ${props.paragraphStyle || ""} ` +
 									`${props.smallText ? "text-sm 2xs:text-base lg:text-lg" : ""} ` +
 									`${!props.smallText ? "text-base 2xs:text-lg lg:text-xl" : ""} ` +
-									"flex flex-col justify-start items-start gap-6 "
+									"flex flex-col justify-start items-start gap-6 w-full "
 								}
 							>
 								{props.paragraph.map((_list, index) => (
-									<p key={index}>{_list}</p>
+									<p className="text-left whitespace-normal break-words max-w-full" key={index}>
+										{_list}
+									</p>
 								))}
 							</div>
 						)}
@@ -160,15 +176,21 @@ function Sections(props: Props): JSX.Element {
 						)}
 
 						{props.paragraphWithSideIcon && (
-							<div className="flex flex-col justify-start items-start gap-6">
+							<div className="flex flex-col justify-start items-start gap-6 w-full">
 								{props.paragraphWithSideIcon.map((_list, index) => (
-									<div className={"grid grid-cols-[auto_1fr] gap-6 " + ` gsap-${props.type}-paragraph`} key={index}>
-										<div className={"h-full w-1  " + ` gsap-${props.type}-side-icon ${props.paragraphSideIconStyle || ""}`}></div>
+									<div className={"flex justify-start items-stretch w-full gap-6 " + ` gsap-${props.type}-paragraph`} key={index}>
+										<div
+											className={
+												"flex-grow w-full max-w-[0.25rem]  " +
+												` gsap-${props.type}-side-icon ${props.paragraphSideIconStyle || ""}`
+											}
+										></div>
 										<p
 											className={
 												` ${props.paragraphWithSideIconStyle || ""} ` +
 												`${props.smallText ? "text-sm 2xs:text-base lg:text-lg" : ""} ` +
-												`${!props.smallText ? "text-base 2xs:text-lg lg:text-xl" : ""} `
+												`${!props.smallText ? "text-base 2xs:text-lg lg:text-xl" : ""} ` +
+												"text-left whitespace-normal break-words max-w-full"
 											}
 											key={index}
 										>
@@ -178,6 +200,14 @@ function Sections(props: Props): JSX.Element {
 								))}
 							</div>
 						)}
+					</div>
+				)}
+
+				{props.withCloseSection && (
+					<div className="flex justify-end items-end w-full pt-32 px-4 overflow-hidden">
+						<div className="gsap-close-section w-full flex justify-end items-end">
+							<ClosePage link="/" customCloseStyle={props.titleStyle || ""} />
+						</div>
 					</div>
 				)}
 			</div>

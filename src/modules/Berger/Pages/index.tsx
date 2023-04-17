@@ -2,7 +2,6 @@ import {BergerSection, BergerSections} from "../Services/berger.constant";
 import React, {useLayoutEffect, useRef} from "react";
 
 import CardOfCards from "../../../components/CardOfCards/CardOfCards";
-import ClosePage from "../../../components/ClosePage/ClosePage";
 import CustomBGImageContainer from "../../../components/CustomBGImageContainer/CustomerBGImageContainer";
 import DesignImgOne from "../../../assets/images/berger/berger-design-1.png";
 import DesignImgThree from "../../../assets/images/berger/berger-design-3.png";
@@ -34,10 +33,9 @@ type LocationState = {
 };
 
 function Berger(): JSX.Element {
-	const {width} = useDimension();
+	const {height, width} = useDimension();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
-	const tl3 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
 
@@ -52,7 +50,6 @@ function Berger(): JSX.Element {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
 				tl2.current?.scrollTrigger?.refresh();
-				tl3.current?.scrollTrigger?.refresh();
 			}, 7000);
 
 			tl.current = gsap.timeline();
@@ -105,36 +102,11 @@ function Berger(): JSX.Element {
 				},
 				"<"
 			);
-			tl.current.from(
-				".gsap-header-img-1",
-				{
-					margin: 0,
-					duration: 1,
-				},
-				"<+=0.6"
-			);
 
-			//close section
-			tl2.current = gsap.timeline({
-				scrollTrigger: {
-					trigger: `.gsap-takeout-section`,
-					start: "top center",
-				},
-			});
-
-			tl2.current.from(
-				`.gsap-close-section`,
-				{
-					opacity: 0,
-					duration: 0.5,
-					translateX: "5%",
-					clearProps: "opacity,translateX",
-				},
-				"1.75"
-			);
+			tl.current.to(".gsap-header-img-1", {translateY: width > 768 ? "20%" : "5%", duration: 1}, "<+=0.6");
 
 			// project goals
-			tl3.current = gsap.timeline({
+			tl2.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: ".gsap-goals",
 					start: "top center",
@@ -142,7 +114,7 @@ function Berger(): JSX.Element {
 			});
 
 			if (width > 767) {
-				tl3.current.from(".gsap-goals", {
+				tl2.current.from(".gsap-goals", {
 					width: "100%",
 					borderRadius: 0,
 					padding: 0,
@@ -151,7 +123,7 @@ function Berger(): JSX.Element {
 					clearProps: "width,padding,borderRadius",
 				});
 
-				tl3.current.from(
+				tl2.current.from(
 					".gsap-goals-primary",
 					{
 						borderRadius: 0,
@@ -161,7 +133,7 @@ function Berger(): JSX.Element {
 					"<"
 				);
 			} else {
-				tl3.current.from(".gsap-goals", {
+				tl2.current.from(".gsap-goals", {
 					opacity: 0,
 					duration: 1,
 					translateY: "10%",
@@ -174,7 +146,7 @@ function Berger(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, []);
-
+	console.log(height);
 	return (
 		<>
 			<Nav />
@@ -197,6 +169,7 @@ function Berger(): JSX.Element {
 					<HeaderContainer
 						gsapHeaderContainerTag="gsap-header-section"
 						gsapPrimaryContainerTag="gsap-header-imgs-div"
+						gsapImgOneContainerTag="gsap-header-img-1-container"
 						gsapImgOneTag="gsap-header-img-1"
 						gsapImgTwoContainerTag="gsap-header-img-2-div"
 						primaryContainerCustomStyle="bg-white"
@@ -494,7 +467,7 @@ function Berger(): JSX.Element {
 							// smallText
 						/>
 					</div>
-					<div className="gsap-takeout-section flex flex-col justify-start items-start w-full pb-0 lg:pb-8 xl:pb-0 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+					<div className="flex flex-col justify-start items-start w-full pb-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 						<Sections
 							type={BergerSections[BergerSection.ITERATIONS].value}
 							lists={BergerSections[BergerSection.ITERATIONS].lists}
@@ -502,16 +475,12 @@ function Berger(): JSX.Element {
 							title={BergerSections[BergerSection.ITERATIONS].title}
 							titleStyle="text-black"
 							paragraphStyle="text-black"
+							withCloseSection
 						/>
-					</div>
-					<div className=" w-full flex justify-end items-end px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto overflow-hidden">
-						<div className="gsap-close-section w-full flex justify-end items-end">
-							<ClosePage link="/" customCloseStyle="text-black" />
-						</div>
 					</div>
 				</div>
 				<div
-					className={`gsap-page-departure-transition-div left-right-lenco-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
+					className={`gsap-page-departure-transition-div left-right-berger-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
 				></div>
 			</main>
 		</>
