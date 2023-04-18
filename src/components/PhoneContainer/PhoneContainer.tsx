@@ -218,7 +218,7 @@ function PhoneContainer(props: Props): JSX.Element {
 					{isSingle && (
 						<div
 							className={
-								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12  w-full ` +
+								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-7 md:px-14 w-full ` +
 								`gsap-primary-container-tag ` +
 								`${props.customContainerStyle} `
 							}
@@ -291,7 +291,7 @@ function PhoneContainer(props: Props): JSX.Element {
 					{!isSingle && (
 						<div
 							className={
-								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-6 md:px-12 w-full ` +
+								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-7 md:px-14 w-full ` +
 								`gsap-primary-container-tag ` +
 								`${props.customContainerStyle} `
 							}

@@ -26,7 +26,7 @@ function CircularWords(props: Props): JSX.Element {
 		<>
 			<div
 				className={
-					"lg:absolute z-30 origin-center lg:-translate-x-2/4 lg:-translate-y-2/4 pointer-events-none " +
+					"lg:absolute z-20 origin-center lg:-translate-x-2/4 lg:-translate-y-2/4 pointer-events-none " +
 					`${props.circularWordsCustomStyle || ""}`
 				}
 				style={{

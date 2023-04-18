@@ -15,6 +15,7 @@ interface Props {
 	imgOneAlt: string;
 
 	// gsapImageTag: string;
+	customMainContainerStyle?: string;
 	customContainerStyle: string;
 	customSecondaryContainerStyle?: string | undefined;
 	customTitleStyle: string;
@@ -131,7 +132,8 @@ function SideImageContainer(props: Props): JSX.Element {
 				<div
 					className={
 						`gsap-${props.type}-side-image ` +
-						`px-4 2xs:px-8 lg:px-16 w-full h-[730px] lg:h-[800px] xl:w-[80rem] mx-auto overflow-hidden relative `
+						`px-4 2xs:px-8 lg:px-16 w-full h-[730px] lg:h-[800px] xl:w-[80rem] mx-auto overflow-hidden relative ` +
+						`${props.customMainContainerStyle || ""}`
 					}
 				>
 					<div

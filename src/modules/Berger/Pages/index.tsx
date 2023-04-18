@@ -33,7 +33,7 @@ type LocationState = {
 };
 
 function Berger(): JSX.Element {
-	const {height, width} = useDimension();
+	const {width} = useDimension();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
@@ -103,7 +103,7 @@ function Berger(): JSX.Element {
 				"<"
 			);
 
-			tl.current.to(".gsap-header-img-1", {translateY: width > 768 ? "20%" : "5%", duration: 1}, "<+=0.6");
+			tl.current.to(".gsap-header-img-1", {translateY: width > 768 ? "20%" : "20%", duration: 1}, "<+=0.6");
 
 			// project goals
 			tl2.current = gsap.timeline({
@@ -113,7 +113,7 @@ function Berger(): JSX.Element {
 				},
 			});
 
-			if (width > 767) {
+			if (width > 1023) {
 				tl2.current.from(".gsap-goals", {
 					width: "100%",
 					borderRadius: 0,
@@ -146,7 +146,7 @@ function Berger(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, []);
-	console.log(height);
+
 	return (
 		<>
 			<Nav />
@@ -210,7 +210,7 @@ function Berger(): JSX.Element {
 					</div>
 
 					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-">
 							<Sections
 								type={BergerSections[BergerSection.THE_RESEARCH].value}
 								lists={BergerSections[BergerSection.THE_RESEARCH].lists}
@@ -229,10 +229,11 @@ function Berger(): JSX.Element {
 							customTitleStyle="text-berger-purple-deep"
 							customSubtitleStyle="text-black"
 							customContainerStyle="bg-white w-full"
+							customMainContainerStyle="h-[550px] xs:h-[630px] md:h-[730px] lg:h-[800px]"
 							customOverlayStyle="bg-white"
 							imgOne={UserInterviewImgOne}
 							imgOneAlt="image showing user interview flow(berger)"
-							customImageStyle="-bottom-20 left-36  "
+							customImageStyle="-bottom-6 2xs:-bottom-8 sm:-bottom-14 md:-bottom-16 lg:-bottom-20 -right-32 2xs:-right-36 lg:-right-44 min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[800px] lg:min-w-[1000px] xl:min-w-[1000px] "
 						/>
 					</div>
 
@@ -323,7 +324,7 @@ function Berger(): JSX.Element {
 
 						<div className="gsap-goals px-4 2xs:px-8 lg:px-16 !pb-0 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
 							<div className="gsap-goals-primary w-full h-full bg-black rounded-3xl">
-								<div className="flex flex-col justify-start items-start w-full gap-16 py-12 md:py-16 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+								<div className="flex flex-col justify-start items-start w-full gap-16 py-12 md:py-16 px-7 md:px-14 max-w-7xl mx-auto">
 									<Sections
 										type={BergerSections[BergerSection.PROJECT_GOALS].value}
 										lists={BergerSections[BergerSection.PROJECT_GOALS].lists}
@@ -371,7 +372,7 @@ function Berger(): JSX.Element {
 					</div>
 
 					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto -right-">
 							<Sections
 								type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
 								lists={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].lists}
@@ -387,11 +388,11 @@ function Berger(): JSX.Element {
 							imgOneAlt="Image showing the information architecture"
 							imgTwo={UserFlowImgTwo}
 							imgTwoAlt="Image showing the user flow"
-							customContainerStyle="bg-white"
-							customImageOneContainerStyle="-bottom-20 sm:-bottom-28 -right-80 z-10"
-							customImageOneStyle="lg:h-[780px] xl:h-[780px]"
-							customImageTwoContainerStyle="-bottom-20 sm:-bottom-44 left-16"
-							customImageTwoStyle="lg:h-[780px] xl:h-[780px]"
+							customContainerStyle="bg-white h-[550px] xs:h-[630px] md:h-[730px] lg:h-[800px]"
+							customImageOneContainerStyle="-bottom-40 sm:-bottom-28 -right-[30rem] sm:-right-[26rem] md:-right-80 z-10"
+							customImageOneStyle="max-w-[700px] sm:max-w-[800px] lg:max-w-[850px]"
+							customImageTwoContainerStyle="-bottom-52 sm:-bottom-44 left-4 2xs:left-8 sm:left-16"
+							customImageTwoStyle="min-w-[700px] max-w-[700px] sm:min-w-[800px] sm:max-w-[800px] lg:max-w-[850px]"
 							isSingle={false}
 						/>
 					</div>
@@ -414,30 +415,31 @@ function Berger(): JSX.Element {
 							customTitleStyle="text-berger-purple"
 							customSubtitleStyle="text-black"
 							customContainerStyle="bg-berger-purple-light w-full"
+							customMainContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px]"
 							customOverlayStyle="bg-berger-purple-light"
 							imgOne={ExploreImgOne}
 							imgOneAlt="Image showing color palettes used for the website"
-							customImageStyle="h-[520px] lg:h-[540px] xl:h-[560px] -bottom-2 -right-36"
+							customImageStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[600px] md:min-w-[700px] lg:min-w-[850px] xl:min-w-[900px] xl:max-w-[900px] -bottom-2 -right-36"
 						/>
 
 						<SideImageWithNoSectionContainer
 							type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
 							imgOne={DesignImgOne}
 							imgOneAlt="Second image showing color palettes used for the website"
-							customContainerStyle="bg-white"
+							customContainerStyle="bg-white h-[300px] xs:h-[450px] md:h-[600px] lg:h-[800px]"
 							customImageOneContainerStyle="!relative flex justify-center items-center"
-							customImageOneStyle="h-[520px] lg:h-[780px] xl:h-[780px]"
+							customImageOneStyle="w-full"
 							animateFromBottom
 							isSingle
 						/>
 
-						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-1">
 							<div className="w-full lg:w-1/2">
 								<CustomBGImageContainer
 									imgOne={DesignImgTwo}
 									imgOneAlt="Image showing two people having two separate calls"
-									customImgOneStyle="h-[520px] g:h-[540px] xl:h-[560px] "
-									customContainerStyle="bg-berger-pink-light flex justify-center items-center"
+									customImgOneStyle="h-[500px] 2xs:h-[520px] lg:h-[540px] xl:h-[560px] "
+									customContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
 									customBackgroundImage={""}
 									animateFromBottom
 								/>
@@ -446,8 +448,8 @@ function Berger(): JSX.Element {
 								<CustomBGImageContainer
 									imgOne={DesignImgThree}
 									imgOneAlt="Image showing a location in a map"
-									customImgOneStyle="h-[760px] lg:h-[780px] xl:h-[800px] left-24 top-24"
-									customContainerStyle="bg-berger-pink-light flex justify-center items-center"
+									customImgOneStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[750px] lg:min-w-[500px] xl:min-w-[560px] 2xs:max-w-[600px] sm:min-w-[750px] md:min-w-[850px] lg:max-w-[600px] xl:max-w-[660px] left-16 top-36 2xs:left-24 2xs:top-24"
+									customContainerStyle="h-[600px] sm:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
 									customBackgroundImage={DesignImgThreeBG}
 									// animateFromBottom
 								/>

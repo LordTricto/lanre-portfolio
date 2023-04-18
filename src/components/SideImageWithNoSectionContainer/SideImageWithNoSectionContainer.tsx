@@ -122,11 +122,11 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 					<div
 						className={
 							`gsap-${props.type}-side-image-no-section-primary ` +
-							`flex flex-col justify-start items-start gsap-${props.type}-side-image-no-section-primary h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] rounded-3xl w-full ` +
+							`flex flex-col justify-start items-start gsap-${props.type}-side-image-no-section-primary rounded-3xl w-full ` +
 							`${props.customContainerStyle} `
 						}
 					>
-						<div className="flex flex-col justify-start items-start h-full w-full relative overflow-hidden ">
+						<div className="flex flex-col justify-center items-center h-full w-full relative overflow-hidden ">
 							{props.isSingle && (
 								<div
 									className={
@@ -134,9 +134,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 									}
 								>
 									<img
-										className={
-											"origin-top object-contain " + "lg:h-[600px] xl:h-[700px] w-full " + `${props.customImageOneStyle || ""}`
-										}
+										className={"origin-top object-contain " + "w-full " + `${props.customImageOneStyle || ""}`}
 										src={props.imgOne}
 										alt={props.imgOneAlt}
 									/>
@@ -152,11 +150,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 										}
 									>
 										<img
-											className={
-												"origin-top object-contain " +
-												"lg:h-[600px] xl:h-[700px] w-full " +
-												`${props.customImageOneStyle || ""}`
-											}
+											className={"origin-top object-contain " + " w-full " + `${props.customImageOneStyle || ""}`}
 											src={props.imgOne}
 											alt={props.imgOneAlt}
 										/>
@@ -169,11 +163,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 										}
 									>
 										<img
-											className={
-												"origin-top object-contain " +
-												"lg:h-[600px] xl:h-[700px] w-full " +
-												`${props.customImageTwoStyle || ""}`
-											}
+											className={"origin-top object-contain " + " w-full " + `${props.customImageTwoStyle || ""}`}
 											src={props.imgTwo}
 											alt={props.imgTwoAlt}
 										/>

@@ -88,29 +88,37 @@ function CardOfCards(): JSX.Element {
 
 	return (
 		<>
-			<div className="w-full" ref={phoneRef}>
+			<div className="w-full h-full" ref={phoneRef}>
 				<div className="gsap-card-primary px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto relative rounded-3xl">
 					<div className="w-full relative">
 						<img className="gsap-card-primary-bg h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
 						<div className="gsap-card-primary-images flex justify-start items-start flex-wrap gap-5 w-full px-7 md:px-14 py-8 md:py-12 ">
 							<div className="flex justify-start items-start flex-wrap gap-5 w-full">
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">No clear Call-to-Action</div>
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
+									No clear Call-to-Action
+								</div>
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
 									Lack of consistency (Product Image)
 								</div>
 							</div>
 							<div className="flex justify-start items-start flex-wrap gap-5 w-full">
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">No product suggestions</div>
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
+									No product suggestions
+								</div>
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
 									Difficulty in navigating through the website
 								</div>
 							</div>
 							<div className="flex justify-start items-start flex-wrap gap-5 w-full">
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
 									Landing page is somewhat confusing
 								</div>
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">Distracting content/interface</div>
-								<div className="py-3 px-5 rounded-2xl bg-white text-black text-base font-medium">Poor e-commerce experience</div>
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
+									Distracting content/interface
+								</div>
+								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">
+									Poor e-commerce experience
+								</div>
 							</div>
 						</div>
 					</div>

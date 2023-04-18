@@ -160,16 +160,16 @@ function MacContainer(props: Props): JSX.Element {
 
 	return (
 		<>
-			<div className="w-full" ref={phoneRef}>
+			<div className="w-full relative" ref={phoneRef}>
+				{props.withViewProject && hideCursor && width > 1023 && (
+					<div className="hidden z-30 lg:block">
+						<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
+					</div>
+				)}
 				<div
 					className="gsap-berger-primary h-full px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto pb-24 md:pb-96 relative rounded-3xl"
 					style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}}
 				>
-					{props.withViewProject && hideCursor && width > 1023 && (
-						<div className="hidden z-30 lg:block">
-							<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
-						</div>
-					)}
 					<div
 						className="flex flex-col justify-center items-center w-full text-white  z-10 h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] mx-auto relative px-7 md:px-14 overflow-hidden lg:overflow-visible"
 						onMouseOver={props.withViewProject ? handleMouseOver : undefined}
