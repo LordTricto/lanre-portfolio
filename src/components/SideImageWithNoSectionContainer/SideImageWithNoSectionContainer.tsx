@@ -42,12 +42,11 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 					gsap.from(`.gsap-${props.type}-side-image-no-section`, {
 						scrollTrigger: {
 							trigger: `.gsap-${props.type}-side-image-no-section`,
-							start: "top center+=150px",
-							// toggleActions: "restart none none reverse",
+							start: width < 476 ? "top center+=350px" : "top center+=150px",
 						},
 						translateY: "10%",
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						clearProps: "opacity,translateY",
 					});
 				}
@@ -55,7 +54,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-side-image-no-section`,
-						start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 						// toggleActions: "restart none none reverse",
 					},
 				});
@@ -85,8 +84,8 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 						opacity: "0",
 						translateX: props.animateFromBottom ? undefined : "10%",
 						translateY: props.animateFromBottom ? "10%" : undefined,
-						duration: 1,
-						stagger: 1,
+						duration: width < 476 ? 0.5 : 1,
+						stagger: width < 476 ? 0.5 : 1,
 						ease: Circ.easeOut,
 						clearProps: props.animateFromBottom ? "opacity,translateY" : "opacity,translateX",
 					},

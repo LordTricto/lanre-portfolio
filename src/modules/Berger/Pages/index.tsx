@@ -109,7 +109,7 @@ function Berger(): JSX.Element {
 			tl2.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: ".gsap-goals",
-					start: "top center",
+					start: width < 476 ? "top center+=200px" : "top center",
 				},
 			});
 
@@ -135,7 +135,7 @@ function Berger(): JSX.Element {
 			} else {
 				tl2.current.from(".gsap-goals", {
 					opacity: 0,
-					duration: 1,
+					duration: width < 476 ? 0.5 : 1,
 					translateY: "10%",
 					clearProps: "opacity,translateY",
 				});

@@ -31,18 +31,18 @@ function CustomBGImageContainer(props: Props): JSX.Element {
 				gsap.from(".gsap-primary-container-tag", {
 					scrollTrigger: {
 						trigger: ".gsap-primary-container-tag",
-						start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 					translateY: width > 1023 ? undefined : "10%",
 					opacity: 0,
-					duration: 1,
+					duration: width < 476 ? 0.5 : 1,
 					clearProps: "opacity,translateY",
 				});
 
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-primary-container-tag",
-						start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 				});
 
@@ -61,12 +61,12 @@ function CustomBGImageContainer(props: Props): JSX.Element {
 					".gsap-image-tag",
 					{
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						translateX: props.animateFromBottom ? undefined : "10%",
 						translateY: props.animateFromBottom ? "10%" : undefined,
 						clearProps: props.animateFromBottom ? "opacity,translateY" : "opacity,translateX",
 					},
-					">=+1"
+					width < 476 ? ">=+0.5" : ">=+1"
 				);
 			}, phoneRef);
 

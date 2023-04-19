@@ -1,6 +1,5 @@
 import React, {useLayoutEffect, useRef} from "react";
 import {RidrSection, RidrSections} from "../Services/ridr.constant";
-import gsap, {Circ, Power4} from "gsap";
 
 import ActivitiesImgOne from "../../../assets/images/ridr/ridr-activities-1.png";
 import ActivitiesImgTwo from "../../../assets/images/ridr/ridr-activities-2.png";
@@ -18,6 +17,7 @@ import ProjectDescription from "../../../components/ProjectDescription/ProjectDe
 // import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
+import gsap from "gsap";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,8 +27,6 @@ type LocationState = {
 
 function Ridr(): JSX.Element {
 	const tl = useRef<gsap.core.Timeline | undefined>();
-	const tl2 = useRef<gsap.core.Timeline | undefined>();
-	const tl3 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
 
@@ -42,8 +40,6 @@ function Ridr(): JSX.Element {
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
-				tl2.current?.scrollTrigger?.refresh();
-				tl3.current?.scrollTrigger?.refresh();
 			}, 7000);
 
 			tl.current = gsap.timeline();
@@ -73,7 +69,6 @@ function Ridr(): JSX.Element {
 				margin: 0,
 				duration: 1,
 			});
-			// tl.current.pause(4);
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
 				transitionDuration: 1,
 				duration: 0,
@@ -111,37 +106,6 @@ function Ridr(): JSX.Element {
 				},
 				"<"
 			);
-
-			tl2.current = gsap.timeline({
-				scrollTrigger: {
-					trigger: `.gsap-assessing-phone-imgs`,
-					start: "top center",
-				},
-			});
-
-			tl2.current.from(`.gsap-assessing-phone-imgs img`, {
-				opacity: "0",
-				translateY: "5%",
-				duration: 0.5,
-				stagger: 0.5,
-				ease: Power4.easeOut,
-				clearProps: "opacity,translateY",
-			});
-
-			tl3.current = gsap.timeline({
-				scrollTrigger: {
-					trigger: `.gsap-revised-phone-imgs`,
-					start: "top top+=300px",
-				},
-			});
-
-			tl3.current.from(`.gsap-revised-phone-imgs img`, {
-				opacity: "0",
-				translateY: "10%",
-				duration: 1,
-				ease: Circ.easeOut,
-				clearProps: "opacity,translateY",
-			});
 		}, landingDivRef);
 
 		return () => {
@@ -213,7 +177,7 @@ function Ridr(): JSX.Element {
 							paragraphStyle="text-ridr-white-secondary"
 						/>
 
-						<div className="flex flex-col justify-start items-start w-full gap-28">
+						<div className="flex flex-col justify-start items-start w-full gap-16">
 							<Sections
 								type={RidrSections[RidrSection.THE_DESIGN].value}
 								lists={RidrSections[RidrSection.THE_DESIGN].lists}

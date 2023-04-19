@@ -272,7 +272,9 @@ function Nav(): JSX.Element {
 						`gsap-nav-links ` +
 						`absolute top-0 left-0 ` +
 						`flex flex-col justify-center items-center gap-14 h-full w-screen p-8 text-4xl md:text-6xl uppercase z-30 ` +
-						`${isNavOpen ? "text-white" : ""}`
+						// `${isNavOpen ? (activeRoute.includes("/lenco") || activeRoute.includes("/ridr") ? "text-white" : "text-black") : ""} ` +
+						// `${isAnimationDone && activeRoute === "/" ? "" : ""} ` +
+						`${isAnimationDone && (activeRoute.includes("/lenco") || activeRoute.includes("/ridr")) ? "text-white" : "text-black"} `
 					}
 				>
 					<li
@@ -299,13 +301,7 @@ function Nav(): JSX.Element {
 							</span>
 						</div>
 					</li>
-					<li
-						className={
-							`transition-all h-14 w-full overflow-hidden relative ` +
-							`${location.pathname === "/" ? "text-black" : ""} ` +
-							`${location.pathname.includes("/lenco") ? "text-white" : ""} `
-						}
-					>
+					<li className={`transition-all h-14 w-full overflow-hidden relative `}>
 						<div
 							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-two `}
 						>
@@ -323,13 +319,7 @@ function Nav(): JSX.Element {
 							</span>
 						</div>
 					</li>
-					<li
-						className={
-							`transition-all h-14 w-full overflow-hidden relative ` +
-							`${location.pathname === "/" ? "text-black" : ""} ` +
-							`${location.pathname.includes("/lenco") ? "text-white" : ""} `
-						}
-					>
+					<li className={`transition-all h-14 w-full overflow-hidden relative `}>
 						<div
 							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-three `}
 						>
@@ -347,13 +337,7 @@ function Nav(): JSX.Element {
 							</span>
 						</div>
 					</li>
-					<li
-						className={
-							`transition-all h-14 w-full overflow-hidden relative ` +
-							`${location.pathname === "/" ? "text-black" : ""} ` +
-							`${location.pathname.includes("/lenco") ? "text-white" : ""} `
-						}
-					>
+					<li className={`transition-all h-14 w-full overflow-hidden relative `}>
 						<div
 							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-four `}
 						>
@@ -371,13 +355,7 @@ function Nav(): JSX.Element {
 							</span>
 						</div>
 					</li>
-					<li
-						className={
-							`transition-all h-14 w-full overflow-hidden relative ` +
-							`${location.pathname === "/" ? "text-black" : ""} ` +
-							`${location.pathname.includes("/lenco") ? "text-white" : ""} `
-						}
-					>
+					<li className={`transition-all h-14 w-full overflow-hidden relative `}>
 						<div
 							className={`absolute flex justify-center items-center h-full w-full transition-all duration-1000 top-14 gsap-nav-link-five `}
 						>

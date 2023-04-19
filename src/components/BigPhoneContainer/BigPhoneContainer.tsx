@@ -50,7 +50,7 @@ function BigPhoneContainer(props: Props): JSX.Element {
 					},
 					translateY: "10%",
 					opacity: 0,
-					duration: 1,
+					duration: width < 476 ? 0.5 : 1,
 					clearProps: "opacity,translateY",
 				});
 
@@ -84,23 +84,23 @@ function BigPhoneContainer(props: Props): JSX.Element {
 					".gsap-big-phone-text-overlay",
 					{
 						height: "0",
-						stagger: 0.75,
-						duration: 2,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 1 : 2,
 						clearProps: "opacity",
 						ease: Circ.easeInOut,
 					},
-					">-0.5"
+					width < 476 ? ">-0.25" : ">-0.5"
 				);
 				tl.current.from(
 					".gsap-big-phone-content",
 					{
 						opacity: 0,
-						stagger: 0.75,
-						duration: 1.25,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 0.625 : 1.25,
 						clearProps: "translateY,opacity",
 						ease: Circ.easeOut,
 					},
-					">-2"
+					width < 476 ? ">-1" : ">-2"
 				);
 				if (width > 1023) {
 					tl.current.from(
@@ -118,16 +118,17 @@ function BigPhoneContainer(props: Props): JSX.Element {
 						".gsap-big-phone-img",
 						{
 							opacity: 0,
-							duration: 1,
+							duration: width < 476 ? 0.5 : 1,
 							translateY: "10%",
 							clearProps: "opacity,translateY",
 						},
-						">-1.25"
+
+						width < 476 ? "0.625" : ">-1.25"
 					);
 				}
 				tl.current.from(".gsap-view-project", {
 					opacity: 0,
-					duration: 1,
+					duration: width < 476 ? 0.5 : 1,
 					clearProps: "opacity",
 				});
 			}, phoneRef);

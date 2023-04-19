@@ -24,7 +24,7 @@ function CardOfCards(): JSX.Element {
 						},
 						translateY: "10%",
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						clearProps: "opacity,translateY",
 						// toggleActions: "restart none none reverse",
 					});
@@ -33,8 +33,7 @@ function CardOfCards(): JSX.Element {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-card-primary",
-						start: "top center",
-						// toggleActions: "restart none none reverse",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 				});
 				if (width > 1023) {
@@ -62,8 +61,8 @@ function CardOfCards(): JSX.Element {
 					{
 						translateY: "10%",
 						opacity: 0,
-						stagger: 0.25,
-						duration: 0.25,
+						stagger: width < 476 ? 0.125 : 0.25,
+						duration: width < 476 ? 0.125 : 0.25,
 						ease: Circ.easeOut,
 						clearProps: "opacity,translateY",
 					},

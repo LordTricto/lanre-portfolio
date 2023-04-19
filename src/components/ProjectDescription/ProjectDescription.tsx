@@ -40,7 +40,7 @@ function ProjectDescription(props: Props): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-project-title",
 						// start: "top center+=300px",
-						start: "top center",
+						start: width > 474 ? "top center" : "top center+=200px",
 						// markers: true,
 						// toggleActions: "restart none none reverse",
 					},

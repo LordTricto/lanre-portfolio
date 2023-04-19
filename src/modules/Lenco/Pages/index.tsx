@@ -31,6 +31,7 @@ import TransactionListImgOne from "../../../assets/images/lenco/lenco-transactio
 import TransactionListImgThree from "../../../assets/images/lenco/lenco-transaction-3.png";
 import TransactionListImgTwo from "../../../assets/images/lenco/lenco-transaction-2.png";
 import VirtualImgOne from "../../../assets/images/lenco/lenco-virtual-1.png";
+import useDimension from "../../../hooks/useDimension";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -44,6 +45,7 @@ function Lenco(): JSX.Element {
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
+	const {width} = useDimension();
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -127,15 +129,15 @@ function Lenco(): JSX.Element {
 			tl2.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.gsap-assessing-phone-imgs`,
-					start: "top center",
+					start: width < 476 ? "top center+=200px" : "top center",
 				},
 			});
 
 			tl2.current.from(`.gsap-assessing-phone-imgs img`, {
 				opacity: "0",
 				translateY: "5%",
-				duration: 0.5,
-				stagger: 0.5,
+				stagger: width < 476 ? 0.25 : 0.5,
+				duration: width < 476 ? 0.25 : 0.5,
 				ease: Power4.easeOut,
 				clearProps: "opacity,translateY",
 			});
@@ -143,14 +145,14 @@ function Lenco(): JSX.Element {
 			tl3.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.gsap-revised-phone-imgs`,
-					start: "top top+=300px",
+					start: width < 476 ? "top top+=500px" : "top top+=300px",
 				},
 			});
 
 			tl3.current.from(`.gsap-revised-phone-imgs img`, {
 				opacity: "0",
 				translateY: "10%",
-				duration: 1,
+				duration: width < 476 ? 0.5 : 1,
 				ease: Circ.easeOut,
 				clearProps: "opacity,translateY",
 			});
@@ -266,7 +268,10 @@ function Lenco(): JSX.Element {
 								<img className={`w-full ` + `object-contain`} src={ArchitectureImg} alt="lenco-phone-app" />
 							</div>
 						</div>
-						<div className="flex flex-col justify-start items-start w-full gap-28">
+					</div>
+
+					<div className="flex flex-col justify-start items-start w-full gap-16">
+						<div className="flex flex-col justify-start items-start w-full gap-16 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<Sections
 								type={LencoSections[LencoSection.THE_REDESIGN].value}
 								lists={LencoSections[LencoSection.THE_REDESIGN].lists}
@@ -308,74 +313,75 @@ function Lenco(): JSX.Element {
 								</div>
 							</div>
 						</div>
-					</div>
-					<MultiPhoneContainer
-						type="filter"
-						title="Transaction List Filter"
-						subTitle="Filters were designed with consideration of the user’s priorities, allowing quick and multiple selection as well
+						<MultiPhoneContainer
+							type="filter"
+							title="Transaction List Filter"
+							subTitle="Filters were designed with consideration of the user’s priorities, allowing quick and multiple selection as well
 									as display the applied filters."
-						customTitleStyle="text-white"
-						customSubtitleStyle="text-blue-quat"
-						customContainerStyle="bg-lenco-bg-xdark w-full"
-						customOverlayStyle="bg-lenco-bg-xdark"
-						// customContainerStyle="bg-white w-full"
-						imgOne={TransactionListImgOne}
-						imgOneAlt="phone showing app switching business(lenco)"
-						imgTwo={TransactionListImgTwo}
-						imgTwoAlt="phone showing app switching business(lenco)"
-						imgThree={TransactionListImgThree}
-						imgThreeAlt="phone showing app switching business(lenco)"
-						imgFour={TransactionListImgFour}
-						imgFourAlt="phone showing app switching business(lenco)"
-					/>
-					<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-						<div className="w-full lg:w-50% xl:w-40%">
-							<PhoneContainer
-								title="Virtual Cards"
-								subTitle="By removing unnecessary elements, I was able create an interface that draws the user’s attention to what
+							customTitleStyle="text-white"
+							customSubtitleStyle="text-blue-quat"
+							customContainerStyle="bg-lenco-bg-xdark w-full"
+							customOverlayStyle="bg-lenco-bg-xdark"
+							// customContainerStyle="bg-white w-full"
+							imgOne={TransactionListImgOne}
+							imgOneAlt="phone showing app switching business(lenco)"
+							imgTwo={TransactionListImgTwo}
+							imgTwoAlt="phone showing app switching business(lenco)"
+							imgThree={TransactionListImgThree}
+							imgThreeAlt="phone showing app switching business(lenco)"
+							imgFour={TransactionListImgFour}
+							imgFourAlt="phone showing app switching business(lenco)"
+						/>
+						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+							<div className="w-full lg:w-50% xl:w-40%">
+								<PhoneContainer
+									title="Virtual Cards"
+									subTitle="By removing unnecessary elements, I was able create an interface that draws the user’s attention to what
 											matters most."
-								customTitleStyle="text-accrue-blue"
-								customContainerStyle="bg-white-dark "
-								imgOne={VirtualImgOne}
-								imgOneAlt="phone showing app(lenco-virtual)"
-								isSingle
-								customTextOverlayStyle="bg-white-dark "
-							/>
+									customTitleStyle="text-accrue-blue"
+									customContainerStyle="bg-white-dark "
+									imgOne={VirtualImgOne}
+									imgOneAlt="phone showing app(lenco-virtual)"
+									isSingle
+									customTextOverlayStyle="bg-white-dark "
+								/>
+							</div>
+							<div className="w-full lg:w-50% xl:w-60%">
+								<PhoneContainer
+									title="Physical Cards"
+									subTitle="Minimalistic and accessible design with a basic call to action and navigation bar."
+									customTitleStyle="text-white"
+									customSubtitleStyle="text-white"
+									customContainerStyle="bg-fora-blue"
+									imgOne={PhysicalImgOne}
+									imgTwo={PhysicalImgTwo}
+									imgOneAlt="phone showing app(lenco-virtual)"
+									imgTwoAlt="second phone showing app(lenco-virtual)"
+									isSingle={false}
+									customTextOverlayStyle="bg-fora-blue "
+								/>
+							</div>
 						</div>
-						<div className="w-full lg:w-50% xl:w-60%">
-							<PhoneContainer
-								title="Physical Cards"
-								subTitle="Minimalistic and accessible design with a basic call to action and navigation bar."
-								customTitleStyle="text-white"
-								customSubtitleStyle="text-white"
-								customContainerStyle="bg-fora-blue"
-								imgOne={PhysicalImgOne}
-								imgTwo={PhysicalImgTwo}
-								imgOneAlt="phone showing app(lenco-virtual)"
-								imgTwoAlt="second phone showing app(lenco-virtual)"
-								isSingle={false}
-								customTextOverlayStyle="bg-fora-blue "
-							/>
-						</div>
-					</div>
-					<MultiPhoneContainer
-						type="reimbursement"
-						title="Reimbursements"
-						subTitle="The goal was to create a flow that is easy to use, and an easy way to improve usability of the product is to
+						<MultiPhoneContainer
+							type="reimbursement"
+							title="Reimbursements"
+							subTitle="The goal was to create a flow that is easy to use, and an easy way to improve usability of the product is to
 										simplify it, and removing any extraneous actions or buttons."
-						customTitleStyle="text-white"
-						customSubtitleStyle="text-blue-quat"
-						customContainerStyle="bg-lenco-bg-xdark w-full"
-						customOverlayStyle="bg-lenco-bg-xdark"
-						imgOne={ReimbursementsListImgOne}
-						imgOneAlt="phone showing app switching business(lenco)"
-						imgTwo={ReimbursementsListImgTwo}
-						imgTwoAlt="phone showing app switching business(lenco)"
-						imgThree={ReimbursementsListImgThree}
-						imgThreeAlt="phone showing app switching business(lenco)"
-						imgFour={ReimbursementsListImgFour}
-						imgFourAlt="phone showing app switching business(lenco)"
-					/>
+							customTitleStyle="text-white"
+							customSubtitleStyle="text-blue-quat"
+							customContainerStyle="bg-lenco-bg-xdark w-full"
+							customOverlayStyle="bg-lenco-bg-xdark"
+							imgOne={ReimbursementsListImgOne}
+							imgOneAlt="phone showing app switching business(lenco)"
+							imgTwo={ReimbursementsListImgTwo}
+							imgTwoAlt="phone showing app switching business(lenco)"
+							imgThree={ReimbursementsListImgThree}
+							imgThreeAlt="phone showing app switching business(lenco)"
+							imgFour={ReimbursementsListImgFour}
+							imgFourAlt="phone showing app switching business(lenco)"
+						/>
+					</div>
+
 					<div className="flex flex-col justify-start items-start w-full pb-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 						<Sections
 							type={LencoSections[LencoSection.TAKEOUT].value}

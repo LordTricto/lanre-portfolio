@@ -43,11 +43,11 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 					gsap.from(`.gsap-${props.type}-phone`, {
 						scrollTrigger: {
 							trigger: `.gsap-${props.type}-phone`,
-							start: "top center+=150px",
+							start: width < 476 ? "top center+=350px" : "top center+=150px",
 						},
 						translateY: "10%",
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						clearProps: "opacity,translateY",
 					});
 				}
@@ -55,7 +55,7 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-phone`,
-						start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 				});
 
@@ -63,8 +63,8 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 					tl.current.from(`.gsap-${props.type}-phone`, {
 						width: "100%",
 						borderRadius: 0,
-						padding: width > 1023 ? 0 : undefined,
-						duration: 1.5,
+						padding: 0,
+						duration: width < 476 ? 0.75 : 1.5,
 						ease: Circ.easeOut,
 						clearProps: "width,padding,borderRadius",
 					});
@@ -72,7 +72,7 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 						`.gsap-${props.type}-phone-primary`,
 						{
 							borderRadius: 0,
-							duration: 1.5,
+							duration: width < 476 ? 0.75 : 1.5,
 							clearProps: "borderRadius",
 						},
 						"<"
@@ -82,35 +82,35 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 					`.gsap-${props.type}-phone-text-overlay`,
 					{
 						height: "0",
-						stagger: 0.75,
-						duration: 2,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 1 : 2,
 						clearProps: "opacity",
 						ease: Circ.easeInOut,
 					},
-					">-0.5"
+					width < 476 ? ">-0.25" : ">-0.5"
 				);
 				tl.current.from(
 					`.gsap-${props.type}-phone-content`,
 					{
 						opacity: 0,
-						stagger: 0.75,
-						duration: 1.25,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 0.625 : 1.25,
 						clearProps: "translateY,opacity",
 						ease: Circ.easeOut,
 					},
-					">-2"
+					width < 476 ? ">-1" : ">-2"
 				);
 				tl.current.from(
 					`.gsap-${props.type}-phone-img img`,
 					{
 						opacity: "0",
 						translateY: "10%",
-						duration: 0.5,
-						stagger: 0.25,
+						stagger: width < 476 ? 0.125 : 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
 						ease: Circ.easeOut,
 						clearProps: "opacity,translateY",
 					},
-					">-1.25"
+					width < 476 ? ">-0.625" : ">-1.25"
 				);
 			}, divRef);
 

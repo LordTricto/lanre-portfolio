@@ -44,7 +44,7 @@ function Sections(props: Props): JSX.Element {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-title`,
-						start: width < 476 ? "top center+=100px" : "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 						// toggleActions: "restart none none reverse",
 					},
 				});
@@ -54,18 +54,18 @@ function Sections(props: Props): JSX.Element {
 					{
 						opacity: "0",
 						translateY: "30%",
-						duration: 0.5,
+						duration: width < 476 ? 0.25 : 0.5,
 						ease: Circ.easeOut,
 						clearProps: "opacity,translateY",
 					},
-					"<+=0.5"
+					"<+=0.25"
 				);
 				if (props.paragraphWithSideIcon) {
 					tl.current.from(
 						`.gsap-${props.type}-side-icon`,
 						{
 							opacity: "0",
-							duration: 0.5,
+							duration: width < 476 ? 0.25 : 0.5,
 							ease: Circ.easeOut,
 							clearProps: "opacity",
 						},
@@ -77,8 +77,8 @@ function Sections(props: Props): JSX.Element {
 						`.gsap-${props.type}-paragraph p`,
 						{
 							opacity: "0",
-							duration: 0.5,
-							stagger: 0.25,
+							duration: width < 476 ? 0.25 : 0.5,
+							stagger: width < 476 ? 0.125 : 0.25,
 							ease: Circ.easeOut,
 							clearProps: "opacity",
 						},
@@ -90,8 +90,8 @@ function Sections(props: Props): JSX.Element {
 						`.gsap-${props.type}-lists li`,
 						{
 							opacity: "0",
-							duration: 0.5,
-							stagger: 0.25,
+							duration: width < 476 ? 0.25 : 0.5,
+							stagger: width < 476 ? 0.125 : 0.25,
 							ease: Circ.easeOut,
 							clearProps: "opacity",
 						},
@@ -103,7 +103,7 @@ function Sections(props: Props): JSX.Element {
 						`.gsap-close-section`,
 						{
 							opacity: 0,
-							duration: 0.5,
+							duration: width < 476 ? 0.25 : 0.5,
 							translateX: "5%",
 							clearProps: "opacity,translateX",
 						},

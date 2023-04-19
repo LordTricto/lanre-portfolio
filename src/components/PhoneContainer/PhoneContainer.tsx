@@ -59,21 +59,19 @@ function PhoneContainer(props: Props): JSX.Element {
 				gsap.from(".gsap-primary-container-tag", {
 					scrollTrigger: {
 						trigger: ".gsap-primary-container-tag",
-						start: "top center",
-						// toggleActions: "restart none none reverse",
-						// markers: true,
+						// start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 					translateY: width > 1023 ? undefined : "10%",
 					opacity: 0,
-					duration: 1,
+					duration: width < 476 ? 0.5 : 1,
 					clearProps: "opacity,translateY",
 				});
 
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-primary-container-tag",
-						start: "top center",
-						// markers: true,
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 				});
 
@@ -81,13 +79,8 @@ function PhoneContainer(props: Props): JSX.Element {
 					gsap.from(".gsap-primary-container-tag", {
 						scrollTrigger: {
 							trigger: ".gsap-container-tag",
-							start: "top center",
-							// end:
-							// toggleActions: "restart none none reverse",
-							// markers: props.title === "Homescreen" ? true : false,
-							// markers: true,
+							start: width < 476 ? "top center+=200px" : "top center",
 							onEnter: () => {
-								// primaryDivRef.current?.classList.toggle("-active");
 								primaryDivRef.current?.classList.add("-active");
 							},
 						},
@@ -99,8 +92,8 @@ function PhoneContainer(props: Props): JSX.Element {
 					{
 						delay: props.delay,
 						height: "0",
-						stagger: 0.75,
-						duration: 2,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 1 : 2,
 						clearProps: "opacity",
 						ease: Circ.easeInOut,
 					},
@@ -109,14 +102,13 @@ function PhoneContainer(props: Props): JSX.Element {
 				tl.current.from(
 					".gsap-content",
 					{
-						// translateY: "20%",
 						opacity: 0,
-						stagger: 0.75,
-						duration: 1.25,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 0.625 : 1.25,
 						clearProps: "translateY,opacity",
 						ease: Circ.easeOut,
 					},
-					">-2"
+					width < 476 ? ">-1" : ">-2"
 				);
 
 				if (width > 1023) {
@@ -125,27 +117,27 @@ function PhoneContainer(props: Props): JSX.Element {
 						{
 							scale: 1.3,
 							bottom: props.customImgOneStyle ? undefined : "1rem",
-							duration: 1,
+							duration: width < 476 ? 0.5 : 1,
 							clearProps: "bottom,scale",
 						},
-						">-1.25"
+						width < 476 ? ">-0.625" : ">-1.25"
 					);
 				} else {
 					tl.current.from(
 						".gsap-image-tag",
 						{
 							opacity: 0,
-							duration: 1,
+							duration: width < 476 ? 0.5 : 1,
 							translateY: "10%",
 							clearProps: "opacity,translateY",
 						},
-						">-1.25"
+						width < 476 ? ">-0.625" : ">-1.25"
 					);
 				}
 				if (props.withViewProject) {
 					tl.current.from(".gsap-view-project", {
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						clearProps: "opacity",
 					});
 				}

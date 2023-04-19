@@ -59,6 +59,7 @@ function Home(): JSX.Element {
 					opacity: 0,
 					pointerEvents: "none",
 					duration: 1,
+					delay: 1,
 				});
 				tl.current.from(".gsap-hero-text", {
 					duration: 1.5,
@@ -213,9 +214,7 @@ function Home(): JSX.Element {
 				tl2.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-memo",
-						start: "top center",
-						// toggleActions: "restart none none reverse",
-						// markers: true,
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 				});
 
@@ -242,53 +241,45 @@ function Home(): JSX.Element {
 				} else {
 					tl2.current.from(".gsap-memo", {
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						translateY: "10%",
 						clearProps: "opacity,translateY",
 					});
 				}
 
-				tl2.current.from(
-					[".gsap-memo-one", ".gsap-memo-two"],
-					{
-						translateY: "100%",
-						opacity: 0,
-						duration: 1,
-						stagger: 0.5,
-						ease: Circ.easeOut,
-						clearProps: "transform,translateY",
-					}
-					// "-=1.75"
-				);
-				tl2.current.to(
-					".gsap-memo-one-span",
-					{
-						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
-						ease: Power4.easeInOut,
-					}
-					// ">-0.75"
-				);
+				tl2.current.from([".gsap-memo-one", ".gsap-memo-two"], {
+					translateY: "100%",
+					opacity: 0,
+					duration: width < 476 ? 0.5 : 1,
+					stagger: width < 476 ? 0.25 : 0.5,
+					ease: Circ.easeOut,
+					clearProps: "transform,translateY",
+				});
+				tl2.current.to(".gsap-memo-one-span", {
+					color: "#1F2130",
+					duration: width < 476 ? 0.25 : 0.5,
+					stagger: width < 476 ? 0.125 : 0.25,
+					ease: Power4.easeInOut,
+				});
 				tl2.current.to(
 					".gsap-memo-two-span",
 					{
 						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
+						stagger: width < 476 ? 0.125 : 0.25,
 						ease: Power4.easeInOut,
 					},
-					">+0.5"
+					width < 476 ? ">+0.25" : ">+0.5"
 				);
 
 				gsap.from(".gsap-section-project-header", {
 					scrollTrigger: {
 						trigger: ".gsap-section-project",
-						start: "top center-=150px",
+						start: width < 476 ? "top center" : "top center-=150px",
 					},
 					translateY: "20%",
 					opacity: 0,
-					duration: 1,
+					duration: width < 476 ? 0.5 : 1,
 					ease: Circ.easeOut,
 					clearProps: "translateY,opacity",
 				});
@@ -315,11 +306,11 @@ function Home(): JSX.Element {
 			<main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 relative overflow-hidden" ref={landingDivRef}>
 				<div
 					className={
-						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
-						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
+						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 bg-black ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} ` +
 						`${location?.from === "/accrue" ? "" : ""}`
 					}
 				></div>
@@ -536,7 +527,7 @@ function Home(): JSX.Element {
 								</div>
 							</div>
 						</div>
-						<MacContainer link="/lenco" withViewProject circularWordsCustomStyle="text-black" />
+						<MacContainer link="/berger" withViewProject circularWordsCustomStyle="text-black" />
 					</div>
 				</section>
 				<ContactMe />

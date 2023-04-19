@@ -41,11 +41,11 @@ function SideImageContainer(props: Props): JSX.Element {
 					gsap.from(`.gsap-${props.type}-side-image`, {
 						scrollTrigger: {
 							trigger: `.gsap-${props.type}-side-image`,
-							start: "top center+=150px",
+							start: width < 476 ? "top center+=350px" : "top center+=150px",
 						},
 						translateY: "10%",
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						clearProps: "opacity,translateY",
 					});
 				}
@@ -53,7 +53,7 @@ function SideImageContainer(props: Props): JSX.Element {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-side-image`,
-						start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
 				});
 
@@ -80,34 +80,34 @@ function SideImageContainer(props: Props): JSX.Element {
 					`.gsap-${props.type}-side-image-text-overlay`,
 					{
 						height: "0",
-						stagger: 0.75,
-						duration: 2,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 1 : 2,
 						clearProps: "opacity",
 						ease: Circ.easeInOut,
 					},
-					">-0.5"
+					width < 476 ? ">-0.5" : ">-0.25"
 				);
 				tl.current.from(
 					`.gsap-${props.type}-side-image-content`,
 					{
 						opacity: 0,
-						stagger: 0.75,
-						duration: 1.25,
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 0.625 : 1.25,
 						clearProps: "translateY,opacity",
 						ease: Circ.easeOut,
 					},
-					">-2"
+					width < 476 ? ">-1" : ">-2"
 				);
 				tl.current.from(
 					`.gsap-${props.type}-side-image img`,
 					{
 						opacity: "0",
 						translateX: "10%",
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						ease: Circ.easeOut,
 						clearProps: "opacity,translateX",
 					},
-					">-0.5"
+					width < 476 ? ">-0.25" : ">-0.5"
 				);
 			}, divRef);
 

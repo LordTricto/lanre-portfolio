@@ -56,17 +56,17 @@ function ContactMe(): JSX.Element {
 				} else {
 					tl.current.from(".gsap-contact-me", {
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
 						translateY: "10%",
 						clearProps: "opacity,translateY",
 					});
 				}
 
-				tl.current.from([".gsap-contact-me-one", ".gsap-contact-me-two"], {
+				tl.current.from(".gsap-contact-me-paragraph", {
 					translateY: "100%",
 					opacity: 0,
-					duration: 1,
-					stagger: 0.5,
+					duration: width < 476 ? 0.5 : 1,
+					stagger: width < 476 ? 0.25 : 0.5,
 					ease: Circ.easeOut,
 					clearProps: "transform,translateY",
 				});
@@ -75,7 +75,8 @@ function ContactMe(): JSX.Element {
 					".gsap-contact-me-circular-words",
 					{
 						opacity: 0,
-						duration: 1,
+						duration: width < 476 ? 0.5 : 1,
+
 						clearProps: "opacity",
 					},
 					">"
@@ -85,51 +86,51 @@ function ContactMe(): JSX.Element {
 					".gsap-cta-one-span",
 					{
 						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
+						stagger: width < 476 ? 0.125 : 0.25,
 						ease: Power4.easeInOut,
 					},
-					">+0.5"
+					width < 476 ? ">+0.25" : ">+0.5"
 				);
 				tl.current.to(
 					".gsap-cta-two-span",
 					{
 						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
+						stagger: width < 476 ? 0.125 : 0.25,
 						ease: Power4.easeInOut,
 					},
-					">+0.5"
+					width < 476 ? ">+0.25" : ">+0.5"
 				);
 				tl.current.to(
 					".gsap-cta-three-span",
 					{
 						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
+						stagger: width < 476 ? 0.125 : 0.25,
 						ease: Power4.easeInOut,
 					},
-					">+0.5"
+					width < 476 ? ">+0.25" : ">+0.5"
 				);
 				tl.current.to(
 					".gsap-cta-four-span",
 					{
 						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
+						stagger: width < 476 ? 0.125 : 0.25,
 						ease: Power4.easeInOut,
 					},
-					">+0.5"
+					width < 476 ? ">+0.25" : ">+0.5"
 				);
 				tl.current.to(
 					".gsap-cta-five-span",
 					{
 						color: "#1F2130",
-						duration: 0.5,
-						stagger: 0.25,
+						duration: width < 476 ? 0.25 : 0.5,
+						stagger: width < 476 ? 0.125 : 0.25,
 						ease: Power4.easeInOut,
 					},
-					">+0.5"
+					width < 476 ? ">+0.25" : ">+0.5"
 				);
 			}, contactDivRef);
 
@@ -199,8 +200,8 @@ function ContactMe(): JSX.Element {
 							onClick={handleOnClick}
 							ref={divRef}
 						>
-							<div className="gsap-contact-me-one w-full xl:max-w-lg">
-								<div className="gsap-cta flex flex-col justify-start items-start gap-2">
+							<div className="w-full xl:max-w-lg">
+								<div className="gsap-cta gsap-contact-me-paragraph flex flex-col justify-start items-start gap-2">
 									<p className="text-5xl 2xs:text-7xl lg:!text-8xl font-medium text-black-tertiary">
 										<span className="gsap-cta-one-span"> Say </span>
 										<span className="gsap-cta-one-span"> Hello! </span>
@@ -214,7 +215,7 @@ function ContactMe(): JSX.Element {
 										</a>
 									</p>
 								</div>
-								<p className="text-xl xs:text-2xl lg:!text-3xl text-black-tertiary pt-14">
+								<p className="gsap-contact-me-paragraph text-xl xs:text-2xl lg:!text-3xl text-black-tertiary pt-14">
 									I was born and raised in Lagos,
 									<span className="gsap-cta-two-span"> I </span>
 									<span className="gsap-cta-two-span"> have </span>
@@ -235,9 +236,9 @@ function ContactMe(): JSX.Element {
 									<span className="gsap-cta-two-span"> Nigeria.</span>
 								</p>
 							</div>
-							<div className="gsap-contact-me-one w-full xl:max-w-lg">
+							<div className="w-full xl:max-w-lg">
 								<div className="flex flex-col gap-5.5 text-xl xs:text-2xl lg:!text-3xl text-black-tertiary mt-5.5 xl:mt-2">
-									<p>
+									<p className="gsap-contact-me-paragraph ">
 										I have
 										<span className="gsap-cta-three-span"> expertise </span>
 										<span className="gsap-cta-three-span"> in </span>
@@ -250,7 +251,7 @@ function ContactMe(): JSX.Element {
 										<span className="gsap-cta-three-span"> Interaction </span>
 										<span className="gsap-cta-three-span"> Design. </span>
 									</p>
-									<p>
+									<p className="gsap-contact-me-paragraph ">
 										I&apos;m very
 										<span className="gsap-cta-four-span"> passionate </span>
 										<span className="gsap-cta-four-span"> about </span>
@@ -262,7 +263,7 @@ function ContactMe(): JSX.Element {
 										that create a significant impact on humanity.
 									</p>
 
-									<p>
+									<p className="gsap-contact-me-paragraph ">
 										I<span className="gsap-cta-five-span"> contribute </span>
 										by bringing technology
 										<span className="gsap-cta-five-span"> into </span>

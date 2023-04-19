@@ -1,6 +1,6 @@
 import {ForaSection, ForaSections} from "../Services/fora.constant";
 import React, {useLayoutEffect, useRef} from "react";
-import gsap, {Circ, Power4} from "gsap";
+import gsap, {Circ} from "gsap";
 
 import ExploreImgOne from "../../../assets/images/fora/fora-explore-1.png";
 import ExploreImgTwo from "../../../assets/images/fora/fora-explore-2.png";
@@ -23,6 +23,7 @@ import Sections from "../../../components/Sections/Sections";
 import WalkthroughImgOne from "../../../assets/images/fora/fora-walkthrough-1.png";
 import WalkthroughImgThree from "../../../assets/images/fora/fora-walkthrough-3.png";
 import WalkthroughImgTwo from "../../../assets/images/fora/fora-walkthrough-2.png";
+import useDimension from "../../../hooks/useDimension";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,6 +37,7 @@ function Fora(): JSX.Element {
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
+	const {width} = useDimension();
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -116,33 +118,17 @@ function Fora(): JSX.Element {
 				"<"
 			);
 
-			tl2.current = gsap.timeline({
-				scrollTrigger: {
-					trigger: `.gsap-assessing-phone-imgs`,
-					start: "top center",
-				},
-			});
-
-			tl2.current.from(`.gsap-assessing-phone-imgs img`, {
-				opacity: "0",
-				translateY: "5%",
-				duration: 0.5,
-				stagger: 0.5,
-				ease: Power4.easeOut,
-				clearProps: "opacity,translateY",
-			});
-
 			tl3.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: `.gsap-revised-phone-imgs`,
-					start: "top top+=300px",
+					start: width < 476 ? "top top+=500px" : "top top+=300px",
 				},
 			});
 
 			tl3.current.from(`.gsap-revised-phone-imgs img`, {
 				opacity: "0",
 				translateY: "10%",
-				duration: 1,
+				duration: width < 476 ? 0.5 : 1,
 				ease: Circ.easeOut,
 				clearProps: "opacity,translateY",
 			});
@@ -240,7 +226,7 @@ function Fora(): JSX.Element {
 							paragraphWithSideIconStyle="text-fora-black-secondary"
 						/>
 
-						<div className="gsap-revised-phone-section flex flex-col justify-start items-start w-full gap-12">
+						<div className="flex flex-col justify-start items-start w-full gap-12">
 							<Sections
 								type={ForaSections[ForaSection.LOW_FIDELITY_DESIGN].value}
 								lists={ForaSections[ForaSection.LOW_FIDELITY_DESIGN].lists}
@@ -254,8 +240,8 @@ function Fora(): JSX.Element {
 							</div>
 						</div>
 					</div>
-					<div className="flex flex-col justify-start items-start w-full gap-28">
-						<div className="flex flex-col justify-start items-start w-full gap-28 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+					<div className="flex flex-col justify-start items-start w-full gap-16">
+						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<Sections
 								type={ForaSections[ForaSection.HIGH_FIDELITY_DESIGN].value}
 								lists={ForaSections[ForaSection.HIGH_FIDELITY_DESIGN].lists}
@@ -282,7 +268,7 @@ function Fora(): JSX.Element {
 							imgThreeAlt="phone showing walkthrough of app(fora)"
 						/>
 
-						<div className="flex flex-col justify-start items-start w-full gap-28 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+						<div className="flex flex-col justify-start items-start w-full gap-16 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
 								<div className="w-full lg:w-50% xl:w-40%">
 									<PhoneContainer
