@@ -28,6 +28,7 @@ interface Props {
 
 	smallText?: boolean;
 	withCloseSection?: boolean;
+	delay?: number;
 }
 
 function Sections(props: Props): JSX.Element {
@@ -57,6 +58,7 @@ function Sections(props: Props): JSX.Element {
 						duration: width < 476 ? 0.25 : 0.5,
 						ease: Circ.easeOut,
 						clearProps: "opacity,translateY",
+						delay: props.delay,
 					},
 					"<+=0.25"
 				);

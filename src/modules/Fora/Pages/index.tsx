@@ -1,5 +1,5 @@
 import {ForaSection, ForaSections} from "../Services/fora.constant";
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ} from "gsap";
 
 import ExploreImgOne from "../../../assets/images/fora/fora-explore-1.png";
@@ -17,6 +17,7 @@ import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import ProfileImgOne from "../../../assets/images/fora/fora-profile-1.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
+import {PuffLoader} from "react-spinners";
 // import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
@@ -38,6 +39,9 @@ function Fora(): JSX.Element {
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
 	const {width} = useDimension();
+	const [isLoading, setIsLoading] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
+	const [numOfImages, setNumOfImages] = useState<number>(0);
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -46,6 +50,15 @@ function Fora(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+
+		if (numOfImages === 13) {
+			setIsLoading(false);
+			setShowLoader(false);
+		} else {
+			setTimeout(() => {
+				setShowLoader(true);
+			}, 4000);
+		}
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
@@ -71,6 +84,11 @@ function Fora(): JSX.Element {
 				translateY: "unset",
 				duration: 0,
 			});
+
+			if (numOfImages !== 13) {
+				tl.current.pause(0.05);
+			}
+
 			tl.current.to(".gsap-page-entry-transition-div", {
 				opacity: 0,
 				pointerEvents: "none",
@@ -137,24 +155,44 @@ function Fora(): JSX.Element {
 		return () => {
 			ctx.revert(); // cleanup!!
 		};
+	}, [numOfImages]);
+
+	const handleUpdateImageCount = useCallback(() => {
+		setNumOfImages((prev) => prev + 1);
 	}, []);
 
 	return (
 		<>
-			<Nav />
+			<Nav pageLoaded={numOfImages === 13} />
 			<main
-				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-fora-bg-white min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
+				className="flex flex-col justify-start items-start h-full w-full gap-4 bg-fora-bg-white min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
 				ref={landingDivRef}
 			>
 				<div
 					className={
+						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-white-dark fixed top-0 left-0 z-60 ` +
+						`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
+					}
+				>
+					<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
+						<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
+					</div>
+				</div>
+				<div
+					className={
 						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
-						`${location?.from === "/" ? "bg-white-dark " : ""} ` +
-						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
-						`${location?.from === "/accrue" ? "" : ""}`
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
 					}
 				></div>
 				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
@@ -172,6 +210,7 @@ function Fora(): JSX.Element {
 						headerImgTwoAlt="lenco-phone-app-two"
 						headerImgThree={HeaderImgThree}
 						headerImgThreeAlt="lenco-phone-app-three"
+						handleUpdateImageCount={handleUpdateImageCount}
 						// isSingle
 					/>
 					<ProjectDescription
@@ -236,7 +275,12 @@ function Fora(): JSX.Element {
 								paragraphStyle="text-fora-black-secondary"
 							/>
 							<div className="gsap-revised-phone-imgs w-full flex justify-center items-center">
-								<img className={`w-max ` + `object-contain`} src={LowFidelityImg} alt="lenco-phone-app" />
+								<img
+									className={`w-max ` + `object-contain`}
+									src={LowFidelityImg}
+									onLoad={handleUpdateImageCount}
+									alt="lenco-phone-app"
+								/>
 							</div>
 						</div>
 					</div>
@@ -266,6 +310,7 @@ function Fora(): JSX.Element {
 							imgTwoAlt="phone showing walkthrough of app(fora)"
 							imgThree={WalkthroughImgThree}
 							imgThreeAlt="phone showing walkthrough of app(fora)"
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 
 						<div className="flex flex-col justify-start items-start w-full gap-16 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
@@ -281,6 +326,7 @@ function Fora(): JSX.Element {
 										imgOneAlt="phone showing home page of app(fora)"
 										isSingle
 										customTextOverlayStyle="bg-black"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 								<div className="w-full lg:w-50% xl:w-60%">
@@ -296,6 +342,7 @@ function Fora(): JSX.Element {
 										imgTwoAlt="phone second showing explore page of app(fora)"
 										isSingle={false}
 										customTextOverlayStyle="bg-white"
+										handleUpdateImageCount={handleUpdateImageCount}
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>
@@ -315,6 +362,7 @@ function Fora(): JSX.Element {
 										imgTwoAlt="phone second showing messaging page of app(fora)"
 										isSingle={false}
 										customTextOverlayStyle="bg-fora-grey"
+										handleUpdateImageCount={handleUpdateImageCount}
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>
@@ -329,6 +377,7 @@ function Fora(): JSX.Element {
 										imgOneAlt="phone showing profile page of app(fora)"
 										isSingle
 										customTextOverlayStyle="bg-fora"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 							</div>

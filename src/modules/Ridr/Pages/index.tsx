@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 import {RidrSection, RidrSections} from "../Services/ridr.constant";
 
 import ActivitiesImgOne from "../../../assets/images/ridr/ridr-activities-1.png";
@@ -14,6 +14,7 @@ import MapsImgTwo from "../../../assets/images/ridr/ridr-maps-2.png";
 import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
+import {PuffLoader} from "react-spinners";
 // import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
@@ -29,6 +30,9 @@ function Ridr(): JSX.Element {
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
+	const [isLoading, setIsLoading] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
+	const [numOfImages, setNumOfImages] = useState<number>(0);
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -37,6 +41,16 @@ function Ridr(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+
+		if (numOfImages === 9) {
+			setIsLoading(false);
+			setShowLoader(false);
+		} else {
+			setTimeout(() => {
+				setShowLoader(true);
+			}, 4000);
+		}
+
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
@@ -60,6 +74,11 @@ function Ridr(): JSX.Element {
 				translateY: "unset",
 				duration: 0,
 			});
+
+			if (numOfImages !== 9) {
+				tl.current.pause(0.05);
+			}
+
 			tl.current.to(".gsap-page-entry-transition-div", {
 				opacity: 0,
 				pointerEvents: "none",
@@ -111,24 +130,44 @@ function Ridr(): JSX.Element {
 		return () => {
 			ctx.revert(); // cleanup!!
 		};
+	}, [numOfImages]);
+
+	const handleUpdateImageCount = useCallback(() => {
+		setNumOfImages((prev) => prev + 1);
 	}, []);
 
 	return (
 		<>
-			<Nav />
+			<Nav pageLoaded={numOfImages === 9} />
 			<main
-				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-ridr-bg-green min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
+				className="flex flex-col justify-start items-start h-full w-full gap-4 bg-ridr-bg-green min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
 				ref={landingDivRef}
 			>
 				<div
 					className={
+						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-white-dark fixed top-0 left-0 z-60 ` +
+						`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
+					}
+				>
+					<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
+						<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
+					</div>
+				</div>
+				<div
+					className={
 						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
-						`${location?.from === "/" ? "bg-white-dark " : ""} ` +
-						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
-						`${location?.from === "/accrue" ? "" : ""}`
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
 					}
 				></div>
 				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
@@ -146,6 +185,7 @@ function Ridr(): JSX.Element {
 						headerImgTwoAlt="lenco-phone-app-two"
 						headerImgThree={HeaderImgThree}
 						headerImgThreeAlt="lenco-phone-app-three"
+						handleUpdateImageCount={handleUpdateImageCount}
 						// isSingle
 					/>
 					<ProjectDescription
@@ -202,6 +242,7 @@ function Ridr(): JSX.Element {
 										imgTwoAlt="second phone showing home screen(lenco)"
 										isSingle={false}
 										customTextOverlayStyle="bg-white-dark"
+										handleUpdateImageCount={handleUpdateImageCount}
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>
@@ -216,6 +257,7 @@ function Ridr(): JSX.Element {
 										imgOneAlt="phone showing app switching business(lenco)"
 										isSingle
 										customTextOverlayStyle="bg-black"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 							</div>
@@ -231,6 +273,7 @@ function Ridr(): JSX.Element {
 										imgOneAlt="phone showing app switching business(lenco)"
 										isSingle
 										customTextOverlayStyle="bg-ridr"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 								<div className="w-full lg:w-50% xl:w-60%">
@@ -246,6 +289,7 @@ function Ridr(): JSX.Element {
 										imgTwoAlt="second phone showing home screen(lenco)"
 										isSingle={false}
 										customTextOverlayStyle="bg-ridr-bg-green-darker"
+										handleUpdateImageCount={handleUpdateImageCount}
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>

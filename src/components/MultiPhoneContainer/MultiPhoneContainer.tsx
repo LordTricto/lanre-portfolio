@@ -24,6 +24,7 @@ interface Props {
 	customTitleStyle: string;
 	customSubtitleStyle?: string;
 	customOverlayStyle?: string;
+	handleUpdateImageCount?: () => void;
 }
 
 function MultiPhoneContainer(props: Props): JSX.Element {
@@ -179,14 +180,32 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 									`${props.customSecondaryContainerStyle || ""}`
 								}
 							>
-								<img className="w-fit object-contain mx-auto" src={props.imgOne} alt={props.imgOneAlt} />
-								<img className="w-fit object-contain mx-auto" src={props.imgTwo} alt={props.imgTwoAlt} />
+								<img
+									className="w-fit object-contain mx-auto"
+									src={props.imgOne}
+									alt={props.imgOneAlt}
+									onLoad={props.handleUpdateImageCount}
+								/>
+								<img
+									className="w-fit object-contain mx-auto"
+									src={props.imgTwo}
+									alt={props.imgTwoAlt}
+									onLoad={props.handleUpdateImageCount}
+								/>
 								<img
 									className={"w-fit object-contain mx-auto" + ` ${!props.imgFour ? "hidden lg:block" : ""}`}
 									src={props.imgThree}
 									alt={props.imgThreeAlt}
+									onLoad={props.handleUpdateImageCount}
 								/>
-								{props.imgFour && <img className="w-fit object-contain mx-auto" src={props.imgFour} alt={props.imgFourAlt} />}
+								{props.imgFour && (
+									<img
+										className="w-fit object-contain mx-auto"
+										src={props.imgFour}
+										alt={props.imgFourAlt}
+										onLoad={props.handleUpdateImageCount}
+									/>
+								)}
 							</div>
 						</div>
 					</div>

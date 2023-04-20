@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ} from "gsap";
 
-import BergerBG from "../../../assets/images/berger-bg.png";
-import MacImageOne from "../../../assets/images/mac-img-1.png";
+import BergerBG from "../../../assets/images/home/berger-bg.png";
+import MacImageOne from "../../../assets/images/home/mac-img-1.png";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ViewProject from "../../CircularWords/CircularWords";
 import useDimension from "../../../hooks/useDimension";
@@ -19,6 +19,8 @@ interface Props {
 	link?: string;
 	withViewProject?: boolean;
 	circularWordsCustomStyle?: string;
+
+	handleUpdateImageCount?: () => void;
 }
 
 function MacContainer(props: Props): JSX.Element {
@@ -176,7 +178,12 @@ function MacContainer(props: Props): JSX.Element {
 						onMouseOut={props.withViewProject ? handleMouseLeave : undefined}
 						onClick={handleOnClick}
 					>
-						<img className="gsap-berger-primary-bg h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
+						<img
+							className="gsap-berger-primary-bg h-full w-full absolute rounded-3xl"
+							src={BergerBG}
+							alt="Berger Paints bg"
+							onLoad={props.handleUpdateImageCount}
+						/>
 						<div className="flex flex-col justify-start items-start lg:items-center gap-8 pt-12 sm:pt-20 w-full z-10 text-left lg:text-center">
 							<span className="gsap-berger-content font-semibold text-3xl 2xs:text-4xl md:!text-5xl max-w-sm md:leading-[4rem] text-left lg:text-center">
 								Berger Paints
@@ -199,6 +206,7 @@ function MacContainer(props: Props): JSX.Element {
 										``
 									}
 									src={MacImageOne}
+									onLoad={props.handleUpdateImageCount}
 									alt="Mac showing app landing page(Berger Paints)"
 								/>
 								{props.withViewProject && (

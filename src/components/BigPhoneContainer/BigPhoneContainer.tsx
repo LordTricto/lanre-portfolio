@@ -27,6 +27,8 @@ interface Props {
 	link?: string;
 	withViewProject?: boolean;
 	circularWordsCustomStyle?: string;
+
+	handleUpdateImageCount?: () => void;
 }
 
 function BigPhoneContainer(props: Props): JSX.Element {
@@ -233,6 +235,7 @@ function BigPhoneContainer(props: Props): JSX.Element {
 									}
 									src={props.imgOne}
 									alt={props.imgOneAlt}
+									onLoad={props.handleUpdateImageCount}
 								/>
 								{props.withViewProject && (
 									<div className="gsap-view-project absolute bottom-5 -right-2 3xs:bottom-7 md:bottom-14 3xs:right-0 lg:hidden z-30">

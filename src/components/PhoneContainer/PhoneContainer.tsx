@@ -34,6 +34,7 @@ interface Props {
 	link?: string;
 	withViewProject?: boolean;
 	circularWordsCustomStyle?: string;
+	handleUpdateImageCount?: () => void;
 }
 
 function PhoneContainer(props: Props): JSX.Element {
@@ -268,6 +269,7 @@ function PhoneContainer(props: Props): JSX.Element {
 											`${props.customImgOneStyle || ""} ` +
 											`gsap-image-tag`
 										}
+										onLoad={props.handleUpdateImageCount}
 										src={props.imgOne}
 										alt={props.imgOneAlt}
 									/>
@@ -326,6 +328,7 @@ function PhoneContainer(props: Props): JSX.Element {
 											`absolute bottom-10 sm:bottom-16 xl:left-0 ` +
 											`gsap-image-tag`
 										}
+										onLoad={props.handleUpdateImageCount}
 										src={props.imgOne}
 										alt={props.imgOneAlt}
 									/>
@@ -335,6 +338,7 @@ function PhoneContainer(props: Props): JSX.Element {
 											`absolute bottom-10 sm:bottom-16 right-0 ` +
 											`gsap-image-tag`
 										}
+										onLoad={props.handleUpdateImageCount}
 										src={props.imgTwo}
 										alt={props.imgTwoAlt}
 									/>

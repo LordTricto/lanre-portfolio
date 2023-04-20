@@ -8,7 +8,11 @@ import useDimension from "../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Nav(): JSX.Element {
+interface Props {
+	pageLoaded: boolean;
+}
+
+function Nav(props: Props): JSX.Element {
 	const {width} = useDimension();
 	const navigate = useNavigate();
 	const tl = useRef<gsap.core.Timeline | undefined>();
@@ -23,17 +27,21 @@ function Nav(): JSX.Element {
 	useLayoutEffect(() => {
 		setIsAnimationDone(false);
 		setActiveRoute("");
-		const timeout2 = setTimeout(
-			() => {
-				setIsAnimationDone(true);
-				setActiveRoute(location.pathname);
-			},
-			location.pathname === "/" ? (width > 1023 ? 8000 : 8500) : 6000
-		);
-		return () => {
-			clearTimeout(timeout2);
-		};
-	}, []);
+
+		if (props.pageLoaded) {
+			console.log("has started");
+
+			setTimeout(
+				() => {
+					setIsAnimationDone(true);
+					setActiveRoute(location.pathname);
+					console.log("nav is showing");
+				},
+				location.pathname === "/" ? (width > 1023 ? 8500 : 8500) : 6000
+			);
+		}
+	}, [props.pageLoaded]);
+	// }, [location.pathname, props.pageLoaded]);
 
 	useEffect(() => {
 		if (!isNavOpen) return;

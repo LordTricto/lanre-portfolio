@@ -1,24 +1,25 @@
 import {Link, useLocation} from "react-router-dom";
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
 import BigPhoneContainer from "../../../components/BigPhoneContainer/BigPhoneContainer";
 import CircularWords from "../../../components/CircularWords/CircularWords";
 import ContactMe from "../../../components/Lenco/ContactMe/ContactMe";
 import {ReactComponent as DownloadIcon} from "../../../assets/svg/download-icon.svg";
-import ImageFive from "../../../assets/images/img-5.png";
-import ImageFour from "../../../assets/images/img-4.png";
-import ImageOne from "../../../assets/images/img-1.png";
-import ImageThree from "../../../assets/images/img-3.png";
-import ImageTwo from "../../../assets/images/img-2.png";
+import ImageFive from "../../../assets/images/home/img-5.png";
+import ImageFour from "../../../assets/images/home/img-4.png";
+import ImageOne from "../../../assets/images/home/img-1.png";
+import ImageThree from "../../../assets/images/home/img-3.png";
+import ImageTwo from "../../../assets/images/home/img-2.png";
 import MacContainer from "../../../components/Lenco/MacContainer/MacContainer";
 import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
-import PhoneImageFive from "../../../assets/images/phone-img-5.png";
-import PhoneImageFour from "../../../assets/images/phone-img-4.png";
-import PhoneImageOne from "../../../assets/images/phone-img-1.png";
-import PhoneImageThree from "../../../assets/images/phone-img-3.png";
-import PhoneImageTwo from "../../../assets/images/phone-img-2.png";
+import PhoneImageFive from "../../../assets/images/home/phone-img-5.png";
+import PhoneImageFour from "../../../assets/images/home/phone-img-4.png";
+import PhoneImageOne from "../../../assets/images/home/phone-img-1.png";
+import PhoneImageThree from "../../../assets/images/home/phone-img-3.png";
+import PhoneImageTwo from "../../../assets/images/home/phone-img-2.png";
+import PuffLoader from "react-spinners/PuffLoader";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
 
@@ -34,6 +35,9 @@ function Home(): JSX.Element {
 	const location = useLocation().state as LocationState;
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
+	const [numOfImages, setNumOfImages] = useState<number>(0);
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -42,278 +46,302 @@ function Home(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				tl.current = gsap.timeline();
-				document.body;
+		if (numOfImages === 12) {
+			setIsLoading(false);
+			setShowLoader(false);
+		} else {
+			setTimeout(() => {
+				setShowLoader(true);
+			}, 4000);
+		}
+		const ctx = gsap.context(() => {
+			tl.current = gsap.timeline();
 
-				tl.current.to(".gsap-hero-text", {
-					color: "white",
+			tl.current.to(".gsap-hero-text", {
+				color: "white",
+				duration: 0,
+				onComplete: () => {
+					document.body.style.overflow = "hidden";
+					document.body.style.scrollBehavior = "unset";
+				},
+			});
+
+			if (numOfImages !== 12) {
+				tl.current.pause(0.05);
+			}
+
+			tl.current.to(".gsap-page-entry-transition-div", {
+				opacity: 0,
+				pointerEvents: "none",
+				duration: 1,
+				delay: 1,
+			});
+			tl.current.from(".gsap-hero-text", {
+				duration: 1.5,
+				scale: 5,
+			});
+			tl.current.from(".gsap-overlay-div", {
+				duration: width < 547 ? 5 : 4.6,
+				width: 0,
+				ease: Power1.easeOut,
+			});
+			tl.current.to(
+				".gsap-overlay-div",
+				{
 					duration: 0,
-					onComplete: () => {
-						document.body.style.overflow = "hidden";
-						document.body.style.scrollBehavior = "unset";
-					},
-				});
-				tl.current.to(".gsap-page-entry-transition-div", {
+					pointerEvents: "none",
+					opacity: 0,
+				},
+				width < 547 ? "=-1" : "=-1.4"
+			);
+			tl.current.to(
+				".gsap-initial-div",
+				{
+					duration: 2,
 					opacity: 0,
 					pointerEvents: "none",
-					duration: 1,
-					delay: 1,
-				});
-				tl.current.from(".gsap-hero-text", {
-					duration: 1.5,
-					scale: 5,
-				});
-				tl.current.from(".gsap-overlay-div", {
-					duration: width < 547 ? 5 : 4.6,
-					width: 0,
-					ease: Power1.easeOut,
-				});
-				tl.current.to(
-					".gsap-overlay-div",
-					{
-						duration: 0,
-						pointerEvents: "none",
-						opacity: 0,
-					},
-					width < 547 ? "=-1" : "=-1.4"
-				);
-				tl.current.to(
-					".gsap-initial-div",
-					{
-						duration: 2,
-						opacity: 0,
-						pointerEvents: "none",
-					},
-					width < 547 ? "=-1" : "=-1.4"
-				);
-				tl.current.to(
-					".gsap-hero-text",
-					{
-						duration: 0,
-						color: "#1F2130",
-						ease: Power4.easeOut,
-					},
-					width < 547 ? "=-2.2" : "=-2"
-				);
-				tl.current.from(".gsap-contact-me-now", {
-					duration: 1,
-					opacity: 0,
+				},
+				width < 547 ? "=-1" : "=-1.4"
+			);
+			tl.current.to(
+				".gsap-hero-text",
+				{
+					duration: 0,
+					color: "#1F2130",
 					ease: Power4.easeOut,
-					onComplete: () => {
-						document.body.style.overflow = "unset";
-						document.body.style.scrollBehavior = "smooth";
-					},
+				},
+				width < 547 ? "=-2.2" : "=-2"
+			);
+			tl.current.from(".gsap-contact-me-now", {
+				duration: 1,
+				opacity: 0,
+				ease: Power4.easeOut,
+				onComplete: () => {
+					document.body.style.overflow = "unset";
+					document.body.style.scrollBehavior = "smooth";
+				},
+			});
+
+			gsap.from(".gsap-img-1", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top center",
+					scrub: 1,
+				},
+				y: -40,
+				ease: Circ.easeOut,
+			});
+
+			gsap.from(".gsap-img-3", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top center",
+					scrub: 1,
+				},
+				y: +40,
+				ease: Circ.easeOut,
+			});
+
+			gsap.from(".gsap-img-4", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-2",
+					start: "top center",
+					end: "bottom 100px",
+					scrub: 1,
+				},
+				y: -40,
+				ease: Circ.easeOut,
+			});
+
+			gsap.from(".gsap-img-5", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-2",
+					start: "top center",
+					end: "bottom 100px",
+					scrub: 1,
+				},
+				y: +40,
+				ease: Circ.easeOut,
+			});
+
+			gsap.from(".gsap-img-1", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top bottom-=300px",
+					// toggleActions: "restart none none reverse",
+				},
+				translateX: "-20%",
+				opacity: 0,
+				duration: 0.5,
+				ease: Circ.easeOut,
+				clearProps: "translateX,opacity",
+			});
+			gsap.from(".gsap-img-2", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top bottom-=300px",
+					// toggleActions: "restart none none reverse",
+				},
+				translateY: "20%",
+				opacity: 0,
+				duration: 0.5,
+				ease: Circ.easeOut,
+				clearProps: "translateY,opacity",
+			});
+			gsap.from(".gsap-img-3", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-1",
+					start: "top bottom-=300px",
+					// toggleActions: "restart none none reverse",
+				},
+				translateX: "20%",
+				opacity: 0,
+				duration: 0.5,
+				ease: Circ.easeOut,
+				clearProps: "translateX,opacity",
+			});
+
+			gsap.from(".gsap-img-4", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-2",
+					start: "top bottom-=300px",
+					// toggleActions: "restart none none reverse",
+				},
+				translateX: "-20%",
+				opacity: 0,
+				duration: 0.5,
+				ease: Circ.easeOut,
+				clearProps: "translateX,opacity",
+			});
+			gsap.from(".gsap-img-5", {
+				scrollTrigger: {
+					trigger: ".gsap-imgs-2",
+					start: "top bottom-=300px",
+					// toggleActions: "restart none none reverse",
+				},
+				translateX: "20%",
+				opacity: 0,
+				duration: 0.5,
+				ease: Circ.easeOut,
+				clearProps: "translateX,opacity",
+			});
+
+			tl2.current = gsap.timeline({
+				scrollTrigger: {
+					trigger: ".gsap-memo",
+					start: width < 476 ? "top center+=200px" : "top center",
+				},
+			});
+
+			if (width > 767) {
+				tl2.current.from(".gsap-memo", {
+					width: "100%",
+					borderRadius: 0,
+					padding: 0,
+					height: "30rem",
+					duration: 1.5,
+					ease: "M0,0 C0,0 0.024,0.595 0.2,0.8 0.406,1.04 1,1 1,1 ",
+					clearProps: "height,width,padding,borderRadius",
 				});
 
-				gsap.from(".gsap-img-1", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-1",
-						start: "top center",
-						scrub: 1,
-					},
-					y: -40,
-					ease: Circ.easeOut,
-				});
-
-				gsap.from(".gsap-img-3", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-1",
-						start: "top center",
-						scrub: 1,
-					},
-					y: +40,
-					ease: Circ.easeOut,
-				});
-
-				gsap.from(".gsap-img-4", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-2",
-						start: "top center",
-						end: "bottom 100px",
-						scrub: 1,
-					},
-					y: -40,
-					ease: Circ.easeOut,
-				});
-
-				gsap.from(".gsap-img-5", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-2",
-						start: "top center",
-						end: "bottom 100px",
-						scrub: 1,
-					},
-					y: +40,
-					ease: Circ.easeOut,
-				});
-
-				gsap.from(".gsap-img-1", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-1",
-						start: "top bottom-=300px",
-						// toggleActions: "restart none none reverse",
-					},
-					translateX: "-20%",
-					opacity: 0,
-					duration: 0.5,
-					ease: Circ.easeOut,
-					clearProps: "translateX,opacity",
-				});
-				gsap.from(".gsap-img-2", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-1",
-						start: "top bottom-=300px",
-						// toggleActions: "restart none none reverse",
-					},
-					translateY: "20%",
-					opacity: 0,
-					duration: 0.5,
-					ease: Circ.easeOut,
-					clearProps: "translateY,opacity",
-				});
-				gsap.from(".gsap-img-3", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-1",
-						start: "top bottom-=300px",
-						// toggleActions: "restart none none reverse",
-					},
-					translateX: "20%",
-					opacity: 0,
-					duration: 0.5,
-					ease: Circ.easeOut,
-					clearProps: "translateX,opacity",
-				});
-
-				gsap.from(".gsap-img-4", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-2",
-						start: "top bottom-=300px",
-						// toggleActions: "restart none none reverse",
-					},
-					translateX: "-20%",
-					opacity: 0,
-					duration: 0.5,
-					ease: Circ.easeOut,
-					clearProps: "translateX,opacity",
-				});
-				gsap.from(".gsap-img-5", {
-					scrollTrigger: {
-						trigger: ".gsap-imgs-2",
-						start: "top bottom-=300px",
-						// toggleActions: "restart none none reverse",
-					},
-					translateX: "20%",
-					opacity: 0,
-					duration: 0.5,
-					ease: Circ.easeOut,
-					clearProps: "translateX,opacity",
-				});
-
-				tl2.current = gsap.timeline({
-					scrollTrigger: {
-						trigger: ".gsap-memo",
-						start: width < 476 ? "top center+=200px" : "top center",
-					},
-				});
-
-				if (width > 767) {
-					tl2.current.from(".gsap-memo", {
-						width: "100%",
+				tl2.current.from(
+					".gsap-memo-primary",
+					{
 						borderRadius: 0,
-						padding: 0,
-						height: "30rem",
 						duration: 1.5,
-						ease: "M0,0 C0,0 0.024,0.595 0.2,0.8 0.406,1.04 1,1 1,1 ",
-						clearProps: "height,width,padding,borderRadius",
-					});
-
-					tl2.current.from(
-						".gsap-memo-primary",
-						{
-							borderRadius: 0,
-							duration: 1.5,
-							clearProps: "borderRadius",
-						},
-						"<"
-					);
-				} else {
-					tl2.current.from(".gsap-memo", {
-						opacity: 0,
-						duration: width < 476 ? 0.5 : 1,
-						translateY: "10%",
-						clearProps: "opacity,translateY",
-					});
-				}
-
-				tl2.current.from([".gsap-memo-one", ".gsap-memo-two"], {
-					translateY: "100%",
+						clearProps: "borderRadius",
+					},
+					"<"
+				);
+			} else {
+				tl2.current.from(".gsap-memo", {
 					opacity: 0,
 					duration: width < 476 ? 0.5 : 1,
-					stagger: width < 476 ? 0.25 : 0.5,
-					ease: Circ.easeOut,
-					clearProps: "transform,translateY",
+					translateY: "10%",
+					clearProps: "opacity,translateY",
 				});
-				tl2.current.to(".gsap-memo-one-span", {
+			}
+
+			tl2.current.from([".gsap-memo-one", ".gsap-memo-two"], {
+				translateY: "100%",
+				opacity: 0,
+				duration: width < 476 ? 0.5 : 1,
+				stagger: width < 476 ? 0.25 : 0.5,
+				ease: Circ.easeOut,
+				clearProps: "transform,translateY",
+			});
+			tl2.current.to(".gsap-memo-one-span", {
+				color: "#1F2130",
+				duration: width < 476 ? 0.25 : 0.5,
+				stagger: width < 476 ? 0.125 : 0.25,
+				ease: Power4.easeInOut,
+			});
+			tl2.current.to(
+				".gsap-memo-two-span",
+				{
 					color: "#1F2130",
 					duration: width < 476 ? 0.25 : 0.5,
 					stagger: width < 476 ? 0.125 : 0.25,
 					ease: Power4.easeInOut,
-				});
-				tl2.current.to(
-					".gsap-memo-two-span",
-					{
-						color: "#1F2130",
-						duration: width < 476 ? 0.25 : 0.5,
-						stagger: width < 476 ? 0.125 : 0.25,
-						ease: Power4.easeInOut,
-					},
-					width < 476 ? ">+0.25" : ">+0.5"
-				);
+				},
+				width < 476 ? ">+0.25" : ">+0.5"
+			);
 
-				gsap.from(".gsap-section-project-header", {
-					scrollTrigger: {
-						trigger: ".gsap-section-project",
-						start: width < 476 ? "top center" : "top center-=150px",
-					},
-					translateY: "20%",
-					opacity: 0,
-					duration: width < 476 ? 0.5 : 1,
-					ease: Circ.easeOut,
-					clearProps: "translateY,opacity",
-				});
-			}, landingDivRef);
+			gsap.from(".gsap-section-project-header", {
+				scrollTrigger: {
+					trigger: ".gsap-section-project",
+					start: width < 476 ? "top center" : "top center-=150px",
+				},
+				translateY: "20%",
+				opacity: 0,
+				duration: width < 476 ? 0.5 : 1,
+				ease: Circ.easeOut,
+				clearProps: "translateY,opacity",
+			});
+		}, landingDivRef);
 
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
+		return () => {
+			ctx.revert(); // cleanup!!
 		};
+	}, [numOfImages]);
 
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
+	const handleUpdateImageCount = useCallback(() => {
+		setNumOfImages((prev) => prev + 1);
 	}, []);
 
 	return (
 		<>
-			<Nav />
+			<Nav pageLoaded={numOfImages === 12} />
+
 			<main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 relative overflow-hidden" ref={landingDivRef}>
 				<div
 					className={
-						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 bg-black ` +
+						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-black fixed top-0 left-0 z-60 ` +
+						`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
 						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
 						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
 						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} ` +
-						`${location?.from === "/accrue" ? "" : ""}`
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
+					}
+				>
+					<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
+						<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
+					</div>
+				</div>
+				<div
+					className={
+						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 bg-black ` +
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
 					}
 				></div>
+
 				<section className="relative z-10 w-full overflow-hidden">
 					<div className="h-screen px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto w-full">
 						<div className="h-full w-full flex flex-col justify-center items-center gap-10">
@@ -361,6 +389,7 @@ function Home(): JSX.Element {
 								}
 								src={ImageOne}
 								alt="chair"
+								onLoad={handleUpdateImageCount}
 							/>
 							<div
 								className={
@@ -373,6 +402,7 @@ function Home(): JSX.Element {
 										className="object-contain h-full w-max grayscale transition !ease-linear duration-300 hover:grayscale-0 mx-auto "
 										src={ImageTwo}
 										alt="map"
+										onLoad={handleUpdateImageCount}
 									/>
 								</div>
 							</div>
@@ -385,6 +415,7 @@ function Home(): JSX.Element {
 								}
 								src={ImageThree}
 								alt="people"
+								onLoad={handleUpdateImageCount}
 							/>
 						</div>
 						<div className="gsap-imgs-2 relative mb-8 xs:mb-16 lg:mb-32 mt-16 2xs:mt-0 h-[200px] md:!h-[350px] lg:!h-[450px] xl:!h-[550px]">
@@ -397,6 +428,7 @@ function Home(): JSX.Element {
 								}
 								src={ImageFour}
 								alt="people dancing"
+								onLoad={handleUpdateImageCount}
 							/>
 
 							<img
@@ -408,6 +440,7 @@ function Home(): JSX.Element {
 								}
 								src={ImageFive}
 								alt="hero page"
+								onLoad={handleUpdateImageCount}
 							/>
 						</div>
 					</div>
@@ -469,6 +502,8 @@ function Home(): JSX.Element {
 							imgOneAlt="phone showing app dashboard(lenco)"
 							link="/lenco"
 							withViewProject
+							handleUpdateImageCount={handleUpdateImageCount}
+
 							// delay={1}
 						/>
 
@@ -484,6 +519,8 @@ function Home(): JSX.Element {
 							imgFirst
 							link="/ridr"
 							withViewProject
+							handleUpdateImageCount={handleUpdateImageCount}
+
 							// delay={1}
 						/>
 
@@ -505,6 +542,7 @@ function Home(): JSX.Element {
 										delay={width > 1279 ? 1 : undefined}
 										link="/accrue"
 										withViewProject
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 								<div className="w-full lg:w-50% xl:w-40%">
@@ -523,11 +561,17 @@ function Home(): JSX.Element {
 										link="/fora"
 										withViewProject
 										circularWordsCustomStyle="text-white lg:text-black"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 							</div>
 						</div>
-						<MacContainer link="/berger" withViewProject circularWordsCustomStyle="text-black" />
+						<MacContainer
+							link="/berger"
+							withViewProject
+							circularWordsCustomStyle="text-black"
+							handleUpdateImageCount={handleUpdateImageCount}
+						/>
 					</div>
 				</section>
 				<ContactMe />

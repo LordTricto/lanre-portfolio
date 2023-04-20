@@ -7,82 +7,75 @@ import useDimension from "../../hooks/useDimension";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function CardOfCards(): JSX.Element {
+interface Props {
+	handleUpdateImageCount?: () => void;
+}
+
+function CardOfCards(props: Props): JSX.Element {
 	const phoneRef = useRef<HTMLDivElement | null>(null);
 	const {width} = useDimension();
 
 	const tl = useRef<gsap.core.Timeline | undefined>();
 
 	useLayoutEffect(() => {
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				if (width < 1024) {
-					gsap.from(".gsap-card-primary", {
-						scrollTrigger: {
-							trigger: ".gsap-card-primary",
-							start: "top center+=150px",
-						},
-						translateY: "10%",
-						opacity: 0,
-						duration: width < 476 ? 0.5 : 1,
-						clearProps: "opacity,translateY",
-						// toggleActions: "restart none none reverse",
-					});
-				}
-
-				tl.current = gsap.timeline({
+		const ctx = gsap.context(() => {
+			if (width < 1024) {
+				gsap.from(".gsap-card-primary", {
 					scrollTrigger: {
 						trigger: ".gsap-card-primary",
-						start: width < 476 ? "top center+=200px" : "top center",
+						start: "top center+=150px",
 					},
+					translateY: "10%",
+					opacity: 0,
+					duration: width < 476 ? 0.5 : 1,
+					clearProps: "opacity,translateY",
+					// toggleActions: "restart none none reverse",
 				});
-				if (width > 1023) {
-					tl.current.from(".gsap-card-primary", {
-						width: "100%",
+			}
+
+			tl.current = gsap.timeline({
+				scrollTrigger: {
+					trigger: ".gsap-card-primary",
+					start: width < 476 ? "top center+=200px" : "top center",
+				},
+			});
+			if (width > 1023) {
+				tl.current.from(".gsap-card-primary", {
+					width: "100%",
+					borderRadius: 0,
+					padding: 0,
+					duration: 1.5,
+					ease: Circ.easeOut,
+					clearProps: "width,padding,borderRadius",
+				});
+				tl.current.from(
+					".gsap-card-primary-bg",
+					{
 						borderRadius: 0,
-						padding: 0,
 						duration: 1.5,
 						ease: Circ.easeOut,
-						clearProps: "width,padding,borderRadius",
-					});
-					tl.current.from(
-						".gsap-card-primary-bg",
-						{
-							borderRadius: 0,
-							duration: 1.5,
-							ease: Circ.easeOut,
-							clearProps: "borderRadius",
-						},
-						"<"
-					);
-				}
-				tl.current.from(
-					".gsap-card-primary-images div",
-					{
-						translateY: "10%",
-						opacity: 0,
-						stagger: width < 476 ? 0.125 : 0.25,
-						duration: width < 476 ? 0.125 : 0.25,
-						ease: Circ.easeOut,
-						clearProps: "opacity,translateY",
+						clearProps: "borderRadius",
 					},
-					">"
+					"<"
 				);
-			}, phoneRef);
+			}
+			tl.current.from(
+				".gsap-card-primary-images div",
+				{
+					translateY: "10%",
+					opacity: 0,
+					stagger: width < 476 ? 0.125 : 0.25,
+					duration: width < 476 ? 0.125 : 0.25,
+					ease: Circ.easeOut,
+					clearProps: "opacity,translateY",
+				},
+				">"
+			);
+		}, phoneRef);
 
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
+		return () => {
+			ctx.revert(); // cleanup!!
 		};
-
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
 	}, []);
 
 	return (
@@ -90,7 +83,12 @@ function CardOfCards(): JSX.Element {
 			<div className="w-full h-full" ref={phoneRef}>
 				<div className="gsap-card-primary px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto relative rounded-3xl">
 					<div className="w-full relative">
-						<img className="gsap-card-primary-bg h-full w-full absolute rounded-3xl" src={BergerBG} alt="Berger Paints bg" />
+						<img
+							className="gsap-card-primary-bg h-full w-full absolute rounded-3xl"
+							src={BergerBG}
+							alt="Berger Paints bg"
+							onLoad={props.handleUpdateImageCount}
+						/>
 						<div className="gsap-card-primary-images flex justify-start items-start flex-wrap gap-5 w-full px-7 md:px-14 py-8 md:py-12 ">
 							<div className="flex justify-start items-start flex-wrap gap-5 w-full">
 								<div className="py-2 md:py-3 px-4 md:px-5 rounded-xl md:rounded-2xl bg-white text-black text-sm md:text-base font-medium">

@@ -23,6 +23,7 @@ interface Props {
 
 	isSingle?: boolean;
 	animateFromBottom?: boolean;
+	handleUpdateImageCount?: () => void;
 }
 
 function SideImageWithNoSectionContainer(props: Props): JSX.Element {
@@ -136,6 +137,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 										className={"origin-top object-contain " + "w-full " + `${props.customImageOneStyle || ""}`}
 										src={props.imgOne}
 										alt={props.imgOneAlt}
+										onLoad={props.handleUpdateImageCount}
 									/>
 								</div>
 							)}
@@ -152,6 +154,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 											className={"origin-top object-contain " + " w-full " + `${props.customImageOneStyle || ""}`}
 											src={props.imgOne}
 											alt={props.imgOneAlt}
+											onLoad={props.handleUpdateImageCount}
 										/>
 									</div>
 									<div
@@ -165,6 +168,7 @@ function SideImageWithNoSectionContainer(props: Props): JSX.Element {
 											className={"origin-top object-contain " + " w-full " + `${props.customImageTwoStyle || ""}`}
 											src={props.imgTwo}
 											alt={props.imgTwoAlt}
+											onLoad={props.handleUpdateImageCount}
 										/>
 									</div>
 								</>

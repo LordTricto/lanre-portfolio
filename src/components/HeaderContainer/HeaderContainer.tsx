@@ -16,6 +16,8 @@ interface Props {
 	gsapImgTwoContainerTag: string;
 	gsapImgThreeTag: string;
 	isSingle?: boolean;
+
+	handleUpdateImageCount?: () => void;
 }
 
 function HeaderContainer(props: Props): JSX.Element {
@@ -53,6 +55,7 @@ function HeaderContainer(props: Props): JSX.Element {
 										// `absolute top-0 left-0 right-0 bottom-0 m-auto ` +
 										`${props.gsapImgOneTag}`
 									}
+									onLoad={props.handleUpdateImageCount}
 									src={props.headerImgOne}
 									alt={props.headerImgOneAlt}
 								/>
@@ -72,6 +75,7 @@ function HeaderContainer(props: Props): JSX.Element {
 
 										// `absolute -bottom-[20%] xs:-bottom-[30%] xl:-bottom-[45%] transform-none `
 									}
+									onLoad={props.handleUpdateImageCount}
 									src={props.headerImgOne}
 									alt={props.headerImgOneAlt}
 								/>
@@ -85,6 +89,7 @@ function HeaderContainer(props: Props): JSX.Element {
 										`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[420px] lg:!h-[520px] xl:!h-[660px] ` +
 										`-translate-y-16 xs:-translate-y-[5.75rem] sm:-translate-y-24 md:-translate-y-32 lg:-translate-y-40 xl:-translate-y-48`
 									}
+									onLoad={props.handleUpdateImageCount}
 									src={props.headerImgTwo}
 									alt={props.headerImgTwoAlt}
 								/>
@@ -103,6 +108,7 @@ function HeaderContainer(props: Props): JSX.Element {
 										`h-[220px] xs:h-[280px] sm:h-[320px] md:!h-[420px] lg:!h-[520px] xl:!h-[660px] ml-6.5 ` +
 										`${props.gsapImgTwoTag}`
 									}
+									onLoad={props.handleUpdateImageCount}
 									src={props.headerImgTwo}
 									alt={props.headerImgTwoAlt}
 								/>
@@ -118,6 +124,7 @@ function HeaderContainer(props: Props): JSX.Element {
 
 										// `absolute -bottom-[20%] xs:-bottom-[30%] xl:-bottom-[45%] transform-nThree `
 									}
+									onLoad={props.handleUpdateImageCount}
 									src={props.headerImgThree}
 									alt={props.headerImgThreeAlt}
 								/>

@@ -1,5 +1,5 @@
 import {LencoSection, LencoSections} from "../Services/lenco.constant";
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ, Power4} from "gsap";
 
 import ArchitectureImg from "../../../assets/images/lenco/lenco-architecture-1.png";
@@ -19,6 +19,7 @@ import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import PhysicalImgOne from "../../../assets/images/lenco/lenco-physical-1.png";
 import PhysicalImgTwo from "../../../assets/images/lenco/lenco-physical-2.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
+import {PuffLoader} from "react-spinners";
 import ReimbursementsListImgFour from "../../../assets/images/lenco/lenco-reimbursement-4.png";
 import ReimbursementsListImgOne from "../../../assets/images/lenco/lenco-reimbursement-1.png";
 import ReimbursementsListImgThree from "../../../assets/images/lenco/lenco-reimbursement-3.png";
@@ -46,6 +47,9 @@ function Lenco(): JSX.Element {
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
 	const {width} = useDimension();
+	const [isLoading, setIsLoading] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
+	const [numOfImages, setNumOfImages] = useState<number>(0);
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -54,6 +58,16 @@ function Lenco(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+
+		if (numOfImages === 22) {
+			setIsLoading(false);
+			setShowLoader(false);
+		} else {
+			setTimeout(() => {
+				setShowLoader(true);
+			}, 4000);
+		}
+
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
@@ -79,6 +93,11 @@ function Lenco(): JSX.Element {
 				translateY: "unset",
 				duration: 0,
 			});
+
+			if (numOfImages !== 22) {
+				tl.current.pause(0.05);
+			}
+
 			tl.current.to(".gsap-page-entry-transition-div", {
 				opacity: 0,
 				pointerEvents: "none",
@@ -161,24 +180,44 @@ function Lenco(): JSX.Element {
 		return () => {
 			ctx.revert(); // cleanup!!
 		};
+	}, [numOfImages]);
+
+	const handleUpdateImageCount = useCallback(() => {
+		setNumOfImages((prev) => prev + 1);
 	}, []);
 
 	return (
 		<>
-			<Nav />
+			<Nav pageLoaded={numOfImages === 22} />
 			<main
-				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-lenco-bg-dark min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
+				className="flex flex-col justify-start items-start h-full w-full gap-4 bg-lenco-bg-dark min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
 				ref={landingDivRef}
 			>
 				<div
 					className={
+						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-white-dark fixed top-0 left-0 z-60 ` +
+						`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
+					}
+				>
+					<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
+						<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
+					</div>
+				</div>
+				<div
+					className={
 						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
-						`${location?.from === "/" ? "bg-white-dark " : ""} ` +
-						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
-						`${location?.from === "/accrue" ? "" : ""}`
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
 					}
 				></div>
 				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
@@ -196,6 +235,8 @@ function Lenco(): JSX.Element {
 						headerImgTwoAlt="lenco-phone-app-two"
 						headerImgThree={HeaderImgThree}
 						headerImgThreeAlt="lenco-phone-app-three"
+						handleUpdateImageCount={handleUpdateImageCount}
+
 						// isSingle
 					/>
 					<ProjectDescription
@@ -239,10 +280,10 @@ function Lenco(): JSX.Element {
 								paragraphStyle="text-blue-quat"
 							/>
 							<div className="gsap-assessing-phone-imgs grid grid-cols-2 2xs:grid-cols-4 mt-4 gap-8 lg:gap-16">
-								<img className="w-fit object-fill" src={AssessingImgOne} alt="lenco-old-app" />
-								<img className="w-fit object-contain" src={AssessingImgTwo} alt="lenco-old-app" />
-								<img className="w-fit object-contain" src={AssessingImgThree} alt="lenco-old-app" />
-								<img className="w-fit object-contain" src={AssessingImgFour} alt="lenco-old-app" />
+								<img className="w-fit object-fill" src={AssessingImgOne} alt="lenco-old-app" onLoad={handleUpdateImageCount} />
+								<img className="w-fit object-contain" src={AssessingImgTwo} alt="lenco-old-app" onLoad={handleUpdateImageCount} />
+								<img className="w-fit object-contain" src={AssessingImgThree} alt="lenco-old-app" onLoad={handleUpdateImageCount} />
+								<img className="w-fit object-contain" src={AssessingImgFour} alt="lenco-old-app" onLoad={handleUpdateImageCount} />
 							</div>
 						</div>
 						<Sections
@@ -265,7 +306,12 @@ function Lenco(): JSX.Element {
 								paragraphStyle="text-blue-quat"
 							/>
 							<div className="gsap-revised-phone-imgs">
-								<img className={`w-full ` + `object-contain`} src={ArchitectureImg} alt="lenco-phone-app" />
+								<img
+									className={`w-full ` + `object-contain`}
+									src={ArchitectureImg}
+									alt="lenco-phone-app"
+									onLoad={handleUpdateImageCount}
+								/>
 							</div>
 						</div>
 					</div>
@@ -295,6 +341,8 @@ function Lenco(): JSX.Element {
 										imgTwoAlt="second phone showing home screen(lenco)"
 										isSingle={false}
 										customTextOverlayStyle="bg-white-dark "
+										handleUpdateImageCount={handleUpdateImageCount}
+
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>
@@ -309,6 +357,7 @@ function Lenco(): JSX.Element {
 										imgOneAlt="phone showing app switching business(lenco)"
 										isSingle
 										customTextOverlayStyle="bg-fora-blue"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 							</div>
@@ -331,6 +380,7 @@ function Lenco(): JSX.Element {
 							imgThreeAlt="phone showing app switching business(lenco)"
 							imgFour={TransactionListImgFour}
 							imgFourAlt="phone showing app switching business(lenco)"
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<div className="w-full lg:w-50% xl:w-40%">
@@ -344,6 +394,7 @@ function Lenco(): JSX.Element {
 									imgOneAlt="phone showing app(lenco-virtual)"
 									isSingle
 									customTextOverlayStyle="bg-white-dark "
+									handleUpdateImageCount={handleUpdateImageCount}
 								/>
 							</div>
 							<div className="w-full lg:w-50% xl:w-60%">
@@ -359,6 +410,7 @@ function Lenco(): JSX.Element {
 									imgTwoAlt="second phone showing app(lenco-virtual)"
 									isSingle={false}
 									customTextOverlayStyle="bg-fora-blue "
+									handleUpdateImageCount={handleUpdateImageCount}
 								/>
 							</div>
 						</div>
@@ -379,6 +431,7 @@ function Lenco(): JSX.Element {
 							imgThreeAlt="phone showing app switching business(lenco)"
 							imgFour={ReimbursementsListImgFour}
 							imgFourAlt="phone showing app switching business(lenco)"
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 					</div>
 

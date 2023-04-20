@@ -22,6 +22,8 @@ interface Props {
 	customSubtitleStyle?: string;
 	customOverlayStyle?: string;
 	customImageStyle?: string;
+
+	handleUpdateImageCount?: () => void;
 }
 
 function SideImageContainer(props: Props): JSX.Element {
@@ -30,100 +32,89 @@ function SideImageContainer(props: Props): JSX.Element {
 	const {width} = useDimension();
 
 	useLayoutEffect(() => {
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				setTimeout(() => {
-					tl.current?.scrollTrigger?.refresh();
-					ScrollTrigger.refresh();
-				}, 7000);
+		const ctx = gsap.context(() => {
+			setTimeout(() => {
+				tl.current?.scrollTrigger?.refresh();
+				ScrollTrigger.refresh();
+			}, 7000);
 
-				if (width < 1024) {
-					gsap.from(`.gsap-${props.type}-side-image`, {
-						scrollTrigger: {
-							trigger: `.gsap-${props.type}-side-image`,
-							start: width < 476 ? "top center+=350px" : "top center+=150px",
-						},
-						translateY: "10%",
-						opacity: 0,
-						duration: width < 476 ? 0.5 : 1,
-						clearProps: "opacity,translateY",
-					});
-				}
-
-				tl.current = gsap.timeline({
+			if (width < 1024) {
+				gsap.from(`.gsap-${props.type}-side-image`, {
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-side-image`,
-						start: width < 476 ? "top center+=200px" : "top center",
+						start: width < 476 ? "top center+=350px" : "top center+=150px",
 					},
+					translateY: "10%",
+					opacity: 0,
+					duration: width < 476 ? 0.5 : 1,
+					clearProps: "opacity,translateY",
 				});
+			}
 
-				if (width > 1023) {
-					tl.current.from(`.gsap-${props.type}-side-image`, {
-						width: "100%",
+			tl.current = gsap.timeline({
+				scrollTrigger: {
+					trigger: `.gsap-${props.type}-side-image`,
+					start: width < 476 ? "top center+=200px" : "top center",
+				},
+			});
+
+			if (width > 1023) {
+				tl.current.from(`.gsap-${props.type}-side-image`, {
+					width: "100%",
+					borderRadius: 0,
+					padding: width > 1023 ? 0 : undefined,
+					duration: 1.5,
+					ease: Circ.easeOut,
+					clearProps: "width,padding,borderRadius",
+				});
+				tl.current.from(
+					`.gsap-${props.type}-side-image-primary`,
+					{
 						borderRadius: 0,
-						padding: width > 1023 ? 0 : undefined,
 						duration: 1.5,
-						ease: Circ.easeOut,
-						clearProps: "width,padding,borderRadius",
-					});
-					tl.current.from(
-						`.gsap-${props.type}-side-image-primary`,
-						{
-							borderRadius: 0,
-							duration: 1.5,
-							clearProps: "borderRadius",
-						},
-						"<"
-					);
-				}
-				tl.current.to(
-					`.gsap-${props.type}-side-image-text-overlay`,
-					{
-						height: "0",
-						stagger: width < 476 ? 0.375 : 0.75,
-						duration: width < 476 ? 1 : 2,
-						clearProps: "opacity",
-						ease: Circ.easeInOut,
+						clearProps: "borderRadius",
 					},
-					width < 476 ? ">-0.5" : ">-0.25"
+					"<"
 				);
-				tl.current.from(
-					`.gsap-${props.type}-side-image-content`,
-					{
-						opacity: 0,
-						stagger: width < 476 ? 0.375 : 0.75,
-						duration: width < 476 ? 0.625 : 1.25,
-						clearProps: "translateY,opacity",
-						ease: Circ.easeOut,
-					},
-					width < 476 ? ">-1" : ">-2"
-				);
-				tl.current.from(
-					`.gsap-${props.type}-side-image img`,
-					{
-						opacity: "0",
-						translateX: "10%",
-						duration: width < 476 ? 0.5 : 1,
-						ease: Circ.easeOut,
-						clearProps: "opacity,translateX",
-					},
-					width < 476 ? ">-0.25" : ">-0.5"
-				);
-			}, divRef);
+			}
+			tl.current.to(
+				`.gsap-${props.type}-side-image-text-overlay`,
+				{
+					height: "0",
+					stagger: width < 476 ? 0.375 : 0.75,
+					duration: width < 476 ? 1 : 2,
+					clearProps: "opacity",
+					ease: Circ.easeInOut,
+				},
+				width < 476 ? ">-0.5" : ">-0.25"
+			);
+			tl.current.from(
+				`.gsap-${props.type}-side-image-content`,
+				{
+					opacity: 0,
+					stagger: width < 476 ? 0.375 : 0.75,
+					duration: width < 476 ? 0.625 : 1.25,
+					clearProps: "translateY,opacity",
+					ease: Circ.easeOut,
+				},
+				width < 476 ? ">-1" : ">-2"
+			);
+			tl.current.from(
+				`.gsap-${props.type}-side-image img`,
+				{
+					opacity: "0",
+					translateX: "10%",
+					duration: width < 476 ? 0.5 : 1,
+					ease: Circ.easeOut,
+					clearProps: "opacity,translateX",
+				},
+				width < 476 ? ">-0.25" : ">-0.5"
+			);
+		}, divRef);
 
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
+		return () => {
+			ctx.revert(); // cleanup!!
 		};
-
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
 	}, []);
 
 	return (
@@ -179,6 +170,7 @@ function SideImageContainer(props: Props): JSX.Element {
 									className={"absolute origin-top object-contain " + `${props.customImageStyle || ""}`}
 									src={props.imgOne}
 									alt={props.imgOneAlt}
+									onLoad={props.handleUpdateImageCount}
 								/>
 							</div>
 						</div>

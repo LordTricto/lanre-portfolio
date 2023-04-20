@@ -1,5 +1,5 @@
 import {BergerSection, BergerSections} from "../Services/berger.constant";
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 
 import CardOfCards from "../../../components/CardOfCards/CardOfCards";
 import CustomBGImageContainer from "../../../components/CustomBGImageContainer/CustomerBGImageContainer";
@@ -15,6 +15,7 @@ import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import ProfessionalImgOne from "../../../assets/images/berger/berger-professional-1.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
+import {PuffLoader} from "react-spinners";
 // import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
@@ -38,6 +39,9 @@ function Berger(): JSX.Element {
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
 	const location = useLocation().state as LocationState;
+	const [isLoading, setIsLoading] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
+	const [numOfImages, setNumOfImages] = useState<number>(0);
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -46,6 +50,16 @@ function Berger(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+
+		if (numOfImages === 12) {
+			setIsLoading(false);
+			setShowLoader(false);
+		} else {
+			setTimeout(() => {
+				setShowLoader(true);
+			}, 4000);
+		}
+
 		const ctx = gsap.context(() => {
 			setTimeout(() => {
 				tl.current?.scrollTrigger?.refresh();
@@ -66,6 +80,10 @@ function Berger(): JSX.Element {
 					document.body.style.scrollBehavior = "unset";
 				},
 			});
+
+			if (numOfImages !== 12) {
+				tl.current.pause(0.05);
+			}
 
 			tl.current.to(".gsap-page-entry-transition-div", {
 				opacity: 0,
@@ -145,24 +163,44 @@ function Berger(): JSX.Element {
 		return () => {
 			ctx.revert(); // cleanup!!
 		};
+	}, [numOfImages]);
+
+	const handleUpdateImageCount = useCallback(() => {
+		setNumOfImages((prev) => prev + 1);
 	}, []);
 
 	return (
 		<>
-			<Nav />
+			<Nav pageLoaded={numOfImages === 12} />
 			<main
-				className="gsap-main-div flex flex-col justify-start items-start h-full w-full gap-4 bg-berger-white min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
+				className="flex flex-col justify-start items-start h-full w-full gap-4 bg-berger-white min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
 				ref={landingDivRef}
 			>
 				<div
 					className={
+						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-white-dark fixed top-0 left-0 z-60 ` +
+						`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
+					}
+				>
+					<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
+						<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
+					</div>
+				</div>
+				<div
+					className={
 						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
-						`${location?.from === "/" ? "bg-white-dark " : ""} ` +
-						`${location?.from === "/lenco" ? "bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/fora" ? "bg-fora-bg-white " : ""} ` +
-						`${location?.from === "/accrue" ? "" : ""}`
+						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
 					}
 				></div>
 				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
@@ -178,6 +216,7 @@ function Berger(): JSX.Element {
 						headerImgOne={HeaderImgOne}
 						headerImgOneAlt="lenco-phone-app-one"
 						isSingle
+						handleUpdateImageCount={handleUpdateImageCount}
 					/>
 					<ProjectDescription
 						title="Berger Paints"
@@ -234,6 +273,7 @@ function Berger(): JSX.Element {
 							imgOne={UserInterviewImgOne}
 							imgOneAlt="image showing user interview flow(berger)"
 							customImageStyle="-bottom-6 2xs:-bottom-8 sm:-bottom-14 md:-bottom-16 lg:-bottom-20 -right-32 2xs:-right-36 lg:-right-44 min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[800px] lg:min-w-[1000px] xl:min-w-[1000px] "
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 					</div>
 
@@ -250,7 +290,7 @@ function Berger(): JSX.Element {
 								paragraphWithSideIconStyle="text-fora-black-secondary"
 							/>
 						</div>
-						<CardOfCards />
+						<CardOfCards handleUpdateImageCount={handleUpdateImageCount} />
 					</div>
 
 					<div className="flex flex-col justify-start items-start w-full gap-16">
@@ -291,6 +331,7 @@ function Berger(): JSX.Element {
 										isSingle
 										customTextOverlayStyle="bg-berger-purple-dark"
 										customImgOneStyle=" h-[620px] !-bottom-36"
+										handleUpdateImageCount={handleUpdateImageCount}
 									/>
 								</div>
 								<div className="w-full">
@@ -316,6 +357,7 @@ function Berger(): JSX.Element {
 										isSingle
 										customTextOverlayStyle="bg-berger-pink"
 										customImgOneStyle="h-[640px] !-bottom-48 max-w-none"
+										handleUpdateImageCount={handleUpdateImageCount}
 										// delay={width > 1279 ? 1 : undefined}
 									/>
 								</div>
@@ -332,6 +374,7 @@ function Berger(): JSX.Element {
 										title={BergerSections[BergerSection.PROJECT_GOALS].title}
 										titleStyle="text-white"
 										paragraphStyle="text-white"
+										delay={width > 1023 ? 1.5 : undefined}
 									/>
 									<div className="flex flex-col md:flex-row justify-start md:justify-between w-full gap-16">
 										<Sections
@@ -341,6 +384,7 @@ function Berger(): JSX.Element {
 											title={BergerSections[BergerSection.BUSINESS_GOALS].title}
 											titleStyle="text-berger-green"
 											listsStyle="text-white"
+											delay={width > 1023 ? 1 : undefined}
 											smallText
 										/>
 										<Sections
@@ -350,6 +394,7 @@ function Berger(): JSX.Element {
 											title={BergerSections[BergerSection.USER_GOALS].title}
 											titleStyle="text-berger-yellow"
 											listsStyle="text-white"
+											delay={width > 1023 ? 1 : undefined}
 											smallText
 										/>
 									</div>
@@ -394,6 +439,7 @@ function Berger(): JSX.Element {
 							customImageTwoContainerStyle="-bottom-52 sm:-bottom-44 left-4 2xs:left-8 sm:left-16"
 							customImageTwoStyle="min-w-[700px] max-w-[700px] sm:min-w-[800px] sm:max-w-[800px] lg:max-w-[850px]"
 							isSingle={false}
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 					</div>
 
@@ -420,6 +466,7 @@ function Berger(): JSX.Element {
 							imgOne={ExploreImgOne}
 							imgOneAlt="Image showing color palettes used for the website"
 							customImageStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[600px] md:min-w-[700px] lg:min-w-[850px] xl:min-w-[900px] xl:max-w-[900px] -bottom-2 -right-36"
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 
 						<SideImageWithNoSectionContainer
@@ -431,6 +478,7 @@ function Berger(): JSX.Element {
 							customImageOneStyle="w-full"
 							animateFromBottom
 							isSingle
+							handleUpdateImageCount={handleUpdateImageCount}
 						/>
 
 						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-1">
@@ -440,8 +488,9 @@ function Berger(): JSX.Element {
 									imgOneAlt="Image showing two people having two separate calls"
 									customImgOneStyle="h-[500px] 2xs:h-[520px] lg:h-[540px] xl:h-[560px] "
 									customContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
-									customBackgroundImage={""}
+									// customBackgroundImage={""}
 									animateFromBottom
+									handleUpdateImageCount={handleUpdateImageCount}
 								/>
 							</div>
 							<div className="w-full lg:w-1/2">
@@ -452,6 +501,7 @@ function Berger(): JSX.Element {
 									customContainerStyle="h-[600px] sm:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
 									customBackgroundImage={DesignImgThreeBG}
 									// animateFromBottom
+									handleUpdateImageCount={handleUpdateImageCount}
 								/>
 							</div>
 						</div>
