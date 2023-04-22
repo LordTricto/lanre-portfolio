@@ -18,7 +18,7 @@ import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import ProfileImgOne from "../../../assets/images/fora/fora-profile-1.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
 import {PuffLoader} from "react-spinners";
-import ReactGA from "React-ga";
+import ReactGA from "react-ga";
 // import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";

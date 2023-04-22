@@ -12,7 +12,7 @@ import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
 import {PuffLoader} from "react-spinners";
-import ReactGA from "React-ga";
+import ReactGA from "react-ga";
 import RetailImgOne from "../../../assets/images/accrue/accrue-retail-1.png";
 import SavingsImgOne from "../../../assets/images/accrue/accrue-savings-1.png";
 import SavingsImgTwo from "../../../assets/images/accrue/accrue-savings-2.png";

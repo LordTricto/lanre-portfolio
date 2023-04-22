@@ -5,7 +5,7 @@ import gsap, {Power1} from "gsap";
 import {useLocation, useOutlet} from "react-router-dom";
 
 import React from "react";
-import ReactGA from "React-ga";
+import ReactGA from "react-ga";
 import {routes} from ".";
 import useDimension from "./hooks/useDimension";
 

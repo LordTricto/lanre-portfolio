@@ -20,7 +20,7 @@ import PhoneImageOne from "../../../assets/images/home/phone-img-1.png";
 import PhoneImageThree from "../../../assets/images/home/phone-img-3.png";
 import PhoneImageTwo from "../../../assets/images/home/phone-img-2.png";
 import PuffLoader from "react-spinners/PuffLoader";
-import ReactGA from "React-ga";
+import ReactGA from "react-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
 

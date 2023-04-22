@@ -20,7 +20,7 @@ import PhysicalImgOne from "../../../assets/images/lenco/lenco-physical-1.png";
 import PhysicalImgTwo from "../../../assets/images/lenco/lenco-physical-2.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
 import {PuffLoader} from "react-spinners";
-import ReactGA from "React-ga";
+import ReactGA from "react-ga";
 import ReimbursementsListImgFour from "../../../assets/images/lenco/lenco-reimbursement-4.png";
 import ReimbursementsListImgOne from "../../../assets/images/lenco/lenco-reimbursement-1.png";
 import ReimbursementsListImgThree from "../../../assets/images/lenco/lenco-reimbursement-3.png";

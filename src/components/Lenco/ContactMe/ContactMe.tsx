@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "
 import gsap, {Circ, Power4} from "gsap";
 
 import CircularWords from "../../CircularWords/CircularWords";
-import ReactGA from "React-ga";
+import ReactGA from "react-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
 
