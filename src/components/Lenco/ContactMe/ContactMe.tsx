@@ -183,7 +183,12 @@ function ContactMe(): JSX.Element {
 			label: "test action",
 			value: 1,
 		});
-		window.location.href = "mailto:yourmail@domain.com";
+		const mailToLink = document.createElement("a");
+		mailToLink.href = "mailto:olanrewaju.olukanni@gmail.com";
+		mailToLink.style.display = "none";
+		document.body.appendChild(mailToLink);
+		mailToLink.click();
+		document.body.removeChild(mailToLink);
 	}, []);
 
 	return (

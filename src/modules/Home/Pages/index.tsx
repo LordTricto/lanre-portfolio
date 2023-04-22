@@ -44,9 +44,11 @@ function Home(): JSX.Element {
 		window.onload;
 		document.body.style.scrollBehavior = "unset";
 		window.scrollTo(0, 0);
-		window.onbeforeunload = function () {
-			window.scrollTo(0, 0);
-		};
+
+		// window.onbeforeunload = function () {
+		// window.scrollTo(0, 0);
+		// };
+
 		ReactGA.pageview(window.location.pathname);
 
 		if (numOfImages === 12) {
@@ -375,7 +377,12 @@ function Home(): JSX.Element {
 									label: "test action",
 									value: 2,
 								});
-								window.location.href = "mailto:yourmail@domain.com";
+								const mailToLink = document.createElement("a");
+								mailToLink.href = "mailto:olanrewaju.olukanni@gmail.com";
+								mailToLink.style.display = "none";
+								document.body.appendChild(mailToLink);
+								mailToLink.click();
+								document.body.removeChild(mailToLink);
 							}}
 						>
 							<div className="gsap-contact-me-now flex justify-center items-center absolute bottom-8 right-0 h-36 w-36 rounded-full">
