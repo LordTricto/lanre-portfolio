@@ -29,13 +29,10 @@ function Nav(props: Props): JSX.Element {
 		setActiveRoute("");
 
 		if (props.pageLoaded) {
-			console.log("has started");
-
 			setTimeout(
 				() => {
 					setIsAnimationDone(true);
 					setActiveRoute(location.pathname);
-					console.log("nav is showing");
 				},
 				location.pathname === "/" ? (width > 1023 ? 8500 : 8500) : 6000
 			);
