@@ -5,8 +5,13 @@ import gsap, {Power1} from "gsap";
 import {useLocation, useOutlet} from "react-router-dom";
 
 import React from "react";
+import ReactGA from "React-ga";
 import {routes} from ".";
 import useDimension from "./hooks/useDimension";
+
+const TrackingId = "G-5H4ZJRTBS0";
+
+ReactGA.initialize(TrackingId);
 
 function App(): JSX.Element {
 	const location = useLocation();

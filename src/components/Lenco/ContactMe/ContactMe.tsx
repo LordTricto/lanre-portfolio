@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "
 import gsap, {Circ, Power4} from "gsap";
 
 import CircularWords from "../../CircularWords/CircularWords";
+import ReactGA from "React-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
 
@@ -175,6 +176,10 @@ function ContactMe(): JSX.Element {
 	}, []);
 
 	const handleOnClick = useCallback(() => {
+		ReactGA.event({
+			category: "contact me",
+			action: "contact me clicked",
+		});
 		window.location.href = "mailto:yourmail@domain.com";
 	}, []);
 

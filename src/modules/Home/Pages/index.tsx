@@ -20,6 +20,7 @@ import PhoneImageOne from "../../../assets/images/home/phone-img-1.png";
 import PhoneImageThree from "../../../assets/images/home/phone-img-3.png";
 import PhoneImageTwo from "../../../assets/images/home/phone-img-2.png";
 import PuffLoader from "react-spinners/PuffLoader";
+import ReactGA from "React-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
 
@@ -46,6 +47,8 @@ function Home(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+		ReactGA.pageview(window.location.pathname);
+
 		if (numOfImages === 12) {
 			setIsLoading(false);
 			setShowLoader(false);
@@ -367,6 +370,10 @@ function Home(): JSX.Element {
 								to="#"
 								onClick={() => {
 									// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+									ReactGA.event({
+										category: "contact me",
+										action: "contact me clicked",
+									});
 									window.location.href = "mailto:yourmail@domain.com";
 								}}
 							>

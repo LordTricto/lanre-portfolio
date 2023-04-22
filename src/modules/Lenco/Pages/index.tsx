@@ -20,6 +20,7 @@ import PhysicalImgOne from "../../../assets/images/lenco/lenco-physical-1.png";
 import PhysicalImgTwo from "../../../assets/images/lenco/lenco-physical-2.png";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
 import {PuffLoader} from "react-spinners";
+import ReactGA from "React-ga";
 import ReimbursementsListImgFour from "../../../assets/images/lenco/lenco-reimbursement-4.png";
 import ReimbursementsListImgOne from "../../../assets/images/lenco/lenco-reimbursement-1.png";
 import ReimbursementsListImgThree from "../../../assets/images/lenco/lenco-reimbursement-3.png";
@@ -58,6 +59,8 @@ function Lenco(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+
+		ReactGA.pageview(window.location.pathname);
 
 		if (numOfImages === 22) {
 			setIsLoading(false);

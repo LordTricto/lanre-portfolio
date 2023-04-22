@@ -15,6 +15,7 @@ import Nav from "../../../components/nav/nav";
 import PhoneContainer from "../../../components/PhoneContainer/PhoneContainer";
 import ProjectDescription from "../../../components/ProjectDescription/ProjectDescription";
 import {PuffLoader} from "react-spinners";
+import ReactGA from "React-ga";
 // import useDimension from "../../../hooks/useDimension";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
@@ -41,6 +42,8 @@ function Ridr(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
+
+		ReactGA.pageview(window.location.pathname);
 
 		if (numOfImages === 9) {
 			setIsLoading(false);
