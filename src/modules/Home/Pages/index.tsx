@@ -360,16 +360,17 @@ function Home(): JSX.Element {
 							</div>
 							<div className="max-w-3xl text-black-secondary">
 								<p className="text-lg 2xs:text-xl md:!text-2xl text-center">
-									Hi, I’m Olanrewaju, a Product Designer focused on building products and connections driven by empathy, people and
-									technology.
+									Hi, I&apos;m Olanrewaju, a Product Designer focused on building products and connections driven by empathy, people
+									and technology.
 								</p>
 							</div>
 						</div>
 						<div
 							className="relative"
-							onClick={() => {
+							onClick={(e) => {
+								e.preventDefault();
 								ReactGA.event({
-									category: "contact me",
+									category: "contact",
 									action: "test action",
 									label: "test action",
 									value: 2,

@@ -175,9 +175,10 @@ function ContactMe(): JSX.Element {
 		}
 	}, []);
 
-	const handleOnClick = useCallback(() => {
+	const handleOnClick = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		e.preventDefault();
 		ReactGA.event({
-			category: "contact me",
+			category: "contact",
 			action: "test action",
 			label: "test action",
 			value: 1,
