@@ -1,4 +1,3 @@
-import {Link, useLocation} from "react-router-dom";
 import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
@@ -23,6 +22,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import ReactGA from "react-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
+import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
