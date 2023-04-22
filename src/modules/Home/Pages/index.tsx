@@ -365,24 +365,23 @@ function Home(): JSX.Element {
 								</p>
 							</div>
 						</div>
-						<div className="relative">
-							<Link
-								to="#"
-								onClick={() => {
-									// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-									ReactGA.event({
-										category: "contact me",
-										action: "contact me clicked",
-									});
-									window.location.href = "mailto:yourmail@domain.com";
-								}}
-							>
-								<div className="gsap-contact-me-now flex justify-center items-center absolute bottom-8 right-0 h-36 w-36 rounded-full">
-									<div className="relative">
-										<CircularWords name="- C o n t a c t - M e - N o w " />
-									</div>
+						<div
+							className="relative"
+							onClick={() => {
+								ReactGA.event({
+									category: "contact me",
+									action: "test action",
+									label: "test action",
+									value: 2,
+								});
+								window.location.href = "mailto:yourmail@domain.com";
+							}}
+						>
+							<div className="gsap-contact-me-now flex justify-center items-center absolute bottom-8 right-0 h-36 w-36 rounded-full">
+								<div className="relative">
+									<CircularWords name="- C o n t a c t - M e - N o w " />
 								</div>
-							</Link>
+							</div>
 						</div>
 					</div>
 					<div className="w-full">

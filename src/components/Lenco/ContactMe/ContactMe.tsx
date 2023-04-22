@@ -178,7 +178,9 @@ function ContactMe(): JSX.Element {
 	const handleOnClick = useCallback(() => {
 		ReactGA.event({
 			category: "contact me",
-			action: "contact me clicked",
+			action: "test action",
+			label: "test action",
+			value: 1,
 		});
 		window.location.href = "mailto:yourmail@domain.com";
 	}, []);
