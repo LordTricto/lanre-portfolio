@@ -3,9 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@studio-freight/react-lenis": "^0.0.17",
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^13.0.0",
 		"@testing-library/user-event": "^13.2.1",
+		"@types/": "studio-freight/react-lenis",
 		"@types/jest": "^27.0.1",
 		"@types/locomotive-scroll": "^4.1.0",
 		"@types/node": "^16.7.13",

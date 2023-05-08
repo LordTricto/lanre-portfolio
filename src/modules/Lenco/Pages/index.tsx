@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {LencoSection, LencoSections} from "../Services/lenco.constant";
-import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ, Power4} from "gsap";
 
 import ArchitectureImg from "../../../assets/images/lenco/lenco-architecture-1.png";
@@ -34,6 +37,8 @@ import TransactionListImgThree from "../../../assets/images/lenco/lenco-transact
 import TransactionListImgTwo from "../../../assets/images/lenco/lenco-transaction-2.png";
 import VirtualImgOne from "../../../assets/images/lenco/lenco-virtual-1.png";
 import useDimension from "../../../hooks/useDimension";
+import {useLenis} from "@studio-freight/react-lenis";
+// import {useLenis} from "@studio-freight/react-lenis";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -46,11 +51,17 @@ function Lenco(): JSX.Element {
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const tl3 = useRef<gsap.core.Timeline | undefined>();
 	const landingDivRef = useRef<HTMLDivElement | null>(null);
-	const location = useLocation().state as LocationState;
+
 	const {width} = useDimension();
+	const location = useLocation().state as LocationState;
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
+	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
+
+	const lenis = useLenis(() => ScrollTrigger.update());
+	// const lenis = useLenis();
+	// console.log(lenis && lenis?.stop);
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -59,7 +70,6 @@ function Lenco(): JSX.Element {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
-
 		ReactGA.pageview(window.location.pathname);
 
 		if (numOfImages === 22) {
@@ -90,6 +100,7 @@ function Lenco(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
+					setIsAnimationDone(false);
 				},
 			});
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
@@ -143,6 +154,7 @@ function Lenco(): JSX.Element {
 					onComplete: () => {
 						document.body.style.overflow = "unset";
 						document.body.style.scrollBehavior = "smooth";
+						setIsAnimationDone(true);
 					},
 				},
 				"<"
@@ -184,6 +196,15 @@ function Lenco(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, [numOfImages]);
+
+	useEffect(() => ScrollTrigger.update(), [lenis]);
+	useEffect(() => {
+		if (!isAnimationDone) {
+			lenis?.stop();
+		} else {
+			lenis?.start();
+		}
+	}, [lenis, isAnimationDone]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);

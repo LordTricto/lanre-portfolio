@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import {AccrueSection, AccrueSections} from "../Services/accrue.constant";
-import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 
 import CardsImgOne from "../../../assets/images/accrue/accrue-card-1.png";
 import HeaderContainer from "../../../components/HeaderContainer/HeaderContainer";
@@ -19,6 +23,7 @@ import SavingsImgTwo from "../../../assets/images/accrue/accrue-savings-2.png";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
 import gsap from "gsap";
+import {useLenis} from "@studio-freight/react-lenis";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,6 +38,9 @@ function Accrue(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
+	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
+
+	const lenis = useLenis(() => ScrollTrigger.update());
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -68,6 +76,7 @@ function Accrue(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
+					setIsAnimationDone(false);
 				},
 			});
 
@@ -122,6 +131,7 @@ function Accrue(): JSX.Element {
 					onComplete: () => {
 						document.body.style.overflow = "unset";
 						document.body.style.scrollBehavior = "smooth";
+						setIsAnimationDone(true);
 					},
 				},
 				"<"
@@ -132,6 +142,15 @@ function Accrue(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, [numOfImages]);
+
+	useEffect(() => ScrollTrigger.update(), [lenis]);
+	useEffect(() => {
+		if (!isAnimationDone) {
+			lenis?.stop();
+		} else {
+			lenis?.start();
+		}
+	}, [lenis, isAnimationDone]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);

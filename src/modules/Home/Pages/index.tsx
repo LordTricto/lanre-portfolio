@@ -1,4 +1,8 @@
-import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ, Power1, Power4} from "gsap";
 
 import BigPhoneContainer from "../../../components/BigPhoneContainer/BigPhoneContainer";
@@ -22,6 +26,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import ReactGA from "react-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../../hooks/useDimension";
+import {useLenis} from "@studio-freight/react-lenis";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,6 +44,9 @@ function Home(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
+	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
+
+	const lenis = useLenis(() => ScrollTrigger.update());
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -68,6 +76,7 @@ function Home(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
+					setIsAnimationDone(false);
 				},
 			});
 
@@ -124,6 +133,7 @@ function Home(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "unset";
 					document.body.style.scrollBehavior = "smooth";
+					setIsAnimationDone(true);
 				},
 			});
 
@@ -310,6 +320,15 @@ function Home(): JSX.Element {
 		};
 	}, [numOfImages]);
 
+	useEffect(() => ScrollTrigger.update(), [lenis]);
+	useEffect(() => {
+		if (!isAnimationDone) {
+			lenis?.stop();
+		} else {
+			lenis?.start();
+		}
+	}, [lenis, isAnimationDone]);
+
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);
 	}, []);
@@ -319,6 +338,8 @@ function Home(): JSX.Element {
 			<Nav pageLoaded={numOfImages === 12} />
 
 			<main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 relative overflow-hidden" ref={landingDivRef}>
+				{/* <main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 relative
+				 overflow-hidden [&>svg]:h-5" ref={landingDivRef}> */}
 				<div
 					className={
 						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-black fixed top-0 left-0 z-60 ` +

@@ -73,9 +73,10 @@
 	box-sizing: border-box;
 }
 
-/* html { */
-/* scroll-behavior: smooth; */
-/* } */
+html {
+	scroll-behavior: none !important;
+	overflow: hidden !important;
+}
 
 body {
 	margin: 0;
@@ -92,23 +93,10 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* .gsap-accure-fora-secondary {
-	transform: rotateX(22.5deg);
-	opacity: 0;
-} */
-
-/* .gsap-accure-secondary-active {
-	will-change: opacity perspective;
-	animation: reveal 1s linear forwards;
-	animation-delay: 2s;
-	transition: 1.5s ease-in-out;
+.-no-scroll {
+	scroll-behavior: none;
+	overflow: hidden;
 }
-.gsap-fora-secondary-active {
-	will-change: opacity perspective;
-	animation: reveal 1s linear forwards;
-	animation-delay: 2s;
-	transition: 1.5s ease-in-out;
-} */
 
 @media screen and (min-width: 1024px) {
 	.gsap-primary-container-tag {

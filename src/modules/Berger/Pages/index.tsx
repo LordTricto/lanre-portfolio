@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {BergerSection, BergerSections} from "../Services/berger.constant";
-import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 
 import CardOfCards from "../../../components/CardOfCards/CardOfCards";
 import CustomBGImageContainer from "../../../components/CustomBGImageContainer/CustomerBGImageContainer";
@@ -27,6 +30,7 @@ import UserFlowImgTwo from "../../../assets/images/berger/berger-user-flow-2.png
 import UserInterviewImgOne from "../../../assets/images/berger/berger-user-interview-1.png";
 import gsap from "gsap";
 import useDimension from "../../../hooks/useDimension";
+import {useLenis} from "@studio-freight/react-lenis";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -43,6 +47,9 @@ function Berger(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
+	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
+
+	const lenis = useLenis(() => ScrollTrigger.update());
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -81,6 +88,7 @@ function Berger(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
+					setIsAnimationDone(false);
 				},
 			});
 
@@ -119,6 +127,7 @@ function Berger(): JSX.Element {
 					onComplete: () => {
 						document.body.style.overflow = "unset";
 						document.body.style.scrollBehavior = "smooth";
+						setIsAnimationDone(true);
 					},
 				},
 				"<"
@@ -167,6 +176,15 @@ function Berger(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, [numOfImages]);
+
+	useEffect(() => ScrollTrigger.update(), [lenis]);
+	useEffect(() => {
+		if (!isAnimationDone) {
+			lenis?.stop();
+		} else {
+			lenis?.start();
+		}
+	}, [lenis, isAnimationDone]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);

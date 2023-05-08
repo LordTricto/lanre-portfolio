@@ -1,4 +1,7 @@
-import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {RidrSection, RidrSections} from "../Services/ridr.constant";
 
 import ActivitiesImgOne from "../../../assets/images/ridr/ridr-activities-1.png";
@@ -20,6 +23,7 @@ import ReactGA from "react-ga";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Sections from "../../../components/Sections/Sections";
 import gsap from "gsap";
+import {useLenis} from "@studio-freight/react-lenis";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,6 +38,9 @@ function Ridr(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
+	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
+
+	const lenis = useLenis(() => ScrollTrigger.update());
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -71,6 +78,7 @@ function Ridr(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
+					setIsAnimationDone(false);
 				},
 			});
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
@@ -124,6 +132,7 @@ function Ridr(): JSX.Element {
 					onComplete: () => {
 						document.body.style.overflow = "unset";
 						document.body.style.scrollBehavior = "smooth";
+						setIsAnimationDone(true);
 					},
 				},
 				"<"
@@ -134,6 +143,15 @@ function Ridr(): JSX.Element {
 			ctx.revert(); // cleanup!!
 		};
 	}, [numOfImages]);
+
+	useEffect(() => ScrollTrigger.update(), [lenis]);
+	useEffect(() => {
+		if (!isAnimationDone) {
+			lenis?.stop();
+		} else {
+			lenis?.start();
+		}
+	}, [lenis, isAnimationDone]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);

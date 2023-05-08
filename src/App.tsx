@@ -6,6 +6,7 @@ import {useLocation, useOutlet} from "react-router-dom";
 
 import React from "react";
 import ReactGA from "react-ga";
+import {Lenis as ReactLenis} from "@studio-freight/react-lenis";
 import {routes} from ".";
 import useDimension from "./hooks/useDimension";
 
@@ -52,7 +53,21 @@ function App(): JSX.Element {
 						>
 							{() => (
 								<div ref={specificRoute.nodeRef} className="page">
-									{currentOutlet}
+									<ReactLenis
+										root
+										options={{
+											duration: 1,
+											easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+											orientation: "vertical",
+											gestureOrientation: "vertical",
+											smoothWheel: true,
+											smoothTouch: false,
+											touchMultiplier: 0.1,
+											wheelMultiplier: 0.1,
+										}}
+									>
+										{currentOutlet}
+									</ReactLenis>
 								</div>
 							)}
 						</CSSTransition>

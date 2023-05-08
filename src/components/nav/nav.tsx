@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ} from "gsap";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -5,6 +8,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {ReactComponent as ArrowDownIcon} from "../../assets/svg/arrowDownIcon.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../hooks/useDimension";
+import {useLenis} from "@studio-freight/react-lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,10 +19,12 @@ interface Props {
 function Nav(props: Props): JSX.Element {
 	const {width} = useDimension();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const navDivRef = useRef<HTMLDivElement | null>(null);
 
-	const location = useLocation();
+	const lenis = useLenis(() => ScrollTrigger.update());
+	useEffect(() => ScrollTrigger.update(), [lenis]);
 
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
@@ -43,9 +49,11 @@ function Nav(props: Props): JSX.Element {
 	useEffect(() => {
 		if (!isNavOpen) return;
 		timeline1();
+		lenis?.stop();
 
 		return () => {
 			timeline2();
+			lenis?.start();
 		};
 	}, [isNavOpen]);
 
