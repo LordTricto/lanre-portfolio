@@ -69,7 +69,9 @@ function Home(): JSX.Element {
 		}
 		const ctx = gsap.context(() => {
 			tl.current = gsap.timeline();
-
+			setTimeout(() => {
+				tl.current?.scrollTrigger?.refresh();
+			}, 7000);
 			tl.current.to(".gsap-hero-text", {
 				color: "white",
 				duration: 0,
@@ -244,7 +246,7 @@ function Home(): JSX.Element {
 			tl2.current = gsap.timeline({
 				scrollTrigger: {
 					trigger: ".gsap-memo",
-					start: width < 476 ? "top center+=200px" : "top center",
+					start: width < 476 ? "top center+=100px" : "top center-=100px",
 				},
 			});
 
@@ -252,11 +254,12 @@ function Home(): JSX.Element {
 				tl2.current.from(".gsap-memo", {
 					width: "100%",
 					borderRadius: 0,
-					padding: 0,
-					height: "30rem",
+					paddingLeft: 0,
+					paddingRight: 0,
+					// height: "30rem",
 					duration: 1.5,
 					ease: "M0,0 C0,0 0.024,0.595 0.2,0.8 0.406,1.04 1,1 1,1 ",
-					clearProps: "height,width,padding,borderRadius",
+					clearProps: "height,width,paddingLeft,paddingRight,borderRadius",
 				});
 
 				tl2.current.from(
@@ -337,7 +340,7 @@ function Home(): JSX.Element {
 		<>
 			<Nav pageLoaded={numOfImages === 12} />
 
-			<main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 relative overflow-hidden" ref={landingDivRef}>
+			<main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 2xl:pb-24 relative overflow-hidden" ref={landingDivRef}>
 				{/* <main className="flex flex-col gap-16 min-h-screen w-full bg-white-dark pb-8 relative
 				 overflow-hidden [&>svg]:h-5" ref={landingDivRef}> */}
 				<div

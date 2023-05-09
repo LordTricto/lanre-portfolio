@@ -46,6 +46,7 @@ function Sections(props: Props): JSX.Element {
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-title`,
 						start: width < 476 ? "top center+=200px" : "top center",
+						markers: !!props.withCloseSection,
 						// toggleActions: "restart none none reverse",
 					},
 				});

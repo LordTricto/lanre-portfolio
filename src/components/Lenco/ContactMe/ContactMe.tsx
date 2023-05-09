@@ -32,6 +32,7 @@ function ContactMe(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-contact-me",
 						start: width > 1024 ? "center center-=200px" : "top center",
+						markers: true,
 					},
 				});
 
@@ -39,10 +40,11 @@ function ContactMe(): JSX.Element {
 					tl.current.from(".gsap-contact-me", {
 						width: "100%",
 						borderRadius: 0,
-						padding: 0,
+						paddingLeft: 0,
+						paddingRight: 0,
 						duration: 1.5,
 						ease: "M0,0 C0,0 0.024,0.595 0.2,0.8 0.406,1.04 1,1 1,1 ",
-						clearProps: "width,padding,borderRadius",
+						clearProps: "width,paddingLeft,paddingRight,borderRadius",
 					});
 
 					tl.current.from(

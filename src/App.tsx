@@ -56,14 +56,14 @@ function App(): JSX.Element {
 									<ReactLenis
 										root
 										options={{
-											duration: 1,
+											duration: 1.25,
 											easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 											orientation: "vertical",
 											gestureOrientation: "vertical",
 											smoothWheel: true,
 											smoothTouch: false,
-											touchMultiplier: 0.1,
-											wheelMultiplier: 0.1,
+											touchMultiplier: 0.125,
+											wheelMultiplier: 0.125,
 										}}
 									>
 										{currentOutlet}
