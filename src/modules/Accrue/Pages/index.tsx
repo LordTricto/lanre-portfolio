@@ -146,9 +146,9 @@ function Accrue(): JSX.Element {
 	useEffect(() => ScrollTrigger.update(), [lenis]);
 	useEffect(() => {
 		if (!isAnimationDone) {
-			lenis?.stop();
+			lenis && lenis.stop && lenis.stop();
 		} else {
-			lenis?.start();
+			lenis && lenis.start && lenis.start();
 		}
 	}, [lenis, isAnimationDone]);
 

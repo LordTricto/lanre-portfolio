@@ -38,7 +38,6 @@ function Ridr(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
-	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
 
 	const lenis = useLenis(() => ScrollTrigger.update());
 
@@ -78,7 +77,7 @@ function Ridr(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
-					setIsAnimationDone(false);
+					lenis && lenis.stop && lenis.stop();
 				},
 			});
 			tl.current.to([".gsap-header-img-1", ".gsap-header-img-2", ".gsap-header-img-3"], {
@@ -132,7 +131,7 @@ function Ridr(): JSX.Element {
 					onComplete: () => {
 						document.body.style.overflow = "unset";
 						document.body.style.scrollBehavior = "smooth";
-						setIsAnimationDone(true);
+						lenis && lenis.start && lenis.start();
 					},
 				},
 				"<"
@@ -145,13 +144,6 @@ function Ridr(): JSX.Element {
 	}, [numOfImages]);
 
 	useEffect(() => ScrollTrigger.update(), [lenis]);
-	useEffect(() => {
-		if (!isAnimationDone) {
-			lenis?.stop();
-		} else {
-			lenis?.start();
-		}
-	}, [lenis, isAnimationDone]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);

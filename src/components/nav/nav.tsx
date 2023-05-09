@@ -49,11 +49,11 @@ function Nav(props: Props): JSX.Element {
 	useEffect(() => {
 		if (!isNavOpen) return;
 		timeline1();
-		lenis?.stop();
+		lenis && lenis.stop && lenis.stop();
 
 		return () => {
 			timeline2();
-			lenis?.start();
+			lenis && lenis.start && lenis.start();
 		};
 	}, [isNavOpen]);
 

@@ -45,17 +45,18 @@ function BigPhoneContainer(props: Props): JSX.Element {
 	useLayoutEffect(() => {
 		const onPageLoad = () => {
 			const ctx = gsap.context(() => {
-				gsap.from(".gsap-big-phone", {
-					scrollTrigger: {
-						trigger: ".gsap-big-phone",
-						start: "top center+=150px",
-					},
-					translateY: "10%",
-					opacity: 0,
-					duration: width < 476 ? 0.5 : 1,
-					clearProps: "opacity,translateY",
-				});
-
+				if (width < 1024) {
+					gsap.from(".gsap-big-phone", {
+						scrollTrigger: {
+							trigger: ".gsap-big-phone",
+							start: "top center+=150px",
+						},
+						translateY: "10%",
+						opacity: 0,
+						duration: width < 476 ? 0.5 : 1,
+						clearProps: "opacity,translateY",
+					});
+				}
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: ".gsap-big-phone",

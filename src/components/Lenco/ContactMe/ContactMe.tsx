@@ -32,7 +32,6 @@ function ContactMe(): JSX.Element {
 					scrollTrigger: {
 						trigger: ".gsap-contact-me",
 						start: width > 1024 ? "center center-=200px" : "top center",
-						markers: true,
 					},
 				});
 

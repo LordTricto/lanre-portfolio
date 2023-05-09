@@ -44,7 +44,6 @@ function Home(): JSX.Element {
 	const [isLoading, setIsLoading] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
-	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
 
 	const lenis = useLenis(() => ScrollTrigger.update());
 
@@ -78,7 +77,7 @@ function Home(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
-					setIsAnimationDone(false);
+					lenis && lenis.stop && lenis.stop();
 				},
 			});
 
@@ -135,7 +134,7 @@ function Home(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "unset";
 					document.body.style.scrollBehavior = "smooth";
-					setIsAnimationDone(true);
+					lenis && lenis.start && lenis.start();
 				},
 			});
 
@@ -181,67 +180,67 @@ function Home(): JSX.Element {
 				ease: Circ.easeOut,
 			});
 
-			gsap.from(".gsap-img-1", {
-				scrollTrigger: {
-					trigger: ".gsap-imgs-1",
-					start: "top bottom-=300px",
-					// toggleActions: "restart none none reverse",
-				},
-				translateX: "-20%",
-				opacity: 0,
-				duration: 0.5,
-				ease: Circ.easeOut,
-				clearProps: "translateX,opacity",
-			});
-			gsap.from(".gsap-img-2", {
-				scrollTrigger: {
-					trigger: ".gsap-imgs-1",
-					start: "top bottom-=300px",
-					// toggleActions: "restart none none reverse",
-				},
-				translateY: "20%",
-				opacity: 0,
-				duration: 0.5,
-				ease: Circ.easeOut,
-				clearProps: "translateY,opacity",
-			});
-			gsap.from(".gsap-img-3", {
-				scrollTrigger: {
-					trigger: ".gsap-imgs-1",
-					start: "top bottom-=300px",
-					// toggleActions: "restart none none reverse",
-				},
-				translateX: "20%",
-				opacity: 0,
-				duration: 0.5,
-				ease: Circ.easeOut,
-				clearProps: "translateX,opacity",
-			});
+			// gsap.from(".gsap-img-1", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-1",
+			// start: "top bottom-=300px",
+			// // toggleActions: "restart none none reverse",
+			// },
+			// translateX: "-20%",
+			// opacity: 0,
+			// duration: 0.5,
+			// ease: Circ.easeOut,
+			// clearProps: "translateX,opacity",
+			// });
+			// gsap.from(".gsap-img-2", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-1",
+			// start: "top bottom-=300px",
+			// // toggleActions: "restart none none reverse",
+			// },
+			// translateY: "20%",
+			// opacity: 0,
+			// duration: 0.5,
+			// ease: Circ.easeOut,
+			// clearProps: "translateY,opacity",
+			// });
+			// gsap.from(".gsap-img-3", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-1",
+			// start: "top bottom-=300px",
+			// // toggleActions: "restart none none reverse",
+			// },
+			// translateX: "20%",
+			// opacity: 0,
+			// duration: 0.5,
+			// ease: Circ.easeOut,
+			// clearProps: "translateX,opacity",
+			// });
 
-			gsap.from(".gsap-img-4", {
-				scrollTrigger: {
-					trigger: ".gsap-imgs-2",
-					start: "top bottom-=300px",
-					// toggleActions: "restart none none reverse",
-				},
-				translateX: "-20%",
-				opacity: 0,
-				duration: 0.5,
-				ease: Circ.easeOut,
-				clearProps: "translateX,opacity",
-			});
-			gsap.from(".gsap-img-5", {
-				scrollTrigger: {
-					trigger: ".gsap-imgs-2",
-					start: "top bottom-=300px",
-					// toggleActions: "restart none none reverse",
-				},
-				translateX: "20%",
-				opacity: 0,
-				duration: 0.5,
-				ease: Circ.easeOut,
-				clearProps: "translateX,opacity",
-			});
+			// gsap.from(".gsap-img-4", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-2",
+			// start: "top bottom-=300px",
+			// // toggleActions: "restart none none reverse",
+			// },
+			// translateX: "-20%",
+			// opacity: 0,
+			// duration: 0.5,
+			// ease: Circ.easeOut,
+			// clearProps: "translateX,opacity",
+			// });
+			// gsap.from(".gsap-img-5", {
+			// scrollTrigger: {
+			// trigger: ".gsap-imgs-2",
+			// start: "top bottom-=300px",
+			// // toggleActions: "restart none none reverse",
+			// },
+			// translateX: "20%",
+			// opacity: 0,
+			// duration: 0.5,
+			// ease: Circ.easeOut,
+			// clearProps: "translateX,opacity",
+			// });
 
 			tl2.current = gsap.timeline({
 				scrollTrigger: {
@@ -324,13 +323,6 @@ function Home(): JSX.Element {
 	}, [numOfImages]);
 
 	useEffect(() => ScrollTrigger.update(), [lenis]);
-	useEffect(() => {
-		if (!isAnimationDone) {
-			lenis?.stop();
-		} else {
-			lenis?.start();
-		}
-	}, [lenis, isAnimationDone]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);
