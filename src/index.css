@@ -143,6 +143,10 @@ code {
 .view-project-text {
 	animation: rotateText 10s linear infinite;
 }
+.view-project-text:hover {
+	animation-play-state: paused;
+	/* animation-timing-function: cubic-bezier(1, 0, 0, 1); */
+}
 
 @keyframes rotateText {
 	0% {

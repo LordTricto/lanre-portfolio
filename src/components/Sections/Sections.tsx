@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef} from "react";
+import React, {useRef} from "react";
 import gsap, {Circ} from "gsap";
 
 import {AccrueSection} from "../../modules/Accrue/Services/accrue.constant";
@@ -8,13 +8,12 @@ import {ForaSection} from "../../modules/Fora/Services/fora.constant";
 // import useDimension from "../../hooks/useDimension";
 import {LencoSection} from "../../modules/Lenco/Services/lenco.constant";
 import {RidrSection} from "../../modules/Ridr/Services/ridr.constant";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../hooks/useDimension";
-
-gsap.registerPlugin(ScrollTrigger);
+import {useGSAP} from "@gsap/react";
 
 interface Props {
 	title: string;
+	isReady?: boolean;
 	type: LencoSection | ForaSection | RidrSection | AccrueSection | BergerSection;
 	lists: string[] | null;
 	paragraph: string[] | null;
@@ -32,36 +31,23 @@ interface Props {
 }
 
 function Sections(props: Props): JSX.Element {
-	const divRef = useRef<HTMLDivElement | null>(null);
 	const tl = useRef<gsap.core.Timeline | undefined>();
+	const divRef = useRef<HTMLDivElement | null>(null);
+
 	const {width} = useDimension();
 
-	useLayoutEffect(() => {
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				setTimeout(() => {
-					tl.current?.scrollTrigger?.refresh();
-				}, 7000);
+	useGSAP(
+		() => {
+			if (props.isReady) {
 				tl.current = gsap.timeline({
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-title`,
-						start: width < 476 ? "top center+=200px" : "top center",
-						// toggleActions: "restart none none reverse",
+						start: "top center+=100px",
+						// markers: true,
+						toggleActions: "restart none none reverse",
 					},
 				});
 
-				tl.current.from(
-					`.gsap-${props.type}-title `,
-					{
-						opacity: "0",
-						translateY: "30%",
-						duration: width < 476 ? 0.25 : 0.5,
-						ease: Circ.easeOut,
-						clearProps: "opacity,translateY",
-						delay: props.delay,
-					},
-					"<+=0.25"
-				);
 				if (props.paragraphWithSideIcon) {
 					tl.current.from(
 						`.gsap-${props.type}-side-icon`,
@@ -74,6 +60,7 @@ function Sections(props: Props): JSX.Element {
 						">"
 					);
 				}
+
 				if (props.paragraph || props.paragraphWithSideIcon) {
 					tl.current.from(
 						`.gsap-${props.type}-paragraph p`,
@@ -104,30 +91,18 @@ function Sections(props: Props): JSX.Element {
 					tl.current.from(
 						`.gsap-close-section`,
 						{
+							translateX: "2.5%",
 							opacity: 0,
-							duration: width < 476 ? 0.25 : 0.5,
-							translateX: "5%",
+							duration: 0.5,
 							clearProps: "opacity,translateX",
 						},
-						">"
+						">=+0.5"
 					);
 				}
-			}, divRef);
-
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
-		};
-
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
-	}, []);
+			}
+		},
+		{dependencies: [props.isReady], scope: divRef}
+	);
 
 	return (
 		<>

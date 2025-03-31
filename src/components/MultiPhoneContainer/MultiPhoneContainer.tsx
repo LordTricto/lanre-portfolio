@@ -1,8 +1,9 @@
-import React, {useLayoutEffect, useRef} from "react";
-import gsap, {Circ} from "gsap";
+import React, {useRef} from "react";
+import gsap, {Power3} from "gsap";
 
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../hooks/useDimension";
+import {useGSAP} from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,107 +29,72 @@ interface Props {
 }
 
 function MultiPhoneContainer(props: Props): JSX.Element {
-	const divRef = useRef<HTMLDivElement | null>(null);
-	const tl = useRef<gsap.core.Timeline | undefined>();
 	const {width} = useDimension();
 
-	useLayoutEffect(() => {
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				setTimeout(() => {
-					tl.current?.scrollTrigger?.refresh();
-					ScrollTrigger.refresh();
-				}, 7000);
+	const tl = useRef<gsap.core.Timeline | undefined>();
+	const divRef = useRef<HTMLDivElement | null>(null);
 
-				if (width < 1024) {
-					gsap.from(`.gsap-${props.type}-phone`, {
-						scrollTrigger: {
-							trigger: `.gsap-${props.type}-phone`,
-							start: width < 476 ? "top center+=350px" : "top center+=150px",
-						},
-						translateY: "10%",
-						opacity: 0,
-						duration: width < 476 ? 0.5 : 1,
-						clearProps: "opacity,translateY",
-					});
-				}
+	const isLessThanTabView = width < 476;
+	const isLessThanLaptopView = width < 1024;
 
-				tl.current = gsap.timeline({
+	useGSAP(
+		() => {
+			if (isLessThanLaptopView) {
+				gsap.from(`.gsap-${props.type}-phone`, {
 					scrollTrigger: {
 						trigger: `.gsap-${props.type}-phone`,
-						start: width < 476 ? "top center+=200px" : "top center",
+						start: width < 476 ? "top center+=350px" : "top center+=150px",
 					},
+					translateY: "10%",
+					opacity: 0,
+					duration: width < 476 ? 0.5 : 1,
+					clearProps: "opacity,translateY",
 				});
+			}
 
-				if (width > 1023) {
-					tl.current.from(`.gsap-${props.type}-phone`, {
-						width: "100%",
-						borderRadius: 0,
-						padding: 0,
-						duration: width < 476 ? 0.75 : 1.5,
-						ease: Circ.easeOut,
-						clearProps: "width,padding,borderRadius",
-					});
-					tl.current.from(
-						`.gsap-${props.type}-phone-primary`,
-						{
-							borderRadius: 0,
-							duration: width < 476 ? 0.75 : 1.5,
-							clearProps: "borderRadius",
-						},
-						"<"
-					);
-				}
-				tl.current.to(
-					`.gsap-${props.type}-phone-text-overlay`,
-					{
-						height: "0",
-						stagger: width < 476 ? 0.375 : 0.75,
-						duration: width < 476 ? 1 : 2,
-						clearProps: "opacity",
-						ease: Circ.easeInOut,
-					},
-					width < 476 ? ">-0.25" : ">-0.5"
-				);
-				tl.current.from(
-					`.gsap-${props.type}-phone-content`,
-					{
-						opacity: 0,
-						stagger: width < 476 ? 0.375 : 0.75,
-						duration: width < 476 ? 0.625 : 1.25,
-						clearProps: "translateY,opacity",
-						ease: Circ.easeOut,
-					},
-					width < 476 ? ">-1" : ">-2"
-				);
-				tl.current.from(
-					`.gsap-${props.type}-phone-img img`,
-					{
-						opacity: "0",
-						translateY: "10%",
-						stagger: width < 476 ? 0.125 : 0.25,
-						duration: width < 476 ? 0.25 : 0.5,
-						ease: Circ.easeOut,
-						clearProps: "opacity,translateY",
-					},
-					width < 476 ? ">-0.625" : ">-1.25"
-				);
-			}, divRef);
+			tl.current = gsap.timeline({
+				scrollTrigger: {
+					trigger: `.gsap-${props.type}-phone`,
+					start: "top center+=100px",
+					// markers: true,
+					// toggleActions: "restart none none reverse",
+				},
+			});
 
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
-		};
+			tl.current.to(`.gsap-${props.type}-phone-text-overlay`, {
+				height: "0",
+				stagger: isLessThanTabView ? 0.275 : 0.5,
+				duration: isLessThanTabView ? 1 : 1.5,
+				clearProps: "opacity",
+				ease: Power3.easeInOut,
+			});
+			tl.current.from(
+				`.gsap-${props.type}-phone-content`,
+				{
+					opacity: 0,
+					stagger: isLessThanTabView ? 0.275 : 0.5,
+					duration: isLessThanTabView ? 0.5 : 1,
+					clearProps: "translateY,opacity",
+					ease: Power3.easeOut,
+				},
+				isLessThanTabView ? ">-0.5" : ">-1.5"
+			);
 
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
-	}, []);
+			tl.current.from(
+				`.gsap-${props.type}-phone-img`,
+				{
+					opacity: "0",
+					translateY: "2.5%",
+					// stagger: width < 476 ? 0.125 : 0.25,
+					duration: width < 476 ? 0.25 : 0.5,
+					ease: Power3.easeOut,
+					clearProps: "opacity,translateY",
+				},
+				">-0.25"
+			);
+		},
+		{scope: divRef}
+	);
 
 	return (
 		<>
@@ -159,15 +125,20 @@ function MultiPhoneContainer(props: Props): JSX.Element {
 										{props.title}
 									</h2>
 								</div>
-
-								<div className="flex flex-row flex-wrap gap-2 relative">
+								<div className="relative">
 									<div
 										className={
-											`gsap-${props.type}-phone-text-overlay w-full h-full absolute bottom-0 left-0 z-10 origin-bottom` +
-											` ${props.customOverlayStyle || ""}`
+											`gsap-${props.type}-phone-text-overlay ` +
+											"w-full h-full absolute bottom-0 left-0 z-10 origin-bottom " +
+											`${props.customOverlayStyle || ""}`
 										}
 									></div>
-									<p className={`text-xl 2xs:text-lg lg:text-xl text-left ` + `${props.customSubtitleStyle || ""}`}>
+									<p
+										className={
+											`text-xl 2xs:text-lg lg:text-xl text-left gsap-${props.type}-phone-content ` +
+											`${props.customSubtitleStyle || ""}`
+										}
+									>
 										{props.subTitle}
 									</p>
 								</div>

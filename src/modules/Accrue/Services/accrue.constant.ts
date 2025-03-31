@@ -20,7 +20,7 @@ export const AccrueSections: {
 		lists: [
 			"Design a flow for users to passively save money by rounding up on purchases.",
 			"Create a product that is functional, desired, and accessible.",
-			"Clear visual designs that fit well into Accrue’s current brand.",
+			"Clear visual designs that fit well into Accrue's current brand.",
 		],
 		paragraph: null,
 	},

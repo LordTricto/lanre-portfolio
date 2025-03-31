@@ -25,6 +25,7 @@ export type RouterRoute = {
 };
 
 export const routes: RouterRoute[] = [
+	// {path: "/test", name: "Test", element: <Test />, nodeRef: createRef()},
 	{path: "/", name: "Home", element: <Home />, nodeRef: createRef()},
 	{path: "/lenco", name: "Lenco", element: <Lenco />, nodeRef: createRef()},
 	{path: "/fora", name: "Fora", element: <Fora />, nodeRef: createRef()},

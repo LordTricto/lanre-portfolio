@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
 import gsap, {Circ} from "gsap";
 import {useLocation, useNavigate} from "react-router-dom";
 
 import {ReactComponent as ArrowDownIcon} from "../../assets/svg/arrowDownIcon.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../hooks/useDimension";
-import {useLenis} from "@studio-freight/react-lenis";
+import {useGSAP} from "@gsap/react";
+
+// import {useLenis} from "@studio-freight/react-lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,14 +16,15 @@ interface Props {
 }
 
 function Nav(props: Props): JSX.Element {
-	const {width} = useDimension();
 	const navigate = useNavigate();
 	const location = useLocation();
+
 	const tl = useRef<gsap.core.Timeline | undefined>();
+	const tl2 = useRef<gsap.core.Timeline | undefined>();
 	const navDivRef = useRef<HTMLDivElement | null>(null);
 
-	const lenis = useLenis(() => ScrollTrigger.update());
-	useEffect(() => ScrollTrigger.update(), [lenis]);
+	// const lenis = useLenis(() => ScrollTrigger.update());
+	// useEffect(() => ScrollTrigger.update(), [lenis]);
 
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 	const [isAnimationDone, setIsAnimationDone] = useState<boolean>(false);
@@ -40,102 +40,93 @@ function Nav(props: Props): JSX.Element {
 					setIsAnimationDone(true);
 					setActiveRoute(location.pathname);
 				},
-				location.pathname === "/" ? (width > 1023 ? 8500 : 8500) : 6000
+				location.pathname === "/" ? 8500 : 6000
 			);
 		}
 	}, [props.pageLoaded]);
-	// }, [location.pathname, props.pageLoaded]);
 
-	useEffect(() => {
-		if (!isNavOpen) return;
-		timeline1();
-		lenis && lenis.stop && lenis.stop();
+	useGSAP(
+		() => {
+			if (isNavOpen) {
+				tl.current = gsap.timeline();
+				tl.current.to(".gsap-nav-overlay-div", {
+					translateY: 0,
+					ease: Circ.easeOut,
+					duration: 1.5,
+				});
+				tl.current.to(
+					".gsap-nav-link-one",
+					{
+						top: 0,
+						duration: 0.25,
+					},
+					"=-1"
+				);
+				tl.current.to(
+					".gsap-nav-link-two",
+					{
+						top: 0,
+						duration: 0.25,
+					},
+					">"
+				);
+				tl.current.to(
+					".gsap-nav-link-three",
+					{
+						top: 0,
+						duration: 0.25,
+					},
+					">"
+				);
+				tl.current.to(
+					".gsap-nav-link-four",
+					{
+						top: 0,
+						duration: 0.25,
+					},
+					">"
+				);
+				tl.current.to(
+					".gsap-nav-link-five",
+					{
+						top: 0,
+						duration: 0.25,
+					},
+					">"
+				);
+			} else {
+				tl2.current = gsap.timeline();
 
-		return () => {
-			timeline2();
-			lenis && lenis.start && lenis.start();
-		};
-	}, [isNavOpen]);
-
-	const timeline1 = useCallback(() => {
-		tl.current = gsap.timeline();
-		tl.current.to(".gsap-nav-overlay-div", {
-			translateY: 0,
-			ease: Circ.easeOut,
-			duration: 1.5,
-		});
-		tl.current.to(
-			".gsap-nav-link-one",
-			{
-				top: 0,
-				duration: 0.25,
-			},
-			"=-1"
-		);
-		tl.current.to(
-			".gsap-nav-link-two",
-			{
-				top: 0,
-				duration: 0.25,
-			},
-			">"
-		);
-		tl.current.to(
-			".gsap-nav-link-three",
-			{
-				top: 0,
-				duration: 0.25,
-			},
-			">"
-		);
-		tl.current.to(
-			".gsap-nav-link-four",
-			{
-				top: 0,
-				duration: 0.25,
-			},
-			">"
-		);
-		tl.current.to(
-			".gsap-nav-link-five",
-			{
-				top: 0,
-				duration: 0.25,
-			},
-			">"
-		);
-	}, []);
-
-	const timeline2 = useCallback(() => {
-		tl.current = gsap.timeline();
-
-		tl.current.to(".gsap-nav-link-five", {
-			top: "3.5rem",
-			duration: 0.25,
-		});
-		tl.current.to(".gsap-nav-link-four", {
-			top: "3.5rem",
-			duration: 0.25,
-		});
-		tl.current.to(".gsap-nav-link-three", {
-			top: "3.5rem",
-			duration: 0.25,
-		});
-		tl.current.to(".gsap-nav-link-two", {
-			top: "3.5rem",
-			duration: 0.25,
-		});
-		tl.current.to(".gsap-nav-link-one", {
-			top: "3.5rem",
-			duration: 0.25,
-		});
-		tl.current.to(".gsap-nav-overlay-div", {
-			translateY: "-100%",
-			ease: Circ.easeOut,
-			duration: 0.75,
-			delay: "0.75",
-		});
-	}, []);
+				tl2.current.to(".gsap-nav-link-five", {
+					top: "3.5rem",
+					duration: 0.25,
+				});
+				tl2.current.to(".gsap-nav-link-four", {
+					top: "3.5rem",
+					duration: 0.25,
+				});
+				tl2.current.to(".gsap-nav-link-three", {
+					top: "3.5rem",
+					duration: 0.25,
+				});
+				tl2.current.to(".gsap-nav-link-two", {
+					top: "3.5rem",
+					duration: 0.25,
+				});
+				tl2.current.to(".gsap-nav-link-one", {
+					top: "3.5rem",
+					duration: 0.25,
+				});
+				tl2.current.to(".gsap-nav-overlay-div", {
+					translateY: "-100%",
+					ease: Circ.easeOut,
+					duration: 0.75,
+					delay: "0.75",
+				});
+			}
+		},
+		{dependencies: [isNavOpen], scope: navDivRef}
+	);
 
 	const handleGoHome = useCallback(() => {
 		navigate("/", {

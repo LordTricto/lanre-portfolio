@@ -1,19 +1,12 @@
-import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
-import gsap, {Circ} from "gsap";
+import React, {useCallback, useRef} from "react";
+import gsap, {Power3} from "gsap";
 
 import BergerBG from "../../../assets/images/home/berger-bg.png";
 import MacImageOne from "../../../assets/images/home/mac-img-1.png";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ViewProject from "../../CircularWords/CircularWords";
+// import ViewProject from "../../CircularWords/CircularWords";
 import useDimension from "../../../hooks/useDimension";
+import {useGSAP} from "@gsap/react";
 import {useNavigate} from "react-router-dom";
-
-gsap.registerPlugin(ScrollTrigger);
-
-interface CoordsInterface {
-	x: number;
-	y: number;
-}
 
 interface Props {
 	link?: string;
@@ -24,135 +17,61 @@ interface Props {
 }
 
 function MacContainer(props: Props): JSX.Element {
-	const phoneRef = useRef<HTMLDivElement | null>(null);
 	const {width} = useDimension();
 	const navigate = useNavigate();
 
+	const mainDivRef = useRef<HTMLDivElement | null>(null);
+
 	const tl = useRef<gsap.core.Timeline | undefined>();
-	const [hideCursor, setHideCursor] = useState(false);
-	const [coords, setCoords] = useState<CoordsInterface>({
-		x: 0,
-		y: 0,
-	});
 
-	useLayoutEffect(() => {
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				if (width < 1024) {
-					gsap.from(".gsap-berger-primary", {
-						scrollTrigger: {
-							trigger: ".gsap-berger-primary",
-							start: "top center+=150px",
-						},
-						translateY: "10%",
-						opacity: 0,
-						duration: 1,
-						clearProps: "opacity,translateY",
-					});
-				}
-
-				tl.current = gsap.timeline({
+	useGSAP(
+		() => {
+			if (width < 1024) {
+				gsap.from(".gsap-berger-primary", {
 					scrollTrigger: {
 						trigger: ".gsap-berger-primary",
-						start: "top center",
+						start: "top center+=150px",
 					},
-				});
-				if (width > 1023) {
-					tl.current.from(".gsap-berger-primary", {
-						width: "100%",
-						borderRadius: 0,
-						padding: 0,
-						duration: 1.5,
-						ease: Circ.easeOut,
-						clearProps: "width,padding,borderRadius",
-					});
-					tl.current.from(
-						".gsap-berger-primary-bg",
-						{
-							borderRadius: 0,
-							duration: 1.5,
-							ease: Circ.easeOut,
-							clearProps: "borderRadius",
-						},
-						"<"
-					);
-				}
-				tl.current.from(".gsap-berger-content", {
-					opacity: 0,
-					stagger: 0.75,
-					duration: 1,
-					translateY: "40%",
-					ease: Circ.easeOut,
-					clearProps: "translateY,opacity,transform",
-				});
-				if (width > 1023) {
-					tl.current.from(
-						".gsap-berger-img",
-						{
-							duration: 1,
-							scale: 1.2,
-							clearProps: "bottom,scale",
-						},
-						">-=1"
-					);
-				} else {
-					tl.current.from(
-						".gsap-berger-img",
-						{
-							opacity: 0,
-							duration: 1,
-							translateX: "10%",
-							clearProps: "opacity,translateX",
-						},
-						">-=1"
-					);
-				}
-				tl.current.from(".gsap-view-project", {
+					translateY: "10%",
 					opacity: 0,
 					duration: 1,
-					clearProps: "opacity",
+					clearProps: "opacity,translateY",
 				});
-			}, phoneRef);
+			}
 
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
-		};
-
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
-	}, []);
-
-	useEffect(() => {
-		document.addEventListener("mousemove", handleMouseMove);
-
-		return () => {
-			document.removeEventListener("mousemove", handleMouseMove);
-		};
-	}, []);
-
-	const handleMouseOver = useCallback(() => {
-		setHideCursor(true);
-	}, []);
-
-	const handleMouseLeave = useCallback(() => {
-		setHideCursor(false);
-	}, []);
-
-	const handleMouseMove = useCallback((e: MouseEvent) => {
-		if (phoneRef.current) {
-			setCoords({
-				x: e.clientX - phoneRef.current?.getBoundingClientRect().left || 0,
-				y: e.clientY - phoneRef.current?.getBoundingClientRect().top || 0,
+			tl.current = gsap.timeline({
+				scrollTrigger: {
+					trigger: ".gsap-berger-primary",
+					start: "top center",
+					toggleActions: "restart none none reverse",
+				},
 			});
-		}
-	}, []);
+
+			tl.current.from(".gsap-berger-content", {
+				opacity: 0,
+				stagger: 0.5,
+				duration: 1,
+				translateY: "40%",
+				ease: Power3.easeOut,
+				clearProps: "translateY,opacity,transform",
+			});
+			if (width > 1023) {
+				tl.current.from(".gsap-berger-img", {
+					duration: 1,
+					scale: 1.2,
+					clearProps: "bottom,scale",
+				});
+			} else {
+				tl.current.from(".gsap-berger-img", {
+					opacity: 0,
+					duration: 1,
+					translateX: "10%",
+					clearProps: "opacity,translateX",
+				});
+			}
+		},
+		{scope: mainDivRef}
+	);
 
 	const handleOnClick = useCallback(() => {
 		if (props.link) {
@@ -162,20 +81,14 @@ function MacContainer(props: Props): JSX.Element {
 
 	return (
 		<>
-			<div className="w-full relative" ref={phoneRef}>
-				{props.withViewProject && hideCursor && width > 1023 && (
-					<div className="hidden z-30 lg:block">
-						<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
-					</div>
-				)}
+			<div className="w-full relative" ref={mainDivRef}>
 				<div
-					className="gsap-berger-primary h-full px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto pb-24 md:pb-96 relative rounded-3xl"
-					style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}}
+					// className="gsap-berger-primary h-full px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto pb-24 md:pb-96 relative rounded-3xl "
+					className="gsap-berger-primary h-full px-4 2xs:px-8 lg:px-16 w-full xl:w-[80rem] mx-auto pb-24 relative rounded-3xl "
+					// style={{cursor: width > 1023 && hideCursor ? "none" : "auto"}}
 				>
 					<div
-						className="flex flex-col justify-center items-center w-full text-white  z-10 h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] mx-auto relative px-7 md:px-14 overflow-hidden lg:overflow-visible"
-						onMouseOver={props.withViewProject ? handleMouseOver : undefined}
-						onMouseOut={props.withViewProject ? handleMouseLeave : undefined}
+						className="flex flex-col justify-center items-center w-full text-white cursor-pointer z-10 h-[640px] 2xs:h-[780px] md:!h-[740px] xl:!h-[720px] mx-auto relative px-7 md:px-14 overflow-hidden "
 						onClick={handleOnClick}
 					>
 						<img
@@ -209,11 +122,11 @@ function MacContainer(props: Props): JSX.Element {
 									onLoad={props.handleUpdateImageCount}
 									alt="Mac showing app landing page(Berger Paints)"
 								/>
-								{props.withViewProject && (
-									<div className="gsap-view-project absolute -right-2 bottom-24 3xs:right-0 lg:hidden z-30">
-										<ViewProject coords={coords} circularWordsCustomStyle={props.circularWordsCustomStyle} />
+								{/* {props.withViewProject && (
+									<div className="gsap-view-project absolute bottom-20 z-30 right-20">
+										<ViewProject circularWordsCustomStyle={props.circularWordsCustomStyle} />
 									</div>
-								)}
+								)} */}
 							</div>
 						</div>
 					</div>

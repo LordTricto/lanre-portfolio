@@ -1,11 +1,13 @@
-import React, {useCallback, useRef} from "react";
-import gsap, {Power3} from "gsap";
+import React, {useCallback, useLayoutEffect, useRef} from "react";
+import gsap, {Circ} from "gsap";
 
+import ViewProject from "../CircularWords/CircularWords";
 import useDimension from "../../hooks/useDimension";
-import {useGSAP} from "@gsap/react";
 import {useNavigate} from "react-router-dom";
 
 interface Props {
+	mainRef?: React.MutableRefObject<HTMLDivElement | null>;
+	imgRef?: React.MutableRefObject<HTMLDivElement | null>;
 	isSingle: boolean;
 	title: string | React.ReactNode;
 	subTitle: string | React.ReactNode;
@@ -20,7 +22,11 @@ interface Props {
 	customTextOverlayStyle: string;
 	customImgOneStyle?: string;
 
+	delay?: number;
+
 	link?: string;
+	withViewProject?: boolean;
+	circularWordsCustomStyle?: string;
 	handleUpdateImageCount?: () => void;
 }
 
@@ -31,68 +37,102 @@ function PhoneContainer(props: Props): JSX.Element {
 	const navigate = useNavigate();
 
 	const tl = useRef<gsap.core.Timeline | undefined>();
-	const mainDivRef = useRef<HTMLDivElement | null>(null);
 
-	const isLessThanTabView = width < 476;
-	const isLessThanLaptopView = width < 1024;
-
-	useGSAP(
-		() => {
-			tl.current = gsap.timeline({
-				scrollTrigger: {
-					trigger: ".gsap-primary-container-tag",
-					start: "top center+=200px",
-					// markers: true,
-					// toggleActions: "restart none none reverse",
-				},
-			});
-
-			tl.current.to(".gsap-text-overlay-tag", {
-				// delay: props.delay,
-				height: "0",
-				stagger: isLessThanTabView ? 0.275 : 0.5,
-				duration: isLessThanTabView ? 1 : 1.5,
-				clearProps: "opacity",
-				ease: Power3.easeInOut,
-			});
-			tl.current.from(
-				".gsap-content",
-				{
-					opacity: 0,
-					stagger: isLessThanTabView ? 0.275 : 0.5,
-					duration: isLessThanTabView ? 0.5 : 1,
-					clearProps: "translateY,opacity",
-					ease: Power3.easeOut,
-				},
-				isLessThanTabView ? ">-0.5" : ">-1.5"
-			);
-
-			if (!isLessThanLaptopView) {
-				tl.current.from(
-					".gsap-image-tag",
-					{
-						scale: 1.3,
-						bottom: props.customImgOneStyle ? undefined : "1rem",
-						duration: isLessThanTabView ? 0.5 : 1,
-						clearProps: "bottom,scale",
+	useLayoutEffect(() => {
+		const ctx = gsap.context(() => {
+			if (props.mainRef) {
+				gsap.from(".gsap-primary-container-tag", {
+					scrollTrigger: {
+						trigger: ".gsap-primary-container-tag",
+						// start: "top center",
+						start: width < 476 ? "top center+=200px" : "top center",
 					},
-					isLessThanTabView ? ">-0.5" : ">-1"
+					translateY: width > 1023 ? undefined : "10%",
+					opacity: 0,
+					duration: width < 476 ? 0.5 : 1,
+					clearProps: "opacity,translateY",
+				});
+
+				tl.current = gsap.timeline({
+					scrollTrigger: {
+						trigger: ".gsap-primary-container-tag",
+						start: width < 476 ? "top center+=200px" : "top center",
+					},
+				});
+
+				if (width > 1023) {
+					gsap.from(".gsap-primary-container-tag", {
+						scrollTrigger: {
+							trigger: ".gsap-container-tag",
+							start: width < 476 ? "top center+=200px" : "top center",
+							onEnter: () => {
+								props.imgRef?.current?.classList.add("-active");
+							},
+						},
+					});
+				}
+
+				tl.current.to(
+					".gsap-text-overlay-tag",
+					{
+						delay: props.delay,
+						height: "0",
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 1 : 2,
+						clearProps: "opacity",
+						ease: Circ.easeInOut,
+					},
+					">-0.5"
 				);
-			} else {
 				tl.current.from(
-					".gsap-image-tag",
+					".gsap-content",
 					{
 						opacity: 0,
-						duration: isLessThanTabView ? 0.5 : 1,
-						translateY: "10%",
-						clearProps: "opacity,translateY",
+						stagger: width < 476 ? 0.375 : 0.75,
+						duration: width < 476 ? 0.625 : 1.25,
+						clearProps: "translateY,opacity",
+						ease: Circ.easeOut,
 					},
-					isLessThanTabView ? ">-0.5" : ">-1"
+					width < 476 ? ">-1" : ">-2"
 				);
+
+				if (width > 1023) {
+					tl.current.from(
+						".gsap-image-tag",
+						{
+							scale: 1.3,
+							bottom: props.customImgOneStyle ? undefined : "1rem",
+							duration: width < 476 ? 0.5 : 1,
+							clearProps: "bottom,scale",
+						},
+						width < 476 ? ">-0.625" : ">-1.25"
+					);
+				} else {
+					tl.current.from(
+						".gsap-image-tag",
+						{
+							opacity: 0,
+							duration: width < 476 ? 0.5 : 1,
+							translateY: "10%",
+							clearProps: "opacity,translateY",
+						},
+						width < 476 ? ">-0.625" : ">-1.25"
+					);
+				}
+				if (props.withViewProject) {
+					tl.current.from(".gsap-view-project", {
+						opacity: 0,
+						duration: width < 476 ? 0.5 : 1,
+						clearProps: "opacity",
+					});
+				}
 			}
-		},
-		{scope: mainDivRef}
-	);
+		}, props.mainRef);
+		console.log(props.mainRef);
+		return () => {
+			ctx.revert(); // cleanup!!
+		};
+	}, [props.mainRef?.current]);
 
 	const handleOnClick = useCallback(() => {
 		if (props.link) {
@@ -102,16 +142,23 @@ function PhoneContainer(props: Props): JSX.Element {
 
 	return (
 		<>
-			<div className="w-full relative" ref={mainDivRef}>
-				<div className="gsap-container-tag w-full" onClick={handleOnClick}>
+			<div className="w-full relative">
+				<div
+					className="gsap-container-tag w-full"
+					style={{
+						perspective: "500px",
+						transformStyle: "preserve-3d",
+					}}
+					onClick={handleOnClick}
+				>
 					{isSingle && (
 						<div
 							className={
-								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-7 md:px-14 w-full cursor-pointer ` +
+								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-7 md:px-14 w-full ` +
 								`gsap-primary-container-tag ` +
 								`${props.customContainerStyle} `
 							}
-							// ref={props.imgRef}
+							ref={props.imgRef}
 						>
 							<div className={`gsap-secondary-container-tag ` + `flex flex-col justify-between items-start h-full w-full `}>
 								<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
@@ -169,11 +216,11 @@ function PhoneContainer(props: Props): JSX.Element {
 										src={props.imgOne}
 										alt={props.imgOneAlt}
 									/>
-									{/* {props.withViewProject && (
+									{props.withViewProject && (
 										<div className="gsap-view-project absolute bottom-20 z-30 left-20">
 											<ViewProject circularWordsCustomStyle={props.circularWordsCustomStyle} />
 										</div>
-									)} */}
+									)}
 								</div>
 							</div>
 						</div>
@@ -181,11 +228,11 @@ function PhoneContainer(props: Props): JSX.Element {
 					{!isSingle && (
 						<div
 							className={
-								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-7 md:px-14 w-full cursor-pointer ` +
+								`rounded-3xl h-[730px] lg:h-[800px] overflow-hidden relative px-7 md:px-14 w-full ` +
 								`gsap-primary-container-tag ` +
 								`${props.customContainerStyle} `
 							}
-							// ref={props.imgRef}
+							ref={props.imgRef}
 						>
 							<div className={`gsap-secondary-container-tag ` + `flex flex-col justify-between items-start h-full w-full `}>
 								<div className="flex flex-col gap-8 pt-12 sm:pt-16 w-full">
@@ -238,11 +285,11 @@ function PhoneContainer(props: Props): JSX.Element {
 										src={props.imgTwo}
 										alt={props.imgTwoAlt}
 									/>
-									{/* {props.withViewProject && (
+									{props.withViewProject && (
 										<div className="gsap-view-project absolute bottom-20 z-30 left-20">
 											<ViewProject circularWordsCustomStyle={props.circularWordsCustomStyle} />
 										</div>
-									)} */}
+									)}
 								</div>
 							</div>
 						</div>

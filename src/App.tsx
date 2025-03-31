@@ -6,7 +6,7 @@ import {useLocation, useOutlet} from "react-router-dom";
 
 import React from "react";
 import ReactGA from "react-ga";
-import {Lenis as ReactLenis} from "@studio-freight/react-lenis";
+// import {Lenis as ReactLenis} from "@studio-freight/react-lenis";
 import {routes} from ".";
 import useDimension from "./hooks/useDimension";
 
@@ -21,12 +21,12 @@ function App(): JSX.Element {
 
 	const specificRoute = routes.find((route) => route.path === location.pathname || route.path === "404");
 	const onExiting = () => {
-		gsap.to(specificRoute?.nodeRef.current?.lastChild?.lastChild || "", {
+		gsap.to(specificRoute?.nodeRef.current?.firstChild?.lastChild?.lastChild || "", {
 			left: "-5rem",
 			duration: width < 547 ? 2 : 1.6,
 			ease: Power1.easeOut,
 		});
-		gsap.to(specificRoute?.nodeRef.current?.firstChild?.firstChild || "", {
+		gsap.to(specificRoute?.nodeRef.current?.firstChild?.firstChild?.firstChild || "", {
 			delay: 1.5,
 			opacity: 0,
 			duration: 0,
@@ -53,21 +53,21 @@ function App(): JSX.Element {
 						>
 							{() => (
 								<div ref={specificRoute.nodeRef} className="page">
-									<ReactLenis
+									{/* <ReactLenis
 										root
 										options={{
 											duration: 1.25,
-											easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+											easing: (t: number) => Math.min(1, 1.001 - Math.pow(4, -10 * t)),
 											orientation: "vertical",
 											gestureOrientation: "vertical",
 											smoothWheel: true,
 											smoothTouch: false,
-											touchMultiplier: 0.125,
-											wheelMultiplier: 0.125,
+											touchMultiplier: 0.8,
+											wheelMultiplier: 0.8,
 										}}
-									>
-										{currentOutlet}
-									</ReactLenis>
+									> */}
+									{currentOutlet}
+									{/* </ReactLenis> */}
 								</div>
 							)}
 						</CSSTransition>

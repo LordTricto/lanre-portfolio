@@ -1,8 +1,9 @@
-import React, {useLayoutEffect, useRef} from "react";
-import gsap, {Circ} from "gsap";
+import React, {useRef} from "react";
+import gsap, {Power4} from "gsap";
 
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useDimension from "../../hooks/useDimension";
+import {useGSAP} from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +12,7 @@ interface Props {
 	title: string;
 	delay?: number | undefined;
 	author: string;
+	isReady?: boolean;
 	subTitle: string;
 	timeline: string;
 	textColorStyle: string;
@@ -23,140 +25,80 @@ interface Props {
 }
 
 function ProjectDescription(props: Props): JSX.Element {
+	const {width} = useDimension();
+
 	const divRef = useRef<HTMLDivElement | null>(null);
 
 	const tl = useRef<gsap.core.Timeline | undefined>();
 	const tl2 = useRef<gsap.core.Timeline | undefined>();
-	const {width} = useDimension();
-	// const tl2 = useRef<gsap.core.Timeline | undefined>();
 
-	useLayoutEffect(() => {
-		const onPageLoad = () => {
-			const ctx = gsap.context(() => {
-				setTimeout(() => {
-					tl.current?.scrollTrigger?.refresh();
-				}, 6500);
-				tl.current = gsap.timeline({
+	useGSAP(
+		() => {
+			if (props.isReady) {
+				gsap.from(".gsap-project-border", {
 					scrollTrigger: {
 						trigger: ".gsap-project-title",
-						// start: "top center+=300px",
 						start: width > 474 ? "top center" : "top center+=200px",
 						// markers: true,
-						// toggleActions: "restart none none reverse",
+						toggleActions: "restart none none reverse",
 					},
-				});
-				// =======
-				tl.current.from(".gsap-project-border", {
-					width: "0",
+					width: 0,
 					duration: 2.75,
-					ease: Circ.easeOut,
+					ease: Power4.easeOut,
 					clearProps: "width",
 				});
-				// =======
-				tl.current.from(
-					".gsap-project-title",
-					{
-						opacity: "0",
-						translateY: "30%",
-						duration: 0.5,
-						ease: Circ.easeOut,
-						clearProps: "opacity,translateY",
-					},
-					"<+=0.5"
-				);
-				tl.current.from(
-					".gsap-project-subTitle",
-					{
-						opacity: "0",
-						duration: 0.5,
-						ease: Circ.easeOut,
-						clearProps: "opacity",
-					},
-					">"
-				);
 
-				tl.current.from(
-					[".gsap-project-timeline", ".gsap-project-role"],
-					{
-						stagger: 0.5,
-						opacity: "0",
-						duration: 0.5,
-						translateY: "20%",
-						ease: Circ.easeOut,
-						clearProps: "opacity,translateY",
-					},
-					">"
-				);
-				// tl.current.from(
-				// [".gsap-project-timeline span:first-child", ".gsap-project-role span:first-child"],
-				// {
-				// stagger: 0.5,
-				// opacity: "0",
-				// duration: 0.5,
-				// translateY: "20%",
-				// ease: Circ.easeOut,
-				// clearProps: "opacity,translateY",
-				// },
+				tl.current = gsap.timeline();
 
-				// "<-=1"
-				// );
-				// tl.current.from(
-				// [".gsap-project-timeline span:last-child", ".gsap-project-role span:last-child"],
-				// {
-				// stagger: 0.5,
-				// opacity: "0",
-				// duration: 0.5,
-				// ease: Circ.easeOut,
-				// clearProps: "opacity",
-				// },
-				// ">"
-				// );
+				tl.current.from([".gsap-project-title", ".gsap-project-subTitle"], {
+					opacity: 0,
+					ease: Power4.easeOut,
+					clearProps: "opacity,translateY",
+					delay: 6.2,
+				});
+
+				tl2.current = gsap.timeline();
+
 				tl2.current = gsap.timeline({
 					scrollTrigger: {
-						trigger: ".gsap-project-quote",
-						// start: "top center+=150px",
-						start: "top center",
+						trigger: ".gsap-project-title",
+						start: width > 474 ? "top center" : "top center+=200px",
 						// markers: true,
-						// toggleActions: "restart none none reverse",
+						toggleActions: "restart none none reverse",
 					},
 				});
-				tl2.current.from(".gsap-project-quote p", {
-					translateX: "20%",
+
+				// tl2.current.from(".gsap-project-title", {
+				// opacity: 0,
+				// translateY: "30%",
+				// duration: 0.25,
+				// ease: Power4.easeOut,
+				// clearProps: "opacity,translateY",
+				// });
+				// tl2.current.from(".gsap-project-subTitle", {
+				// opacity: 0,
+				// duration: 0.25,
+				// ease: Power4.easeOut,
+				// clearProps: "opacity",
+				// });
+				tl2.current.from([".gsap-project-timeline", ".gsap-project-role"], {
+					stagger: 0.5,
 					opacity: 0,
-					duration: 1,
+					duration: 0.5,
+					translateY: "20%",
+					ease: Power4.easeOut,
+					clearProps: "opacity,translateY",
+				});
+				tl2.current.from([".gsap-project-quote p", ".gsap-project-quote span"], {
+					translateX: "2.5%",
+					opacity: 0,
+					duration: 0.5,
 					clearProps: "opacity,translateX",
 				});
-				tl2.current.from(".gsap-project-quote span", {
-					opacity: 0,
-					duration: 1,
-					clearProps: "opacity,translateX",
-				});
-				if (width > 1023) {
-					// tl.current.from(".gsap-project-title", {
-					// width: "100%",
-					// borderRadius: 0,
-					// padding: width > 1023 ? 0 : undefined,
-					// duration: 1.5,
-					// ease: Circ.easeOut,
-					// clearProps: "width,padding,borderRadius",
-					// });
-				}
-			}, divRef);
-
-			return () => {
-				ctx.revert(); // cleanup!!
-			};
-		};
-
-		// Check if the page has already loaded
-		if (document.readyState === "complete") {
-			onPageLoad();
-		} else {
-			window.addEventListener("load", onPageLoad, false);
-			// Remove the event listener when component unmounts
-			return () => window.removeEventListener("load", onPageLoad);
-		}
-	}, [props.delay]);
+			}
+		},
+		{dependencies: [props.isReady], scope: divRef}
+	);
 
 	return (
 		<>

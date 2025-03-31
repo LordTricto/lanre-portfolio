@@ -30,7 +30,7 @@ import UserFlowImgTwo from "../../../assets/images/berger/berger-user-flow-2.png
 import UserInterviewImgOne from "../../../assets/images/berger/berger-user-interview-1.png";
 import gsap from "gsap";
 import useDimension from "../../../hooks/useDimension";
-import {useLenis} from "@studio-freight/react-lenis";
+// import {useLenis} from "@studio-freight/react-lenis";
 import {useLocation} from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,7 +48,7 @@ function Berger(): JSX.Element {
 	const [showLoader, setShowLoader] = useState(false);
 	const [numOfImages, setNumOfImages] = useState<number>(0);
 
-	const lenis = useLenis(() => ScrollTrigger.update());
+	// const lenis = useLenis(() => ScrollTrigger.update());
 
 	useLayoutEffect(() => {
 		window.onload;
@@ -87,7 +87,7 @@ function Berger(): JSX.Element {
 				onComplete: () => {
 					document.body.style.overflow = "hidden";
 					document.body.style.scrollBehavior = "unset";
-					lenis && lenis.stop && lenis.stop();
+					// lenis && lenis.stop && lenis.stop();
 				},
 			});
 
@@ -126,7 +126,7 @@ function Berger(): JSX.Element {
 					onComplete: () => {
 						document.body.style.overflow = "unset";
 						document.body.style.scrollBehavior = "smooth";
-						lenis && lenis.start && lenis.start();
+						// lenis && lenis.start && lenis.start();
 					},
 				},
 				"<"
@@ -176,7 +176,7 @@ function Berger(): JSX.Element {
 		};
 	}, [numOfImages]);
 
-	useEffect(() => ScrollTrigger.update(), [lenis]);
+	// useEffect(() => ScrollTrigger.update(), [lenis]);
 
 	const handleUpdateImageCount = useCallback(() => {
 		setNumOfImages((prev) => prev + 1);
@@ -186,367 +186,370 @@ function Berger(): JSX.Element {
 		<>
 			<Nav pageLoaded={numOfImages === 12} />
 			<main
-				className="flex flex-col justify-start items-start h-full w-full gap-4 bg-berger-white min-h-screen pb-8 lg:pb-16 relative overflow-hidden "
+				className="flex flex-col justify-start items-start h-full w-full gap-4 bg-berger-white min-h-screen pb-8 lg:pb-16 relative overflow-hidden"
 				ref={landingDivRef}
 			>
-				<div
-					className={
-						`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-white-dark fixed top-0 left-0 z-60 ` +
-						`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
-						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
-						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
-						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
-					}
-				>
-					<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
-						<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
-					</div>
-				</div>
-				<div
-					className={
-						`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
-						`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
-						`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
-						`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
-						`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
-						`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
-						`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
-					}
-				></div>
-				<div className="flex flex-col justify-start items-start w-full mb-8 md:mb-24 gap-28">
-					<HeaderContainer
-						gsapHeaderContainerTag="gsap-header-section"
-						gsapPrimaryContainerTag="gsap-header-imgs-div"
-						gsapImgOneContainerTag="gsap-header-img-1-container"
-						gsapImgOneTag="gsap-header-img-1"
-						gsapImgTwoContainerTag="gsap-header-img-2-div"
-						primaryContainerCustomStyle="bg-white"
-						gsapImgTwoTag="gsap-header-img-2"
-						gsapImgThreeTag="gsap-header-img-3"
-						headerImgOne={HeaderImgOne}
-						headerImgOneAlt="lenco-phone-app-one"
-						isSingle
-						handleUpdateImageCount={handleUpdateImageCount}
-					/>
-					<ProjectDescription
-						title="Berger Paints"
-						subTitle="Nigeria's leading paint brand, offering varieties of paints and coating products to provide your desired colors."
-						textColorStyle="text-fora-black-secondary"
-						customTitleStyle="text-black"
-						customBorderStyle="bg-black"
-						customSubTitleStyle="text-black"
-						author="Jared Spool"
-						quote={
-							<>
-								Good design, when it&apos;s done well, becomes invisible. It&apos;s only when it&apos;s done poorly that we notice it.
-							</>
+				<div id="gsap-index-div" className="h-full w-full flex flex-col gap-4">
+					<div
+						className={
+							`gsap-main-div flex justify-center items-center w-full h-full min-h-screen bg-white-dark fixed top-0 left-0 z-60 ` +
+							`${!isLoading ? "opacity-0 pointer-events-none" : ""} ` +
+							`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+							`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+							`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+							`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+							`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+							`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
 						}
-						role="Conception, UX/UI, Design System"
-						isHeaderBlack
-						timeline="1"
-					/>
-
-					<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-						<Sections
-							type={BergerSections[BergerSection.THE_OVERVIEW].value}
-							lists={BergerSections[BergerSection.THE_OVERVIEW].lists}
-							paragraph={BergerSections[BergerSection.THE_OVERVIEW].paragraph}
-							title={BergerSections[BergerSection.THE_OVERVIEW].title}
-							listsStyle="text-black"
-							titleStyle="text-black"
-							paragraphStyle="text-black"
-						/>
+					>
+						<div className={`transition-all z-30 ${showLoader ? "opacity-100" : "opacity-0"}`}>
+							<PuffLoader color={location?.from === "/lenco" || location?.from === "/ridr" ? "#ffff" : "#1F2130"} speedMultiplier={2} />
+						</div>
 					</div>
+					<div
+						className={
+							`gsap-page-entry-transition-div w-screen h-screen fixed z-50 ` +
+							`${location?.from === "/" ? "!bg-white-dark " : ""} ` +
+							`${location?.from === "/lenco" ? "!bg-lenco-bg-dark " : ""} ` +
+							`${location?.from === "/ridr" ? "!bg-ridr-bg-green " : ""} ` +
+							`${location?.from === "/accrue" ? "!bg-accrue-blue-light " : ""} ` +
+							`${location?.from === "/berger" ? "!bg-berger-white " : ""} ` +
+							`${location?.from === "/fora" ? "!bg-fora-bg-white " : ""} `
+						}
+					></div>
+					<div className="flex flex-col justify-start items-start w-full mb-2 gap-28">
+						<HeaderContainer
+							gsapHeaderContainerTag="gsap-header-section"
+							gsapPrimaryContainerTag="gsap-header-imgs-div"
+							gsapImgOneContainerTag="gsap-header-img-1-container"
+							gsapImgOneTag="gsap-header-img-1"
+							gsapImgTwoContainerTag="gsap-header-img-2-div"
+							primaryContainerCustomStyle="bg-white"
+							gsapImgTwoTag="gsap-header-img-2"
+							gsapImgThreeTag="gsap-header-img-3"
+							headerImgOne={HeaderImgOne}
+							headerImgOneAlt="lenco-phone-app-one"
+							isSingle
+							handleUpdateImageCount={handleUpdateImageCount}
+						/>
+						<ProjectDescription
+							title="Berger Paints"
+							subTitle="Nigeria's leading paint brand, offering varieties of paints and coating products to provide your desired colors."
+							textColorStyle="text-fora-black-secondary"
+							customTitleStyle="text-black"
+							customBorderStyle="bg-black"
+							customSubTitleStyle="text-black"
+							author="Jared Spool"
+							quote={
+								<>
+									Good design, when it&apos;s done well, becomes invisible. It&apos;s only when it&apos;s done poorly that we notice
+									it.
+								</>
+							}
+							role="Conception, UX/UI, Design System"
+							isHeaderBlack
+							timeline="1"
+						/>
 
-					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-">
+						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<Sections
-								type={BergerSections[BergerSection.THE_RESEARCH].value}
-								lists={BergerSections[BergerSection.THE_RESEARCH].lists}
-								paragraph={BergerSections[BergerSection.THE_RESEARCH].paragraph}
-								title={BergerSections[BergerSection.THE_RESEARCH].title}
-								titleStyle="text-black"
+								type={BergerSections[BergerSection.THE_OVERVIEW].value}
+								lists={BergerSections[BergerSection.THE_OVERVIEW].lists}
+								paragraph={BergerSections[BergerSection.THE_OVERVIEW].paragraph}
+								title={BergerSections[BergerSection.THE_OVERVIEW].title}
 								listsStyle="text-black"
+								titleStyle="text-black"
 								paragraphStyle="text-black"
 							/>
 						</div>
 
-						<SideImageContainer
-							type={BergerSections[BergerSection.USER_INTERVIEW].value}
-							title={BergerSections[BergerSection.USER_INTERVIEW].title}
-							subTitle={BergerSections[BergerSection.USER_INTERVIEW].paragraph}
-							customTitleStyle="text-berger-purple-deep"
-							customSubtitleStyle="text-black"
-							customContainerStyle="bg-white w-full"
-							customMainContainerStyle="h-[550px] xs:h-[630px] md:h-[730px] lg:h-[800px]"
-							customOverlayStyle="bg-white"
-							imgOne={UserInterviewImgOne}
-							imgOneAlt="image showing user interview flow(berger)"
-							customImageStyle="-bottom-6 2xs:-bottom-8 sm:-bottom-14 md:-bottom-16 lg:-bottom-20 -right-32 2xs:-right-36 lg:-right-44 min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[800px] lg:min-w-[1000px] xl:min-w-[1000px] "
-							handleUpdateImageCount={handleUpdateImageCount}
-						/>
-					</div>
-
-					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-							<Sections
-								type={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].value}
-								lists={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].lists}
-								paragraph={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].paragraph}
-								paragraphWithSideIcon={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].paragraphWithSideIcon}
-								title={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].title}
-								titleStyle="text-black"
-								paragraphSideIconStyle="bg-black"
-								paragraphWithSideIconStyle="text-fora-black-secondary"
-							/>
-						</div>
-						<CardOfCards handleUpdateImageCount={handleUpdateImageCount} />
-					</div>
-
-					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-							<Sections
-								type={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].value}
-								lists={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].lists}
-								paragraph={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].paragraph}
-								title={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].title}
-								titleStyle="text-black"
-								paragraphStyle="text-fora-black-secondary"
-							/>
-						</div>
-
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
-								<div className="w-full">
-									<PhoneContainer
-										title="Homeowner"
-										subTitle={
-											<>
-												As a <span className="font-semibold">homeowner, I</span> want to{" "}
-												<span className="font-semibold">see ideas</span> so I can
-												<span className="font-semibold"> paint my house. </span>
-											</>
-										}
-										secondSubTitle={
-											<>
-												As a <span className="font-semibold">homeowner, I</span> want to{" "}
-												<span className="font-semibold">get a professional</span> to paint for me.
-											</>
-										}
-										customTitleStyle="text-white"
-										customSubtitleStyle="text-white"
-										customContainerStyle="bg-berger-purple-dark"
-										imgOne={HomeOwnerImgOne}
-										imgOneAlt="phone showing home page of app(fora)"
-										isSingle
-										customTextOverlayStyle="bg-berger-purple-dark"
-										customImgOneStyle=" h-[620px] !-bottom-36"
-										handleUpdateImageCount={handleUpdateImageCount}
-									/>
-								</div>
-								<div className="w-full">
-									<PhoneContainer
-										title="Professional"
-										subTitle={
-											<>
-												As a <span className="font-semibold"> painter, I </span> want to{" "}
-												<span className="font-semibold"> get paints from an outlet </span> around me with ease.
-											</>
-										}
-										secondSubTitle={
-											<>
-												As a <span className="font-semibold"> builder, I </span> want{" "}
-												<span className="font-semibold"> professional support/advice </span> for my next project.
-											</>
-										}
-										customTitleStyle="text-white"
-										customSubtitleStyle="text-white"
-										customContainerStyle="bg-berger-pink"
-										imgOne={ProfessionalImgOne}
-										imgOneAlt="phone showing explore page of app(fora)"
-										isSingle
-										customTextOverlayStyle="bg-berger-pink"
-										customImgOneStyle="h-[640px] !-bottom-48 max-w-none"
-										handleUpdateImageCount={handleUpdateImageCount}
-										// delay={width > 1279 ? 1 : undefined}
-									/>
-								</div>
+						<div className="flex flex-col justify-start items-start w-full gap-16">
+							<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-">
+								<Sections
+									type={BergerSections[BergerSection.THE_RESEARCH].value}
+									lists={BergerSections[BergerSection.THE_RESEARCH].lists}
+									paragraph={BergerSections[BergerSection.THE_RESEARCH].paragraph}
+									title={BergerSections[BergerSection.THE_RESEARCH].title}
+									titleStyle="text-black"
+									listsStyle="text-black"
+									paragraphStyle="text-black"
+								/>
 							</div>
+
+							<SideImageContainer
+								type={BergerSections[BergerSection.USER_INTERVIEW].value}
+								title={BergerSections[BergerSection.USER_INTERVIEW].title}
+								subTitle={BergerSections[BergerSection.USER_INTERVIEW].paragraph}
+								customTitleStyle="text-berger-purple-deep"
+								customSubtitleStyle="text-black"
+								customContainerStyle="bg-white w-full"
+								customMainContainerStyle="h-[550px] xs:h-[630px] md:h-[730px] lg:h-[800px]"
+								customOverlayStyle="bg-white"
+								imgOne={UserInterviewImgOne}
+								imgOneAlt="image showing user interview flow(berger)"
+								customImageStyle="-bottom-6 2xs:-bottom-8 sm:-bottom-14 md:-bottom-16 lg:-bottom-20 -right-32 2xs:-right-36 lg:-right-44 min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[800px] lg:min-w-[1000px] xl:min-w-[1000px] "
+								handleUpdateImageCount={handleUpdateImageCount}
+							/>
 						</div>
 
-						<div className="gsap-goals px-4 2xs:px-8 lg:px-16 !pb-0 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
-							<div className="gsap-goals-primary w-full h-full bg-black rounded-3xl">
-								<div className="flex flex-col justify-start items-start w-full gap-16 py-12 md:py-16 px-7 md:px-14 max-w-7xl mx-auto">
-									<Sections
-										type={BergerSections[BergerSection.PROJECT_GOALS].value}
-										lists={BergerSections[BergerSection.PROJECT_GOALS].lists}
-										paragraph={BergerSections[BergerSection.PROJECT_GOALS].paragraph}
-										title={BergerSections[BergerSection.PROJECT_GOALS].title}
-										titleStyle="text-white"
-										paragraphStyle="text-white"
-										delay={width > 1023 ? 1.5 : undefined}
-									/>
-									<div className="flex flex-col md:flex-row justify-start md:justify-between w-full gap-16">
-										<Sections
-											type={BergerSections[BergerSection.BUSINESS_GOALS].value}
-											lists={BergerSections[BergerSection.BUSINESS_GOALS].lists}
-											paragraph={BergerSections[BergerSection.BUSINESS_GOALS].paragraph}
-											title={BergerSections[BergerSection.BUSINESS_GOALS].title}
-											titleStyle="text-berger-green"
-											listsStyle="text-white"
-											delay={width > 1023 ? 1 : undefined}
-											smallText
+						<div className="flex flex-col justify-start items-start w-full gap-16">
+							<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+								<Sections
+									type={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].value}
+									lists={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].lists}
+									paragraph={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].paragraph}
+									paragraphWithSideIcon={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].paragraphWithSideIcon}
+									title={BergerSections[BergerSection.COMPETITIVE_ANALYSIS].title}
+									titleStyle="text-black"
+									paragraphSideIconStyle="bg-black"
+									paragraphWithSideIconStyle="text-fora-black-secondary"
+								/>
+							</div>
+							<CardOfCards handleUpdateImageCount={handleUpdateImageCount} />
+						</div>
+
+						<div className="flex flex-col justify-start items-start w-full gap-16">
+							<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+								<Sections
+									type={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].value}
+									lists={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].lists}
+									paragraph={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].paragraph}
+									title={BergerSections[BergerSection.USER_PERSONAS_AND_STORIES].title}
+									titleStyle="text-black"
+									paragraphStyle="text-fora-black-secondary"
+								/>
+							</div>
+
+							<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+								<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8">
+									<div className="w-full">
+										<PhoneContainer
+											title="Homeowner"
+											subTitle={
+												<>
+													As a <span className="font-semibold">homeowner, I</span> want to{" "}
+													<span className="font-semibold">see ideas</span> so I can
+													<span className="font-semibold"> paint my house. </span>
+												</>
+											}
+											secondSubTitle={
+												<>
+													As a <span className="font-semibold">homeowner, I</span> want to{" "}
+													<span className="font-semibold">get a professional</span> to paint for me.
+												</>
+											}
+											customTitleStyle="text-white"
+											customSubtitleStyle="text-white"
+											customContainerStyle="bg-berger-purple-dark"
+											imgOne={HomeOwnerImgOne}
+											imgOneAlt="phone showing home page of app(fora)"
+											isSingle
+											customTextOverlayStyle="bg-berger-purple-dark"
+											customImgOneStyle=" h-[620px] !-bottom-36"
+											handleUpdateImageCount={handleUpdateImageCount}
 										/>
-										<Sections
-											type={BergerSections[BergerSection.USER_GOALS].value}
-											lists={BergerSections[BergerSection.USER_GOALS].lists}
-											paragraph={BergerSections[BergerSection.USER_GOALS].paragraph}
-											title={BergerSections[BergerSection.USER_GOALS].title}
-											titleStyle="text-berger-yellow"
-											listsStyle="text-white"
-											delay={width > 1023 ? 1 : undefined}
-											smallText
+									</div>
+									<div className="w-full">
+										<PhoneContainer
+											title="Professional"
+											subTitle={
+												<>
+													As a <span className="font-semibold"> painter, I </span> want to{" "}
+													<span className="font-semibold"> get paints from an outlet </span> around me with ease.
+												</>
+											}
+											secondSubTitle={
+												<>
+													As a <span className="font-semibold"> builder, I </span> want{" "}
+													<span className="font-semibold"> professional support/advice </span> for my next project.
+												</>
+											}
+											customTitleStyle="text-white"
+											customSubtitleStyle="text-white"
+											customContainerStyle="bg-berger-pink"
+											imgOne={ProfessionalImgOne}
+											imgOneAlt="phone showing explore page of app(fora)"
+											isSingle
+											customTextOverlayStyle="bg-berger-pink"
+											customImgOneStyle="h-[640px] !-bottom-48 max-w-none"
+											handleUpdateImageCount={handleUpdateImageCount}
+											// delay={width > 1279 ? 1 : undefined}
 										/>
 									</div>
 								</div>
 							</div>
+
+							<div className="gsap-goals px-4 2xs:px-8 lg:px-16 !pb-0 w-full xl:w-[80rem] mx-auto relative overflow-hidden">
+								<div className="gsap-goals-primary w-full h-full bg-black rounded-3xl">
+									<div className="flex flex-col justify-start items-start w-full gap-16 py-12 md:py-16 px-7 md:px-14 max-w-7xl mx-auto">
+										<Sections
+											type={BergerSections[BergerSection.PROJECT_GOALS].value}
+											lists={BergerSections[BergerSection.PROJECT_GOALS].lists}
+											paragraph={BergerSections[BergerSection.PROJECT_GOALS].paragraph}
+											title={BergerSections[BergerSection.PROJECT_GOALS].title}
+											titleStyle="text-white"
+											paragraphStyle="text-white"
+											delay={width > 1023 ? 1.5 : undefined}
+										/>
+										<div className="flex flex-col md:flex-row justify-start md:justify-between w-full gap-16">
+											<Sections
+												type={BergerSections[BergerSection.BUSINESS_GOALS].value}
+												lists={BergerSections[BergerSection.BUSINESS_GOALS].lists}
+												paragraph={BergerSections[BergerSection.BUSINESS_GOALS].paragraph}
+												title={BergerSections[BergerSection.BUSINESS_GOALS].title}
+												titleStyle="text-berger-green"
+												listsStyle="text-white"
+												delay={width > 1023 ? 1 : undefined}
+												smallText
+											/>
+											<Sections
+												type={BergerSections[BergerSection.USER_GOALS].value}
+												lists={BergerSections[BergerSection.USER_GOALS].lists}
+												paragraph={BergerSections[BergerSection.USER_GOALS].paragraph}
+												title={BergerSections[BergerSection.USER_GOALS].title}
+												titleStyle="text-berger-yellow"
+												listsStyle="text-white"
+												delay={width > 1023 ? 1 : undefined}
+												smallText
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
 
-					<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-						<Sections
-							type={BergerSections[BergerSection.PROBLEM_STATEMENT].value}
-							lists={BergerSections[BergerSection.PROBLEM_STATEMENT].lists}
-							paragraph={BergerSections[BergerSection.PROBLEM_STATEMENT].paragraph}
-							paragraphWithSideIcon={BergerSections[BergerSection.PROBLEM_STATEMENT].paragraphWithSideIcon}
-							title={BergerSections[BergerSection.PROBLEM_STATEMENT].title}
-							titleStyle="text-black"
-							paragraphSideIconStyle="bg-berger-blue"
-							paragraphStyle="text-black text-xl max-w-sm"
-						/>
-					</div>
-
-					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto -right-">
+						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<Sections
+								type={BergerSections[BergerSection.PROBLEM_STATEMENT].value}
+								lists={BergerSections[BergerSection.PROBLEM_STATEMENT].lists}
+								paragraph={BergerSections[BergerSection.PROBLEM_STATEMENT].paragraph}
+								paragraphWithSideIcon={BergerSections[BergerSection.PROBLEM_STATEMENT].paragraphWithSideIcon}
+								title={BergerSections[BergerSection.PROBLEM_STATEMENT].title}
+								titleStyle="text-black"
+								paragraphSideIconStyle="bg-berger-blue"
+								paragraphStyle="text-black text-xl max-w-sm"
+							/>
+						</div>
+
+						<div className="flex flex-col justify-start items-start w-full gap-16">
+							<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto -right-">
+								<Sections
+									type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
+									lists={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].lists}
+									paragraph={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].paragraph}
+									title={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].title}
+									titleStyle="text-black"
+									paragraphStyle="text-black"
+								/>
+							</div>
+							<SideImageWithNoSectionContainer
 								type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
-								lists={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].lists}
-								paragraph={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].paragraph}
-								title={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].title}
+								imgOne={UserFlowImgOne}
+								imgOneAlt="Image showing the information architecture"
+								imgTwo={UserFlowImgTwo}
+								imgTwoAlt="Image showing the user flow"
+								customContainerStyle="bg-white h-[550px] xs:h-[630px] md:h-[730px] lg:h-[800px]"
+								customImageOneContainerStyle="-bottom-40 sm:-bottom-28 -right-[30rem] sm:-right-[26rem] md:-right-80 z-10"
+								customImageOneStyle="max-w-[700px] sm:max-w-[800px] lg:max-w-[850px]"
+								customImageTwoContainerStyle="-bottom-52 sm:-bottom-44 left-4 2xs:left-8 sm:left-16"
+								customImageTwoStyle="min-w-[700px] max-w-[700px] sm:min-w-[800px] sm:max-w-[800px] lg:max-w-[850px]"
+								isSingle={false}
+								handleUpdateImageCount={handleUpdateImageCount}
+							/>
+						</div>
+
+						<div className="flex flex-col justify-start items-start w-full gap-16">
+							<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto bottom-">
+								<Sections
+									type={BergerSections[BergerSection.THE_DESIGN].value}
+									lists={BergerSections[BergerSection.THE_DESIGN].lists}
+									paragraph={BergerSections[BergerSection.THE_DESIGN].paragraph}
+									title={BergerSections[BergerSection.THE_DESIGN].title}
+									titleStyle="text-black"
+								/>
+							</div>
+
+							<SideImageContainer
+								type={BergerSections[BergerSection.EXPLORE_COLORS].value}
+								title={BergerSections[BergerSection.EXPLORE_COLORS].title}
+								subTitle={BergerSections[BergerSection.EXPLORE_COLORS].paragraph}
+								customTitleStyle="text-berger-purple"
+								customSubtitleStyle="text-black"
+								customContainerStyle="bg-berger-purple-light w-full"
+								customMainContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px]"
+								customOverlayStyle="bg-berger-purple-light"
+								imgOne={ExploreImgOne}
+								imgOneAlt="Image showing color palettes used for the website"
+								customImageStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[600px] md:min-w-[700px] lg:min-w-[850px] xl:min-w-[900px] xl:max-w-[900px] -bottom-2 -right-36"
+								handleUpdateImageCount={handleUpdateImageCount}
+							/>
+
+							<SideImageWithNoSectionContainer
+								type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
+								imgOne={DesignImgOne}
+								imgOneAlt="Second image showing color palettes used for the website"
+								customContainerStyle="bg-white h-[300px] xs:h-[450px] md:h-[600px] lg:h-[800px]"
+								customImageOneContainerStyle="!relative flex justify-center items-center"
+								customImageOneStyle="w-full"
+								animateFromBottom
+								isSingle
+								handleUpdateImageCount={handleUpdateImageCount}
+							/>
+
+							<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-1">
+								<div className="w-full lg:w-1/2">
+									<CustomBGImageContainer
+										imgOne={DesignImgTwo}
+										imgOneAlt="Image showing two people having two separate calls"
+										customImgOneStyle="h-[500px] 2xs:h-[520px] lg:h-[540px] xl:h-[560px] "
+										customContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
+										// customBackgroundImage={""}
+										animateFromBottom
+										handleUpdateImageCount={handleUpdateImageCount}
+									/>
+								</div>
+								<div className="w-full lg:w-1/2">
+									<CustomBGImageContainer
+										imgOne={DesignImgThree}
+										imgOneAlt="Image showing a location in a map"
+										customImgOneStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[750px] lg:min-w-[500px] xl:min-w-[560px] 2xs:max-w-[600px] sm:min-w-[750px] md:min-w-[850px] lg:max-w-[600px] xl:max-w-[660px] left-16 top-36 2xs:left-24 2xs:top-24"
+										customContainerStyle="h-[600px] sm:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
+										customBackgroundImage={DesignImgThreeBG}
+										// animateFromBottom
+										handleUpdateImageCount={handleUpdateImageCount}
+									/>
+								</div>
+							</div>
+						</div>
+
+						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
+							<Sections
+								type={BergerSections[BergerSection.THE_SOLUTION].value}
+								paragraph={BergerSections[BergerSection.THE_SOLUTION].paragraph}
+								lists={BergerSections[BergerSection.THE_SOLUTION].lists}
+								title={BergerSections[BergerSection.THE_SOLUTION].title}
 								titleStyle="text-black"
 								paragraphStyle="text-black"
+								listsStyle="text-black"
+								// smallText
 							/>
 						</div>
-						<SideImageWithNoSectionContainer
-							type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
-							imgOne={UserFlowImgOne}
-							imgOneAlt="Image showing the information architecture"
-							imgTwo={UserFlowImgTwo}
-							imgTwoAlt="Image showing the user flow"
-							customContainerStyle="bg-white h-[550px] xs:h-[630px] md:h-[730px] lg:h-[800px]"
-							customImageOneContainerStyle="-bottom-40 sm:-bottom-28 -right-[30rem] sm:-right-[26rem] md:-right-80 z-10"
-							customImageOneStyle="max-w-[700px] sm:max-w-[800px] lg:max-w-[850px]"
-							customImageTwoContainerStyle="-bottom-52 sm:-bottom-44 left-4 2xs:left-8 sm:left-16"
-							customImageTwoStyle="min-w-[700px] max-w-[700px] sm:min-w-[800px] sm:max-w-[800px] lg:max-w-[850px]"
-							isSingle={false}
-							handleUpdateImageCount={handleUpdateImageCount}
-						/>
-					</div>
-
-					<div className="flex flex-col justify-start items-start w-full gap-16">
-						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto bottom-">
+						<div className="flex flex-col justify-start items-start w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
 							<Sections
-								type={BergerSections[BergerSection.THE_DESIGN].value}
-								lists={BergerSections[BergerSection.THE_DESIGN].lists}
-								paragraph={BergerSections[BergerSection.THE_DESIGN].paragraph}
-								title={BergerSections[BergerSection.THE_DESIGN].title}
+								type={BergerSections[BergerSection.ITERATIONS].value}
+								lists={BergerSections[BergerSection.ITERATIONS].lists}
+								paragraph={BergerSections[BergerSection.ITERATIONS].paragraph}
+								title={BergerSections[BergerSection.ITERATIONS].title}
 								titleStyle="text-black"
+								paragraphStyle="text-black"
+								withCloseSection
 							/>
 						</div>
-
-						<SideImageContainer
-							type={BergerSections[BergerSection.EXPLORE_COLORS].value}
-							title={BergerSections[BergerSection.EXPLORE_COLORS].title}
-							subTitle={BergerSections[BergerSection.EXPLORE_COLORS].paragraph}
-							customTitleStyle="text-berger-purple"
-							customSubtitleStyle="text-black"
-							customContainerStyle="bg-berger-purple-light w-full"
-							customMainContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px]"
-							customOverlayStyle="bg-berger-purple-light"
-							imgOne={ExploreImgOne}
-							imgOneAlt="Image showing color palettes used for the website"
-							customImageStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[600px] md:min-w-[700px] lg:min-w-[850px] xl:min-w-[900px] xl:max-w-[900px] -bottom-2 -right-36"
-							handleUpdateImageCount={handleUpdateImageCount}
-						/>
-
-						<SideImageWithNoSectionContainer
-							type={BergerSections[BergerSection.USER_FLOW_AND_INFORMATION_ARCHITECTURE].value}
-							imgOne={DesignImgOne}
-							imgOneAlt="Second image showing color palettes used for the website"
-							customContainerStyle="bg-white h-[300px] xs:h-[450px] md:h-[600px] lg:h-[800px]"
-							customImageOneContainerStyle="!relative flex justify-center items-center"
-							customImageOneStyle="w-full"
-							animateFromBottom
-							isSingle
-							handleUpdateImageCount={handleUpdateImageCount}
-						/>
-
-						<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full gap-16 lg:gap-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto xs:left-1">
-							<div className="w-full lg:w-1/2">
-								<CustomBGImageContainer
-									imgOne={DesignImgTwo}
-									imgOneAlt="Image showing two people having two separate calls"
-									customImgOneStyle="h-[500px] 2xs:h-[520px] lg:h-[540px] xl:h-[560px] "
-									customContainerStyle="h-[650px] xs:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
-									// customBackgroundImage={""}
-									animateFromBottom
-									handleUpdateImageCount={handleUpdateImageCount}
-								/>
-							</div>
-							<div className="w-full lg:w-1/2">
-								<CustomBGImageContainer
-									imgOne={DesignImgThree}
-									imgOneAlt="Image showing a location in a map"
-									customImgOneStyle="min-w-[400px] 2xs:min-w-[500px] sm:min-w-[650px] md:min-w-[750px] lg:min-w-[500px] xl:min-w-[560px] 2xs:max-w-[600px] sm:min-w-[750px] md:min-w-[850px] lg:max-w-[600px] xl:max-w-[660px] left-16 top-36 2xs:left-24 2xs:top-24"
-									customContainerStyle="h-[600px] sm:h-[730px] lg:h-[800px] bg-berger-pink-light flex justify-center items-center"
-									customBackgroundImage={DesignImgThreeBG}
-									// animateFromBottom
-									handleUpdateImageCount={handleUpdateImageCount}
-								/>
-							</div>
-						</div>
 					</div>
-
-					<div className="flex justify-start lg:justify-between items-start flex-col lg:flex-row w-full px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-						<Sections
-							type={BergerSections[BergerSection.THE_SOLUTION].value}
-							paragraph={BergerSections[BergerSection.THE_SOLUTION].paragraph}
-							lists={BergerSections[BergerSection.THE_SOLUTION].lists}
-							title={BergerSections[BergerSection.THE_SOLUTION].title}
-							titleStyle="text-black"
-							paragraphStyle="text-black"
-							listsStyle="text-black"
-							// smallText
-						/>
-					</div>
-					<div className="flex flex-col justify-start items-start w-full pb-8 px-4 2xs:px-8 lg:px-16 max-w-7xl mx-auto">
-						<Sections
-							type={BergerSections[BergerSection.ITERATIONS].value}
-							lists={BergerSections[BergerSection.ITERATIONS].lists}
-							paragraph={BergerSections[BergerSection.ITERATIONS].paragraph}
-							title={BergerSections[BergerSection.ITERATIONS].title}
-							titleStyle="text-black"
-							paragraphStyle="text-black"
-							withCloseSection
-						/>
-					</div>
+					<div
+						className={`gsap-page-departure-transition-div left-right-berger-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
+					></div>
 				</div>
-				<div
-					className={`gsap-page-departure-transition-div left-right-berger-gradient h-full w-[150vw] 2xs:w-[110vw] absolute top-0 left-[100%] z-30 `}
-				></div>
 			</main>
 		</>
 	);
